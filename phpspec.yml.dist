@@ -1,0 +1,4 @@
+suites:
+    main:
+        namespace: BitBag\SyliusBlacklistPlugin
+        psr4_prefix: BitBag\SyliusBlacklistPlugin
