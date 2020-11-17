@@ -1,113 +1,115 @@
-<p align="center">
-    <a href="https://sylius.com" target="_blank">
-        <img src="https://demo.sylius.com/assets/shop/img/logo.png" />
+<h1 align="center">
+    <a href="http://bitbag.shop" target="_blank">
+        <img src="doc/logo.png" width="55%" />
     </a>
-</p>
+    <br />
+    <a href="https://packagist.org/packages/bitbag/wishlist-plugin" title="License" target="_blank">
+        <img src="https://img.shields.io/packagist/l/bitbag/wishlist-plugin.svg" />
+    </a>
+    <a href="https://packagist.org/packages/bitbag/wishlist-plugin" title="Version" target="_blank">
+        <img src="https://img.shields.io/packagist/v/bitbag/wishlist-plugin.svg" />
+    </a>
+    <a href="http://travis-ci.org/BitBagCommerce/SyliusWishlistPlugin" title="Build status" target="_blank">
+            <img src="https://img.shields.io/travis/BitBagCommerce/SyliusWishlistPlugin/master.svg" />
+        </a>
+    <a href="https://scrutinizer-ci.com/g/BitBagCommerce/SyliusWishlistPlugin/" title="Scrutinizer" target="_blank">
+        <img src="https://img.shields.io/scrutinizer/g/BitBagCommerce/SyliusWishlistPlugin.svg" />
+    </a>
+    <a href="https://packagist.org/packages/bitbag/wishlist-plugin" title="Total Downloads" target="_blank">
+        <img src="https://poser.pugx.org/bitbag/wishlist-plugin/downloads" />
+    </a>
+    <p>
+        <a href="https://sylius.com/plugins/" target="_blank">
+            <img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="85">
+        </a>
+    </p>
+</h1>
 
-<h1 align="center">Plugin Skeleton</h1>
+## About us
 
-<p align="center">Skeleton for starting Sylius plugins.</p>
+At BitBag we do believe in open source. However, we are able to do it just beacuse of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us working together, feel free to reach us out. You will find out more about our professional services, technologies and contact details at https://bitbag.io/.
 
-## Documentation
+## BitBag SyliusBlacklistPlugin
 
-For a comprehensive guide on Sylius Plugins development please go to Sylius documentation,
-there you will find the <a href="https://docs.sylius.com/en/latest/plugin-development-guide/index.html">Plugin Development Guide</a>, that is full of examples.
+This plugin allows you to integrate blacklist features with Sylius platform app.
 
-## Quickstart Installation
+## Demo
 
-1. Run `composer create-project sylius/plugin-skeleton ProjectName`.
+We created a demo app with some useful use-cases of the plugin! Visit [demo.bitbag.shop](https://demo.bitbag.shop) to take a look at it. 
+The admin can be accessed under [demo.bitbag.shop/admin](https://demo.bitbag.shop/admin) link and `sylius: sylius` credentials.
 
-2. From the plugin skeleton root directory, run the following commands:
-
-    ```bash
-    $ (cd tests/Application && yarn install)
-    $ (cd tests/Application && yarn build)
-    $ (cd tests/Application && APP_ENV=test bin/console assets:install public)
+## Installation
+```bash
+$ composer require bitbag/blacklist-plugin
+```
     
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:database:create)
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:schema:create)
-    ```
+Add plugin dependencies to your `config/bundles.php` file:
+```php
+return [
+    ...
 
-To be able to setup a plugin's database, remember to configure you database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
+    BitBag\SyliusBlacklistPlugin\BitBagSyliusBlacklistPlugin::class => ['all' => true],
+];
+```
+
+Import required config in your `config/packages/_sylius.yaml` file:
+```yaml
+# config/packages/_sylius.yaml
+
+imports:
+    ...
+    
+    - { resource: "@BitBagSyliusBlacklistPlugin/Resources/config/config.yml" }
+```
+
+Import routing in your `config/routes.yaml` file:
+
+```
+# config/routes.yaml
+
+bitbag_sylius_blacklist_plugin:
+    resource: "@BitBagSyliusBlacklistPlugin/Resources/config/routing.yml"
+```
+
+Update your database
+
+```
+$ bin/console doctrine:migrations:migrate
+```
+
+**Note:** If you are running it on production, add the `-e prod` flag to this command.
 
 ## Usage
 
-### Running plugin tests
+## Customization
 
-  - PHPUnit
+### Available services you can [decorate](https://symfony.com/doc/current/service_container/service_decoration.html) and forms you can [extend](http://symfony.com/doc/current/form/create_form_type_extension.html)
 
-    ```bash
-    vendor/bin/phpunit
-    ```
+Run the below command to see what Symfony services are shared with this plugin:
+```bash
+$ bin/console debug:container | grep bitbag_sylius_blacklist_plugin
+```
 
-  - PHPSpec
+### Parameters you can override in your parameters.yml(.dist) file
+```yml
+$ bin/console debug:container --parameters | grep bitbag
+```
 
-    ```bash
-    vendor/bin/phpspec run
-    ```
+## Testing
+```bash
+$ composer install
+$ cd tests/Application
+$ yarn install
+$ yarn build
+$ bin/console assets:install public -e test
+$ bin/console doctrine:schema:create -e test
+$ bin/console server:run 127.0.0.1:8080 -d public -e test
+$ open http://localhost:8080
+$ cd ../..
+$ vendor/bin/behat
+$ vendor/bin/phpspec run
+```
 
-  - Behat (non-JS scenarios)
+## Contribution
 
-    ```bash
-    vendor/bin/behat --strict --tags="~@javascript"
-    ```
-
-  - Behat (JS scenarios)
- 
-    1. [Install Symfony CLI command](https://symfony.com/download).
- 
-    2. Start Headless Chrome:
-    
-      ```bash
-      google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1
-      ```
-    
-    3. Install SSL certificates (only once needed) and run test application's webserver on `127.0.0.1:8080`:
-    
-      ```bash
-      symfony server:ca:install
-      APP_ENV=test symfony server:start --port=8080 --dir=tests/Application/public --daemon
-      ```
-    
-    4. Run Behat:
-    
-      ```bash
-      vendor/bin/behat --strict --tags="@javascript"
-      ```
-    
-  - Static Analysis
-  
-    - Psalm
-    
-      ```bash
-      vendor/bin/psalm
-      ```
-      
-    - PHPStan
-    
-      ```bash
-      vendor/bin/phpstan analyse -c phpstan.neon -l max src/  
-      ```
-
-  - Coding Standard
-  
-    ```bash
-    vendor/bin/ecs check src
-    ```
-
-### Opening Sylius with your plugin
-
-- Using `test` environment:
-
-    ```bash
-    (cd tests/Application && APP_ENV=test bin/console sylius:fixtures:load)
-    (cd tests/Application && APP_ENV=test bin/console server:run -d public)
-    ```
-    
-- Using `dev` environment:
-
-    ```bash
-    (cd tests/Application && APP_ENV=dev bin/console sylius:fixtures:load)
-    (cd tests/Application && APP_ENV=dev bin/console server:run -d public)
-    ```
-# SyliusBlacklistPlugin
+Learn more about our contribution workflow on http://docs.sylius.org/en/latest/contributing/.
