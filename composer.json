@@ -42,7 +42,7 @@
     "autoload": {
         "psr-4": {
             "BitBag\\SyliusBlacklistPlugin\\": "src/",
-            "Tests\\BitBag\\SyliusBlacklistPlugin\\": "tests/"
+            "Tests\\BitBag\\SyliusBlacklistPlugin\\": ["tests/", "tests/Application/src"]
         }
     },
     "autoload-dev": {
