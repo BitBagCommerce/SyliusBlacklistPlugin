@@ -1,0 +1,4 @@
+imports:
+    - { resource: "resources.yaml" }
+    - { resource: "services.xml" }
+    - { resource: "grids.yaml" }

@@ -1,0 +1,55 @@
+sylius_grid:
+  grids:
+    bitbag_sylius_blacklist_plugin_blacklisting_rule:
+      driver:
+        name: doctrine/orm
+        options:
+          class: "%bitbag_sylius_blacklist_plugin.model.blacklisting_rule.class%"
+      fields:
+        name:
+          type: string
+          label: sylius.ui.name
+          sortable: ~
+        attributes:
+          type: string
+          label: bitbag_sylius_blacklist_plugin.ui.rule_attributes
+          sortable: ~
+        permittedStrikes:
+          type: string
+          label: bitbag_sylius_blacklist_plugin.ui.permitted_strikes
+          sortable: permittedStrikes
+        enabled:
+          type: twig
+          label: sylius.ui.enabled
+          options:
+            template: "@SyliusUi/Grid/Field/enabled.html.twig"
+      filters:
+        name:
+          type: string
+          label: sylius.ui.name
+        channel:
+          type: entity
+          label: sylius.ui.channel
+          form_options:
+            class: "%sylius.model.channel.class%"
+        attribute:
+          type: select
+          label: bitbag_sylius_blacklist_plugin.ui.rule_attribute
+          form_options:
+            choices:
+              sylius.ui.test1: test1
+              sylius.ui.test2: test2
+        status:
+          type: select
+          label: sylius.ui.enabled
+          form_options:
+            choices:
+              sylius.ui.enabled: true
+              sylius.ui.disabled: false
+      actions:
+        item:
+          update:
+            type: update
+        main:
+          create:
+            type: create

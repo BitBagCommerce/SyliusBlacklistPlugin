@@ -1,0 +1,5 @@
+sylius_resource:
+  resources:
+    bitbag_sylius_blacklist_plugin.blacklisting_rule:
+      classes:
+        model: BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRule

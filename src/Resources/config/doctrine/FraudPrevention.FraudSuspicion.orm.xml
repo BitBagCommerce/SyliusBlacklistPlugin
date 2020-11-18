@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicion" table="bitbag_fraud_suspicion">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="orderId" type="integer" column="orderId" nullable="true" />
+        <field name="customerId" type="integer" column="customerId" />
+        <field name="company" type="string" column="company" nullable="true" />
+        <field name="firstName" type="string" column="first_name" />
+        <field name="lastName" type="string" column="last_name" />
+        <field name="email" type="string" column="email" />
+        <field name="city" type="string" column="city" />
+        <field name="province" type="string" column="province" />
+        <field name="country" type="string" column="country" />
+        <field name="addressType" type="string" column="address_type" />
+
+    </mapped-superclass>
+
+</doctrine-mapping>

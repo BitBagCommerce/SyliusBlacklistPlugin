@@ -1,0 +1,13 @@
+bitbag_sylius_blacklist_plugin_admin_fraud_suspicion:
+    resource: |
+        alias: bitbag_sylius_blacklist_plugin.fraud_suspicion
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        grid: bitbag_sylius_blacklist_plugin_fraud_suspicion
+        permission: true
+        vars:
+            all:
+                subheader: bitbag_sylius_blacklist_plugin.ui.manage_fraud_suspicions
+            index:
+                icon: clipboard list
+    type: sylius.resource

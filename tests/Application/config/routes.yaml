@@ -1,0 +1,2 @@
+bitbag_sylius_blacklist_plugin:
+  resource: "@BitBagSyliusBlacklistPlugin/Resources/config/routing.yaml"

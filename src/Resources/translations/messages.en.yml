@@ -1,0 +1,12 @@
+bitbag_sylius_blacklist_plugin:
+    ui:
+        blacklisting_rules: Blacklisting rule
+        fraud_suspicions: Fraud suspicion
+        manage_blacklisting_rules: Manage blacklisting rules
+        manage_fraud_suspicions: Manage fraud suspicions
+        new_blacklisting_rule: New blacklisting rule
+        new_fraud_suspicion: New fraud suspicion
+        permitted_strikes: Permitted strikes
+        address_type: Address type
+        rule_attributes: Rule attributes
+        rule_attribute: Rule attribute
