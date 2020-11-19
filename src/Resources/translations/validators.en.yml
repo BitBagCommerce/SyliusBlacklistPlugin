@@ -1,0 +1,7 @@
+bitbag_sylius_blacklist_plugin:
+    blacklisting_rule:
+        name:
+            not_blank: The rule name cannot be blank
+            max_length: The rule name is too long
+        permitted_strikes:
+            not_blank: The permitted strikes cannot be blank

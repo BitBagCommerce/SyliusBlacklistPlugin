@@ -13,3 +13,9 @@ bitbag_sylius_blacklist_plugin:
         blacklisted: Blacklisted
         neutral: Neutral
         fraud_status: Fraud status
+    form:
+        blacklisting_rule:
+            name: Rule name
+            attribute: Rule attributes
+            permitted_strikes: Permitted strikes
+            channels: Channels

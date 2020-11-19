@@ -4,3 +4,4 @@ sylius_resource:
       classes:
         model: BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRule
         interface: BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRule
+        form: BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType
