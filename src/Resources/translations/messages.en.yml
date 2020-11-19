@@ -13,6 +13,7 @@ bitbag_sylius_blacklist_plugin:
         blacklisted: Blacklisted
         neutral: Neutral
         fraud_status: Fraud status
+        mark_suspicious: Mark suspicious
     form:
         blacklisting_rule:
             name: Rule name
