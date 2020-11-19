@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Model;
 
-use BitBag\SyliusBlacklistPlugin\Entity\Customer\CustomerInterface;
+use BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface;
 
 trait FraudStatusTrait
 {
-    protected $fraudStatus = CustomerInterface::FRAUD_STATUS_NEUTRAL;
+    protected $fraudStatus = FraudStatusInterface::FRAUD_STATUS_NEUTRAL;
 
     public function getFraudStatus(): ?string
     {
