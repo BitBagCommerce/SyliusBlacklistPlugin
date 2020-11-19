@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 
+use Sylius\Component\Order\Model\OrderInterface;
+
 class FraudSuspicion implements FraudSuspicionInterface
 {
     /** @var int|null */
     private $id;
 
-    /** @var int|null */
-    private $orderId;
+    /** @var OrderInterface|null */
+    private $order;
 
     /** @var int|null */
     private $customerId;
@@ -47,14 +49,14 @@ class FraudSuspicion implements FraudSuspicionInterface
         return $this->id;
     }
 
-    public function getOrderId(): ?int
+    public function getOrder(): ?OrderInterface
     {
-        return $this->orderId;
+        return $this->order;
     }
 
-    public function setOrderId(int $orderId)
+    public function setOrder(?OrderInterface $order): void
     {
-        $this->orderId = $orderId;
+        $this->order = $order;
     }
 
     public function getCustomerId(): ?int

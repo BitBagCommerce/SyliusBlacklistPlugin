@@ -10,7 +10,6 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="orderId" type="integer" column="orderId" nullable="true" />
         <field name="customerId" type="integer" column="customerId" />
         <field name="company" type="string" column="company" nullable="true" />
         <field name="firstName" type="string" column="first_name" />
@@ -21,6 +20,9 @@
         <field name="country" type="string" column="country" />
         <field name="addressType" type="string" column="address_type" />
 
+        <one-to-one field="order" target-entity="Sylius\Component\Order\Model\Order">
+            <join-column name="order_id" nullable="true"/>
+        </one-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>

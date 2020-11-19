@@ -2,15 +2,16 @@
 
 namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface FraudSuspicionInterface extends ResourceInterface
 {
     public function getId(): ?int;
 
-    public function getOrderId(): ?int;
+    public function getOrder(): ?OrderInterface;
 
-    public function setOrderId(int $orderId);
+    public function setOrder(?OrderInterface $order): void;
 
     public function getCustomerId(): ?int;
 
