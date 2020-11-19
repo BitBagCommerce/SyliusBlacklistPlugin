@@ -13,18 +13,17 @@
         <field name="name" type="string" column="name" />
         <field name="attributes" type="string" column="attributes" />
         <field name="permittedStrikes" type="integer" column="permitted_strikes" />
-        <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface" mapped-by="blacklistingRules">
+        <field name="enabled" type="boolean" column="enabled" />
+
+        <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
             <join-table name="blacklisting_rule_channel">
                 <join-columns>
-                    <join-column name="blacklisting_rule_id" referenced-column-name="id"/>
+                    <join-column name="blacklisting_rule_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
                 </join-columns>
                 <inverse-join-columns>
-                    <join-column name="channel_id" referenced-column-name="id"/>
+                    <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
-        <field name="enabled" type="boolean" column="enabled" />
-
     </mapped-superclass>
-
 </doctrine-mapping>
