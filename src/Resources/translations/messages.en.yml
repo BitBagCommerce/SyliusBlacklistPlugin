@@ -10,3 +10,6 @@ bitbag_sylius_blacklist_plugin:
         address_type: Address type
         rule_attributes: Rule attributes
         rule_attribute: Rule attribute
+        blacklisted: Blacklisted
+        neutral: Neutral
+        fraud_status: Fraud status

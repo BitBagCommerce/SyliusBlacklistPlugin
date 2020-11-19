@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%sylius.model.customer.class%"
+                    class: Tests\BitBag\SyliusBlacklistPlugin\Entity\Customer
             sorting:
                 createdAt: desc
             fields:
@@ -40,10 +40,17 @@ sylius_grid:
                         template: "@SyliusAdmin/Customer/Grid/Field/verified.html.twig"
                 fraudStatus:
                     type: twig
-                    label: sylius.ui.fraud_status
+                    label: bitbag_sylius_blacklist_plugin.ui.fraud_status
                     options:
                         template: "@BitBagSyliusBlacklistPlugin/Customer/Grid/Field/fraudStatus.html.twig"
             filters:
+                fraudStatus:
+                    type: select
+                    label: bitbag_sylius_blacklist_plugin.ui.fraud_status
+                    form_options:
+                        choices:
+                            bitbag_sylius_blacklist_plugin.ui.neutral: Neutral
+                            bitbag_sylius_blacklist_plugin.ui.blacklisted: Blacklisted
                 search:
                     type: string
                     label: sylius.ui.search

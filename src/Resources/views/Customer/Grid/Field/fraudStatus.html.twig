@@ -1,0 +1,9 @@
+{% if data == 'neutral' %}
+    <span class="ui icon label">
+        {{ 'bitbag_sylius_blacklist_plugin.ui.neutral'|trans }}
+    </span>
+{% elseif data == 'blacklisted' %}
+    <span class="ui icon label black">
+        <i class="x icon"></i> {{ 'bitbag_sylius_blacklist_plugin.ui.blacklisted'|trans }}
+    </span>
+{% endif %}
