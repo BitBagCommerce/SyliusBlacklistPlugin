@@ -26,7 +26,11 @@ class BlacklistingRule implements BlacklistingRuleInterface
     /** @var int */
     protected $permittedStrikes;
 
-    /** @var Collection|ChannelInterface[] */
+    /**
+     * @var Collection|ChannelInterface[]
+     *
+     * @psalm-var Collection<array-key, ChannelInterface>
+     */
     protected $channels;
 
     public function getId(): ?int
