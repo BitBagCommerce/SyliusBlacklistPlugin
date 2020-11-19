@@ -3,3 +3,4 @@ sylius_resource:
     bitbag_sylius_blacklist_plugin.fraud_suspicion:
       classes:
         model: BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicion
+        interface: BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface
