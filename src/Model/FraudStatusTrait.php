@@ -6,7 +6,7 @@ namespace BitBag\SyliusBlacklistPlugin\Model;
 
 use BitBag\SyliusBlacklistPlugin\Entity\Customer\CustomerInterface;
 
-trait CustomerTrait
+trait FraudStatusTrait
 {
     protected $fraudStatus = CustomerInterface::FRAUD_STATUS_NEUTRAL;
 

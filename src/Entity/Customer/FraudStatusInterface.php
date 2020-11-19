@@ -2,9 +2,7 @@
 
 namespace BitBag\SyliusBlacklistPlugin\Entity\Customer;
 
-use Sylius\Component\Core\Model\CustomerInterface as BaseCustomerInterface;
-
-interface CustomerInterface extends BaseCustomerInterface
+interface FraudStatusInterface
 {
     /** @var string */
     public const FRAUD_STATUS_NEUTRAL = 'neutral';
