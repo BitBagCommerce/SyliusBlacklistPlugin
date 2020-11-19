@@ -1,0 +1,4 @@
+bitbag_sylius_blacklist_plugin_admin_blacklisting_rule:
+    resource: "admin/blacklisting_rule.yaml"
+bitbag_sylius_blacklist_plugin_admin_fraud_suspicion.yaml:
+    resource: "admin/fraud_suspicion.yaml"
