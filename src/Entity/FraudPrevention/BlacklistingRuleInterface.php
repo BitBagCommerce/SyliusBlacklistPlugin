@@ -2,6 +2,7 @@
 
 namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface BlacklistingRuleInterface extends ResourceInterface
@@ -10,7 +11,7 @@ interface BlacklistingRuleInterface extends ResourceInterface
 
     public function getName(): ?string;
 
-    public function setName(string $name);
+    public function setName(string $name): void;
 
     public function getAttributes(): ?string;
 
@@ -18,13 +19,13 @@ interface BlacklistingRuleInterface extends ResourceInterface
 
     public function getPermittedStrikes(): ?int;
 
-    public function setPermittedStrikes(int $permittedStrikes);
+    public function setPermittedStrikes(int $permittedStrikes): void;
 
     public function getChannels();
 
-    public function setChannels($channels);
+    public function addChannel(ChannelInterface $channel): void;
 
-    public function getEnabled(): ?bool;
+    public function removeChannel(ChannelInterface $channel): void;
 
-    public function setEnabled(bool $status);
+    public function hasChannel(ChannelInterface $channel): bool;
 }

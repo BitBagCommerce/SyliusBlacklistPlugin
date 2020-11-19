@@ -12,7 +12,7 @@ interface CustomerInterface extends BaseCustomerInterface
     /** @var string */
     public const FRAUD_STATUS_BLACKLISTED = 'blacklisted';
 
-    public function getFraudStatus(): string;
+    public function getFraudStatus(): ?string;
 
-    public function setFraudStatus(string $fraudStatus);
+    public function setFraudStatus(?string $fraudStatus): void;
 }

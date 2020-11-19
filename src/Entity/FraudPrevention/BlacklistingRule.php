@@ -6,26 +6,28 @@ namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ToggleableTrait;
 
 class BlacklistingRule implements BlacklistingRuleInterface
 {
+    use ToggleableTrait;
+    use TimestampableTrait;
+
     /** @var int|null */
-    private $id;
+    protected $id;
 
     /** @var string */
-    private $name;
+    protected $name;
 
     /** @var string */
-    private $attributes;
+    protected $attributes;
 
     /** @var int */
-    private $permittedStrikes;
+    protected $permittedStrikes;
 
     /** @var Collection|ChannelInterface[] */
-    private $channels;
-
-    /** @var bool */
-    private $enabled;
+    protected $channels;
 
     public function getId(): ?int
     {
@@ -37,7 +39,7 @@ class BlacklistingRule implements BlacklistingRuleInterface
         return $this->name;
     }
 
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -57,28 +59,35 @@ class BlacklistingRule implements BlacklistingRuleInterface
         return $this->permittedStrikes;
     }
 
-    public function setPermittedStrikes(int $permittedStrikes)
+    public function setPermittedStrikes(int $permittedStrikes): void
     {
         $this->permittedStrikes = $permittedStrikes;
     }
 
+    /**
+     * @return Collection|ChannelInterface[]
+     */
     public function getChannels()
     {
         return $this->channels;
     }
 
-    public function setChannels($channels)
+    public function addChannel(ChannelInterface $channel): void
     {
-        $this->channels = $channels;
+        if (!$this->hasChannel($channel)) {
+            $this->channels->add($channel);
+        }
     }
 
-    public function getEnabled(): ?bool
+    public function removeChannel(ChannelInterface $channel): void
     {
-        return $this->enabled;
+        if ($this->hasChannel($channel)) {
+            $this->channels->removeElement($channel);
+        }
     }
 
-    public function setEnabled(bool $enabled)
+    public function hasChannel(ChannelInterface $channel): bool
     {
-        $this->enabled = $enabled;
+        return $this->channels->contains($channel);
     }
 }

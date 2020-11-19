@@ -8,14 +8,14 @@ use BitBag\SyliusBlacklistPlugin\Entity\Customer\CustomerInterface;
 
 trait CustomerTrait
 {
-    private $fraudStatus = CustomerInterface::FRAUD_STATUS_NEUTRAL;
+    protected $fraudStatus = CustomerInterface::FRAUD_STATUS_NEUTRAL;
 
-    public function getFraudStatus(): string
+    public function getFraudStatus(): ?string
     {
         return $this->fraudStatus;
     }
 
-    public function setFraudStatus(string $fraudStatus)
+    public function setFraudStatus(?string $fraudStatus): void
     {
         $this->fraudStatus = $fraudStatus;
     }
