@@ -12,6 +12,7 @@
     <services>
         <service id="bit_bag.sylius_blacklist_plugin.form.type.blacklisting_rule" class="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType">
             <argument>%bitbag_sylius_blacklist_plugin.model.blacklisting_rule.class%</argument>
+            <argument type="service" id="parameter_bag"/>
             <argument>%bitbag.sylius_blacklist_plugin.form.type.validation_groups%</argument>
             <tag name="form.type"/>
         </service>

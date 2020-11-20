@@ -21,5 +21,7 @@ bitbag_sylius_blacklist_plugin:
             attribute: Rule attributes
             permitted_strikes: Permitted strikes
             channels: Channels
+            customer_id: Customer ID
+            country: Country
         fraud_suspicion:
             comment: Comment

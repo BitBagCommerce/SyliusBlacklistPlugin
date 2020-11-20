@@ -6,24 +6,35 @@ namespace BitBag\SyliusBlacklistPlugin\Form\Type;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class BlacklistingRuleType extends AbstractResourceType
 {
+    /** @var ParameterBagInterface */
+    private $params;
+
+    public function __construct(string $dataClass, ParameterBagInterface $params, array $validationGroups = [])
+    {
+        parent::__construct($dataClass, $validationGroups);
+        $this->params = $params;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', TextType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.name',
             ])
-//TODO: We have to add tags to automatic generation of choices
-//            ->add('attributes', ChoiceType::class, [
-//                'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.attribute',
-//                'multiple' => true,
-//                'choices' => ['customerId' => 'customerId', 'postcode' => 'postcode']
-//            ])
+            ->add('attributes', ChoiceType::class, [
+                'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.attribute',
+                'multiple' => true,
+                'choices' => $this->params->get('bitbag_sylius_blacklist_plugin.blacklisting_rule_attribute_choices')
+
+            ])
             ->add('permittedStrikes', NumberType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.permitted_strikes',
             ])
