@@ -5,9 +5,29 @@ bitbag_sylius_blacklist_plugin_admin_fraud_suspicion:
         templates: SyliusAdminBundle:Crud
         grid: bitbag_sylius_blacklist_plugin_fraud_suspicion
         permission: true
+        only: ['index', 'update', 'create']
         vars:
             all:
                 subheader: bitbag_sylius_blacklist_plugin.ui.manage_fraud_suspicions
             index:
                 icon: clipboard list
     type: sylius.resource
+
+bitbag_sylius_blacklist_plugin_admin_order_mark_suspicious:
+    path: /order/{orderId}/fraud-suspicion/new
+    methods: [GET, POST]
+    defaults:
+        _controller: bitbag_sylius_blacklist_plugin.controller.fraud_suspicion:createAction
+        _sylius:
+            vars:
+                route:
+                    name: bitbag_sylius_blacklist_plugin_admin_order_mark_suspicious
+                    parameters:
+                        orderId: $orderId
+            section: admin
+            template: "@SyliusAdmin/Crud/create.html.twig"
+            form: BitBag\SyliusBlacklistPlugin\Form\Type\FraudSuspicionOrderType
+            factory:
+                method: createForOrder
+                arguments:
+                    - "expr:notFoundOnNull(service('sylius.repository.order').find($orderId))"
