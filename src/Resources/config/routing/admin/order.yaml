@@ -1,5 +1,0 @@
-bitbag_sylius_blacklist_plugin_admin_order_mark_suspicious:
-  path: /order/{orderId}/fraud-suspicion/new
-  methods: [GET, POST]
-  defaults:
-    _controller: bitbag_sylius_blacklist_plugin.controller.fraud_suspicion:createAction

@@ -4,6 +4,7 @@ bitbag_sylius_blacklist_plugin:
         fraud_suspicions: Fraud suspicion
         manage_blacklisting_rules: Manage blacklisting rules
         manage_fraud_suspicions: Manage fraud suspicions
+        edit_fraud_suspicion: Edit fraud suspicion
         new_blacklisting_rule: New blacklisting rule
         new_fraud_suspicion: New fraud suspicion
         permitted_strikes: Permitted strikes
@@ -20,3 +21,5 @@ bitbag_sylius_blacklist_plugin:
             attribute: Rule attributes
             permitted_strikes: Permitted strikes
             channels: Channels
+        fraud_suspicion:
+            comment: Comment

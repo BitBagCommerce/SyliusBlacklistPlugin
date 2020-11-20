@@ -9,40 +9,43 @@ use Sylius\Component\Order\Model\OrderInterface;
 class FraudSuspicion implements FraudSuspicionInterface
 {
     /** @var int|null */
-    private $id;
+    protected $id;
 
     /** @var OrderInterface|null */
-    private $order;
+    protected $order;
 
     /** @var int|null */
-    private $customerId;
+    protected $customerId;
 
     /** @var string|null */
-    private $company;
+    protected $company;
 
     /** @var string */
-    private $firstName;
+    protected $firstName;
 
     /** @var string */
-    private $lastName;
+    protected $lastName;
 
     /** @var string */
-    private $email;
+    protected $email;
 
     /** @var string */
-    private $street;
+    protected $street;
 
     /** @var string */
-    private $city;
+    protected $city;
 
     /** @var string */
-    private $province;
+    protected $province;
 
     /** @var string */
-    private $country;
+    protected $country;
 
     /** @var string */
-    private $addressType;
+    protected $addressType;
+
+    /** @var string|null */
+    protected $comment;
 
     public function getId(): ?int
     {
@@ -74,7 +77,7 @@ class FraudSuspicion implements FraudSuspicionInterface
         return $this->company;
     }
 
-    public function setCompany(string $company)
+    public function setCompany(?string $company)
     {
         $this->company = $company;
     }
@@ -134,7 +137,7 @@ class FraudSuspicion implements FraudSuspicionInterface
         return $this->province;
     }
 
-    public function setProvince(string $province)
+    public function setProvince(?string $province)
     {
         $this->province = $province;
     }
@@ -157,5 +160,15 @@ class FraudSuspicion implements FraudSuspicionInterface
     public function setAddressType(string $addressType)
     {
         $this->addressType = $addressType;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(string $comment): void
+    {
+        $this->comment = $comment;
     }
 }

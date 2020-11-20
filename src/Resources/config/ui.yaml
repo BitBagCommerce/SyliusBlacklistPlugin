@@ -1,5 +1,0 @@
-sylius_ui:
-  events:
-    sylius.admin.order.show.content:
-      blocks:
-        header: '@BitBagSyliusBlacklistPlugin\bundles\SyliusAdminBundle\Order\Show\_headerWidget.html.twig'

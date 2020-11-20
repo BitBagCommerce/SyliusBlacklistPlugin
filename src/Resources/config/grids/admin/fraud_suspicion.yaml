@@ -6,10 +6,12 @@ sylius_grid:
         options:
           class: "%bitbag_sylius_blacklist_plugin.model.fraud_suspicion.class%"
       fields:
-        orderId:
-          type: string
+        order:
+          type: twig
           label: sylius.ui.order
           sortable: ~
+          options:
+            template: "@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/Grid/Field/order.html.twig"
         customerId:
           type: string
           label: sylius.ui.customer

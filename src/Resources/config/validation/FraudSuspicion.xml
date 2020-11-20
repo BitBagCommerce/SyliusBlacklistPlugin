@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicion">
+        <property name="comment">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">bitbag_sylius_blacklist_plugin.blacklisting_rule.name.max_length</option>
+                <option name="groups">bitbag</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

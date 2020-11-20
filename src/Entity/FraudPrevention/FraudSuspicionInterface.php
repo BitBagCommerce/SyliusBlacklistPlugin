@@ -7,6 +7,12 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface FraudSuspicionInterface extends ResourceInterface
 {
+    /** @var string */
+    public const BILLING_ADDRESS_TYPE = 'billing';
+
+    /** @var string */
+    public const SHIPPING_ADDRESS_TYPE = 'shipping';
+
     public function getId(): ?int;
 
     public function getOrder(): ?OrderInterface;
@@ -19,7 +25,7 @@ interface FraudSuspicionInterface extends ResourceInterface
 
     public function getCompany(): ?string;
 
-    public function setCompany(string $company);
+    public function setCompany(?string $company);
 
     public function getFirstName(): ?string;
 
@@ -43,7 +49,7 @@ interface FraudSuspicionInterface extends ResourceInterface
 
     public function getProvince(): ?string;
 
-    public function setProvince(string $province);
+    public function setProvince(?string $province);
 
     public function getCountry(): ?string;
 
@@ -52,4 +58,8 @@ interface FraudSuspicionInterface extends ResourceInterface
     public function getAddressType(): ?string;
 
     public function setAddressType(string $addressType);
+
+    public function getComment(): ?string;
+
+    public function setComment(string $comment): void;
 }

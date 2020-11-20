@@ -16,9 +16,10 @@
         <field name="lastName" type="string" column="last_name" />
         <field name="email" type="string" column="email" />
         <field name="city" type="string" column="city" />
-        <field name="province" type="string" column="province" />
+        <field name="province" type="string" column="province" nullable="true" />
         <field name="country" type="string" column="country" />
         <field name="addressType" type="string" column="address_type" />
+        <field name="comment" type="string" column="comment" nullable="true" />
 
         <one-to-one field="order" target-entity="Sylius\Component\Order\Model\Order">
             <join-column name="order_id" nullable="true"/>
