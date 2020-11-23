@@ -10,6 +10,12 @@ sylius_grid:
           type: string
           label: sylius.ui.name
           sortable: ~
+        attributes:
+          type: twig
+          label: bitbag_sylius_blacklist_plugin.ui.rule_attributes
+          sortable: ~
+          options:
+            template: '@BitBagSyliusBlacklistPlugin/BlacklistingRule/Admin/Grid/Field/attributes.html.twig'
         permittedStrikes:
           type: string
           label: bitbag_sylius_blacklist_plugin.ui.permitted_strikes
@@ -46,6 +52,8 @@ sylius_grid:
         item:
           update:
             type: update
+          delete:
+            type: delete
         main:
           create:
             type: create
