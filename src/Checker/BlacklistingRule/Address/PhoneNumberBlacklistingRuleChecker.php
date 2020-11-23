@@ -16,7 +16,7 @@ class PhoneNumberBlacklistingRuleChecker implements BlacklistingRuleCheckerInter
     public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, OrderInterface $order): void
     {
         $builder
-            ->andWhere('o.phone_number = :phoneNumber')
+            ->andWhere('o.phoneNumber = :phoneNumber')
             ->setParameter('phoneNumber', $order->getBillingAddress()->getPhoneNumber())
         ;
     }

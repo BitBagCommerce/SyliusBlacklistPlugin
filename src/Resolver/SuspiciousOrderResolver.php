@@ -46,11 +46,15 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
         $this->customerManager = $customerManager;
     }
 
-    public function resolve(OrderInterface $order)
+    public function resolve(OrderInterface $order): bool
     {
         $checkers = $this->serviceRegistry->all();
 
         $blacklistingRules = $this->blacklistingRuleRepository->findByChannel($this->getChannel());
+
+        if (\count($blacklistingRules) === 0) {
+            return false;
+        }
 
         /** @var BlacklistingRuleInterface $blacklistingRule */
         foreach ($blacklistingRules as $blacklistingRule) {
@@ -62,13 +66,16 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
             }
 
             if (\count($builder->getQuery()->getResult()) + 1 >= $blacklistingRule->getPermittedStrikes()) {
-                $customer = $order->getCustomer();
-                $customer->setFraudStatus(FraudStatusInterface::FRAUD_STATUS_BLACKLISTED);
-
-                $this->customerManager->persist($customer);
-                $this->customerManager->flush();
+//                $customer = $order->getCustomer();
+//                $customer->setFraudStatus(FraudStatusInterface::FRAUD_STATUS_BLACKLISTED);
+//
+//                $this->customerManager->persist($customer);
+//                $this->customerManager->flush();
+                return true;
             }
         }
+
+        return false;
     }
 
     private function getChannel(): ChannelInterface

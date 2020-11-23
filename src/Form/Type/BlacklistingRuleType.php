@@ -6,7 +6,6 @@ namespace BitBag\SyliusBlacklistPlugin\Form\Type;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,13 +13,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class BlacklistingRuleType extends AbstractResourceType
 {
-    /** @var ParameterBagInterface */
-    private $params;
+    /** @var array */
+    private $attributeChoices;
 
-    public function __construct(string $dataClass, ParameterBagInterface $params, array $validationGroups = [])
+    public function __construct(string $dataClass, array $attributeChoices, array $validationGroups = [])
     {
         parent::__construct($dataClass, $validationGroups);
-        $this->params = $params;
+        $this->attributeChoices = $attributeChoices;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -32,7 +31,7 @@ final class BlacklistingRuleType extends AbstractResourceType
             ->add('attributes', ChoiceType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.attribute',
                 'multiple' => true,
-                'choices' => $this->params->get('bitbag_sylius_blacklist_plugin.blacklisting_rule_attribute_choices')
+                'choices' => $this->attributeChoices
 
             ])
             ->add('permittedStrikes', NumberType::class, [

@@ -16,7 +16,7 @@ class CustomerIdBlacklistingRuleChecker implements BlacklistingRuleCheckerInterf
     public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, OrderInterface $order): void
     {
         $builder
-            ->andWhere('o.customer_id = :customerId')
+            ->andWhere('o.customerId = :customerId')
             ->setParameter('customerId', $order->getCustomer()->getId())
         ;
     }

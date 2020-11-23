@@ -66,8 +66,9 @@ class BlacklistingRule implements BlacklistingRuleInterface
 
     public function removeAttribute(string $attribute): void
     {
-        $index = array_search('string3',$this->attributes);
-        if($index !== FALSE){
+        $index = array_search($attribute, $this->attributes);
+
+        if ($index !== false) {
             unset($this->attributes[$index]);
         }
     }

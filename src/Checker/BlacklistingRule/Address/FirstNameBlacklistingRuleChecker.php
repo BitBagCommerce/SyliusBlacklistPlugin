@@ -16,7 +16,7 @@ class FirstNameBlacklistingRuleChecker implements BlacklistingRuleCheckerInterfa
     public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, OrderInterface $order): void
     {
         $builder
-            ->andWhere('o.first_name = :firstName')
+            ->andWhere('o.firstName = :firstName')
             ->setParameter('firstName', $order->getBillingAddress()->getFirstName())
         ;
     }
