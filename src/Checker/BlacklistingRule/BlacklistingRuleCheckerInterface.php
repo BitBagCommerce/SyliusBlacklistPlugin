@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusBlacklistPlugin\Checker\Rule;
+namespace BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule;
 
-use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRuleInterface;
-use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
+use Doctrine\ORM\QueryBuilder;
+use Sylius\Component\Order\Model\OrderInterface;
 
 interface BlacklistingRuleCheckerInterface
 {
-    public function checkIfCustomerIsBlacklisted(
-        BlacklistingRuleInterface $blacklistingRule,
-        FraudSuspicionInterface $newFraudSuspicion,
-        array $fraudSuspicions
-    ): bool;
+    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, OrderInterface $order): void;
+
+    public function getAttributeName(): string;
 }

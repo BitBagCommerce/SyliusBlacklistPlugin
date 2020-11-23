@@ -1,0 +1,17 @@
+<container
+        xmlns="http://symfony.com/schema/dic/services"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker.customer_id" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Customer\CustomerIdBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="customer_id" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.customer_id" form-type="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType" />
+        </service>
+        <service id="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker.customer_ip" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Customer\CustomerIpBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="customer_ip" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.customer_ip" form-type="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType" />
+        </service>
+        <service id="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker.email" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Customer\EmailBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="email" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.email" form-type="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType" />
+        </service>
+    </services>
+</container>

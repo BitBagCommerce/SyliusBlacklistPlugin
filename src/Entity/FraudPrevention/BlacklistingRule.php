@@ -21,7 +21,7 @@ class BlacklistingRule implements BlacklistingRuleInterface
     /** @var string */
     protected $name;
 
-    /** @var string */
+    /** @var array */
     protected $attributes;
 
     /** @var int */
@@ -54,14 +54,22 @@ class BlacklistingRule implements BlacklistingRuleInterface
         $this->name = $name;
     }
 
-    public function getAttributes(): ?string
+    public function getAttributes(): ?array
     {
         return $this->attributes;
     }
 
-    public function setAttributes(string $attributes)
+    public function addAttribute(string $attribute): void
     {
-        $this->attributes = $attributes;
+        $this->attributes[] = $attribute;
+    }
+
+    public function removeAttribute(string $attribute): void
+    {
+        $index = array_search('string3',$this->attributes);
+        if($index !== FALSE){
+            unset($this->attributes[$index]);
+        }
     }
 
     public function getPermittedStrikes(): ?int

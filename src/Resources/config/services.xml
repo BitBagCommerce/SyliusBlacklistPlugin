@@ -6,14 +6,8 @@
     </imports>
 
     <services>
-        <service id="bitbag_sylius_blacklist_plugin.blacklistin_rule_checker.customer_id" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\CustomerIdBlacklistingRuleChecker">
-            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="customer_id" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.customer_id" form-type="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType" />
-        </service>
-        <service id="bitbag_sylius_blacklist_plugin.blacklistin_rule_checker.country" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\CountryBlacklistingRuleChecker">
-            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="country" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.country" form-type="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType" />
-        </service>
         <service id="bitbag_sylius_blacklist_plugin.registry_blacklisting_rule_checker" class="Sylius\Component\Registry\ServiceRegistry">
-            <argument>BitBag\SyliusBlacklistPlugin\Checker\Rule\BlacklistingRuleCheckerInterface</argument>
+            <argument>BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleCheckerInterface</argument>
             <argument>bitbag rule checker</argument>
         </service>
         <service id="bitbag_sylius_blacklist_plugin.form_registry.blacklisting_rule_checker" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />

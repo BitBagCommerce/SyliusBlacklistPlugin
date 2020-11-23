@@ -13,7 +13,9 @@ final class FraudSuspicionRepository extends EntityRepository implements FraudSu
 {
     public function createListQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('o');
+        return $this->createQueryBuilder('o')
+            ->select(['COUNT(o.id)'])
+            ->innerJoin('o.order', 'ord');
     }
 
     public function findOneByOrder(OrderInterface $order): ?FraudSuspicionInterface

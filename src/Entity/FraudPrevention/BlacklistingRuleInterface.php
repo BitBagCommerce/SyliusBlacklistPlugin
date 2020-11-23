@@ -16,9 +16,11 @@ interface BlacklistingRuleInterface extends ResourceInterface, ToggleableInterfa
 
     public function setName(string $name): void;
 
-    public function getAttributes(): ?string;
+    public function getAttributes(): ?array;
 
-    public function setAttributes(string $attributes);
+    public function addAttribute(string $attribute): void;
+
+    public function removeAttribute(string $attribute): void;
 
     public function getPermittedStrikes(): ?int;
 

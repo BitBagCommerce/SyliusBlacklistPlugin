@@ -12,7 +12,7 @@
         </id>
 
         <field name="name" type="string" column="name" />
-        <field name="attributes" type="string" column="attributes" />
+        <field name="attributes" type="array" column="attributes" />
         <field name="permittedStrikes" type="integer" column="permitted_strikes" />
         <field name="enabled" type="boolean" column="enabled" />
         <field name="createdAt" column="created_at" type="datetime">

@@ -10,10 +10,6 @@ sylius_grid:
           type: string
           label: sylius.ui.name
           sortable: ~
-        attributes:
-          type: string
-          label: bitbag_sylius_blacklist_plugin.ui.rule_attributes
-          sortable: ~
         permittedStrikes:
           type: string
           label: bitbag_sylius_blacklist_plugin.ui.permitted_strikes
