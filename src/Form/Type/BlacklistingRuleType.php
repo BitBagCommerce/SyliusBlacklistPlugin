@@ -6,6 +6,10 @@ namespace BitBag\SyliusBlacklistPlugin\Form\Type;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Customer\Model\CustomerGroup;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -41,6 +45,14 @@ final class BlacklistingRuleType extends AbstractResourceType
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.channels',
+            ])
+            ->add('customerGroups', EntityType::class, [
+                'class' => CustomerGroup::class,
+                'multiple' => true,
+                'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.customer_group',
+            ])
+            ->add('enabled', CheckboxType::class, [
+                'label' => 'sylius.ui.enabled',
             ])
         ;
     }

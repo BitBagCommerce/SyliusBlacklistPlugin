@@ -15,12 +15,15 @@ bitbag_sylius_blacklist_plugin:
         neutral: Neutral
         fraud_status: Fraud status
         mark_suspicious: Mark suspicious
+        mark_blacklisted: Mark blacklisted
+        mark_neutral: Mark neutral
     form:
         blacklisting_rule:
             name: Rule name
             attribute: Rule attributes
             permitted_strikes: Permitted strikes
             channels: Channels
+            customer_group: Customer groups
             company: Company
             country: Country
             customer_id: Customer ID

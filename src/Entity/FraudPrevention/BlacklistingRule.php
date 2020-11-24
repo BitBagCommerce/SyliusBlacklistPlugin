@@ -7,6 +7,7 @@ namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 
@@ -34,9 +35,17 @@ class BlacklistingRule implements BlacklistingRuleInterface
      */
     protected $channels;
 
+    /**
+     * @var Collection|CustomerGroupInterface[]
+     *
+     * @psalm-var Collection<array-key, CustomerGroupInterface>
+     */
+    protected $customerGroups;
+
     public function __construct()
     {
         $this->channels = new ArrayCollection();
+        $this->customerGroups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,5 +114,29 @@ class BlacklistingRule implements BlacklistingRuleInterface
     public function hasChannel(ChannelInterface $channel): bool
     {
         return $this->channels->contains($channel);
+    }
+
+    public function getCustomerGroups(): Collection
+    {
+        return $this->customerGroups;
+    }
+
+    public function addCustomerGroup(CustomerGroupInterface $customerGroup): void
+    {
+        if (!$this->hasCustomerGroup($customerGroup)) {
+            $this->channels->add($customerGroup);
+        }
+    }
+
+    public function removeCustomerGroup(CustomerGroupInterface $customerGroup): void
+    {
+        if ($this->hasCustomerGroup($customerGroup)) {
+            $this->channels->removeElement($customerGroup);
+        }
+    }
+
+    public function hasCustomerGroup(CustomerGroupInterface $customerGroup): bool
+    {
+        return $this->channels->contains($customerGroup);
     }
 }
