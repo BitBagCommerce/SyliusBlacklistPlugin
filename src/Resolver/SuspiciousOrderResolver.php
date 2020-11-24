@@ -77,12 +77,13 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
 
     private function getAddress(OrderInterface $order, string $addressType): AddressInterface
     {
-        if ($addressType === FraudSuspicion::BILLING_ADDRESS_TYPE) {
-            return $order->getBillingAddress();
-        } elseif ($addressType === FraudSuspicion::SHIPPING_ADDRESS_TYPE) {
-            return $order->getShippingAddress();
-        } else {
-            throw new \Exception('Wrong address type!');
+        switch ($addressType) {
+            case FraudSuspicion::BILLING_ADDRESS_TYPE:
+                return $order->getBillingAddress();
+            case FraudSuspicion::SHIPPING_ADDRESS_TYPE:
+                return $order->getShippingAddress();
+            default:
+                throw new \Exception('Wrong address type!');
         }
     }
 

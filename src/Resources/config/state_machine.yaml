@@ -1,13 +1,2 @@
-winzou_state_machine:
-    bitbag_sylius_blacklist_plugin_customer:
-        class: Tests\BitBag\SyliusBlacklistPlugin\Entity\Customer
-        property_path: fraudStatus
-        graph: bitbag_sylius_blacklist_plugin_customer
-        state_machine_class: "%sylius.state_machine.class%"
-        states:
-            neutral: ~
-            blacklisted: ~
-        transitions:
-            blacklisting:
-                from: [ neutral ]
-                to: blacklisted
+imports:
+    - { resource: "state_machine/*.yaml" }
