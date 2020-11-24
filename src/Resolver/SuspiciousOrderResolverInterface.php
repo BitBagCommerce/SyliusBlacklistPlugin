@@ -2,9 +2,9 @@
 
 namespace BitBag\SyliusBlacklistPlugin\Resolver;
 
-use Sylius\Component\Order\Model\OrderInterface;
+use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 
 interface SuspiciousOrderResolverInterface
 {
-    public function resolve(OrderInterface $order);
+    public function resolve(FraudSuspicionInterface $fraudSuspicion);
 }

@@ -6,6 +6,7 @@ namespace BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address;
 
 use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleCheckerInterface;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 
 class LastNameBlacklistingRuleChecker implements BlacklistingRuleCheckerInterface
@@ -13,11 +14,11 @@ class LastNameBlacklistingRuleChecker implements BlacklistingRuleCheckerInterfac
     /** @var string */
     public const LAST_NAME_ATTRIBUTE_NAME = 'last_name';
 
-    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, OrderInterface $order): void
+    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, OrderInterface $order, AddressInterface $address): void
     {
         $builder
             ->andWhere('o.lastName = :lastName')
-            ->setParameter('lastName', $order->getBillingAddress()->getLastName())
+            ->setParameter('lastName', $address->getLastName())
         ;
     }
 

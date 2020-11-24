@@ -1,6 +1,6 @@
 winzou_state_machine:
     bitbag_sylius_blacklist_plugin_customer:
-        class: "%sylius.model.customer.class%"
+        class: Tests\BitBag\SyliusBlacklistPlugin\Entity\Customer
         property_path: fraudStatus
         graph: bitbag_sylius_blacklist_plugin_customer
         state_machine_class: "%sylius.state_machine.class%"

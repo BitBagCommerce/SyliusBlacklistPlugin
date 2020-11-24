@@ -6,6 +6,7 @@ namespace BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Customer;
 
 use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleCheckerInterface;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 
 class CustomerIdBlacklistingRuleChecker implements BlacklistingRuleCheckerInterface
@@ -13,7 +14,7 @@ class CustomerIdBlacklistingRuleChecker implements BlacklistingRuleCheckerInterf
     /** @var string */
     public const CUSTOMER_ID_ATTRIBUTE_NAME = 'customer_id';
 
-    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, OrderInterface $order): void
+    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, OrderInterface $order, AddressInterface $address): void
     {
         $builder
             ->andWhere('o.customerId = :customerId')
