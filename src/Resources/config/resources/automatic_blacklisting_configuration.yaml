@@ -1,0 +1,6 @@
+sylius_resource:
+  resources:
+    bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration:
+      classes:
+        model: BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingConfiguration
+        interface: BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingConfigurationInterface
