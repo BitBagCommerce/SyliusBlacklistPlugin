@@ -33,34 +33,33 @@ final class AdminCustomerShowMenuListener
 
         $csrfToken = $this->csrfTokenManager->getToken((string) $customer->getId())->getValue();
 
-        switch ($customer->getFraudStatus()) {
-            case FraudStatusInterface::FRAUD_STATUS_NEUTRAL:
-                $menu
-                    ->addChild(self::MARK_BLACKLISTED_TYPE_MENU_KEY, [
-                        'route' => 'bitbag_sylius_blacklist_plugin_admin_customer_mark_blacklisted',
-                        'routeParameters' => [
-                            'id' => $customer->getId(),
-                            '_csrf_token' => $csrfToken
-                        ],
-                    ])
-                    ->setAttribute('type', 'transition')
-                    ->setLabel('bitbag_sylius_blacklist_plugin.ui.mark_blacklisted')
-                    ->setLabelAttribute('icon', 'warning')
-                    ->setLabelAttribute('color', 'red');
-                break;
-            case FraudStatusInterface::FRAUD_STATUS_BLACKLISTED:
-                $menu
-                    ->addChild(self::MARK_NEUTRAL_TYPE_MENU_KEY, [
-                        'route' => 'bitbag_sylius_blacklist_plugin_admin_customer_mark_neutral',
-                        'routeParameters' => [
-                            'id' => $customer->getId(),
-                            '_csrf_token' => $csrfToken
-                        ],
-                    ])
-                    ->setAttribute('type', 'transition')
-                    ->setLabel('bitbag_sylius_blacklist_plugin.ui.mark_neutral')
-                    ->setLabelAttribute('icon', 'universal access');
-                break;
+        if ($customer->getFraudStatus() === FraudStatusInterface::FRAUD_STATUS_NEUTRAL) {
+            $menu
+                ->addChild(self::MARK_BLACKLISTED_TYPE_MENU_KEY, [
+                    'route' => 'bitbag_sylius_blacklist_plugin_admin_customer_mark_blacklisted',
+                    'routeParameters' => [
+                        'id' => $customer->getId(),
+                        '_csrf_token' => $csrfToken
+                    ],
+                ])
+                ->setAttribute('type', 'transition')
+                ->setLabel('bitbag_sylius_blacklist_plugin.ui.mark_blacklisted')
+                ->setLabelAttribute('icon', 'warning')
+                ->setLabelAttribute('color', 'red');
+        }
+
+        if ($customer->getFraudStatus() === FraudStatusInterface::FRAUD_STATUS_BLACKLISTED) {
+            $menu
+                ->addChild(self::MARK_NEUTRAL_TYPE_MENU_KEY, [
+                    'route' => 'bitbag_sylius_blacklist_plugin_admin_customer_mark_neutral',
+                    'routeParameters' => [
+                        'id' => $customer->getId(),
+                        '_csrf_token' => $csrfToken
+                    ],
+                ])
+                ->setAttribute('type', 'transition')
+                ->setLabel('bitbag_sylius_blacklist_plugin.ui.mark_neutral')
+                ->setLabelAttribute('icon', 'universal access');
         }
     }
 }
