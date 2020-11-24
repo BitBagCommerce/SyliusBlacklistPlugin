@@ -79,8 +79,8 @@ sylius_grid:
           label: bitbag_sylius_blacklist_plugin.ui.address_type
           form_options:
             choices:
-              sylius.ui.billing_address: Billing address
-              sylius.ui.shipping_address: Shipping address
+              sylius.ui.billing_address: 'billing'
+              sylius.ui.shipping_address: 'shipping'
       actions:
         item:
           update:

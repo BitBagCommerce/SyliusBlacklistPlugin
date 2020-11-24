@@ -9,7 +9,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 
-final class CustomerStateResolver
+class CustomerStateResolver implements CustomerStateResolverInterface
 {
     /** @var FactoryInterface */
     private $stateMachineFactory;

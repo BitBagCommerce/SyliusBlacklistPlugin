@@ -5,20 +5,19 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\EventListener;
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
-use BitBag\SyliusBlacklistPlugin\Resolver\SuspiciousOrderResolver;
 use BitBag\SyliusBlacklistPlugin\Resolver\SuspiciousOrderResolverInterface;
-use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolver;
+use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class FraudSuspicionListener
 {
-    /** @var SuspiciousOrderResolver */
+    /** @var SuspiciousOrderResolverInterface */
     private $suspiciousOrderResolver;
 
-    /** @var CustomerStateResolver */
+    /** @var CustomerStateResolverInterface */
     private $customerStateResolver;
 
-    public function __construct(SuspiciousOrderResolverInterface $suspiciousOrderResolver, CustomerStateResolver $customerStateResolver)
+    public function __construct(SuspiciousOrderResolverInterface $suspiciousOrderResolver, CustomerStateResolverInterface $customerStateResolver)
     {
         $this->suspiciousOrderResolver = $suspiciousOrderResolver;
         $this->customerStateResolver = $customerStateResolver;
@@ -29,7 +28,7 @@ class FraudSuspicionListener
         /** @var FraudSuspicionInterface $newFraudSuspicion */
         $newFraudSuspicion = $event->getSubject();
 
-        if ($this->suspiciousOrderResolver->resolve($newFraudSuspicion)) {
+        if ($this->suspiciousOrderResolver->resolve($newFraudSuspicion->getOrder(), $newFraudSuspicion->getAddressType())) {
             $this->customerStateResolver->changeStateOnBlacklisted($newFraudSuspicion->getOrder()->getCustomer());
         }
     }
