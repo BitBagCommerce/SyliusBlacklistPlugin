@@ -1,0 +1,20 @@
+<container
+        xmlns="http://symfony.com/schema/dic/services"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="bitbag_sylius_blacklist_plugin.automatic_blacklisting_rule_checker.payment_failures_per_day"
+                 class="BitBag\SyliusBlacklistPlugin\Checker\AutomaticBlacklistingRule\PaymentFailuresPerDayAutomaticBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.automatic_blacklisting_rule_checker" type="payment_failures_per_day"
+                 label="bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.payment_failures_per_day"
+                 form-type="BitBag\SyliusBlacklistPlugin\Form\Rule\PaymentFailuresPerDayConfigurationType" />
+        </service>
+        <service id="bitbag_sylius_blacklist_plugin.automatic_blacklisting_rule_checker.orders_per_week"
+                 class="BitBag\SyliusBlacklistPlugin\Checker\AutomaticBlacklistingRule\OrdersPerWeekAutomaticBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.automatic_blacklisting_rule_checker" type="orders_per_week"
+                 label="bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.orders_per_week"
+                 form-type="BitBag\SyliusBlacklistPlugin\Form\Rule\OrdersPerWeekConfigurationType" />
+        </service>
+    </services>
+</container>

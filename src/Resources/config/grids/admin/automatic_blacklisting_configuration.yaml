@@ -1,0 +1,19 @@
+sylius_grid:
+  grids:
+    bitbag_sylius_blacklist_plugin_automatic_blacklisting_configuration:
+      driver:
+        name: doctrine/orm
+        options:
+          class: "%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_configuration.class%"
+      fields:
+        name:
+          type: string
+          label: sylius.ui.name
+          sortable: ~
+      actions:
+        item:
+          delete:
+            type: delete
+        main:
+          create:
+            type: create

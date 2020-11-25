@@ -10,5 +10,11 @@
             <argument>BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleCheckerInterface</argument>
             <argument>bitbag rule checker</argument>
         </service>
+
+        <service id="bitbag_sylius_blacklist_plugin.registry_automatic_blacklisting_rule_checker" class="Sylius\Component\Registry\ServiceRegistry">
+            <argument>BitBag\SyliusBlacklistPlugin\Checker\AutomaticBlacklistingRule\AutomaticBlacklistingRuleCheckerInterface</argument>
+            <argument>bitbag automatic blacklisting rule checker</argument>
+        </service>
+        <service id="bitbag_sylius_blacklist_plugin.form_registry.automatic_blacklisting_rule_checker" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
     </services>
 </container>
