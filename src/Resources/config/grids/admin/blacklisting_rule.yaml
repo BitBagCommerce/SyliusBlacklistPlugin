@@ -36,11 +36,6 @@ sylius_grid:
             class: "%sylius.model.channel.class%"
           options:
             field: "channels.id"
-#        attribute:
-#          type: select
-#          label: bitbag_sylius_blacklist_plugin.ui.rule_attribute
-#          form_options:
-#            choices: '%bitbag_sylius_blacklist_plugin.blacklisting_rule_attribute_choices%'
         enabled:
           type: boolean
           label: sylius.ui.enabled

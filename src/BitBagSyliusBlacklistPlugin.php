@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin;
 
+use BitBag\SyliusBlacklistPlugin\DependencyInjection\Compiler\RegisterAutomaticBlacklistingRuleCheckersPass;
 use BitBag\SyliusBlacklistPlugin\DependencyInjection\Compiler\RegisterBlacklistingRuleCheckersPass;
 use Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -18,5 +19,6 @@ final class BitBagSyliusBlacklistPlugin extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterBlacklistingRuleCheckersPass());
+        $container->addCompilerPass(new RegisterAutomaticBlacklistingRuleCheckersPass());
     }
 }

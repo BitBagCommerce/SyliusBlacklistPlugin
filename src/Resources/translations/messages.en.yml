@@ -17,6 +17,9 @@ bitbag_sylius_blacklist_plugin:
         mark_suspicious: Mark suspicious
         mark_blacklisted: Mark blacklisted
         mark_neutral: Mark neutral
+        automatic_blacklisting_configurations: Auto-blacklisting config
+        configure_automatic_blacklisting_configurations: Configure auto-blacklisitng
+        new_automatic_blacklisting_configuration: Add new configuration
     form:
         blacklisting_rule:
             name: Rule name
@@ -37,3 +40,10 @@ bitbag_sylius_blacklist_plugin:
             street: Street
         fraud_suspicion:
             comment: Comment
+        automatic_blacklisting_rule:
+            rules: Rules
+            type: Type
+            count: Count
+            name: Configuration name
+            payment_failures_per_day: Payment failures per day
+            orders_per_week: Orders per week

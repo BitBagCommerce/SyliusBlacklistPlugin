@@ -7,6 +7,12 @@
         <parameter key="bitbag.sylius_blacklist_plugin.form.type.validation_groups" type="collection">
             <parameter>bitbag</parameter>
         </parameter>
+        <parameter key="bitbag.sylius_blacklist_plugin.form.type.automatic_blacklisting_configuration.validation_groups" type="collection">
+            <parameter>bitbag</parameter>
+        </parameter>
+        <parameter key="bitbag.sylius_blacklist_plugin.form.type.automatic_blacklisting_rule.validation_groups" type="collection">
+            <parameter>bitbag</parameter>
+        </parameter>
         <parameter key="bitbag.sylius_blacklist_plugin.form.type.checkout_address.validation_groups" type="collection">
             <parameter>bitbag_checkout_address</parameter>
         </parameter>
@@ -29,10 +35,35 @@
             <argument>%bitbag.sylius_blacklist_plugin.form.type.validation_groups%</argument>
             <tag name="form.type"/>
         </service>
+
         <service id="sylius.form.type.checkout_address" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType">
             <argument>%sylius.model.order.class%</argument>
             <argument>%bitbag.sylius_blacklist_plugin.form.type.checkout_address.validation_groups%</argument>
             <argument type="service" id="sylius.address_comparator" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="bit_bag.sylius_blacklist_plugin.form.type.automatic_blacklisting_configuration"
+                 class="BitBag\SyliusBlacklistPlugin\Form\Type\AutomaticBlacklistingConfigurationType">
+            <argument>%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_configuration.class%</argument>
+            <argument>%bitbag.sylius_blacklist_plugin.form.type.automatic_blacklisting_configuration.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+        <service id="bit_bag.sylius_blacklist_plugin.form.type.automatic_blacklisting_rule"
+                 class="BitBag\SyliusBlacklistPlugin\Form\Type\AutomaticBlacklistingRuleType">
+            <argument>%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_rule.class%</argument>
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.form_registry.automatic_blacklisting_rule_checker" />
+            <argument>%bitbag.sylius_blacklist_plugin.form.type.automatic_blacklisting_rule.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+        <service id="bit_bag.sylius_blacklist_plugin.form.type.automatic_blacklisting_rule.collection"
+                 class="BitBag\SyliusBlacklistPlugin\Form\Type\AutomaticBlacklistingRuleCollectionType">
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.registry_automatic_blacklisting_rule_checker" />
+            <tag name="form.type" />
+        </service>
+        <service id="bit_bag.sylius_blacklist_plugin.form.type.automatic_blacklisting_rule_choice"
+                 class="BitBag\SyliusBlacklistPlugin\Form\Type\AutomaticBlacklistingRuleChoiceType">
+            <argument>%bit_bag.sylius_blacklist_plugin.automatic_blacklisting_rules%</argument>
             <tag name="form.type" />
         </service>
     </services>
