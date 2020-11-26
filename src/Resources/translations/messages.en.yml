@@ -1,6 +1,6 @@
 bitbag_sylius_blacklist_plugin:
     ui:
-        blacklisting_rules: Blacklisting rule
+        blacklisting_rules: Manual blacklisting rule
         fraud_suspicions: Fraud suspicion
         manage_blacklisting_rules: Manage blacklisting rules
         manage_fraud_suspicions: Manage fraud suspicions

@@ -17,22 +17,22 @@ final class RegisterAutomaticBlacklistingRuleCheckersPass implements CompilerPas
             return;
         }
 
-        $promotionRuleCheckerRegistry = $container->getDefinition('bitbag_sylius_blacklist_plugin.registry_automatic_blacklisting_rule_checker');
-        $promotionRuleCheckerFormTypeRegistry = $container->getDefinition('bitbag_sylius_blacklist_plugin.form_registry.automatic_blacklisting_rule_checker');
+        $automaticBlacklistingRuleCheckerRegistry = $container->getDefinition('bitbag_sylius_blacklist_plugin.registry_automatic_blacklisting_rule_checker');
+        $automaticBlacklistingRuleCheckerFormTypeRegistry = $container->getDefinition('bitbag_sylius_blacklist_plugin.form_registry.automatic_blacklisting_rule_checker');
 
-        $promotionRuleCheckerTypeToLabelMap = [];
+        $automaticBlacklistingRuleCheckerTypeToLabelMap = [];
         foreach ($container->findTaggedServiceIds('bitbag_sylius_blacklist_plugin.automatic_blacklisting_rule_checker') as $id => $attributes) {
             foreach ($attributes as $attribute) {
                 if (!isset($attribute['type'], $attribute['label'], $attribute['form_type'])) {
                     throw new \InvalidArgumentException('Tagged rule checker `' . $id . '` needs to have `type`, `form_type` and `label` attributes.');
                 }
 
-                $promotionRuleCheckerTypeToLabelMap[$attribute['type']] = $attribute['label'];
-                $promotionRuleCheckerRegistry->addMethodCall('register', [$attribute['type'], new Reference($id)]);
-                $promotionRuleCheckerFormTypeRegistry->addMethodCall('add', [$attribute['type'], 'default', $attribute['form_type']]);
+                $automaticBlacklistingRuleCheckerTypeToLabelMap[$attribute['type']] = $attribute['label'];
+                $automaticBlacklistingRuleCheckerRegistry->addMethodCall('register', [$attribute['type'], new Reference($id)]);
+                $automaticBlacklistingRuleCheckerFormTypeRegistry->addMethodCall('add', [$attribute['type'], 'default', $attribute['form_type']]);
             }
         }
 
-        $container->setParameter('bit_bag.sylius_blacklist_plugin.automatic_blacklisting_rules', $promotionRuleCheckerTypeToLabelMap);
+        $container->setParameter('bit_bag.sylius_blacklist_plugin.automatic_blacklisting_rules', $automaticBlacklistingRuleCheckerTypeToLabelMap);
     }
 }
