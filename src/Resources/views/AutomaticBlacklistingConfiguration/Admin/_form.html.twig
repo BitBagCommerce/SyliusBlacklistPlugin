@@ -1,0 +1,25 @@
+<div class="ui two column stackable grid">
+    <div class="column">
+        {{ form_errors(form) }}
+        <div class="ui segment">
+            <div class="one field">
+                {{ form_row(form.name) }}
+            </div>
+            <div class="one field">
+                {{ form_row(form.channels) }}
+            </div>
+            <div class="one field">
+                {{ form_row(form.enabled) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui segment">
+    <h4 class="ui dividing header">{{ 'bitbag_sylius_blacklist_plugin.ui.settings'|trans }}</h4>
+
+    <div class="ui one column stackable grid">
+        <div class="column" id="rules">
+            {{ form_row(form.rules) }}
+        </div>
+    </div>
+</div>

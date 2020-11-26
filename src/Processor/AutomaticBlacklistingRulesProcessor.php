@@ -6,11 +6,11 @@ namespace BitBag\SyliusBlacklistPlugin\Processor;
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingConfigurationInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingRuleInterface;
+use BitBag\SyliusBlacklistPlugin\Repository\AutomaticBlacklistingConfigurationRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\OrderRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolverInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesProcessorInterface
 {
@@ -20,16 +20,16 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
     /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /** @var RepositoryInterface */
-    private $automaticBlacklistingConfigurationRepository;
-
     /** @var CustomerStateResolverInterface */
     private $customerStateResolver;
+
+    /** @var AutomaticBlacklistingConfigurationRepositoryInterface */
+    private $automaticBlacklistingConfigurationRepository;
 
     public function __construct(
         ServiceRegistryInterface $serviceRegistry,
         OrderRepositoryInterface $orderRepository,
-        RepositoryInterface $automaticBlacklistingConfigurationRepository,
+        AutomaticBlacklistingConfigurationRepositoryInterface $automaticBlacklistingConfigurationRepository,
         CustomerStateResolverInterface $customerStateResolver
     ) {
         $this->serviceRegistry = $serviceRegistry;
@@ -43,7 +43,9 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
         $checkers = $this->serviceRegistry->all();
         $customer = $order->getCustomer();
 
-        $allAutomaticBlacklistingConfiguration = $this->automaticBlacklistingConfigurationRepository->findAll();
+        $channel = $order->getChannel();
+
+        $allAutomaticBlacklistingConfiguration = $this->automaticBlacklistingConfigurationRepository->findByChannel($channel);
 
         if (\count($allAutomaticBlacklistingConfiguration) === 0) {
             return false;
@@ -56,15 +58,14 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
             foreach ($automaticBlacklistingRules as $automaticBlacklistingRule) {
                 foreach ($checkers as $checker) {
                     if ($checker->getType() === $automaticBlacklistingRule->getType()) {
-                        if ($checker->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order, $this->orderRepository)) {
-                            $this->customerStateResolver->changeStateOnBlacklisted($customer);
-                            return true;
+                        if (!($checker->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order, $this->orderRepository))) {
+                            return false;
                         }
                     }
                 }
             }
         }
 
-        return false;
+        return true;
     }
 }

@@ -38,24 +38,27 @@ class CheckoutAddressTypeValidator extends ConstraintValidator
         /** @var CustomerInterface $customer */
         $customer = $order->getCustomer();
 
-        if ($this->automaticBlacklistingRulesProcessor->process($order)) {
-            $this->context->buildViolation($constraint->message)->setTranslationDomain('validators')->addViolation();
-            return;
-        }
-
-        if ($this->suspiciousOrderResolver->resolve($order, FraudSuspicionInterface::BILLING_ADDRESS_TYPE)) {
-            $this->context->buildViolation($constraint->message)->setTranslationDomain('validators')->addViolation();
-            return;
-        }
-
-        if ($this->suspiciousOrderResolver->resolve($order, FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE)) {
-            $this->context->buildViolation($constraint->message)->setTranslationDomain('validators')->addViolation();
-            return;
-        }
-
         if ($customer->getFraudStatus() === FraudStatusInterface::FRAUD_STATUS_BLACKLISTED) {
-            $this->context->buildViolation($constraint->message)->setTranslationDomain('validators')->addViolation();
+            $this->buildViolation($constraint);
             return;
         }
+
+        if ($this->automaticBlacklistingRulesProcessor->process($order)) {
+            $this->buildViolation($constraint);
+            return;
+        }
+
+        if (
+            $this->suspiciousOrderResolver->resolve($order, FraudSuspicionInterface::BILLING_ADDRESS_TYPE) ||
+            $this->suspiciousOrderResolver->resolve($order, FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE)
+        ) {
+            $this->buildViolation($constraint);
+            return;
+        }
+    }
+
+    private function buildViolation(Constraint $constraint): void
+    {
+        $this->context->buildViolation($constraint->message)->setTranslationDomain('validators')->addViolation();
     }
 }

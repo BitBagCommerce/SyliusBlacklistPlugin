@@ -31,3 +31,4 @@ bitbag_sylius_blacklist_plugin_admin_order_mark_suspicious:
                 method: createForOrder
                 arguments:
                     - "expr:notFoundOnNull(service('sylius.repository.order').find($orderId))"
+                    - "object"

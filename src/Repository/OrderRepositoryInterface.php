@@ -7,7 +7,7 @@ use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
 
 interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 {
-    public function findByCustomerPaymentFailuresInCurrentDay(CustomerInterface $customer): string;
+    public function findByCustomerPaymentFailuresInCurrentDay(CustomerInterface $customer, string $dateModifier): string;
 
-    public function findByCustomerOrdersInCurrentWeek(CustomerInterface $customer): string;
+    public function findByCustomerOrdersInCurrentWeek(CustomerInterface $customer, string $dateModifier): string;
 }

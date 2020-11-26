@@ -23,9 +23,8 @@ class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
         $fraudSuspicion->setOrder($order);
         $fraudSuspicion->setCustomerId($order->getCustomer()->getId());
         $fraudSuspicion->setCompany($order->getBillingAddress()->getCompany());
-        $fraudSuspicion->setFirstName($order->getCustomer()->getFirstName());
-        $fraudSuspicion->setLastName($order->getCustomer()->getLastName());
-        $fraudSuspicion->setEmail($order->getCustomer()->getEmail());
+        $fraudSuspicion->setFirstName($order->getBillingAddress()->getFirstName());
+        $fraudSuspicion->setLastName($order->getBillingAddress()->getLastName());
         $fraudSuspicion->setEmail($order->getCustomer()->getEmail());
         $fraudSuspicion->setStreet($order->getBillingAddress()->getStreet());
         $fraudSuspicion->setCity($order->getBillingAddress()->getCity());
