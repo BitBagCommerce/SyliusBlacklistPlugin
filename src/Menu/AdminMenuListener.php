@@ -33,17 +33,17 @@ final class AdminMenuListener
             ->setLabelAttribute('icon', 'hand paper');
 
         $salesMenu
-            ->addChild(self::AUTOMATIC_BLACKLISTING_CONFIGURATION_TYPE_MENU_KEY, [
-                'route' => 'bitbag_sylius_blacklist_plugin_admin_automatic_blacklisting_configuration_index',
-            ])
-            ->setLabel('bitbag_sylius_blacklist_plugin.ui.automatic_blacklisting_configurations')
-            ->setLabelAttribute('icon', 'microchip');
-
-        $salesMenu
             ->addChild(self::FRAUD_SUSPICION_TYPE_MENU_KEY, [
                 'route' => 'bitbag_sylius_blacklist_plugin_admin_fraud_suspicion_index',
             ])
             ->setLabel('bitbag_sylius_blacklist_plugin.ui.fraud_suspicions')
             ->setLabelAttribute('icon', 'exclamation triangle');
+
+        $salesMenu
+            ->addChild(self::AUTOMATIC_BLACKLISTING_CONFIGURATION_TYPE_MENU_KEY, [
+                'route' => 'bitbag_sylius_blacklist_plugin_admin_automatic_blacklisting_configuration_index',
+            ])
+            ->setLabel('bitbag_sylius_blacklist_plugin.ui.automatic_blacklisting_configurations')
+            ->setLabelAttribute('icon', 'cog');
     }
 }

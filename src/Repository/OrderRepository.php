@@ -16,11 +16,11 @@ final class OrderRepository extends BaseOrderRepository implements OrderReposito
             ->innerJoin('o.customer', 'customer')
             ->where('customer.id = :customerId')
             ->andWhere('o.paymentState = :failedState')
-            ->andWhere('o.createdAt >= :yesterdayDate')
+            ->andWhere('o.createdAt >= :date')
             ->setParameters([
                 'customerId' => $customer->getId(),
                 'failedState' => 'failed',
-                'yesterdayDate' => (new \DateTime())->modify('- '. $dateModifier)
+                'date' => (new \DateTime())->modify('- '. $dateModifier)
             ])
             ->getQuery()
             ->getSingleScalarResult();
@@ -32,10 +32,10 @@ final class OrderRepository extends BaseOrderRepository implements OrderReposito
             ->select(['COUNT(o.id)'])
             ->innerJoin('o.customer', 'customer')
             ->where('customer.id = :customerId')
-            ->andWhere('o.createdAt >= :oneWeekBeforeDate')
+            ->andWhere('o.createdAt >= :date')
             ->setParameters([
                 'customerId' => $customer->getId(),
-                'oneWeekBeforeDate' => (new \DateTime())->modify('- '. $dateModifier)
+                'date' => (new \DateTime())->modify('- '. $dateModifier)
             ])
             ->getQuery()
             ->getSingleScalarResult();

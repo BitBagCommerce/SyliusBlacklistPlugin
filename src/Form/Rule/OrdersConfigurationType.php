@@ -11,13 +11,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
-final class PaymentFailuresPerDayConfigurationType extends AbstractType
+final class OrdersConfigurationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('count', IntegerType::class, [
-                'label' => 'sylius.form.promotion_rule.cart_quantity_configuration.count',
+                'label' => 'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.count',
                 'constraints' => [
                     new NotBlank(['groups' => ['bit bag']]),
                     new Type(['type' => 'numeric', 'groups' => ['bit bag']]),
@@ -37,6 +37,6 @@ final class PaymentFailuresPerDayConfigurationType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'bitbag_sylius_blacklist_plugin_automatic_blacklisting_rule_payment_failures_per_day_configuration';
+        return 'bitbag_sylius_blacklist_plugin_automatic_blacklisting_rule_orders_per_week_configuration';
     }
 }
