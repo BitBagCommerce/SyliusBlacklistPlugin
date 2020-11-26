@@ -7,6 +7,9 @@
         <parameter key="bitbag.sylius_blacklist_plugin.form.type.validation_groups" type="collection">
             <parameter>bitbag</parameter>
         </parameter>
+        <parameter key="bitbag.sylius_blacklist_plugin.form.type.checkout_address.validation_groups" type="collection">
+            <parameter>bitbag_checkout_address</parameter>
+        </parameter>
     </parameters>
 
     <services>
@@ -25,6 +28,12 @@
             <argument>%bitbag_sylius_blacklist_plugin.model.fraud_suspicion.class%</argument>
             <argument>%bitbag.sylius_blacklist_plugin.form.type.validation_groups%</argument>
             <tag name="form.type"/>
+        </service>
+        <service id="sylius.form.type.checkout_address" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType">
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%bitbag.sylius_blacklist_plugin.form.type.checkout_address.validation_groups%</argument>
+            <argument type="service" id="sylius.address_comparator" />
+            <tag name="form.type" />
         </service>
     </services>
 </container>

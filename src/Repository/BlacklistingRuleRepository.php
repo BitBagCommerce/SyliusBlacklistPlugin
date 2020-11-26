@@ -20,7 +20,11 @@ final class BlacklistingRuleRepository extends EntityRepository implements Black
         return $this->createListQueryBuilder()
             ->innerJoin('o.channels', 'channel')
             ->where('channel.id = :channelId')
-            ->setParameter('channelId', $channel->getId())
+            ->andWhere('o.enabled = :enabled')
+            ->setParameters([
+                'channelId' => $channel->getId(),
+                'enabled' => true
+            ])
             ->getQuery()
             ->getResult();
     }

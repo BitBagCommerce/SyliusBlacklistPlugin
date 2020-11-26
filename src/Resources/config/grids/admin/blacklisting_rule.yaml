@@ -29,25 +29,21 @@ sylius_grid:
         name:
           type: string
           label: sylius.ui.name
-        channel:
-          type: entity
+        channels:
+          type: entities
           label: sylius.ui.channel
           form_options:
             class: "%sylius.model.channel.class%"
-        attribute:
-          type: select
-          label: bitbag_sylius_blacklist_plugin.ui.rule_attribute
-          form_options:
-            choices:
-              sylius.ui.test1: test1
-              sylius.ui.test2: test2
-        status:
-          type: select
+          options:
+            field: "channels.id"
+#        attribute:
+#          type: select
+#          label: bitbag_sylius_blacklist_plugin.ui.rule_attribute
+#          form_options:
+#            choices: '%bitbag_sylius_blacklist_plugin.blacklisting_rule_attribute_choices%'
+        enabled:
+          type: boolean
           label: sylius.ui.enabled
-          form_options:
-            choices:
-              sylius.ui.enabled: true
-              sylius.ui.disabled: false
       actions:
         item:
           update:

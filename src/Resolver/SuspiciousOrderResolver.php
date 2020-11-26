@@ -13,6 +13,7 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
@@ -46,11 +47,10 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
         $this->customerManager = $customerManager;
     }
 
-    public function resolve(FraudSuspicionInterface $fraudSuspicion): bool
+    public function resolve(OrderInterface $order, string $addressType): bool
     {
         $checkers = $this->serviceRegistry->all();
-        $order = $fraudSuspicion->getOrder();
-        $address = $this->resolveAddressType($fraudSuspicion);
+        $address = $this->getAddress($order, $addressType);
 
         $blacklistingRules = $this->blacklistingRuleRepository->findByChannel($this->getChannel());
 
@@ -75,15 +75,13 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
         return false;
     }
 
-    private function resolveAddressType(FraudSuspicionInterface $fraudSuspicion): AddressInterface
+    private function getAddress(OrderInterface $order, string $addressType): AddressInterface
     {
-        $addressType = $fraudSuspicion->getAddressType();
-
         switch ($addressType) {
             case FraudSuspicion::BILLING_ADDRESS_TYPE:
-                return $fraudSuspicion->getOrder()->getBillingAddress();
+                return $order->getBillingAddress();
             case FraudSuspicion::SHIPPING_ADDRESS_TYPE:
-                return $fraudSuspicion->getOrder()->getShippingAddress();
+                return $order->getShippingAddress();
             default:
                 throw new \Exception('Wrong address type!');
         }
