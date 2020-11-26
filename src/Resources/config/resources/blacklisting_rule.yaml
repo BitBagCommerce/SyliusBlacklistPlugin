@@ -3,5 +3,6 @@ sylius_resource:
     bitbag_sylius_blacklist_plugin.blacklisting_rule:
       classes:
         model: BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRule
-        interface: BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRule
+        repository: BitBag\SyliusBlacklistPlugin\Repository\BlacklistingRuleRepository
+        interface: BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRuleInterface
         form: BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType

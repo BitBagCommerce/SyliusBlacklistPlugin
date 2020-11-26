@@ -4,4 +4,11 @@
     <imports>
         <import resource="services/**/*.xml" />
     </imports>
+
+    <services>
+        <service id="bitbag_sylius_blacklist_plugin.registry_blacklisting_rule_checker" class="Sylius\Component\Registry\ServiceRegistry">
+            <argument>BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleCheckerInterface</argument>
+            <argument>bitbag rule checker</argument>
+        </service>
+    </services>
 </container>

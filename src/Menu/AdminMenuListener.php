@@ -28,13 +28,13 @@ final class AdminMenuListener
                 'route' => 'bitbag_sylius_blacklist_plugin_admin_blacklisting_rule_index',
             ])
             ->setLabel('bitbag_sylius_blacklist_plugin.ui.blacklisting_rules')
-            ->setLabelAttribute('icon', 'clipboard');
+            ->setLabelAttribute('icon', 'hand paper');
 
         $salesMenu
             ->addChild(self::FRAUD_SUSPICION_TYPE_MENU_KEY, [
                 'route' => 'bitbag_sylius_blacklist_plugin_admin_fraud_suspicion_index',
             ])
             ->setLabel('bitbag_sylius_blacklist_plugin.ui.fraud_suspicions')
-            ->setLabelAttribute('icon', 'clipboard');
+            ->setLabelAttribute('icon', 'exclamation triangle');
     }
 }

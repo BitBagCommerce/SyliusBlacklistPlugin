@@ -12,7 +12,7 @@
         </id>
 
         <field name="name" type="string" column="name" />
-        <field name="attributes" type="string" column="attributes" />
+        <field name="attributes" type="array" column="attributes" />
         <field name="permittedStrikes" type="integer" column="permitted_strikes" />
         <field name="enabled" type="boolean" column="enabled" />
         <field name="createdAt" column="created_at" type="datetime">
@@ -29,6 +29,16 @@
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+        <many-to-many field="customerGroups" target-entity="Sylius\Component\Customer\Model\CustomerGroupInterface">
+            <join-table name="blacklisting_rule_customer_group">
+                <join-columns>
+                    <join-column name="blacklisting_rule_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="customer_group_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
                 </inverse-join-columns>
             </join-table>
         </many-to-many>

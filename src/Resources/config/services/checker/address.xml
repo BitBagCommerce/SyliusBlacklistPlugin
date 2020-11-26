@@ -1,0 +1,32 @@
+<container
+        xmlns="http://symfony.com/schema/dic/services"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker.company" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address\CompanyBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="company" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.company" form-type="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType" />
+        </service>
+        <service id="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker.country" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address\CountryBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="country" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.country" form-type="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType" />
+        </service>
+        <service id="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker.first_name" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address\FirstNameBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="first_name" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.first_name" form-type="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType" />
+        </service>
+        <service id="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker.last_name" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address\LastNameBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="last_name" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.last_name" form-type="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType" />
+        </service>
+        <service id="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker.phone_number" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address\PhoneNumberBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="phone_number" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.phone_number" form-type="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType" />
+        </service>
+        <service id="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker.postcode" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address\PostcodeBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="postcode" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.postcode" form-type="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType" />
+        </service>
+        <service id="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker.province" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address\ProvinceBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="province" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.province" form-type="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType" />
+        </service>
+        <service id="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker.street" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address\StreetBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="street" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.street" form-type="BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType" />
+        </service>
+    </services>
+</container>
