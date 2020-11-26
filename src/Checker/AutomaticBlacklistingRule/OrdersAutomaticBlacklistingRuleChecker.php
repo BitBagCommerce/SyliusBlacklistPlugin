@@ -8,16 +8,19 @@ use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingRul
 use BitBag\SyliusBlacklistPlugin\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 
-class PaymentFailuresPerDayAutomaticBlacklistingRuleChecker implements AutomaticBlacklistingRuleCheckerInterface
+class OrdersAutomaticBlacklistingRuleChecker implements AutomaticBlacklistingRuleCheckerInterface
 {
-    public const TYPE = 'payment_failures_per_day';
+    public const TYPE = 'orders';
 
     public function isBlacklistedOrderAndCustomer(
         AutomaticBlacklistingRuleInterface $blacklistingRule,
         OrderInterface $order,
         OrderRepositoryInterface $orderRepository
     ): bool {
-        if ($orderRepository->findByCustomerPaymentFailuresInCurrentDay($order->getCustomer()) >= $blacklistingRule->getSettings()['count']) {
+        $numberOfOrders = $orderRepository
+            ->findByCustomerOrdersInCurrentWeek($order->getCustomer(), $blacklistingRule->getSettings()['date_modifier']);
+
+        if (\intval($numberOfOrders) >= $blacklistingRule->getSettings()['count']) {
             return true;
         }
 

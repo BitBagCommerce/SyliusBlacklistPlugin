@@ -4,11 +4,13 @@ bitbag_sylius_blacklist_plugin_admin_automatic_blacklisting_configuration:
         section: admin
         templates: SyliusAdminBundle:Crud
         grid: bitbag_sylius_blacklist_plugin_automatic_blacklisting_configuration
-        except: ['show', 'update']
+        except: ['show']
         permission: true
         vars:
             all:
                 subheader: bitbag_sylius_blacklist_plugin.ui.configure_automatic_blacklisting_configurations
+                templates:
+                    form: "@BitBagSyliusBlacklistPlugin/AutomaticBlacklistingConfiguration/Admin/_form.html.twig"
             index:
                 icon: clipboard list
     type: sylius.resource

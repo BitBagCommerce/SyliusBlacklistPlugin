@@ -20,6 +20,8 @@ bitbag_sylius_blacklist_plugin:
         automatic_blacklisting_configurations: Auto-blacklisting config
         configure_automatic_blacklisting_configurations: Configure auto-blacklisitng
         new_automatic_blacklisting_configuration: Add new configuration
+        edit_automatic_blacklisting_configuration: Edit configuration
+        settings: Settings
     form:
         blacklisting_rule:
             name: Rule name
@@ -45,5 +47,9 @@ bitbag_sylius_blacklist_plugin:
             type: Type
             count: Count
             name: Configuration name
-            payment_failures_per_day: Payment failures per day
-            orders_per_week: Orders per week
+            payment_failures: Max number of payment failures
+            orders: Max number of orders
+            date_modifier: Date modifier
+            per_day: Per day
+            per_week: Per week
+            per_month: Per month
