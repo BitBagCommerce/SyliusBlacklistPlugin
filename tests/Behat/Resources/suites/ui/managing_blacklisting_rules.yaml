@@ -1,0 +1,12 @@
+default:
+    suites:
+        ui_managing_blacklisting_rules:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.admin_security
+
+                - bitbag_sylius_blacklist_plugin.behat.context.setup.blacklisting_rule
+                - bitbag_sylius_blacklist_plugin.behat.context.ui.admin.blacklisting_rule
+            filters:
+                tags: "@managing_blacklisting_rules && @ui"
