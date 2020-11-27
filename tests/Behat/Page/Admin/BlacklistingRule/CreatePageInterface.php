@@ -19,7 +19,7 @@ interface CreatePageInterface extends BaseCreatePageInterface, ContainsErrorInte
 
     public function fillLink(string $link): void;
 
-    public function associateSections(array $sectionsNames): void;
+    public function enable(): void;
 
-    public function disable(): void;
+    public function checkField(string $field): void;
 }

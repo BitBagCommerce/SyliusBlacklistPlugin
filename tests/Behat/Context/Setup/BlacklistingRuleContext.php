@@ -38,9 +38,29 @@ final class BlacklistingRuleContext implements Context
         $this->blacklistingRuleRepository = $blacklistingRuleRepository;
     }
 
-    private function createBlock(
+    /**
+     * @Given there is a blacklisting rule in the store
+     */
+    public function thereIsABlacklistingRuleInTheStore()
+    {
+        $blacklistingRule = $this->createBlacklistingRule();
+
+        $this->saveBlacklistingRule($blacklistingRule);
+    }
+
+    /**
+     * @Given there is a blacklisting rule with :ruleName name and :permittedStrikes permitted strikes
+     */
+    public function thereIsABlacklistingRuleWithNameAndPermittedStrikes(string $ruleName, string $permittedStrikes)
+    {
+        $blacklistingRule = $this->createBlacklistingRule($ruleName, \intval($permittedStrikes));
+
+        $this->saveBlacklistingRule($blacklistingRule);
+    }
+
+    private function createBlacklistingRule(
         ?string $name = null,
-        ?string $permittedStrikes = null,
+        ?int $permittedStrikes = null,
         ChannelInterface $channel = null
     ): BlacklistingRuleInterface
     {

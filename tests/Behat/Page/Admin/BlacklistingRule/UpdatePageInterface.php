@@ -15,5 +15,5 @@ interface UpdatePageInterface extends BaseUpdatePageInterface, ChecksCodeImmutab
 
     public function disable(): void;
 
-    public function isBlockDisabled(): bool;
+    public function isBlacklistingRuleDisabled(): bool;
 }

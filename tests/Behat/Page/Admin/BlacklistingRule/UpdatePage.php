@@ -13,7 +13,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function fillName(string $name): void
     {
-        $this->getDocument()->fillField('Name', $name);
+        $this->getDocument()->fillField('Rule name', $name);
     }
 
     public function fillLink(string $link): void
@@ -26,7 +26,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->uncheckField('Enabled');
     }
 
-    public function isBlockDisabled(): bool
+    public function isBlacklistingRuleDisabled(): bool
     {
         return $this->getDocument()->findField('Enabled')->isChecked();
     }

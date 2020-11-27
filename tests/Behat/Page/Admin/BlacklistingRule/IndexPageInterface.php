@@ -11,5 +11,7 @@ interface IndexPageInterface extends BaseIndexPageInterface, ContainsEmptyListIn
 {
     public function getBlocksWithTypeCount(string $type): int;
 
-    public function deleteBlock(string $code): void;
+    public function deleteBlacklistingRule(string $name): void;
+
+    public function isBlacklistingRuleDisabled(string $name): bool;
 }

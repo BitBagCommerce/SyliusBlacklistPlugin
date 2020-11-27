@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusBlacklistPlugin\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
+use BitBag\SyliusBlacklistPlugin\Repository\BlacklistingRuleRepositoryInterface;
 use Sylius\Behat\NotificationType;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -39,6 +41,9 @@ final class BlacklistingRuleContext implements Context
     /** @var RandomStringGeneratorInterface */
     private $randomStringGenerator;
 
+    /** @var BlacklistingRuleRepositoryInterface */
+    private $blacklistingRuleRepository;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CurrentPageResolverInterface $currentPageResolver,
@@ -46,7 +51,8 @@ final class BlacklistingRuleContext implements Context
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
-        RandomStringGeneratorInterface $randomStringGenerator
+        RandomStringGeneratorInterface $randomStringGenerator,
+        BlacklistingRuleRepositoryInterface $blacklistingRuleRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->currentPageResolver = $currentPageResolver;
@@ -55,6 +61,7 @@ final class BlacklistingRuleContext implements Context
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
         $this->randomStringGenerator = $randomStringGenerator;
+        $this->blacklistingRuleRepository = $blacklistingRuleRepository;
     }
 
     /**
@@ -66,51 +73,21 @@ final class BlacklistingRuleContext implements Context
     }
 
     /**
+     * @When I go to the update :ruleName blacklisting rule page
+     */
+    public function iGoToTheUpdateBlockPage(string $ruleName)
+    {
+        $id = $this->blacklistingRuleRepository->findOneBy(['name' => $ruleName])->getId();
+
+        $this->updatePage->open(['id' => $id]);
+    }
+
+    /**
      * @When I go to the create blacklisting rule page
      */
     public function iGoToTheCreateImageBlacklistingRulePage(): void
     {
         $this->createPage->open();
-    }
-
-    /**
-     * @When I delete this blacklisting rule
-     */
-    public function iDeleteThisBlacklistingRule()
-    {
-        $blacklistingRule = $this->sharedStorage->get('blacklistingRule');
-
-        $this->indexPage->deleteBlock($blacklistingRule->getId());
-    }
-
-    /**
-     * @When I go to the update :id blacklisting rule page
-     */
-    public function iGoToTheUpdateBlockPage(string $id)
-    {
-        $this->updatePage->open(['id' => $id]);
-    }
-
-    /**
-     * @When I want to edit this block
-     */
-    public function iWantToEditThisBlock()
-    {
-        $blacklistingRule = $this->sharedStorage->get('blacklistingRule');
-
-        $this->updatePage->open(['id' => $blacklistingRule->getId()]);
-    }
-
-    /**
-     * @When I fill :fields fields
-     */
-    public function iFillFields(string $fields): void
-    {
-        $fields = explode(',', $fields);
-
-        foreach ($fields as $field) {
-            $this->resolveCurrentPage()->fillField(trim($field), $this->randomStringGenerator->generate());
-        }
     }
 
     /**
@@ -134,6 +111,17 @@ final class BlacklistingRuleContext implements Context
     }
 
     /**
+     * @Given /^I select "([^"]*)" and "([^"]*)" as rule attributes$/
+     */
+    public function iSelectAndAsRuleAttributes($arg1, $arg2)
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        $currentPage->selectOption('Rule attributes', $arg1);
+        $currentPage->selectOption('Rule attributes', $arg2);
+    }
+
+    /**
      * @When I fill the permittedStrikes with :permittedStrikes
      */
     public function iFillTheContentWith(string $permittedStrikes): void
@@ -142,14 +130,30 @@ final class BlacklistingRuleContext implements Context
     }
 
     /**
-     * @When I select :ruleAttribute[0], :ruleAttirbute[1] and :ruleAttirbute[2] as rule attributes
+     * @Given /^I select "([^"]*)" as channels$/
      */
-    public function iSelectAsRuleAttributes(array $ruleAttributes): void
+    public function iSelectAsChannels($arg1)
+    {
+        $this->resolveCurrentPage()->checkField($arg1);
+    }
+
+    /**
+     * @Given /^I select "([^"]*)" and "([^"]*)" as customer groups$/
+     */
+    public function iSelectAndAsCustomerGroups($arg1, $arg2)
     {
         $currentPage = $this->resolveCurrentPage();
-        foreach ($ruleAttributes as $ruleAttribute) {
-            $currentPage->selectOption('Rule attributes', $ruleAttribute);
-        }
+
+        $currentPage->selectOption('Customer groups', $arg1);
+        $currentPage->selectOption('Customer groups', $arg2);
+    }
+
+    /**
+     * @Given /^I check enabled$/
+     */
+    public function iCheckEnabled()
+    {
+        $this->resolveCurrentPage()->enable();
     }
 
     /**
@@ -170,6 +174,14 @@ final class BlacklistingRuleContext implements Context
     }
 
     /**
+     * @When I disable it
+     */
+    public function iDisableIt()
+    {
+        $this->resolveCurrentPage()->disable();
+    }
+
+    /**
      * @Then I should be notified that the blacklisting rule has been created
      */
     public function iShouldBeNotifiedThatTheBlacklistingRuleHasBeenCreated(): void
@@ -181,18 +193,7 @@ final class BlacklistingRuleContext implements Context
     }
 
     /**
-     * @Then I should be notified that the blacklisting rule has been successfully updated
-     */
-    public function iShouldBeNotifiedThatTheBlacklistingRuleHasBeenSuccessfullyUpdated(): void
-    {
-        $this->notificationChecker->checkNotification(
-            'Blacklisting rule has been successfully updated.',
-            NotificationType::success()
-        );
-    }
-
-    /**
-     * @Then I should be notified that the blacklisting rule has been successfully deleted
+     * @Then I should be notified that the blacklisting rule has been deleted
      */
     public function iShouldBeNotifiedThatTheBlacklistingRuleHasBeenDeleted(): void
     {
@@ -203,16 +204,44 @@ final class BlacklistingRuleContext implements Context
     }
 
     /**
+     * @Then I should be notified that the blacklisting rule has been successfully updated
+     */
+    public function iShouldBeNotifiedThatTheBlacklistingRuleHasBeenUpdated(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'Blacklisting rule has been successfully updated.',
+            NotificationType::success()
+        );
+    }
+
+    /**
+     * @Then blacklisting rule :name should be disabled
+     */
+    public function thisBlacklistingRuleShouldBeDisabled(string $name): void
+    {
+        Assert::true($this->resolveCurrentPage()->isBlacklistingRuleDisabled($name));
+    }
+
+    /**
+     * @Then I should see empty list of blacklisting rules
+     */
+    public function iShouldSeeEmptyListOfBlacklistingRules(): void
+    {
+        $this->resolveCurrentPage()->isEmpty();
+    }
+
+    /**
      * @Then I should be notified that :fields fields cannot be blank
      */
     public function iShouldBeNotifiedThatCannotBeBlank(string $fields): void
     {
-        $fields = explode(',', $fields);
+        $fields = explode(', ', $fields);
+
 
         foreach ($fields as $field) {
             Assert::true($this->resolveCurrentPage()->containsErrorWithMessage(sprintf(
-                '%s cannot be blank.',
-                trim($field)
+                'The %s cannot be blank',
+                $field
             )));
         }
     }
@@ -222,22 +251,14 @@ final class BlacklistingRuleContext implements Context
      */
     public function iShouldBeNotifiedThatFieldsAreTooLong(string $fields): void
     {
-        $fields = explode(',', $fields);
+        $fields = explode(', ', $fields);
 
         foreach ($fields as $field) {
             Assert::true($this->resolveCurrentPage()->containsErrorWithMessage(sprintf(
-                '%s can not be longer than',
-                trim($field)
-            ), false));
+                'The %s is too long',
+                $field
+            )));
         }
-    }
-
-    /**
-     * @Then I should see empty list of blacklisting rules
-     */
-    public function iShouldSeeEmptyListOfBlocks(): void
-    {
-        $this->resolveCurrentPage()->isEmpty();
     }
 
     /**
@@ -253,10 +274,12 @@ final class BlacklistingRuleContext implements Context
     }
 
     /**
-     * @Given /^I select "([^"]*)", "([^"]*)" and "([^"]*)" as rule attributes$/
+     * @Given I delete this blacklisting rule
      */
-    public function iSelectAndAsRuleAttributes($arg1, $arg2, $arg3)
+    public function iDeleteThisBlacklistingRule()
     {
-        throw new PendingException();
+        $blacklistingRule = $this->sharedStorage->get('blacklistingRule');
+
+        $this->indexPage->deleteBlacklistingRule($blacklistingRule->getName());
     }
 }
