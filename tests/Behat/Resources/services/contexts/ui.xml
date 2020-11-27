@@ -18,5 +18,24 @@
             <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.service.random_string_genereator" />
             <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.blacklisting_rule" />
         </service>
+        <service id="bitbag_sylius_blacklist_plugin.behat.context.ui.admin.customer"
+                 class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Context\Ui\Admin\CustomerContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.customer.index" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.customer.show" />
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+        <service id="bitbag_sylius_blacklist_plugin.behat.context.ui.admin.fraud_suspicion"
+                 class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Context\Ui\Admin\FraudSuspicionContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.fraud_suspicion.index" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.fraud_suspicion.create" />
+            <argument type="service" id="sylius.repository.customer" />
+        </service>
     </services>
 </container>
