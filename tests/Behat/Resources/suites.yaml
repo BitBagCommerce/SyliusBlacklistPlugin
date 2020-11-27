@@ -1,2 +1,4 @@
 imports:
     - suites/ui/managing_blacklisting_rules.yaml
+    - suites/ui/managing_fraud_statuses_of_customers.yaml
+    - suites/ui/managing_fraud_suspicions.yaml

@@ -1,0 +1,14 @@
+default:
+    suites:
+        ui_managing_fraud_suspicion:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.order
+
+                - bitbag_sylius_blacklist_plugin.behat.context.ui.admin.fraud_suspicion
+            filters:
+                tags: "@managing_fraud_suspicion && @ui"

@@ -1,0 +1,12 @@
+default:
+    suites:
+        ui_managing_fraud_statuses_of_customers:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+
+                - bitbag_sylius_blacklist_plugin.behat.context.ui.admin.customer
+            filters:
+                tags: "@managing_fraud_statuses_of_customers && @ui"
