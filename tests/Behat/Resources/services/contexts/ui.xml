@@ -16,6 +16,7 @@
             <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.blacklisting_rule.create" />
             <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.blacklisting_rule.update" />
             <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.service.random_string_genereator" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.blacklisting_rule" />
         </service>
     </services>
 </container>

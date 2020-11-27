@@ -38,38 +38,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->fillField('Link', $link);
     }
 
-    public function disable(): void
+    public function checkField(string $field): void
     {
-        $this->getDocument()->uncheckField('Enabled');
+        $this->getDocument()->checkField($field);
     }
 
-    public function associateSections(array $sectionsNames): void
+    public function enable(): void
     {
-        Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
-
-        $dropdown = $this->getElement('association_dropdown_section');
-        $dropdown->click();
-
-        foreach ($sectionsNames as $sectionName) {
-            $dropdown->waitFor(10, function () use ($sectionName) {
-                return $this->hasElement('association_dropdown_section_item', [
-                    '%item%' => $sectionName,
-                ]);
-            });
-
-            $item = $this->getElement('association_dropdown_section_item', [
-                '%item%' => $sectionName,
-            ]);
-
-            $item->click();
-        }
-    }
-
-    protected function getDefinedElements(): array
-    {
-        return array_merge(parent::getDefinedElements(), [
-            'association_dropdown_section' => '.field > label:contains("Sections") ~ .sylius-autocomplete',
-            'association_dropdown_section_item' => '.field > label:contains("Sections") ~ .sylius-autocomplete > div.menu > div.item:contains("%item%")',
-        ]);
+        $this->getDocument()->checkField('Enabled');
     }
 }
