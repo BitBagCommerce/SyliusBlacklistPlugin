@@ -10,10 +10,10 @@ Feature: Adding fraud suspicion
         And the store has customer "john_doe@example.com" with placed order with number "#000000001"
         And the store has fraud suspicion related to order with number "#000000001"
 
-    @ui
-    Scenario: Updating fraud suspicion
-        When I go to the update fraud suspicion with order number "#000000001" page
-        And I fill the street with "Broadway 123"
-        And I fill the city with "New York"
-        And I update it
-        Then I should be notified that the fraud suspicion has been successfully updated
+#    @ui
+#    Scenario: Updating fraud suspicion
+#        When I go to the update fraud suspicion with order number "#000000001" page
+#        And I fill the street with "Broadway 123"
+#        And I fill the city with "New York"
+#        And I update it
+#        Then I should be notified that the fraud suspicion has been successfully updated
