@@ -27,6 +27,7 @@
         </service>
         <service id="bit_bag.sylius_blacklist_plugin.form.type.fraud_suspicion_order" class="BitBag\SyliusBlacklistPlugin\Form\Type\FraudSuspicionOrderType">
             <argument>%bitbag_sylius_blacklist_plugin.model.fraud_suspicion.class%</argument>
+            <argument type="service" id="bit_bag.sylius_blacklist_plugin.resolver.address_type"/>
             <argument>%bitbag.sylius_blacklist_plugin.form.type.validation_groups%</argument>
             <tag name="form.type"/>
         </service>

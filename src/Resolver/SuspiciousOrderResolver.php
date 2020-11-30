@@ -47,10 +47,9 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
         $this->customerManager = $customerManager;
     }
 
-    public function resolve(OrderInterface $order, string $addressType): bool
+    public function resolve(FraudSuspicionInterface $fraudSuspicion): bool
     {
         $checkers = $this->serviceRegistry->all();
-        $address = $this->getAddress($order, $addressType);
 
         $blacklistingRules = $this->blacklistingRuleRepository->findByChannel($this->getChannel());
 
@@ -63,7 +62,7 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
             $builder = $this->fraudSuspicionRepository->createListQueryBuilder();
             foreach ($checkers as $checker) {
                 if (\in_array($checker->getAttributeName(), $blacklistingRule->getAttributes())) {
-                    $checker->checkIfCustomerIsBlacklisted($builder, $order, $address);
+                    $checker->checkIfCustomerIsBlacklisted($builder, $fraudSuspicion);
                 }
             }
 
@@ -73,18 +72,6 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
         }
 
         return false;
-    }
-
-    private function getAddress(OrderInterface $order, string $addressType): AddressInterface
-    {
-        switch ($addressType) {
-            case FraudSuspicion::BILLING_ADDRESS_TYPE:
-                return $order->getBillingAddress();
-            case FraudSuspicion::SHIPPING_ADDRESS_TYPE:
-                return $order->getShippingAddress();
-            default:
-                throw new \Exception('Wrong address type!');
-        }
     }
 
     private function getChannel(): ChannelInterface

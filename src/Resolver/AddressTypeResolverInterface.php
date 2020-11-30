@@ -4,7 +4,7 @@ namespace BitBag\SyliusBlacklistPlugin\Resolver;
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 
-interface SuspiciousOrderResolverInterface
+interface AddressTypeResolverInterface
 {
-    public function resolve(FraudSuspicionInterface $fraudSuspicion);
+    public function resolveAndUpdateFraudSuspicion(FraudSuspicionInterface $fraudSuspicion): void;
 }

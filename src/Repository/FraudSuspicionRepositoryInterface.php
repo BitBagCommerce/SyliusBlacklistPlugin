@@ -12,4 +12,6 @@ interface FraudSuspicionRepositoryInterface extends RepositoryInterface
     public function createListQueryBuilder(): QueryBuilder;
 
     public function findOneByOrder(OrderInterface $order): ?FraudSuspicionInterface;
+
+    public function findOneByOrderNumber(string $orderNumber): ?FraudSuspicionInterface;
 }

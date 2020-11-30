@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 
 use Sylius\Component\Order\Model\OrderInterface;
+use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
 
 class FraudSuspicion implements FraudSuspicionInterface
 {
@@ -14,8 +15,8 @@ class FraudSuspicion implements FraudSuspicionInterface
     /** @var OrderInterface|null */
     protected $order;
 
-    /** @var int|null */
-    protected $customerId;
+    /** @var CustomerInterface|null */
+    protected $customer;
 
     /** @var string|null */
     protected $company;
@@ -28,6 +29,9 @@ class FraudSuspicion implements FraudSuspicionInterface
 
     /** @var string */
     protected $email;
+
+    /** @var string */
+    protected $phoneNumber;
 
     /** @var string */
     protected $street;
@@ -62,14 +66,14 @@ class FraudSuspicion implements FraudSuspicionInterface
         $this->order = $order;
     }
 
-    public function getCustomerId(): ?int
+    public function getCustomer(): ?CustomerInterface
     {
-        return $this->customerId;
+        return $this->customer;
     }
 
-    public function setCustomerId(int $customerId)
+    public function setCustomer(CustomerInterface $customer): void
     {
-        $this->customerId = $customerId;
+        $this->customer = $customer;
     }
 
     public function getCompany(): ?string
@@ -110,6 +114,18 @@ class FraudSuspicion implements FraudSuspicionInterface
     public function setEmail(string $email)
     {
         $this->email = $email;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(?string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
     }
 
     public function getStreet(): ?string
