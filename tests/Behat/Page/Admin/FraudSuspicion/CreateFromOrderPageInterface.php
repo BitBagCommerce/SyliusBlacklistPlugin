@@ -7,7 +7,7 @@ namespace Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\FraudSuspicion;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 use Tests\BitBag\SyliusBlacklistPlugin\Behat\Behaviour\ContainsErrorInterface;
 
-interface CreatePageInterface extends BaseCreatePageInterface, ContainsErrorInterface
+interface CreateFromOrderPageInterface extends BaseCreatePageInterface, ContainsErrorInterface
 {
     public function fillField(string $field, ?string $value): self;
 

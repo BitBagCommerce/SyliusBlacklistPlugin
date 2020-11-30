@@ -8,7 +8,21 @@ default:
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.order
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.shipping
+
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.order
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.address
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.shipping_method
+                - sylius.behat.context.transform.payment
+
+                - sylius.behat.context.transform.shared_storage
 
                 - bitbag_sylius_blacklist_plugin.behat.context.ui.admin.fraud_suspicion
+                - bitbag_sylius_blacklist_plugin.behat.context.setup.fraud_suspicion
+                - sylius.behat.context.ui.shop.currency
             filters:
                 tags: "@managing_fraud_suspicion && @ui"

@@ -35,7 +35,12 @@
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.fraud_suspicion.index" />
             <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.fraud_suspicion.create" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.fraud_suspicion.create_from_order" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.fraud_suspicion.update" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.order.show" />
             <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.fraud_suspicion" />
         </service>
     </services>
 </container>

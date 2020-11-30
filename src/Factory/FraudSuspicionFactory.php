@@ -21,7 +21,7 @@ class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
         $fraudSuspicion = $this->createNew();
 
         $fraudSuspicion->setOrder($order);
-        $fraudSuspicion->setCustomerId($order->getCustomer()->getId());
+        $fraudSuspicion->setCustomer($order->getCustomer());
         $fraudSuspicion->setCompany($order->getBillingAddress()->getCompany());
         $fraudSuspicion->setFirstName($order->getBillingAddress()->getFirstName());
         $fraudSuspicion->setLastName($order->getBillingAddress()->getLastName());

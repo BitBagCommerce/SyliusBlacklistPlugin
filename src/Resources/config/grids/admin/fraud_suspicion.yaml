@@ -12,7 +12,7 @@ sylius_grid:
           sortable: ~
           options:
             template: "@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/Grid/Field/order.html.twig"
-        customerId:
+        customer.id:
           type: string
           label: sylius.ui.customer
           sortable: ~

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\FraudSuspicion;
 
-use Behat\Mink\Element\DocumentElement;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Tests\BitBag\SyliusBlacklistPlugin\Behat\Behaviour\ContainsErrorTrait;
 
-class CreatePage extends BaseCreatePage implements CreatePageInterface
+class CreateFromOrderPage extends BaseCreatePage implements CreateFromOrderPageInterface
 {
     use ContainsErrorTrait;
 

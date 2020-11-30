@@ -28,7 +28,7 @@ class FraudSuspicionListener
         /** @var FraudSuspicionInterface $newFraudSuspicion */
         $newFraudSuspicion = $event->getSubject();
 
-        if ($this->suspiciousOrderResolver->resolve($newFraudSuspicion->getOrder(), $newFraudSuspicion->getAddressType())) {
+        if ($this->suspiciousOrderResolver->resolve($newFraudSuspicion)) {
             $this->customerStateResolver->changeStateOnBlacklisted($newFraudSuspicion->getOrder()->getCustomer());
         }
     }

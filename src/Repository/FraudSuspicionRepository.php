@@ -28,4 +28,15 @@ final class FraudSuspicionRepository extends EntityRepository implements FraudSu
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findOneByOrderNumber(string $orderNumber): ?FraudSuspicionInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.order', 'ord')
+            ->andWhere('ord.number = :orderNumber')
+            ->setParameter('orderNumber', $orderNumber)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
