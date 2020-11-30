@@ -42,5 +42,14 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.fraud_suspicion" />
         </service>
+        <service id="bitbag_sylius_blacklist_plugin.behat.context.ui.admin.automatic_blacklisting_configuration"
+                 class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Context\Ui\Admin\AutomaticBlacklistingConfigurationContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.automatic_blacklisting_configuration.index" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.automatic_blacklisting_configuration.create" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.automatic_blacklisting_configuration.update" />
+        </service>
     </services>
 </container>
