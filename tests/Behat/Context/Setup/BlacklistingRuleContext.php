@@ -50,10 +50,17 @@ final class BlacklistingRuleContext implements Context
 
     /**
      * @Given there is a blacklisting rule with :ruleName name and :permittedStrikes permitted strikes
+     * @Given there is a blacklisting rule with :ruleName name and :permittedStrikes permitted strikes and :ruleAttributes as a rule attributes
      */
-    public function thereIsABlacklistingRuleWithNameAndPermittedStrikes(string $ruleName, string $permittedStrikes)
+    public function thereIsABlacklistingRuleWithNameAndPermittedStrikes(string $ruleName, string $permittedStrikes, string $ruleAttributes = null)
     {
-        $blacklistingRule = $this->createBlacklistingRule($ruleName, \intval($permittedStrikes));
+        if ($ruleAttributes !== null) {
+            $attributes = explode(', ', $ruleAttributes);
+
+            $blacklistingRule = $this->createBlacklistingRule($ruleName, \intval($permittedStrikes), $attributes);
+        } else {
+            $blacklistingRule = $this->createBlacklistingRule($ruleName, \intval($permittedStrikes));
+        }
 
         $this->saveBlacklistingRule($blacklistingRule);
     }
@@ -61,6 +68,7 @@ final class BlacklistingRuleContext implements Context
     private function createBlacklistingRule(
         ?string $name = null,
         ?int $permittedStrikes = null,
+        array $attributes = [],
         ChannelInterface $channel = null
     ): BlacklistingRuleInterface
     {

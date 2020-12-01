@@ -52,5 +52,11 @@
             <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.automatic_blacklisting_configuration.update" />
             <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.automatic_blacklisting_configuration" />
         </service>
+
+        <service id="bitbag_sylius_blacklist_plugin.behat.context.ui.shop.checkout"
+                 class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Context\Ui\Shop\CheckoutContext">
+            <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.shop.checkout.address" />
+        </service>
     </services>
 </container>
