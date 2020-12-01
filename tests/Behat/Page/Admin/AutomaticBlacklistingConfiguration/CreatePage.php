@@ -81,6 +81,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->checkField('Enabled');
     }
 
+    protected function getDefinedElements(): array
+    {
+        return [
+            'rules' => '#bitbag_sylius_blacklist_plugin_automatic_blacklisting_configuration_rules',
+        ];
+    }
+
     private function getLastCollectionItem(string $collection): NodeElement
     {
         $items = $this->getCollectionItems($collection);
