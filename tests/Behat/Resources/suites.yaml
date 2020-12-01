@@ -4,3 +4,4 @@ imports:
     - suites/ui/managing_fraud_suspicions.yaml
     - suites/ui/managing_fraud_suspicions.yaml
     - suites/ui/managing_automatic_blacklisting_configuration.yaml
+    - suites/ui/blocking_users_on_checkout.yaml

@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\Validator\Constraints\Checkout;
 
 use BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface;
-use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use BitBag\SyliusBlacklistPlugin\Processor\AutomaticBlacklistingRulesProcessorInterface;
 use BitBag\SyliusBlacklistPlugin\Resolver\SuspiciousOrderResolverInterface;
-use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
 use Webmozart\Assert\Assert;
 
 class CheckoutAddressTypeValidator extends ConstraintValidator

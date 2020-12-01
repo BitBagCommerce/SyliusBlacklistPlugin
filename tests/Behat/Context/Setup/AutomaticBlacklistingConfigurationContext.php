@@ -46,7 +46,7 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     }
 
     /**
-     * @Given there is a automatic blacklisting configuration :name with rule :type configured with count :count and  date modifier :dateModifier
+     * @Given there is a automatic blacklisting configuration :name with rule :type configured with count :count and date modifier :dateModifier
      */
     public function thereIsAAutomaticBlacklistingConfigurationWithRuleConfiguredWithCountAndDateModifier(string $name, string $type, string $count, string $dateModifier)
     {
