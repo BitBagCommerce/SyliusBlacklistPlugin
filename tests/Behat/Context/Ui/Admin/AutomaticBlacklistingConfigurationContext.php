@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusBlacklistPlugin\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
-use BitBag\SyliusBlacklistPlugin\Repository\BlacklistingRuleRepositoryInterface;
+use BitBag\SyliusBlacklistPlugin\Repository\AutomaticBlacklistingConfigurationRepositoryInterface;
 use Sylius\Behat\NotificationType;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -15,7 +14,6 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\AutomaticBlacklistingConfiguration\CreatePageInterface;
 use Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\AutomaticBlacklistingConfiguration\IndexPageInterface;
 use Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\AutomaticBlacklistingConfiguration\UpdatePageInterface;
-use Tests\BitBag\SyliusBlacklistPlugin\Behat\Service\RandomStringGeneratorInterface;
 use Webmozart\Assert\Assert;
 
 final class AutomaticBlacklistingConfigurationContext implements Context
@@ -38,13 +36,17 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     /** @var UpdatePageInterface */
     private UpdatePageInterface $updatePage;
 
+    /** @var AutomaticBlacklistingConfigurationRepositoryInterface */
+    private AutomaticBlacklistingConfigurationRepositoryInterface $automaticBlacklistingConfigurationRepository;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker,
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
-        UpdatePageInterface $updatePage
+        UpdatePageInterface $updatePage,
+        AutomaticBlacklistingConfigurationRepositoryInterface $automaticBlacklistingConfigurationRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->currentPageResolver = $currentPageResolver;
@@ -52,6 +54,7 @@ final class AutomaticBlacklistingConfigurationContext implements Context
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
+        $this->automaticBlacklistingConfigurationRepository = $automaticBlacklistingConfigurationRepository;
     }
 
     /**
@@ -63,7 +66,28 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     }
 
     /**
+     * @When I go to update configuration :configurationName page
+     */
+    public function iGoToUpdateConfigurationPage(string $configurationName)
+    {
+        $automaticBlacklistingConfiguration = $this->automaticBlacklistingConfigurationRepository->findOneBy(['name' => $configurationName]);
+
+        $this->updatePage->open(['id' => $automaticBlacklistingConfiguration->getId()]);
+    }
+
+    /**
+     * @When I delete a :configurationName automatic blacklisting configuration
+     */
+    public function iDeleteAPromotionAutomaticBlacklistingConfiguration(string $configurationName)
+    {
+        $this->indexPage->open();
+
+        $this->resolveCurrentPage()->deleteAutomaticBlacklistingConfiguration($configurationName);
+    }
+
+    /**
      * @When I name it :configurationName
+     * @Then I fill configuration name with :configurationName
      */
     public function iNameIt(string $configurationName): void
     {
@@ -94,7 +118,7 @@ final class AutomaticBlacklistingConfigurationContext implements Context
         $this->resolveCurrentPage()->addRule($ruleType);
 
         $this->createPage->fillRuleOption('Count', $count);
-        $this->createPage->selectAutocompleteRuleOption('Date modifier', $dateModifier);
+        $this->createPage->selectRuleOption('Date modifier', $dateModifier);
     }
 
     /**
@@ -104,6 +128,15 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     public function iAddIt(): void
     {
         $this->createPage->create();
+    }
+
+    /**
+     * @When I update it
+     * @When I try to update it
+     */
+    public function iUpdateIt(): void
+    {
+        $this->updatePage->update();
     }
 
     /**
@@ -118,6 +151,48 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     }
 
     /**
+     * @Then I should be notified that the automatic blacklisting configuration has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatTheAutomaticBlacklistingConfigurationSuccessfullyHasBeenDeleted(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'Automatic blacklisting configuration has been successfully deleted.',
+            NotificationType::success()
+        );
+    }
+
+    /**
+     * @Then I should be notified that the automatic blacklisting configuration has been successfully updated
+     */
+    public function iShouldBeNotifiedThatTheAutomaticBlacklistingConfigurationSuccessfullyHasBeenUpdated(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'Automatic blacklisting configuration has been successfully updated.',
+            NotificationType::success()
+        );
+    }
+
+    /**
+     * @Then :configurationName should no longer exist in the automatic blacklisting configuration registry
+     */
+    public function promotionShouldNotExistInTheRegistry(string $configurationName)
+    {
+        $this->indexPage->open();
+
+        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $configurationName]));
+    }
+
+    /**
+     * @Then the :configurationName should appear in the registry
+     */
+    public function thePromotionShouldAppearInTheRegistry(string $configurationName): void
+    {
+        $this->indexPage->open();
+
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $configurationName]));
+    }
+
+    /**
      * @return IndexPageInterface|CreatePageInterface|UpdatePageInterface|SymfonyPageInterface
      */
     private function resolveCurrentPage(): SymfonyPageInterface
@@ -127,5 +202,13 @@ final class AutomaticBlacklistingConfigurationContext implements Context
             $this->createPage,
             $this->updatePage,
         ]);
+    }
+
+    /**
+     * @Given I change last rule count with :count
+     */
+    public function iChangeLastRuleCountWith(string $count)
+    {
+        $this->resolveCurrentPage()->fillRuleOption('Count', $count);
     }
 }

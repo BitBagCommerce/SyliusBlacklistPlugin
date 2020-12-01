@@ -50,6 +50,7 @@
             <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.automatic_blacklisting_configuration.index" />
             <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.automatic_blacklisting_configuration.create" />
             <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.automatic_blacklisting_configuration.update" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.automatic_blacklisting_configuration" />
         </service>
     </services>
 </container>

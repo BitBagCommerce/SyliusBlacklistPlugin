@@ -11,9 +11,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface, ChecksCodeImmutab
 {
     public function fillName(string $name): void;
 
-    public function fillLink(string $link): void;
-
     public function disable(): void;
 
-    public function isBlacklistingRuleDisabled(): bool;
+    public function update(): void;
+
+    public function fillRuleOption(string $option, string $value): void;
 }

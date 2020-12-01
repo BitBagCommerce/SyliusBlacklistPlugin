@@ -9,9 +9,5 @@ use Tests\BitBag\SyliusBlacklistPlugin\Behat\Behaviour\ContainsEmptyListInterfac
 
 interface IndexPageInterface extends BaseIndexPageInterface, ContainsEmptyListInterface
 {
-    public function getBlocksWithTypeCount(string $type): int;
-
-    public function deleteBlacklistingRule(string $name): void;
-
-    public function isBlacklistingRuleDisabled(string $name): bool;
+    public function deleteAutomaticBlacklistingConfiguration(string $name): void;
 }
