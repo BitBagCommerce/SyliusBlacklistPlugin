@@ -71,6 +71,24 @@ final class FraudSuspicionContext implements Context
     }
 
     /**
+     * @Given the order :orderNumber is marked as suspicious by fake :addressType address
+     */
+    public function theOrderIsMarkedAsSuspiciousByFakeAddress(string $orderNumber, string $addressType)
+    {
+        $order = $this->orderRepository->findOneBy(['number' => $orderNumber]);
+
+        if (null === $order) {
+            throw new \Exception('The order has not been found!');
+        }
+
+        $fraudSuspicion = $this->fraudSuspicionFactory->createForOrder($order);
+        $fraudSuspicion->setAddressType($addressType);
+
+        $this->entityManager->persist($fraudSuspicion);
+        $this->entityManager->flush();
+    }
+
+    /**
      * @Given the store has customer :email with placed order with number :orderNumber
      */
     public function thereIsACustomerWithPlacedOrderInTheStore(string $email, string $orderNumber)

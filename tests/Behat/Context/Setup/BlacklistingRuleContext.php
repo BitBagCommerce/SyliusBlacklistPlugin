@@ -87,6 +87,10 @@ final class BlacklistingRuleContext implements Context
             $permittedStrikes = \rand(1, 10);
         }
 
+        foreach ($attributes as $attribute) {
+            $blacklistingRule->addAttribute($attribute);
+        }
+
         $blacklistingRule->setName($name);
         $blacklistingRule->setPermittedStrikes($permittedStrikes);
         $blacklistingRule->addChannel($channel);
