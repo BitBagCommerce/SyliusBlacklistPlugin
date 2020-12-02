@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Validator\Constraints\Checkout;
 
+use BitBag\SyliusBlacklistPlugin\Converter\FraudSuspicionCommonModelConverterInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface;
+use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use BitBag\SyliusBlacklistPlugin\Processor\AutomaticBlacklistingRulesProcessorInterface;
 use BitBag\SyliusBlacklistPlugin\Resolver\SuspiciousOrderResolverInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -21,12 +23,17 @@ class CheckoutAddressTypeValidator extends ConstraintValidator
     /** @var AutomaticBlacklistingRulesProcessorInterface */
     private $automaticBlacklistingRulesProcessor;
 
+    /** @var FraudSuspicionCommonModelConverterInterface */
+    private FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter;
+
     public function __construct(
         SuspiciousOrderResolverInterface $suspiciousOrderResolver,
-        AutomaticBlacklistingRulesProcessorInterface $automaticBlacklistingRulesProcessor
+        AutomaticBlacklistingRulesProcessorInterface $automaticBlacklistingRulesProcessor,
+        FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter
     ) {
         $this->suspiciousOrderResolver = $suspiciousOrderResolver;
         $this->automaticBlacklistingRulesProcessor = $automaticBlacklistingRulesProcessor;
+        $this->fraudSuspicionCommonModelConverter = $fraudSuspicionCommonModelConverter;
     }
 
     public function validate($order, Constraint $constraint): void
@@ -47,9 +54,12 @@ class CheckoutAddressTypeValidator extends ConstraintValidator
             return;
         }
 
+        $fraudSuspicionCommonModelWithBillingAddressType = $this->fraudSuspicionCommonModelConverter->convertOrderObject($order, FraudSuspicionInterface::BILLING_ADDRESS_TYPE);
+        $fraudSuspicionCommonModelWithShippingAddressType = $this->fraudSuspicionCommonModelConverter->convertOrderObject($order, FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE);
+
         if (
-            $this->suspiciousOrderResolver->resolve($order, FraudSuspicionInterface::BILLING_ADDRESS_TYPE) ||
-            $this->suspiciousOrderResolver->resolve($order, FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE)
+            $this->suspiciousOrderResolver->resolve($fraudSuspicionCommonModelWithBillingAddressType) ||
+            $this->suspiciousOrderResolver->resolve($fraudSuspicionCommonModelWithShippingAddressType)
         ) {
             $this->buildViolation($constraint);
             return;

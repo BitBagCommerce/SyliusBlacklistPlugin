@@ -2,20 +2,17 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
+namespace BitBag\SyliusBlacklistPlugin\Model;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
 
-class FraudSuspicion implements FraudSuspicionInterface
+class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
 {
-    /** @var int|null */
-    protected $id;
-
     /** @var OrderInterface|null */
     protected $order;
 
-    /** @var CustomerInterface|null */
+    /** @var CustomerInterface */
     protected $customer;
 
     /** @var string|null */
@@ -50,17 +47,6 @@ class FraudSuspicion implements FraudSuspicionInterface
 
     /** @var string|null */
     protected $customerIp;
-
-    /** @var string */
-    protected $addressType;
-
-    /** @var string|null */
-    protected $comment;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getOrder(): ?OrderInterface
     {
@@ -127,11 +113,9 @@ class FraudSuspicion implements FraudSuspicionInterface
         return $this->phoneNumber;
     }
 
-    public function setPhoneNumber(?string $phoneNumber): self
+    public function setPhoneNumber(?string $phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
-
-        return $this;
     }
 
     public function getStreet(): ?string
@@ -192,25 +176,5 @@ class FraudSuspicion implements FraudSuspicionInterface
     public function setCustomerIp(?string $customerIp): void
     {
         $this->customerIp = $customerIp;
-    }
-
-    public function getAddressType(): ?string
-    {
-        return $this->addressType;
-    }
-
-    public function setAddressType(string $addressType)
-    {
-        $this->addressType = $addressType;
-    }
-
-    public function getComment(): ?string
-    {
-        return $this->comment;
-    }
-
-    public function setComment(string $comment): void
-    {
-        $this->comment = $comment;
     }
 }

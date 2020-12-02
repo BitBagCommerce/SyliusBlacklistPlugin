@@ -6,6 +6,7 @@ namespace BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address;
 
 use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleCheckerInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicion;
+use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModel;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -15,11 +16,11 @@ class CityBlacklistingRuleChecker implements BlacklistingRuleCheckerInterface
     /** @var string */
     public const CITY_ATTRIBUTE_NAME = 'city';
 
-    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, FraudSuspicion $newFraudSuspicion): void
+    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, FraudSuspicionCommonModel $fraudSuspicionCommonModel): void
     {
         $builder
             ->andWhere('o.city = :city')
-            ->setParameter('city', $newFraudSuspicion->getCity())
+            ->setParameter('city', $fraudSuspicionCommonModel->getCity())
         ;
     }
 

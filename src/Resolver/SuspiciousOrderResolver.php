@@ -7,6 +7,7 @@ namespace BitBag\SyliusBlacklistPlugin\Resolver;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRuleInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicion;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
+use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModel;
 use BitBag\SyliusBlacklistPlugin\Repository\BlacklistingRuleRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\FraudSuspicionRepositoryInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -47,7 +48,7 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
         $this->customerManager = $customerManager;
     }
 
-    public function resolve(FraudSuspicionInterface $fraudSuspicion): bool
+    public function resolve(FraudSuspicionCommonModel $fraudSuspicionCommonModel): bool
     {
         $checkers = $this->serviceRegistry->all();
 
@@ -62,7 +63,7 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
             $builder = $this->fraudSuspicionRepository->createListQueryBuilder();
             foreach ($checkers as $checker) {
                 if (\in_array($checker->getAttributeName(), $blacklistingRule->getAttributes())) {
-                    $checker->checkIfCustomerIsBlacklisted($builder, $fraudSuspicion);
+                    $checker->checkIfCustomerIsBlacklisted($builder, $fraudSuspicionCommonModel);
                 }
             }
 

@@ -30,6 +30,8 @@ class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
         $fraudSuspicion->setCity($order->getBillingAddress()->getCity());
         $fraudSuspicion->setProvince($order->getBillingAddress()->getProvinceName());
         $fraudSuspicion->setCountry($order->getBillingAddress()->getCountryCode());
+        $fraudSuspicion->setPostcode($order->getBillingAddress()->getPostcode());
+        $fraudSuspicion->setCustomerIp($order->getCustomerIp());
 
         return $fraudSuspicion;
     }
