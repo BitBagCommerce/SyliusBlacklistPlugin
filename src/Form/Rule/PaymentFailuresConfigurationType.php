@@ -37,6 +37,6 @@ final class PaymentFailuresConfigurationType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'bitbag_sylius_blacklist_plugin_automatic_blacklisting_rule_payment_failures_per_day_configuration';
+        return 'bitbag_sylius_blacklist_plugin_automatic_blacklisting_rule_payment_failures_configuration';
     }
 }

@@ -4,13 +4,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Customer\Model\CustomerGroupInterface;
-use Sylius\Component\Resource\Model\TimestampableTrait;
-use Sylius\Component\Resource\Model\ToggleableTrait;
-
 class AutomaticBlacklistingRule implements AutomaticBlacklistingRuleInterface
 {
     /** @var mixed */

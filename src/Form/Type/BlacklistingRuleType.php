@@ -7,7 +7,6 @@ namespace BitBag\SyliusBlacklistPlugin\Form\Type;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Customer\Model\CustomerGroup;
-use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
