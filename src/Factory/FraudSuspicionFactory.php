@@ -7,7 +7,6 @@ namespace BitBag\SyliusBlacklistPlugin\Factory;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicion;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
 {

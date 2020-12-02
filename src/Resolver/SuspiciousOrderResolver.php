@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\Resolver;
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRuleInterface;
-use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicion;
-use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModel;
 use BitBag\SyliusBlacklistPlugin\Repository\BlacklistingRuleRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\FraudSuspicionRepositoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface

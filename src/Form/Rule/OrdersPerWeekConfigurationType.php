@@ -37,6 +37,6 @@ final class OrdersPerWeekConfigurationType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'bitbag_sylius_blacklist_plugin_automatic_blacklisting_rule_orders_per_week_configuration';
+        return 'bitbag_sylius_blacklist_plugin_automatic_blacklisting_rule_orders_configuration';
     }
 }
