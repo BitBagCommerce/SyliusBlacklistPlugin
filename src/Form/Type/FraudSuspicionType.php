@@ -34,6 +34,12 @@ final class FraudSuspicionType extends AbstractResourceType
                 'required' => false
             ])
             ->add('country', TextType::class)
+            ->add('postcode', TextType::class, [
+                'required' => false
+            ])
+            ->add('customerIp', TextType::class, [
+                'required' => false
+            ])
             ->add('addressType', ChoiceType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.ui.address_type',
                 'choices' => [

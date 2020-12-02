@@ -7,6 +7,7 @@
         <service id="bit_bag.sylius_blacklist_plugin.event_listener.fraud_suspicion" class="BitBag\SyliusBlacklistPlugin\EventListener\FraudSuspicionListener">
             <argument type="service" id="bit_bag.sylius_blacklist_plugin.resolver.suspicious_order" />
             <argument type="service" id="bit_bag.sylius_blacklist_plugin.state_resolver.customer" />
+            <argument type="service" id="bit_bag.sylius_blacklist_plugin.converter.fraud_suspicion_common_model" />
             <tag name="kernel.event_listener" event="bitbag_sylius_blacklist_plugin.fraud_suspicion.pre_create" method="processSuspicionOrder" />
         </service>
     </services>

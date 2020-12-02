@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\EventListener;
 
+use BitBag\SyliusBlacklistPlugin\Converter\FraudSuspicionCommonModelConverterInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use BitBag\SyliusBlacklistPlugin\Resolver\SuspiciousOrderResolverInterface;
 use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolverInterface;
@@ -17,10 +18,17 @@ class FraudSuspicionListener
     /** @var CustomerStateResolverInterface */
     private $customerStateResolver;
 
-    public function __construct(SuspiciousOrderResolverInterface $suspiciousOrderResolver, CustomerStateResolverInterface $customerStateResolver)
-    {
+    /** @var FraudSuspicionCommonModelConverterInterface */
+    private FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter;
+
+    public function __construct(
+        SuspiciousOrderResolverInterface $suspiciousOrderResolver,
+        CustomerStateResolverInterface $customerStateResolver,
+        FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter
+    ) {
         $this->suspiciousOrderResolver = $suspiciousOrderResolver;
         $this->customerStateResolver = $customerStateResolver;
+        $this->fraudSuspicionCommonModelConverter = $fraudSuspicionCommonModelConverter;
     }
 
     public function processSuspicionOrder(GenericEvent $event): void
@@ -28,7 +36,9 @@ class FraudSuspicionListener
         /** @var FraudSuspicionInterface $newFraudSuspicion */
         $newFraudSuspicion = $event->getSubject();
 
-        if ($this->suspiciousOrderResolver->resolve($newFraudSuspicion)) {
+        $fraudSuspicionCommonModel = $this->fraudSuspicionCommonModelConverter->convertFraudSuspicionObject($newFraudSuspicion);
+
+        if ($this->suspiciousOrderResolver->resolve($fraudSuspicionCommonModel)) {
             $this->customerStateResolver->changeStateOnBlacklisted($newFraudSuspicion->getOrder()->getCustomer());
         }
     }

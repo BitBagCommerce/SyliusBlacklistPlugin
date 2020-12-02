@@ -18,6 +18,8 @@
         <field name="city" type="string" column="city" />
         <field name="province" type="string" column="province" nullable="true" />
         <field name="country" type="string" column="country" />
+        <field name="postcode" type="string" column="postcode" nullable="true" />
+        <field name="customerIp" type="string" column="customer_ip" nullable="true" />
         <field name="addressType" type="string" column="address_type" />
         <field name="comment" type="string" column="comment" nullable="true" />
 

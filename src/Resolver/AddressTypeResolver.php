@@ -23,7 +23,7 @@ class AddressTypeResolver implements AddressTypeResolverInterface
         $fraudSuspicion->setPhoneNumber($address->getPhoneNumber());
     }
 
-    private function resolve(FraudSuspicionInterface $fraudSuspicion): AddressInterface
+    public function resolve(FraudSuspicionInterface $fraudSuspicion): AddressInterface
     {
         switch ($fraudSuspicion->getAddressType()) {
             case FraudSuspicion::BILLING_ADDRESS_TYPE:

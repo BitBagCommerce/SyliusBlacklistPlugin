@@ -6,6 +6,7 @@ namespace BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address;
 
 use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleCheckerInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicion;
+use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModel;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -15,11 +16,11 @@ class PhoneNumberBlacklistingRuleChecker implements BlacklistingRuleCheckerInter
     /** @var string */
     public const PHONE_NUMBER_ATTRIBUTE_NAME = 'phone_number';
 
-    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, FraudSuspicion $newFraudSuspicion): void
+    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, FraudSuspicionCommonModel $fraudSuspicionCommonModel): void
     {
         $builder
             ->andWhere('o.phoneNumber = :phoneNumber')
-            ->setParameter('phoneNumber', $newFraudSuspicion->getPhoneNumber())
+            ->setParameter('phoneNumber', $fraudSuspicionCommonModel->getPhoneNumber())
         ;
     }
 
