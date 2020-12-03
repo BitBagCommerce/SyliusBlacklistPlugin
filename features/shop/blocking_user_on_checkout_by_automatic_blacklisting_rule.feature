@@ -12,7 +12,7 @@ Feature: Blocking users on checkout
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
         And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "whitehouse"
-        And I am a logged in customer
+        And I am logged in as "francis@underwood.com"
         And there is a customer "francis@underwood.com" that placed an order
         And the customer bought a single "PHP T-Shirt"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
