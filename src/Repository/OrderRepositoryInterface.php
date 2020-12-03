@@ -11,5 +11,5 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 {
     public function findByCustomerPaymentFailuresAndPeriod(CustomerInterface $customer, \DateTime $date): int;
 
-    public function findByCustomerOrdersInCurrentWeek(CustomerInterface $customer, string $dateModifier): string;
+    public function findByCustomerOrdersAndPeriod(CustomerInterface $customer, \DateTime $date): int;
 }

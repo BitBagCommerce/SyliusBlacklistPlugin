@@ -7,6 +7,7 @@ default:
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.customer_group
+
                 - bitbag_sylius_blacklist_plugin.behat.context.setup.blacklisting_rule
 
                 - bitbag_sylius_blacklist_plugin.behat.context.ui.admin.blacklisting_rule
