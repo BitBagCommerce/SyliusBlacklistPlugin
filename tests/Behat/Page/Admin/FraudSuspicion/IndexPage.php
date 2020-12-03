@@ -10,5 +10,4 @@ use Tests\BitBag\SyliusBlacklistPlugin\Behat\Behaviour\ContainsEmptyListTrait;
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     use ContainsEmptyListTrait;
-
 }

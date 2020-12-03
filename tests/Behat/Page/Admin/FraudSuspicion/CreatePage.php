@@ -14,9 +14,10 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function fillField(string $field, ?string $value): self
     {
-        if (null === $value) {
+        if (empty($value)) {
             $value = '';
         }
+
         $this->getDocument()->fillField($field, $value);
 
         return $this;

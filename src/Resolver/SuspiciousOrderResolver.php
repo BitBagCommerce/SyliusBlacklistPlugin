@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\Resolver;
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRuleInterface;
-use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModel;
+use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModelInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\BlacklistingRuleRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\FraudSuspicionRepositoryInterface;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -44,23 +45,30 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
         $this->customerManager = $customerManager;
     }
 
-    public function resolve(FraudSuspicionCommonModel $fraudSuspicionCommonModel): bool
+    public function resolve(FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel): bool
     {
-        $checkers = $this->serviceRegistry->all();
-
-        $blacklistingRules = $this->blacklistingRuleRepository->findByChannel($this->getChannel());
+        $blacklistingRules = $this->blacklistingRuleRepository->findActiveByChannel($this->getChannel());
 
         if (\count($blacklistingRules) === 0) {
             return false;
         }
 
+        $customerGroup = $fraudSuspicionCommonModel->getCustomer()->getGroup();
+
         /** @var BlacklistingRuleInterface $blacklistingRule */
         foreach ($blacklistingRules as $blacklistingRule) {
+            if (
+                !empty($customerGroup) &&
+                !$blacklistingRule->getCustomerGroups()->isEmpty() &&
+                !$blacklistingRule->hasCustomerGroup($customerGroup)
+            ) {
+                return false;
+            }
+
             $builder = $this->fraudSuspicionRepository->createListQueryBuilder();
-            foreach ($checkers as $checker) {
-                if (\in_array($checker->getAttributeName(), $blacklistingRule->getAttributes())) {
-                    $checker->checkIfCustomerIsBlacklisted($builder, $fraudSuspicionCommonModel);
-                }
+
+            foreach ($blacklistingRule->getAttributes() as $attribute) {
+                $this->checkIfCustomerIsBlacklisted($builder,$fraudSuspicionCommonModel, $attribute);
             }
 
             if (\intval($builder->getQuery()->getSingleScalarResult()) + 1 >= $blacklistingRule->getPermittedStrikes()) {
@@ -69,6 +77,16 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
         }
 
         return false;
+    }
+
+    private function checkIfCustomerIsBlacklisted(
+        QueryBuilder $builder,
+        FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel,
+        string $attribute
+    ): void {
+        $checker = $this->serviceRegistry->get($attribute);
+
+        $checker->checkIfCustomerIsBlacklisted($builder, $fraudSuspicionCommonModel);
     }
 
     private function getChannel(): ChannelInterface

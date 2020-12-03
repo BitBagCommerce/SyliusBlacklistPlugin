@@ -1,40 +1,40 @@
 sylius_grid:
-  grids:
-    bitbag_sylius_blacklist_plugin_automatic_blacklisting_configuration:
-      driver:
-        name: doctrine/orm
-        options:
-          class: "%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_configuration.class%"
-      fields:
-        name:
-          type: string
-          label: sylius.ui.name
-          sortable: ~
-        enabled:
-          type: twig
-          label: sylius.ui.enabled
-          options:
-            template: "@SyliusUi/Grid/Field/enabled.html.twig"
-      filters:
-        name:
-          type: string
-          label: sylius.ui.name
-        channels:
-          type: entities
-          label: sylius.ui.channel
-          form_options:
-            class: "%sylius.model.channel.class%"
-          options:
-            field: "channels.id"
-        enabled:
-          type: boolean
-          label: sylius.ui.enabled
-      actions:
-        item:
-          delete:
-            type: delete
-          update:
-            type: update
-        main:
-          create:
-            type: create
+    grids:
+        bitbag_sylius_blacklist_plugin_automatic_blacklisting_configuration:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_configuration.class%"
+            fields:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: ~
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+            filters:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                channels:
+                    type: entities
+                    label: sylius.ui.channel
+                    form_options:
+                        class: "%sylius.model.channel.class%"
+                    options:
+                        field: "channels.id"
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
+            actions:
+                item:
+                    delete:
+                        type: delete
+                    update:
+                        type: update
+                main:
+                    create:
+                        type: create

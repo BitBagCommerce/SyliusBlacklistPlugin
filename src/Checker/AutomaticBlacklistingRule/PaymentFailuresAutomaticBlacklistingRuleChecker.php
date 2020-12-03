@@ -17,14 +17,13 @@ class PaymentFailuresAutomaticBlacklistingRuleChecker implements AutomaticBlackl
         OrderInterface $order,
         OrderRepositoryInterface $orderRepository
     ): bool {
+        $date = (new \DateTime())->modify('- ' . $blacklistingRule->getSettings()['date_modifier']);
+
         $numberOfPaymentFailures = $orderRepository
-            ->findByCustomerPaymentFailuresInCurrentDay($order->getCustomer(), $blacklistingRule->getSettings()['date_modifier']);
+            ->findByCustomerPaymentFailuresAndPeriod($order->getCustomer(), $date)
+        ;
 
-        if (\intval($numberOfPaymentFailures) >= $blacklistingRule->getSettings()['count']) {
-            return true;
-        }
-
-        return false;
+        return $numberOfPaymentFailures >= $blacklistingRule->getSettings()['count'];
     }
 
     public function getType(): string

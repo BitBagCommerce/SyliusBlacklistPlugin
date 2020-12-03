@@ -7,7 +7,6 @@
         <import resource="admin/fraud_suspicion.xml" />
         <import resource="admin/order.xml" />
         <import resource="admin/automatic_blacklisting_configuration.xml" />
-
         <import resource="shop/checkout.xml" />
     </imports>
 </container>

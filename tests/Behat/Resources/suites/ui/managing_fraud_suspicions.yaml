@@ -3,6 +3,7 @@ default:
         ui_managing_fraud_suspicion:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.customer
@@ -10,6 +11,7 @@ default:
                 - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.shipping
+                - bitbag_sylius_blacklist_plugin.behat.context.setup.fraud_suspicion
 
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.order
@@ -18,11 +20,9 @@ default:
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.payment
-
                 - sylius.behat.context.transform.shared_storage
 
                 - bitbag_sylius_blacklist_plugin.behat.context.ui.admin.fraud_suspicion
-                - bitbag_sylius_blacklist_plugin.behat.context.setup.fraud_suspicion
                 - sylius.behat.context.ui.shop.currency
             filters:
                 tags: "@managing_fraud_suspicion && @ui"

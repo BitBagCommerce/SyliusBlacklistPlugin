@@ -1,9 +1,17 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
 declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Form\Rule;
 
+use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingRule;
+use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingRuleInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -19,17 +27,17 @@ final class OrdersConfigurationType extends AbstractType
             ->add('count', IntegerType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.count',
                 'constraints' => [
-                    new NotBlank(['groups' => ['bit bag']]),
-                    new Type(['type' => 'numeric', 'groups' => ['bit bag']]),
+                    new NotBlank(['groups' => ['bitbag']]),
+                    new Type(['type' => 'numeric', 'groups' => ['bitbag']]),
                 ],
             ])
             ->add('date_modifier', ChoiceType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.date_modifier',
                 'required' => true,
                 'choices' => [
-                    'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_day' => '1 day',
-                    'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_week' => '1 week',
-                    'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_month' => '1 month',
+                    'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_day' => AutomaticBlacklistingRuleInterface::PER_DAY,
+                    'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_week' => AutomaticBlacklistingRuleInterface::PER_WEEK,
+                    'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_month' => AutomaticBlacklistingRuleInterface::PER_MONTH,
                 ]
             ])
         ;

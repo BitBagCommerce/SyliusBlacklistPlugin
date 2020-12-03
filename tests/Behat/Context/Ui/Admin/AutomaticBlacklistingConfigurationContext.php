@@ -28,16 +28,16 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     private $notificationChecker;
 
     /** @var IndexPageInterface */
-    private IndexPageInterface $indexPage;
+    private $indexPage;
 
     /** @var CreatePageInterface */
-    private CreatePageInterface $createPage;
+    private $createPage;
 
     /** @var UpdatePageInterface */
-    private UpdatePageInterface $updatePage;
+    private $updatePage;
 
     /** @var AutomaticBlacklistingConfigurationRepositoryInterface */
-    private AutomaticBlacklistingConfigurationRepositoryInterface $automaticBlacklistingConfigurationRepository;
+    private $automaticBlacklistingConfigurationRepository;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -68,7 +68,7 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     /**
      * @When I go to update configuration :configurationName page
      */
-    public function iGoToUpdateConfigurationPage(string $configurationName)
+    public function iGoToUpdateConfigurationPage(string $configurationName): void
     {
         $automaticBlacklistingConfiguration = $this->automaticBlacklistingConfigurationRepository->findOneBy(['name' => $configurationName]);
 
@@ -78,7 +78,7 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     /**
      * @When I delete a :configurationName automatic blacklisting configuration
      */
-    public function iDeleteAPromotionAutomaticBlacklistingConfiguration(string $configurationName)
+    public function iDeleteAPromotionAutomaticBlacklistingConfiguration(string $configurationName): void
     {
         $this->indexPage->open();
 
@@ -97,7 +97,7 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     /**
      * @Given /^I select "([^"]*)" as channels$/
      */
-    public function iSelectAsChannels($arg1)
+    public function iSelectAsChannels($arg1): void
     {
         $this->resolveCurrentPage()->checkField($arg1);
     }
@@ -105,7 +105,7 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     /**
      * @Given I enable it
      */
-    public function iEnableIt()
+    public function iEnableIt(): void
     {
         $this->resolveCurrentPage()->enable();
     }
@@ -113,7 +113,7 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     /**
      * @Given I add the :ruleType rule configured with count :count and :dateModifier as date modifier
      */
-    public function iAddTheRuleConfiguredWithCountAndAsDateModifier(string $ruleType, string $count, string $dateModifier)
+    public function iAddTheRuleConfiguredWithCountAndAsDateModifier(string $ruleType, string $count, string $dateModifier): void
     {
         $this->resolveCurrentPage()->addRule($ruleType);
 
@@ -175,7 +175,7 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     /**
      * @Then :configurationName should no longer exist in the automatic blacklisting configuration registry
      */
-    public function promotionShouldNotExistInTheRegistry(string $configurationName)
+    public function promotionShouldNotExistInTheRegistry(string $configurationName): void
     {
         $this->indexPage->open();
 
@@ -207,7 +207,7 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     /**
      * @Given I change last rule count with :count
      */
-    public function iChangeLastRuleCountWith(string $count)
+    public function iChangeLastRuleCountWith(string $count): void
     {
         $this->resolveCurrentPage()->fillRuleOption('Count', $count);
     }

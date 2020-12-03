@@ -12,8 +12,10 @@ final class RegisterAutomaticBlacklistingRuleCheckersPass implements CompilerPas
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->has('bitbag_sylius_blacklist_plugin.registry_automatic_blacklisting_rule_checker') ||
-            !$container->has('bitbag_sylius_blacklist_plugin.form_registry.automatic_blacklisting_rule_checker')) {
+        if (
+            !$container->has('bitbag_sylius_blacklist_plugin.registry_automatic_blacklisting_rule_checker') ||
+            !$container->has('bitbag_sylius_blacklist_plugin.form_registry.automatic_blacklisting_rule_checker')
+        ) {
             return;
         }
 
@@ -33,6 +35,6 @@ final class RegisterAutomaticBlacklistingRuleCheckersPass implements CompilerPas
             }
         }
 
-        $container->setParameter('bit_bag.sylius_blacklist_plugin.automatic_blacklisting_rules', $automaticBlacklistingRuleCheckerTypeToLabelMap);
+        $container->setParameter('bitbag.sylius_blacklist_plugin.automatic_blacklisting_rules', $automaticBlacklistingRuleCheckerTypeToLabelMap);
     }
 }

@@ -24,7 +24,7 @@ class CheckoutAddressTypeValidator extends ConstraintValidator
     private $automaticBlacklistingRulesProcessor;
 
     /** @var FraudSuspicionCommonModelConverterInterface */
-    private FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter;
+    private $fraudSuspicionCommonModelConverter;
 
     public function __construct(
         SuspiciousOrderResolverInterface $suspiciousOrderResolver,

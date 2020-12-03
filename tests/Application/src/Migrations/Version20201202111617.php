@@ -36,6 +36,7 @@ final class Version20201202111617 extends AbstractMigration
         $this->addSql('ALTER TABLE blacklisting_rule_customer_group ADD CONSTRAINT FK_C82ADBCAD2919A68 FOREIGN KEY (customer_group_id) REFERENCES sylius_customer_group (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE bitbag_fraud_suspicion ADD CONSTRAINT FK_7B5CF7C08D9F6D38 FOREIGN KEY (order_id) REFERENCES sylius_order (id) ON DELETE SET NULL');
         $this->addSql('ALTER TABLE bitbag_fraud_suspicion ADD CONSTRAINT FK_7B5CF7C09395C3F3 FOREIGN KEY (customer_id) REFERENCES sylius_customer (id)');
+        $this->addSql('ALTER TABLE sylius_customer ADD COLUMN fraud_status VARCHAR(255) DEFAULT \'neutral\'');
     }
 
     public function down(Schema $schema) : void

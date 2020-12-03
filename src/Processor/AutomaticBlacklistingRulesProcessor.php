@@ -40,12 +40,9 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
 
     public function process(OrderInterface $order): bool
     {
-        $checkers = $this->serviceRegistry->all();
-        $customer = $order->getCustomer();
-
         $channel = $order->getChannel();
 
-        $allAutomaticBlacklistingConfiguration = $this->automaticBlacklistingConfigurationRepository->findByChannel($channel);
+        $allAutomaticBlacklistingConfiguration = $this->automaticBlacklistingConfigurationRepository->findActiveByChannel($channel);
 
         if (\count($allAutomaticBlacklistingConfiguration) === 0) {
             return false;
@@ -56,16 +53,19 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
             $automaticBlacklistingRules = $automaticBlacklistingConfiguration->getRules();
             /** @var AutomaticBlacklistingRuleInterface $automaticBlacklistingRule */
             foreach ($automaticBlacklistingRules as $automaticBlacklistingRule) {
-                foreach ($checkers as $checker) {
-                    if ($checker->getType() === $automaticBlacklistingRule->getType()) {
-                        if (!($checker->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order, $this->orderRepository))) {
-                            return false;
-                        }
-                    }
+                if (!($this->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order))) {
+                    return false;
                 }
             }
         }
 
         return true;
+    }
+
+    private function isBlacklistedOrderAndCustomer(AutomaticBlacklistingRuleInterface $automaticBlacklistingRule, OrderInterface $order)
+    {
+        $checker = $this->serviceRegistry->get($automaticBlacklistingRule->getType());
+
+        return $checker->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order, $this->orderRepository);
     }
 }

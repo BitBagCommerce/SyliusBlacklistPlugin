@@ -60,7 +60,7 @@ final class CustomerContext implements Context
     /**
      * @When I go to the customer page
      */
-    public function iGoToTheCustomerPage()
+    public function iGoToTheCustomerPage(): void
     {
         $this->indexPage->open();
     }
@@ -68,7 +68,7 @@ final class CustomerContext implements Context
     /**
      * @When I go to the show :email customer page
      */
-    public function iGoToTheShowCustomerPage(string $email)
+    public function iGoToTheShowCustomerPage(string $email): void
     {
         $id = $this->customerRepository->findOneBy(['email' => $email])->getId();
 
@@ -89,7 +89,7 @@ final class CustomerContext implements Context
     /**
      * @Given I click :buttonName button
      */
-    public function iClickButton(string $buttonName)
+    public function iClickButton(string $buttonName): void
     {
         $this->resolveCurrentPage()->clickButton($buttonName);
     }
@@ -108,7 +108,7 @@ final class CustomerContext implements Context
     /**
      * @Then customer :email should be :fraudStatus
      */
-    public function customerShouldBe(string $email, string $expectedFraudStatus)
+    public function customerShouldBe(string $email, string $expectedFraudStatus): void
     {
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
 

@@ -45,7 +45,8 @@ final class AdminCustomerShowMenuListener
                 ->setAttribute('type', 'transition')
                 ->setLabel('bitbag_sylius_blacklist_plugin.ui.mark_blacklisted')
                 ->setLabelAttribute('icon', 'warning')
-                ->setLabelAttribute('color', 'red');
+                ->setLabelAttribute('color', 'red')
+            ;
         }
 
         if ($customer->getFraudStatus() === FraudStatusInterface::FRAUD_STATUS_BLACKLISTED) {
@@ -59,7 +60,8 @@ final class AdminCustomerShowMenuListener
                 ])
                 ->setAttribute('type', 'transition')
                 ->setLabel('bitbag_sylius_blacklist_plugin.ui.mark_neutral')
-                ->setLabelAttribute('icon', 'universal access');
+                ->setLabelAttribute('icon', 'universal access')
+            ;
         }
     }
 }

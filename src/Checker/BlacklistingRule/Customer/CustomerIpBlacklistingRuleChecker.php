@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Customer;
 
 use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleCheckerInterface;
-use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModel;
+use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModelInterface;
 use Doctrine\ORM\QueryBuilder;
 
 class CustomerIpBlacklistingRuleChecker implements BlacklistingRuleCheckerInterface
@@ -13,12 +13,14 @@ class CustomerIpBlacklistingRuleChecker implements BlacklistingRuleCheckerInterf
     /** @var string */
     public const CUSTOMER_IP_ATTRIBUTE_NAME = 'customer_ip';
 
-    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, FraudSuspicionCommonModel $fraudSuspicionCommonModel): void
+    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel): void
     {
-        $builder
-            ->andWhere('o.customer_ip = :customerIp')
-            ->setParameter('customerIp', $fraudSuspicionCommonModel->getCustomerIp())
-        ;
+        if (null !== $fraudSuspicionCommonModel->getCustomerIp()) {
+            $builder
+                ->andWhere('o.customer_ip = :customerIp')
+                ->setParameter('customerIp', $fraudSuspicionCommonModel->getCustomerIp())
+            ;
+        }
     }
 
     public function getAttributeName(): string

@@ -7,6 +7,7 @@
 >
     <services>
         <defaults public="true" />
+
         <service id="bitbag_sylius_blacklist_plugin.behat.context.setup.blacklisting_rule"
                  class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Context\Setup\BlacklistingRuleContext">
             <argument type="service" id="sylius.behat.shared_storage" />
@@ -14,6 +15,7 @@
             <argument type="service" id="bitbag_sylius_blacklist_plugin.factory.blacklisting_rule" />
             <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.blacklisting_rule" />
         </service>
+
         <service id="bitbag_sylius_blacklist_plugin.behat.context.setup.fraud_suspicion"
                  class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Context\Setup\FraudSuspicionContext">
             <argument type="service" id="sylius.behat.shared_storage" />
@@ -23,9 +25,10 @@
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.factory.order" />
             <argument type="service" id="sylius.factory.address" />
-            <argument type="service" id="bit_bag.sylius_blacklist_plugin.factory.fraud_suspicion" />
+            <argument type="service" id="bitbag.sylius_blacklist_plugin.factory.fraud_suspicion" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
         <service id="bitbag_sylius_blacklist_plugin.behat.context.setup.automatic_blacklisting_configuration"
                  class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Context\Setup\AutomaticBlacklistingConfigurationContext">
             <argument type="service" id="bitbag_sylius_blacklist_plugin.factory.automatic_blacklisting_configuration" />

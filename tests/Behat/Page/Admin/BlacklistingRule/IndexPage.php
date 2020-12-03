@@ -32,10 +32,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $updatedRow = $tableAccessor->getRowWithFields($table, ['name' => $name]);
         $enabledText = $tableAccessor->getFieldFromRow($table, $updatedRow, 'enabled');
 
-        if ($enabledText === 'Enabled') {
-            return false;
-        }
-
-        return true;
+        return $enabledText !== 'Enabled';
     }
 }

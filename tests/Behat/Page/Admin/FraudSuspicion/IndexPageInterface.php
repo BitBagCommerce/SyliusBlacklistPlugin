@@ -9,5 +9,4 @@ use Tests\BitBag\SyliusBlacklistPlugin\Behat\Behaviour\ContainsEmptyListInterfac
 
 interface IndexPageInterface extends BaseIndexPageInterface, ContainsEmptyListInterface
 {
-
 }

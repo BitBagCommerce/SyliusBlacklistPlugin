@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusBlacklistPlugin\Repository;
 
 use Doctrine\ORM\QueryBuilder;
@@ -10,5 +12,5 @@ interface AutomaticBlacklistingConfigurationRepositoryInterface extends Reposito
 {
     public function createListQueryBuilder(): QueryBuilder;
 
-    public function findByChannel(ChannelInterface $channel): array;
+    public function findActiveByChannel(ChannelInterface $channel): array;
 }

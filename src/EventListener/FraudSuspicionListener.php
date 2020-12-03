@@ -19,7 +19,7 @@ class FraudSuspicionListener
     private $customerStateResolver;
 
     /** @var FraudSuspicionCommonModelConverterInterface */
-    private FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter;
+    private $fraudSuspicionCommonModelConverter;
 
     public function __construct(
         SuspiciousOrderResolverInterface $suspiciousOrderResolver,

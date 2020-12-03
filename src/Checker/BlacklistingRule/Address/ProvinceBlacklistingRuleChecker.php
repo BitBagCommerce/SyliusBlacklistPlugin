@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address;
 
 use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleCheckerInterface;
-use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModel;
+use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModelInterface;
 use Doctrine\ORM\QueryBuilder;
 
 class ProvinceBlacklistingRuleChecker implements BlacklistingRuleCheckerInterface
@@ -13,12 +13,14 @@ class ProvinceBlacklistingRuleChecker implements BlacklistingRuleCheckerInterfac
     /** @var string */
     public const PROVINCE_ATTRIBUTE_NAME = 'province';
 
-    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, FraudSuspicionCommonModel $fraudSuspicionCommonModel): void
+    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel): void
     {
-        $builder
-            ->andWhere('o.province = :province')
-            ->setParameter('province', $fraudSuspicionCommonModel->getProvince())
-        ;
+        if (null !== $fraudSuspicionCommonModel->getProvince()) {
+            $builder
+                ->andWhere('o.province = :province')
+                ->setParameter('province', $fraudSuspicionCommonModel->getProvince())
+            ;
+        }
     }
 
     public function getAttributeName(): string

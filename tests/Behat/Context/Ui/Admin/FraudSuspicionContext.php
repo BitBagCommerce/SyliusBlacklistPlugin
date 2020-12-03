@@ -38,22 +38,22 @@ final class FraudSuspicionContext implements Context
     private $createPage;
 
     /** @var UpdatePageInterface */
-    private UpdatePageInterface $updatePage;
+    private $updatePage;
 
     /** @var CustomerRepositoryInterface */
     private $customerRepository;
 
     /** @var ShowPageInterface */
-    private ShowPageInterface $orderShowPage;
+    private $orderShowPage;
 
     /** @var OrderRepositoryInterface */
-    private OrderRepositoryInterface $orderRepository;
+    private $orderRepository;
 
     /** @var FraudSuspicionRepositoryInterface */
-    private FraudSuspicionRepositoryInterface $fraudSuspicionRepository;
+    private $fraudSuspicionRepository;
 
     /** @var CreateFromOrderPageInterface */
-    private CreateFromOrderPageInterface $createFromOrderPage;
+    private $createFromOrderPage;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -92,7 +92,7 @@ final class FraudSuspicionContext implements Context
     /**
      * @When I go to the update fraud suspicion with order number :orderNumber page
      */
-    public function iGoToTheUpdateFraudSuspicionWithOrderNumberPage(string $orderNumber)
+    public function iGoToTheUpdateFraudSuspicionWithOrderNumberPage(string $orderNumber): void
     {
         $fraudSuspicion = $this->fraudSuspicionRepository->findOneByOrderNumber($orderNumber);
 
@@ -112,7 +112,7 @@ final class FraudSuspicionContext implements Context
     /**
      * @Then I fill the street with :street
      */
-    public function iFillTheStreetWith(string $street)
+    public function iFillTheStreetWith(string $street): void
     {
         $this->resolveCurrentPage()->fillStreet($street);
     }
@@ -120,7 +120,7 @@ final class FraudSuspicionContext implements Context
     /**
      * @Then I fill the city with :city
      */
-    public function iFillTheCityWith(string $city)
+    public function iFillTheCityWith(string $city): void
     {
         $this->resolveCurrentPage()->fillCity($city);
     }
@@ -128,7 +128,7 @@ final class FraudSuspicionContext implements Context
     /**
      * @Then I fill all required fields basing on order :orderNumber address
      */
-    public function iFillAllRequiredFieldsBasingOnOrderAddress(string $orderNumber)
+    public function iFillAllRequiredFieldsBasingOnOrderAddress(string $orderNumber): void
     {
         $order = $this->orderRepository->findOneBy(['number' => $orderNumber]);
 
@@ -168,7 +168,7 @@ final class FraudSuspicionContext implements Context
     /**
      * @Then I select :addressType as address type
      */
-    public function iSelectAsAddressType(string $addressType)
+    public function iSelectAsAddressType(string $addressType): void
     {
         $this->resolveCurrentPage()->selectOption('Address type', $addressType);
     }
@@ -176,7 +176,7 @@ final class FraudSuspicionContext implements Context
     /**
      * @Given I add comment :comment
      */
-    public function iAddComment(string $comment)
+    public function iAddComment(string $comment): void
     {
         $this->resolveCurrentPage()->fillField('Comment', $comment);
     }
@@ -184,7 +184,7 @@ final class FraudSuspicionContext implements Context
     /**
      * @Given I click :buttonName button
      */
-    public function iClickButton(string $buttonName)
+    public function iClickButton(string $buttonName): void
     {
         $this->resolveCurrentPage()->clickButton($buttonName);
     }
