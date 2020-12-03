@@ -23,7 +23,7 @@ class OrdersAutomaticBlacklistingRuleChecker implements AutomaticBlacklistingRul
             ->findByCustomerOrdersAndPeriod($order->getCustomer(), $date)
         ;
 
-        return \intval($numberOfOrders) >= $blacklistingRule->getSettings()['count'];
+        return $numberOfOrders >= $blacklistingRule->getSettings()['count'];
     }
 
     public function getType(): string
