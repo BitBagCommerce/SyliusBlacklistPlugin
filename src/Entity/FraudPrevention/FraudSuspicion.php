@@ -127,11 +127,9 @@ class FraudSuspicion implements FraudSuspicionInterface
         return $this->phoneNumber;
     }
 
-    public function setPhoneNumber(?string $phoneNumber): self
+    public function setPhoneNumber(?string $phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
-
-        return $this;
     }
 
     public function getStreet(): ?string
