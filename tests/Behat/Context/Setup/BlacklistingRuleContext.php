@@ -41,7 +41,7 @@ final class BlacklistingRuleContext implements Context
     /**
      * @Given there is a blacklisting rule in the store
      */
-    public function thereIsABlacklistingRuleInTheStore()
+    public function thereIsABlacklistingRuleInTheStore(): void
     {
         $blacklistingRule = $this->createBlacklistingRule();
 
@@ -52,7 +52,7 @@ final class BlacklistingRuleContext implements Context
      * @Given there is a blacklisting rule with :ruleName name and :permittedStrikes permitted strikes
      * @Given there is a blacklisting rule with :ruleName name and :permittedStrikes permitted strikes and :ruleAttributes as a rule attributes
      */
-    public function thereIsABlacklistingRuleWithNameAndPermittedStrikes(string $ruleName, string $permittedStrikes, string $ruleAttributes = null)
+    public function thereIsABlacklistingRuleWithNameAndPermittedStrikes(string $ruleName, string $permittedStrikes, string $ruleAttributes = null): void
     {
         if ($ruleAttributes !== null) {
             $attributes = explode(', ', $ruleAttributes);
@@ -70,8 +70,7 @@ final class BlacklistingRuleContext implements Context
         ?int $permittedStrikes = null,
         array $attributes = [],
         ChannelInterface $channel = null
-    ): BlacklistingRuleInterface
-    {
+    ): BlacklistingRuleInterface {
         /** @var BlacklistingRuleInterface $blacklistingRule */
         $blacklistingRule = $this->blacklistingFactory->createNew();
 

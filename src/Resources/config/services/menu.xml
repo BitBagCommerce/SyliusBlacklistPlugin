@@ -6,14 +6,14 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="bit_bag.sylius_blacklist_plugin.menu.admin_menu_listener" class="BitBag\SyliusBlacklistPlugin\Menu\AdminMenuListener">
+        <service id="bitbag.sylius_blacklist_plugin.menu.admin_menu_listener" class="BitBag\SyliusBlacklistPlugin\Menu\AdminMenuListener">
             <tag name="kernel.event_listener" event="sylius.menu.admin.main" method="addAdminMenuItems"/>
         </service>
-        <service id="bit_bag.sylius_blacklist_plugin.menu.admin_order_show_menu_listener" class="BitBag\SyliusBlacklistPlugin\Menu\AdminOrderShowMenuListener">
+        <service id="bitbag.sylius_blacklist_plugin.menu.admin_order_show_menu_listener" class="BitBag\SyliusBlacklistPlugin\Menu\AdminOrderShowMenuListener">
             <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.fraud_suspicion"/>
             <tag name="kernel.event_listener" event="sylius.menu.admin.order.show" method="addAdminOrderShowMenuItems"/>
         </service>
-        <service id="bit_bag.sylius_blacklist_plugin.menu.admin_customer_show_menu_listener" class="BitBag\SyliusBlacklistPlugin\Menu\AdminCustomerShowMenuListener">
+        <service id="bitbag.sylius_blacklist_plugin.menu.admin_customer_show_menu_listener" class="BitBag\SyliusBlacklistPlugin\Menu\AdminCustomerShowMenuListener">
             <argument type="service" id="security.csrf.token_manager"/>
             <tag name="kernel.event_listener" event="sylius.menu.admin.customer.show" method="addAdminCustomerShowMenuItems"/>
         </service>

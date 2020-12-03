@@ -1,23 +1,23 @@
 bitbag_sylius_blacklist_plugin_admin_customer_mark_blacklisted:
-  path: /customers/{id}/mark-blacklisted
-  methods: [PUT]
-  defaults:
-    _controller: sylius.controller.customer:applyStateMachineTransitionAction
-    _sylius:
-      permission: true
-      state_machine:
-        graph: bitbag_sylius_blacklist_plugin_customer
-        transition: blacklisting
-      redirect: referer
+    path: /customers/{id}/mark-blacklisted
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.customer:applyStateMachineTransitionAction
+        _sylius:
+            permission: true
+            state_machine:
+                graph: bitbag_sylius_blacklist_plugin_customer
+                transition: blacklisting
+            redirect: referer
 
 bitbag_sylius_blacklist_plugin_admin_customer_mark_neutral:
-  path: /customers/{id}/mark-neutral
-  methods: [PUT]
-  defaults:
-    _controller: sylius.controller.customer:applyStateMachineTransitionAction
-    _sylius:
-      permission: true
-      state_machine:
-        graph: bitbag_sylius_blacklist_plugin_customer
-        transition: neutralizing
-      redirect: referer
+    path: /customers/{id}/mark-neutral
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.customer:applyStateMachineTransitionAction
+        _sylius:
+            permission: true
+            state_machine:
+                graph: bitbag_sylius_blacklist_plugin_customer
+                transition: neutralizing
+            redirect: referer

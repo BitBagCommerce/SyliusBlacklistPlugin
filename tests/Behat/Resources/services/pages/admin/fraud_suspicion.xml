@@ -6,14 +6,17 @@
             parent="sylius.behat.page.admin.crud.index">
             <argument>bitbag_sylius_blacklist_plugin_admin_fraud_suspicion_index</argument>
         </service>
+
         <service id="bitbag_sylius_blacklist_plugin.behat.page.admin.fraud_suspicion.create" class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\FraudSuspicion\CreatePage"
                  parent="sylius.behat.page.admin.crud.create">
             <argument>bitbag_sylius_blacklist_plugin_admin_fraud_suspicion_create</argument>
         </service>
+
         <service id="bitbag_sylius_blacklist_plugin.behat.page.admin.fraud_suspicion.update" class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\FraudSuspicion\UpdatePage"
                  parent="sylius.behat.page.admin.crud.update">
             <argument>bitbag_sylius_blacklist_plugin_admin_fraud_suspicion_update</argument>
         </service>
+
         <service id="bitbag_sylius_blacklist_plugin.behat.page.admin.fraud_suspicion.create_from_order" class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\FraudSuspicion\CreateFromOrderPage"
                  parent="sylius.behat.page.admin.crud.create">
             <argument>bitbag_sylius_blacklist_plugin_admin_order_mark_suspicious</argument>

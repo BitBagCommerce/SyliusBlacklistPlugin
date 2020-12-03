@@ -51,7 +51,7 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -81,8 +81,10 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
 
     public function removeRule(AutomaticBlacklistingRuleInterface $rule): void
     {
-        $rule->setConfiguration(null);
-        $this->rules->removeElement($rule);
+        if ($this->hasRule($rule)) {
+            $rule->setConfiguration(null);
+            $this->rules->removeElement($rule);
+        }
     }
 
     public function getChannels(): Collection

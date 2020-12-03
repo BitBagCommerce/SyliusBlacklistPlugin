@@ -6,7 +6,7 @@ namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 
 class AutomaticBlacklistingRule implements AutomaticBlacklistingRuleInterface
 {
-    /** @var mixed */
+    /** @var int|null */
     protected $id;
 
     /** @var string|null */

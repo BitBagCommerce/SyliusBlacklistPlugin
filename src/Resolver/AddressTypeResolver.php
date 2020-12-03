@@ -6,6 +6,7 @@ namespace BitBag\SyliusBlacklistPlugin\Resolver;
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicion;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
+use BitBag\SyliusBlacklistPlugin\Exception\WrongAddressTypeException;
 use Sylius\Component\Core\Model\AddressInterface;
 
 class AddressTypeResolver implements AddressTypeResolverInterface
@@ -31,7 +32,7 @@ class AddressTypeResolver implements AddressTypeResolverInterface
             case FraudSuspicion::SHIPPING_ADDRESS_TYPE:
                 return $fraudSuspicion->getOrder()->getShippingAddress();
             default:
-                throw new \Exception('Wrong address type!');
+                throw new WrongAddressTypeException('Wrong address type!');
         }
     }
 }

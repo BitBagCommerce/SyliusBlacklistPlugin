@@ -6,6 +6,7 @@
             parent="sylius.behat.page.admin.crud.index">
             <argument>sylius_admin_customer_index</argument>
         </service>
+
         <service id="bitbag_sylius_blacklist_plugin.behat.page.admin.customer.show" class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\Customer\ShowPage"
                  parent="sylius.behat.page.admin.customer.show">
             <argument>sylius_admin_customer_show</argument>

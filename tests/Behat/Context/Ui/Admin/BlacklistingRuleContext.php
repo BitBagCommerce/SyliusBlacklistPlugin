@@ -67,7 +67,7 @@ final class BlacklistingRuleContext implements Context
     /**
      * @When I go to the blacklisting rule page
      */
-    public function iGoToTheBlacklistingRulePage()
+    public function iGoToTheBlacklistingRulePage(): void
     {
         $this->indexPage->open();
     }
@@ -75,7 +75,7 @@ final class BlacklistingRuleContext implements Context
     /**
      * @When I go to the update :ruleName blacklisting rule page
      */
-    public function iGoToTheUpdateBlockPage(string $ruleName)
+    public function iGoToTheUpdateBlockPage(string $ruleName): void
     {
         $id = $this->blacklistingRuleRepository->findOneBy(['name' => $ruleName])->getId();
 
@@ -113,7 +113,7 @@ final class BlacklistingRuleContext implements Context
     /**
      * @Given /^I select "([^"]*)" and "([^"]*)" as rule attributes$/
      */
-    public function iSelectAndAsRuleAttributes($arg1, $arg2)
+    public function iSelectAndAsRuleAttributes($arg1, $arg2): void
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -132,7 +132,7 @@ final class BlacklistingRuleContext implements Context
     /**
      * @Given /^I select "([^"]*)" as channels$/
      */
-    public function iSelectAsChannels($arg1)
+    public function iSelectAsChannels($arg1): void
     {
         $this->resolveCurrentPage()->checkField($arg1);
     }
@@ -140,7 +140,7 @@ final class BlacklistingRuleContext implements Context
     /**
      * @Given /^I select "([^"]*)" and "([^"]*)" as customer groups$/
      */
-    public function iSelectAndAsCustomerGroups($arg1, $arg2)
+    public function iSelectAndAsCustomerGroups($arg1, $arg2): void
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -151,7 +151,7 @@ final class BlacklistingRuleContext implements Context
     /**
      * @Given /^I check enabled$/
      */
-    public function iCheckEnabled()
+    public function iCheckEnabled(): void
     {
         $this->resolveCurrentPage()->enable();
     }
@@ -176,7 +176,7 @@ final class BlacklistingRuleContext implements Context
     /**
      * @When I disable it
      */
-    public function iDisableIt()
+    public function iDisableIt(): void
     {
         $this->resolveCurrentPage()->disable();
     }
@@ -276,7 +276,7 @@ final class BlacklistingRuleContext implements Context
     /**
      * @Given I delete this blacklisting rule
      */
-    public function iDeleteThisBlacklistingRule()
+    public function iDeleteThisBlacklistingRule(): void
     {
         $blacklistingRule = $this->sharedStorage->get('blacklistingRule');
 

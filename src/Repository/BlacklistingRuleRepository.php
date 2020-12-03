@@ -15,17 +15,16 @@ final class BlacklistingRuleRepository extends EntityRepository implements Black
         return $this->createQueryBuilder('o');
     }
 
-    public function findByChannel(ChannelInterface $channel): array
+    public function findActiveByChannel(ChannelInterface $channel): array
     {
         return $this->createListQueryBuilder()
             ->innerJoin('o.channels', 'channel')
             ->where('channel.id = :channelId')
             ->andWhere('o.enabled = :enabled')
-            ->setParameters([
-                'channelId' => $channel->getId(),
-                'enabled' => true
-            ])
+            ->setParameter('channelId', $channel->getId())
+            ->setParameter('enabled', true)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 }

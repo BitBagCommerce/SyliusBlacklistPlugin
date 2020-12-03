@@ -124,19 +124,19 @@ class BlacklistingRule implements BlacklistingRuleInterface
     public function addCustomerGroup(CustomerGroupInterface $customerGroup): void
     {
         if (!$this->hasCustomerGroup($customerGroup)) {
-            $this->channels->add($customerGroup);
+            $this->customerGroups->add($customerGroup);
         }
     }
 
     public function removeCustomerGroup(CustomerGroupInterface $customerGroup): void
     {
         if ($this->hasCustomerGroup($customerGroup)) {
-            $this->channels->removeElement($customerGroup);
+            $this->customerGroups->removeElement($customerGroup);
         }
     }
 
     public function hasCustomerGroup(CustomerGroupInterface $customerGroup): bool
     {
-        return $this->channels->contains($customerGroup);
+        return $this->customerGroups->contains($customerGroup);
     }
 }

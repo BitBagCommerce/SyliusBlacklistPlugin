@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address;
 
 use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleCheckerInterface;
-use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModel;
+use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModelInterface;
 use Doctrine\ORM\QueryBuilder;
 
 class LastNameBlacklistingRuleChecker implements BlacklistingRuleCheckerInterface
@@ -13,7 +13,7 @@ class LastNameBlacklistingRuleChecker implements BlacklistingRuleCheckerInterfac
     /** @var string */
     public const LAST_NAME_ATTRIBUTE_NAME = 'last_name';
 
-    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, FraudSuspicionCommonModel $fraudSuspicionCommonModel): void
+    public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel): void
     {
         $builder
             ->andWhere('o.lastName = :lastName')

@@ -6,16 +6,25 @@ namespace BitBag\SyliusBlacklistPlugin\Converter;
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicion;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
-use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModel;
+use BitBag\SyliusBlacklistPlugin\Exception\WrongAddressTypeException;
+use BitBag\SyliusBlacklistPlugin\Factory\FraudSuspicionCommonModelFactoryInterface;
 use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModelInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 
 class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelConverterInterface
 {
+    /** @var FraudSuspicionCommonModelFactoryInterface */
+    private $fraudSuspicionCommonModelFactory;
+
+    public function __construct(FraudSuspicionCommonModelFactoryInterface $fraudSuspicionCommonModelFactory)
+    {
+        $this->fraudSuspicionCommonModelFactory = $fraudSuspicionCommonModelFactory;
+    }
+
     public function convertFraudSuspicionObject(FraudSuspicionInterface $fraudSuspicion): FraudSuspicionCommonModelInterface
     {
-        $fraudSuspicionCommonModel = new FraudSuspicionCommonModel();
+        $fraudSuspicionCommonModel = $this->fraudSuspicionCommonModelFactory->createNew();
 
         $fraudSuspicionCommonModel->setOrder($fraudSuspicion->getOrder());
         $fraudSuspicionCommonModel->setCustomer($fraudSuspicion->getCustomer());
@@ -36,7 +45,7 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
     {
         $address = $this->getAddressFromOrder($order, $addressType);
 
-        $fraudSuspicionCommonModel = new FraudSuspicionCommonModel();
+        $fraudSuspicionCommonModel = $this->fraudSuspicionCommonModelFactory->createNew();
 
         $fraudSuspicionCommonModel->setOrder($order);
         $fraudSuspicionCommonModel->setCustomer($order->getCustomer());
@@ -61,7 +70,7 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
             case FraudSuspicion::SHIPPING_ADDRESS_TYPE:
                 return $order->getShippingAddress();
             default:
-                throw new \Exception('Wrong address type!');
+                throw new WrongAddressTypeException('Wrong address type!');
         }
     }
 }

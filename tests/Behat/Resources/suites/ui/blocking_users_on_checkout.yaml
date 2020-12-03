@@ -23,7 +23,6 @@ default:
                 - sylius.behat.context.transform.tax_category
                 - sylius.behat.context.transform.user
                 - sylius.behat.context.transform.zone
-
                 - sylius.behat.context.transform.shared_storage
 
                 - sylius.behat.context.setup.address
@@ -44,6 +43,7 @@ default:
                 - sylius.behat.context.setup.taxation
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
+
                 - bitbag_sylius_blacklist_plugin.behat.context.setup.automatic_blacklisting_configuration
                 - bitbag_sylius_blacklist_plugin.behat.context.setup.blacklisting_rule
                 - bitbag_sylius_blacklist_plugin.behat.context.setup.fraud_suspicion
@@ -63,8 +63,7 @@ default:
                 - sylius.behat.context.ui.shop.currency
                 - sylius.behat.context.ui.shop.homepage
                 - sylius.behat.context.ui.shop.locale
+
                 - bitbag_sylius_blacklist_plugin.behat.context.ui.shop.checkout
-
-
             filters:
                 tags: "@blocking_users_on_checkout && @ui"

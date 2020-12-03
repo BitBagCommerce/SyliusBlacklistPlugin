@@ -6,10 +6,12 @@
             parent="sylius.behat.page.admin.crud.index">
             <argument>bitbag_sylius_blacklist_plugin_admin_automatic_blacklisting_configuration_index</argument>
         </service>
+
         <service id="bitbag_sylius_blacklist_plugin.behat.page.admin.automatic_blacklisting_configuration.create" class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\AutomaticBlacklistingConfiguration\CreatePage"
                  parent="sylius.behat.page.admin.crud.create">
             <argument>bitbag_sylius_blacklist_plugin_admin_automatic_blacklisting_configuration_create</argument>
         </service>
+
         <service id="bitbag_sylius_blacklist_plugin.behat.page.admin.automatic_blacklisting_configuration.update" class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\AutomaticBlacklistingConfiguration\UpdatePage"
                  parent="sylius.behat.page.admin.crud.update">
             <argument>bitbag_sylius_blacklist_plugin_admin_automatic_blacklisting_configuration_update</argument>

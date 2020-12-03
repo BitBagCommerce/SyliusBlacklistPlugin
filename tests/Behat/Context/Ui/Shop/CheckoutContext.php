@@ -13,10 +13,10 @@ use Webmozart\Assert\Assert;
 final class CheckoutContext implements Context
 {
     /** @var CurrentPageResolverInterface */
-    private CurrentPageResolverInterface $currentPageResolver;
+    private $currentPageResolver;
 
     /** @var AddressPageInterface */
-    private AddressPageInterface $addressPage;
+    private $addressPage;
 
     public function __construct(CurrentPageResolverInterface $currentPageResolver, AddressPageInterface $addressPage)
     {
@@ -27,7 +27,7 @@ final class CheckoutContext implements Context
     /**
      * @Then I should be notified that something went wrong
      */
-    public function iShouldBeNotifiedThatSomethingWentWrong()
+    public function iShouldBeNotifiedThatSomethingWentWrong(): void
     {
         Assert::true($this->resolveCurrentPage()->containsErrorWithMessage(sprintf('Something went wrong. You cannot place the order.')));
     }
@@ -45,7 +45,7 @@ final class CheckoutContext implements Context
     /**
      * @Given /^I should be at the checkout addressing step$/
      */
-    public function iShouldBeAtTheCheckoutAddressingStep()
+    public function iShouldBeAtTheCheckoutAddressingStep(): void
     {
         Assert::same($this->resolveCurrentPage(), $this->addressPage);
     }

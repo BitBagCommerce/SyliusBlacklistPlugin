@@ -9,5 +9,4 @@ use Tests\BitBag\SyliusBlacklistPlugin\Behat\Behaviour\ContainsErrorInterface;
 
 interface AddressPageInterface extends BaseAddressPageInterface, ContainsErrorInterface
 {
-
 }

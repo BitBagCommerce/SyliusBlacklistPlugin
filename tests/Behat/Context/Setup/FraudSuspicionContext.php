@@ -28,25 +28,25 @@ final class FraudSuspicionContext implements Context
     private $randomStringGenerator;
 
     /** @var CustomerRepositoryInterface */
-    private CustomerRepositoryInterface $customerRepository;
+    private $customerRepository;
 
     /** @var OrderRepositoryInterface */
-    private OrderRepositoryInterface $orderRepository;
+    private $orderRepository;
 
     /** @var FactoryInterface */
-    private FactoryInterface $customerFactory;
+    private $customerFactory;
 
     /** @var FactoryInterface */
-    private FactoryInterface $orderFactory;
+    private $orderFactory;
 
     /** @var FactoryInterface */
-    private FactoryInterface $addressFactory;
+    private $addressFactory;
 
     /** @var FraudSuspicionFactoryInterface */
-    private FraudSuspicionFactoryInterface $fraudSuspicionFactory;
+    private $fraudSuspicionFactory;
 
     /** @var EntityManagerInterface */
-    private EntityManagerInterface $entityManager;
+    private $entityManager;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -73,11 +73,11 @@ final class FraudSuspicionContext implements Context
     /**
      * @Given the order :orderNumber is marked as suspicious by fake :addressType address
      */
-    public function theOrderIsMarkedAsSuspiciousByFakeAddress(string $orderNumber, string $addressType)
+    public function theOrderIsMarkedAsSuspiciousByFakeAddress(string $orderNumber, string $addressType): void
     {
         $order = $this->orderRepository->findOneBy(['number' => $orderNumber]);
 
-        if (null === $order) {
+        if (empty($order)) {
             throw new \Exception('The order has not been found!');
         }
 
@@ -91,7 +91,7 @@ final class FraudSuspicionContext implements Context
     /**
      * @Given the store has customer :email with placed order with number :orderNumber
      */
-    public function thereIsACustomerWithPlacedOrderInTheStore(string $email, string $orderNumber)
+    public function thereIsACustomerWithPlacedOrderInTheStore(string $email, string $orderNumber): void
     {
         $customer = $this->createCustomer($email, 'John', 'Doe');
         $order = $this->createOrder($customer, $orderNumber);
@@ -108,7 +108,7 @@ final class FraudSuspicionContext implements Context
         $lastName = null,
         \DateTimeInterface $createdAt = null,
         $phoneNumber = null
-    ) {
+    ): CustomerInterface {
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
 
@@ -130,10 +130,10 @@ final class FraudSuspicionContext implements Context
         $number = null,
         ChannelInterface $channel = null,
         $localeCode = null
-    ) {
+    ): OrderInterface {
         $order = $this->createCart($customer, $channel, $localeCode);
 
-        if (null !== $number) {
+        if (!empty($order)) {
             $order->setNumber($number);
         }
         $address = $this->createAddress($order->getCustomer());
@@ -151,7 +151,7 @@ final class FraudSuspicionContext implements Context
         \Sylius\Component\Customer\Model\CustomerInterface $customer,
         ChannelInterface $channel = null,
         $localeCode = null
-    ) {
+    ): OrderInterface {
         /** @var OrderInterface $order */
         $order = $this->orderFactory->createNew();
 
@@ -167,6 +167,7 @@ final class FraudSuspicionContext implements Context
     {
         /** @var AddressInterface $address */
         $address = $this->addressFactory->createNew();
+        
         $address->setCustomer($customer);
         $address->setFirstName($customer->getFirstName());
         $address->setLastName($customer->getLastName());
@@ -181,7 +182,7 @@ final class FraudSuspicionContext implements Context
     /**
      * @Given the store has fraud suspicion related to order with number :orderNumber
      */
-    public function theStoreHasFraudSuspicionRelatedToOrderWithNumber(string $orderNumber)
+    public function theStoreHasFraudSuspicionRelatedToOrderWithNumber(string $orderNumber): void
     {
         $order = $this->orderRepository->findOneBy(['number' => $orderNumber]);
 
