@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormEvents;
 final class FraudSuspicionOrderType extends AbstractResourceType
 {
     /** @var AddressTypeResolver */
-    private AddressTypeResolver $addressTypeResolver;
+    private $addressTypeResolver;
 
     public function __construct(string $dataClass, AddressTypeResolver $addressTypeResolver, array $validationGroups = [])
     {
