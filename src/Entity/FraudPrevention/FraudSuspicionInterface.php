@@ -44,7 +44,7 @@ interface FraudSuspicionInterface extends ResourceInterface
 
     public function getPhoneNumber(): ?string;
 
-    public function setPhoneNumber(?string $phoneNumber): self;
+    public function setPhoneNumber(?string $phoneNumber);
 
     public function getStreet(): ?string;
 
