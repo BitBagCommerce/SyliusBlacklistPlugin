@@ -11,6 +11,7 @@ default:
                 - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.shipping
+
                 - bitbag_sylius_blacklist_plugin.behat.context.setup.fraud_suspicion
 
                 - sylius.behat.context.transform.customer
@@ -22,7 +23,8 @@ default:
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.shared_storage
 
-                - bitbag_sylius_blacklist_plugin.behat.context.ui.admin.fraud_suspicion
                 - sylius.behat.context.ui.shop.currency
+
+                - bitbag_sylius_blacklist_plugin.behat.context.ui.admin.fraud_suspicion
             filters:
                 tags: "@managing_fraud_suspicion && @ui"
