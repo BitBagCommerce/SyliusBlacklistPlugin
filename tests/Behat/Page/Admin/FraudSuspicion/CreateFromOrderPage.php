@@ -11,7 +11,7 @@ class CreateFromOrderPage extends BaseCreatePage implements CreateFromOrderPageI
 {
     use ContainsErrorTrait;
 
-    public function fillField(string $field, ?string $value): self
+    public function fillField(string $field, ?string $value): CreateFromOrderPageInterface
     {
         if (empty($value)) {
             $value = '';
@@ -22,7 +22,7 @@ class CreateFromOrderPage extends BaseCreatePage implements CreateFromOrderPageI
         return $this;
     }
 
-    public function selectOption(string $field, string $value): self
+    public function selectOption(string $field, string $value): CreateFromOrderPageInterface
     {
         $this->getDocument()->selectFieldOption($field, $value);
 
