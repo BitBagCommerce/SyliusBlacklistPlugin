@@ -20,7 +20,7 @@ class OrdersAutomaticBlacklistingRuleChecker implements AutomaticBlacklistingRul
         $date = (new \DateTime())->modify('- ' . $blacklistingRule->getSettings()['date_modifier']);
 
         $numberOfOrders = $orderRepository
-            ->findByCustomerOrdersAndPeriod($order->getCustomer(), $date)
+            ->findPlacedOrdersByCustomerAndPeriod($order->getCustomer(), $date)
         ;
 
         return $numberOfOrders >= $blacklistingRule->getSettings()['count'];

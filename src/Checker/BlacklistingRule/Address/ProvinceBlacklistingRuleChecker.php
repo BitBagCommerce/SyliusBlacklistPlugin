@@ -15,7 +15,7 @@ class ProvinceBlacklistingRuleChecker implements BlacklistingRuleCheckerInterfac
 
     public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel): void
     {
-        if (null !== $fraudSuspicionCommonModel->getProvince()) {
+        if (!empty($fraudSuspicionCommonModel->getProvince())) {
             $builder
                 ->andWhere('o.province = :province')
                 ->setParameter('province', $fraudSuspicionCommonModel->getProvince())

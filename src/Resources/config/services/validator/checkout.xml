@@ -6,6 +6,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <defaults public="true" />
+
         <service id="bitbag_sylius_blacklist_plugin.validator.constraints.checkout.address_type_validator" class="BitBag\SyliusBlacklistPlugin\Validator\Constraints\Checkout\CheckoutAddressTypeValidator">
             <argument type="service" id="bitbag.sylius_blacklist_plugin.resolver.suspicious_order" />
             <argument type="service" id="bitbag.sylius_blacklist_plugin.processor.automatic_blacklisting_rules" />
