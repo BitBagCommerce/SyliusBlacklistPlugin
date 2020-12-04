@@ -20,7 +20,7 @@ final class BlacklistingRuleRepository extends EntityRepository implements Black
 
     public function findActiveByChannel(ChannelInterface $channel): array
     {
-        return $this->createListQueryBuilder()
+        return $this->createQueryBuilder('o')
             ->innerJoin('o.channels', 'channel')
             ->where('channel.id = :channelId')
             ->andWhere('o.enabled = :enabled')
