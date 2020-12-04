@@ -1,6 +1,6 @@
 bitbag_sylius_blacklist_plugin:
     ui:
-        blacklisting_rules: Blacklisting rule
+        blacklisting_rules: Manual blacklisting rule
         fraud_suspicions: Fraud suspicion
         manage_blacklisting_rules: Manage blacklisting rules
         manage_fraud_suspicions: Manage fraud suspicions
@@ -15,11 +15,41 @@ bitbag_sylius_blacklist_plugin:
         neutral: Neutral
         fraud_status: Fraud status
         mark_suspicious: Mark suspicious
+        mark_blacklisted: Mark blacklisted
+        mark_neutral: Mark neutral
+        automatic_blacklisting_configurations: Auto-blacklisting config
+        configure_automatic_blacklisting_configurations: Configure auto-blacklisitng
+        new_automatic_blacklisting_configuration: Add new configuration
+        edit_automatic_blacklisting_configuration: Edit configuration
+        settings: Settings
     form:
         blacklisting_rule:
             name: Rule name
             attribute: Rule attributes
             permitted_strikes: Permitted strikes
             channels: Channels
+            customer_group: Customer groups
+            company: Company
+            country: Country
+            customer_id: Customer ID
+            customer_ip: Customer IP
+            email: Email
+            first_name: First name
+            last_name: Last name
+            phone_number: Phone number
+            postcode: Postcode
+            province: Province
+            street: Street
         fraud_suspicion:
             comment: Comment
+        automatic_blacklisting_rule:
+            rules: Rules
+            type: Type
+            count: Count
+            name: Configuration name
+            payment_failures: Max number of payment failures
+            orders: Max number of orders
+            date_modifier: Date modifier
+            per_day: Per day
+            per_week: Per week
+            per_month: Per month

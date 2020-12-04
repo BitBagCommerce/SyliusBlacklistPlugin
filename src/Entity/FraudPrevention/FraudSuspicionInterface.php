@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
 
 interface FraudSuspicionInterface extends ResourceInterface
 {
@@ -19,9 +22,9 @@ interface FraudSuspicionInterface extends ResourceInterface
 
     public function setOrder(?OrderInterface $order): void;
 
-    public function getCustomerId(): ?int;
+    public function getCustomer(): ?CustomerInterface;
 
-    public function setCustomerId(int $customerId);
+    public function setCustomer(CustomerInterface $customer): void;
 
     public function getCompany(): ?string;
 
@@ -39,6 +42,10 @@ interface FraudSuspicionInterface extends ResourceInterface
 
     public function setEmail(string $email);
 
+    public function getPhoneNumber(): ?string;
+
+    public function setPhoneNumber(?string $phoneNumber);
+
     public function getStreet(): ?string;
 
     public function setStreet(string $street);
@@ -54,6 +61,14 @@ interface FraudSuspicionInterface extends ResourceInterface
     public function getCountry(): ?string;
 
     public function setCountry(string $country);
+
+    public function getPostcode(): ?string;
+
+    public function setPostcode(?string $postcode): void;
+
+    public function getCustomerIp(): ?string;
+
+    public function setCustomerIp(?string $customerIp): void;
 
     public function getAddressType(): ?string;
 

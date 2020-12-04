@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 
 use Sylius\Component\Order\Model\OrderInterface;
+use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
 
 class FraudSuspicion implements FraudSuspicionInterface
 {
@@ -14,8 +15,8 @@ class FraudSuspicion implements FraudSuspicionInterface
     /** @var OrderInterface|null */
     protected $order;
 
-    /** @var int|null */
-    protected $customerId;
+    /** @var CustomerInterface|null */
+    protected $customer;
 
     /** @var string|null */
     protected $company;
@@ -30,6 +31,9 @@ class FraudSuspicion implements FraudSuspicionInterface
     protected $email;
 
     /** @var string */
+    protected $phoneNumber;
+
+    /** @var string */
     protected $street;
 
     /** @var string */
@@ -40,6 +44,12 @@ class FraudSuspicion implements FraudSuspicionInterface
 
     /** @var string */
     protected $country;
+
+    /** @var string|null */
+    protected $postcode;
+
+    /** @var string|null */
+    protected $customerIp;
 
     /** @var string */
     protected $addressType;
@@ -62,14 +72,14 @@ class FraudSuspicion implements FraudSuspicionInterface
         $this->order = $order;
     }
 
-    public function getCustomerId(): ?int
+    public function getCustomer(): ?CustomerInterface
     {
-        return $this->customerId;
+        return $this->customer;
     }
 
-    public function setCustomerId(int $customerId)
+    public function setCustomer(CustomerInterface $customer): void
     {
-        $this->customerId = $customerId;
+        $this->customer = $customer;
     }
 
     public function getCompany(): ?string
@@ -112,6 +122,16 @@ class FraudSuspicion implements FraudSuspicionInterface
         $this->email = $email;
     }
 
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(?string $phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+
     public function getStreet(): ?string
     {
         return $this->street;
@@ -150,6 +170,26 @@ class FraudSuspicion implements FraudSuspicionInterface
     public function setCountry(string $country)
     {
         $this->country = $country;
+    }
+
+    public function getPostcode(): ?string
+    {
+        return $this->postcode;
+    }
+
+    public function setPostcode(?string $postcode): void
+    {
+        $this->postcode = $postcode;
+    }
+
+    public function getCustomerIp(): ?string
+    {
+        return $this->customerIp;
+    }
+
+    public function setCustomerIp(?string $customerIp): void
+    {
+        $this->customerIp = $customerIp;
     }
 
     public function getAddressType(): ?string

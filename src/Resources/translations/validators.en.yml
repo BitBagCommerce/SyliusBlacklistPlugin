@@ -5,3 +5,10 @@ bitbag_sylius_blacklist_plugin:
             max_length: The rule name is too long
         permitted_strikes:
             not_blank: The permitted strikes cannot be blank
+    automatic_blacklisting_rule:
+        name:
+            not_blank: The configuration name cannot be blank
+            max_length: The configuration name is too long
+    form:
+        error:
+            cannot_place_order: Something went wrong. You cannot place the order.

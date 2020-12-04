@@ -3,20 +3,20 @@
         <img src="doc/logo.png" width="55%" />
     </a>
     <br />
-    <a href="https://packagist.org/packages/bitbag/wishlist-plugin" title="License" target="_blank">
-        <img src="https://img.shields.io/packagist/l/bitbag/wishlist-plugin.svg" />
+    <a href="https://packagist.org/packages/bitbag/blacklist-plugin" title="License" target="_blank">
+        <img src="https://img.shields.io/packagist/l/bitbag/blacklist-plugin.svg" />
     </a>
-    <a href="https://packagist.org/packages/bitbag/wishlist-plugin" title="Version" target="_blank">
-        <img src="https://img.shields.io/packagist/v/bitbag/wishlist-plugin.svg" />
+    <a href="https://packagist.org/packages/bitbag/blacklist-plugin" title="Version" target="_blank">
+        <img src="https://img.shields.io/packagist/v/bitbag/blacklist-plugin.svg" />
     </a>
-    <a href="http://travis-ci.org/BitBagCommerce/SyliusWishlistPlugin" title="Build status" target="_blank">
-            <img src="https://img.shields.io/travis/BitBagCommerce/SyliusWishlistPlugin/master.svg" />
+    <a href="http://travis-ci.org/BitBagCommerce/SyliusbVlacklistPlugin" title="Build status" target="_blank">
+            <img src="https://img.shields.io/travis/BitBagCommerce/SyliusblacklistPlugin/master.svg" />
         </a>
-    <a href="https://scrutinizer-ci.com/g/BitBagCommerce/SyliusWishlistPlugin/" title="Scrutinizer" target="_blank">
-        <img src="https://img.shields.io/scrutinizer/g/BitBagCommerce/SyliusWishlistPlugin.svg" />
+    <a href="https://scrutinizer-ci.com/g/BitBagCommerce/SyliusBlacklistPlugin/" title="Scrutinizer" target="_blank">
+        <img src="https://img.shields.io/scrutinizer/g/BitBagCommerce/SyliusBlacklistPlugin.svg" />
     </a>
-    <a href="https://packagist.org/packages/bitbag/wishlist-plugin" title="Total Downloads" target="_blank">
-        <img src="https://poser.pugx.org/bitbag/wishlist-plugin/downloads" />
+    <a href="https://packagist.org/packages/bitbag/blacklist-plugin" title="Total Downloads" target="_blank">
+        <img src="https://poser.pugx.org/bitbag/blacklist-plugin/downloads" />
     </a>
     <p>
         <a href="https://sylius.com/plugins/" target="_blank">
@@ -59,7 +59,7 @@ Import required config in your `config/packages/_sylius.yaml` file:
 imports:
     ...
     
-    - { resource: "@BitBagSyliusBlacklistPlugin/Resources/config/config.yml" }
+    - { resource: "@BitBagSyliusBlacklistPlugin/Resources/config/config.yaml" }
 ```
 
 Import routing in your `config/routes.yaml` file:
@@ -68,7 +68,7 @@ Import routing in your `config/routes.yaml` file:
 # config/routes.yaml
 
 bitbag_sylius_blacklist_plugin:
-    resource: "@BitBagSyliusBlacklistPlugin/Resources/config/routing.yml"
+    resource: "@BitBagSyliusBlacklistPlugin/Resources/config/routing.yaml"
 ```
 
 Update your database
@@ -79,8 +79,6 @@ $ bin/console doctrine:migrations:migrate
 
 **Note:** If you are running it on production, add the `-e prod` flag to this command.
 
-## Usage
-
 ## Customization
 
 ### Available services you can [decorate](https://symfony.com/doc/current/service_container/service_decoration.html) and forms you can [extend](http://symfony.com/doc/current/form/create_form_type_extension.html)
@@ -88,11 +86,6 @@ $ bin/console doctrine:migrations:migrate
 Run the below command to see what Symfony services are shared with this plugin:
 ```bash
 $ bin/console debug:container | grep bitbag_sylius_blacklist_plugin
-```
-
-### Parameters you can override in your parameters.yml(.dist) file
-```yml
-$ bin/console debug:container --parameters | grep bitbag
 ```
 
 ## Testing

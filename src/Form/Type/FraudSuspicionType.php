@@ -6,18 +6,21 @@ namespace BitBag\SyliusBlacklistPlugin\Form\Type;
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Tests\BitBag\SyliusBlacklistPlugin\Entity\Customer;
 
 final class FraudSuspicionType extends AbstractResourceType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('customerId', NumberType::class)
+            ->add('customer', EntityType::class, [
+                'class' => Customer::class,
+            ])
             ->add('company', TextType::class, [
                 'required' => false
             ])
@@ -30,6 +33,12 @@ final class FraudSuspicionType extends AbstractResourceType
                 'required' => false
             ])
             ->add('country', TextType::class)
+            ->add('postcode', TextType::class, [
+                'required' => false
+            ])
+            ->add('customerIp', TextType::class, [
+                'required' => false
+            ])
             ->add('addressType', ChoiceType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.ui.address_type',
                 'choices' => [

@@ -5,13 +5,26 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\Form\Type;
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
+use BitBag\SyliusBlacklistPlugin\Resolver\AddressTypeResolver;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 final class FraudSuspicionOrderType extends AbstractResourceType
 {
+    /** @var AddressTypeResolver */
+    private $addressTypeResolver;
+
+    public function __construct(string $dataClass, AddressTypeResolver $addressTypeResolver, array $validationGroups = [])
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->addressTypeResolver = $addressTypeResolver;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -25,6 +38,9 @@ final class FraudSuspicionOrderType extends AbstractResourceType
             ->add('comment', TextareaType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.fraud_suspicion.comment',
             ])
+            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event): void {
+                $this->addressTypeResolver->resolveAndUpdateFraudSuspicion($event->getData());
+            })
         ;
     }
 

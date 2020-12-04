@@ -10,20 +10,25 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="customerId" type="integer" column="customerId" />
         <field name="company" type="string" column="company" nullable="true" />
         <field name="firstName" type="string" column="first_name" />
         <field name="lastName" type="string" column="last_name" />
         <field name="email" type="string" column="email" />
+        <field name="phoneNumber" type="string" column="phone_number" nullable="true" />
         <field name="city" type="string" column="city" />
         <field name="province" type="string" column="province" nullable="true" />
         <field name="country" type="string" column="country" />
+        <field name="postcode" type="string" column="postcode" />
+        <field name="customerIp" type="string" column="customer_ip" nullable="true" />
         <field name="addressType" type="string" column="address_type" />
         <field name="comment" type="string" column="comment" nullable="true" />
 
         <one-to-one field="order" target-entity="Sylius\Component\Order\Model\Order">
-            <join-column name="order_id" nullable="true"/>
+            <join-column name="order_id" nullable="true" on-delete="SET NULL"/>
         </one-to-one>
+        <many-to-one field="customer" target-entity="Tests\BitBag\SyliusBlacklistPlugin\Entity\Customer">
+            <join-column name="customer_id" nullable="false" />
+        </many-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>

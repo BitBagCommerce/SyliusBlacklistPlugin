@@ -7,7 +7,6 @@ namespace BitBag\SyliusBlacklistPlugin\Factory;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicion;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
 {
@@ -21,16 +20,17 @@ class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
         $fraudSuspicion = $this->createNew();
 
         $fraudSuspicion->setOrder($order);
-        $fraudSuspicion->setCustomerId($order->getCustomer()->getId());
+        $fraudSuspicion->setCustomer($order->getCustomer());
         $fraudSuspicion->setCompany($order->getBillingAddress()->getCompany());
-        $fraudSuspicion->setFirstName($order->getCustomer()->getFirstName());
-        $fraudSuspicion->setLastName($order->getCustomer()->getLastName());
-        $fraudSuspicion->setEmail($order->getCustomer()->getEmail());
+        $fraudSuspicion->setFirstName($order->getBillingAddress()->getFirstName());
+        $fraudSuspicion->setLastName($order->getBillingAddress()->getLastName());
         $fraudSuspicion->setEmail($order->getCustomer()->getEmail());
         $fraudSuspicion->setStreet($order->getBillingAddress()->getStreet());
         $fraudSuspicion->setCity($order->getBillingAddress()->getCity());
         $fraudSuspicion->setProvince($order->getBillingAddress()->getProvinceName());
         $fraudSuspicion->setCountry($order->getBillingAddress()->getCountryCode());
+        $fraudSuspicion->setPostcode($order->getBillingAddress()->getPostcode());
+        $fraudSuspicion->setCustomerIp($order->getCustomerIp());
 
         return $fraudSuspicion;
     }

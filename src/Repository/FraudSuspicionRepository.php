@@ -13,7 +13,10 @@ final class FraudSuspicionRepository extends EntityRepository implements FraudSu
 {
     public function createListQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('o');
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->innerJoin('o.order', 'ord')
+        ;
     }
 
     public function findOneByOrder(OrderInterface $order): ?FraudSuspicionInterface
@@ -24,6 +27,19 @@ final class FraudSuspicionRepository extends EntityRepository implements FraudSu
             ->setParameter('orderId', $order->getId())
             ->setMaxResults(1)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function findOneByOrderNumber(string $orderNumber): ?FraudSuspicionInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.order', 'ord')
+            ->andWhere('ord.number = :orderNumber')
+            ->setParameter('orderNumber', $orderNumber)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 }

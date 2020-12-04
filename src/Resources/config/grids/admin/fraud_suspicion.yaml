@@ -1,90 +1,90 @@
 sylius_grid:
-  grids:
-    bitbag_sylius_blacklist_plugin_fraud_suspicion:
-      driver:
-        name: doctrine/orm
-        options:
-          class: "%bitbag_sylius_blacklist_plugin.model.fraud_suspicion.class%"
-      fields:
-        order:
-          type: twig
-          label: sylius.ui.order
-          sortable: ~
-          options:
-            template: "@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/Grid/Field/order.html.twig"
-        customerId:
-          type: string
-          label: sylius.ui.customer
-          sortable: ~
-        company:
-          type: string
-          label: sylius.ui.company
-          sortable: ~
-        firstName:
-          type: string
-          label: sylius.ui.first_name
-          sortable: ~
-        lastName:
-          type: string
-          label: sylius.ui.last_name
-          sortable: ~
-        email:
-          type: string
-          label: sylius.ui.email
-          sortable: ~
-        street:
-          type: string
-          label: sylius.ui.street
-          sortable: ~
-        city:
-          type: string
-          label: sylius.ui.city
-          sortable: ~
-        province:
-          type: string
-          label: sylius.ui.province
-          sortable: ~
-        country:
-          type: string
-          label: sylius.ui.country
-          sortable: ~
-        addressType:
-          type: string
-          label: bitbag_sylius_blacklist_plugin.ui.address_type
-          sortable: ~
-      filters:
-        firstName:
-          type: string
-          label: sylius.ui.first_name
-        lastName:
-          type: string
-          label: sylius.ui.last_name
-        email:
-          type: string
-          label: sylius.ui.email
-        street:
-          type: string
-          label: sylius.ui.street
-        city:
-          type: string
-          label: sylius.ui.city
-        province:
-          type: string
-          label: sylius.ui.province
-        country:
-          type: string
-          label: sylius.ui.country
-        addressType:
-          type: select
-          label: bitbag_sylius_blacklist_plugin.ui.address_type
-          form_options:
-            choices:
-              sylius.ui.billing_address: Billing address
-              sylius.ui.shipping_address: Shipping address
-      actions:
-        item:
-          update:
-            type: update
-        main:
-          create:
-            type: create
+    grids:
+        bitbag_sylius_blacklist_plugin_fraud_suspicion:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%bitbag_sylius_blacklist_plugin.model.fraud_suspicion.class%"
+            fields:
+                order:
+                    type: twig
+                    label: sylius.ui.order
+                    sortable: ~
+                    options:
+                        template: "@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/Grid/Field/order.html.twig"
+                customer.id:
+                    type: string
+                    label: sylius.ui.customer
+                    sortable: ~
+                company:
+                    type: string
+                    label: sylius.ui.company
+                    sortable: ~
+                firstName:
+                    type: string
+                    label: sylius.ui.first_name
+                    sortable: ~
+                lastName:
+                    type: string
+                    label: sylius.ui.last_name
+                    sortable: ~
+                email:
+                    type: string
+                    label: sylius.ui.email
+                    sortable: ~
+                street:
+                    type: string
+                    label: sylius.ui.street
+                    sortable: ~
+                city:
+                    type: string
+                    label: sylius.ui.city
+                    sortable: ~
+                province:
+                    type: string
+                    label: sylius.ui.province
+                    sortable: ~
+                country:
+                    type: string
+                    label: sylius.ui.country
+                    sortable: ~
+                addressType:
+                    type: string
+                    label: bitbag_sylius_blacklist_plugin.ui.address_type
+                    sortable: ~
+            filters:
+                firstName:
+                    type: string
+                    label: sylius.ui.first_name
+                lastName:
+                    type: string
+                    label: sylius.ui.last_name
+                email:
+                    type: string
+                    label: sylius.ui.email
+                street:
+                    type: string
+                    label: sylius.ui.street
+                city:
+                    type: string
+                    label: sylius.ui.city
+                province:
+                    type: string
+                    label: sylius.ui.province
+                country:
+                    type: string
+                    label: sylius.ui.country
+                addressType:
+                    type: select
+                    label: bitbag_sylius_blacklist_plugin.ui.address_type
+                    form_options:
+                        choices:
+                            sylius.ui.billing_address: 'billing'
+                            sylius.ui.shipping_address: 'shipping'
+            actions:
+                item:
+                    update:
+                        type: update
+                main:
+                    create:
+                        type: create

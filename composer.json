@@ -7,7 +7,7 @@
     "require": {
         "php": "^7.3",
 
-        "sylius/sylius": "^1.8"
+        "sylius/sylius": "^1.7"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
@@ -47,11 +47,6 @@
     },
     "autoload-dev": {
         "classmap": ["tests/Application/Kernel.php"]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.8-dev"
-        }
     },
     "config": {
         "sort-packages": true
