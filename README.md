@@ -71,6 +71,95 @@ bitbag_sylius_blacklist_plugin:
     resource: "@BitBagSyliusBlacklistPlugin/Resources/config/routing.yaml"
 ```
 
+Add traits to your Customer entity class, when You don't use annotation.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Entity\Customer;
+
+use BitBag\SyliusBlacklistPlugin\Model\FraudStatusTrait;
+use Sylius\Component\Core\Model\Customer as BaseCustomer;
+
+class Customer extends BaseCustomer implements CustomerInterface
+{
+    use FraudStatusTrait;
+}
+```
+
+Or this way if you use annotations:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Entity\Customer;
+
+use Doctrine\ORM\Mapping as ORM;
+use BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface;use BitBag\SyliusBlacklistPlugin\Model\FraudStatusTrait;
+use Sylius\Component\Core\Model\Customer as BaseCustomer;
+
+/**
+* @ORM\Entity 
+* @ORM\Table(name="sylius_customer")
+*/
+class Customer extends BaseCustomer implements CustomerInterface
+{
+    /**
+    * @var string
+    * @ORM\Column(type="string", nullable=false)
+    */   
+    protected $fraudStatus = FraudStatusInterface::FRAUD_STATUS_NEUTRAL;
+}
+```
+
+If you don't use annotations, define new Entity mapping inside your src/Resources/config/doctrine directory.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                            http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+    <entity name="App\Entity\Customer\Customer" table="sylius_customer">
+        <field name="fraudStatus" column="fraud_status" type="string" />
+    </entity>
+</doctrine-mapping>
+```
+
+Create also interface, which is implemented by customer entity
+
+```php
+<?php
+
+namespace App\Entity\Customer;
+
+use BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface;
+use Sylius\Component\Core\Model\CustomerInterface as BaseCustomerInterface;
+
+interface CustomerInterface extends BaseCustomerInterface, FraudStatusInterface
+{
+}
+```
+Override Customer resource:
+
+```yaml
+# config/packages/_sylius.yaml
+...
+
+sylius_customer:
+    resources:
+        customer:
+            classes:
+                model: App\Entity\Customer\Customer
+```
+
 Update your database
 
 ```
