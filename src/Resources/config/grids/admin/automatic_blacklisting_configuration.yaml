@@ -5,6 +5,8 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_configuration.class%"
+                    repository:
+                        method: createListQueryBuilder
             fields:
                 name:
                     type: string
@@ -20,12 +22,14 @@ sylius_grid:
                     type: string
                     label: sylius.ui.name
                 channels:
-                    type: entities
-                    label: sylius.ui.channel
+                    type: entity
+                    label: bitbag_sylius_blacklist_plugin.form.blacklisting_rule.channels
                     form_options:
-                        class: "%sylius.model.channel.class%"
+                        class: '%sylius.model.channel.class%'
+                        choice_label: name
+                        choice_value: code
                     options:
-                        field: "channels.id"
+                        fields: [ channels.code ]
                 enabled:
                     type: boolean
                     label: sylius.ui.enabled
