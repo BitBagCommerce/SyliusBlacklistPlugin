@@ -12,7 +12,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use ContainsErrorTrait;
 
-    public function fillField(string $field, ?string $value): self
+    public function fillField(string $field, ?string $value): CreatePageInterface
     {
         if (empty($value)) {
             $value = '';
@@ -23,7 +23,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $this;
     }
 
-    public function selectOption(string $field, string $value): self
+    public function selectOption(string $field, string $value): CreatePageInterface
     {
         $this->getDocument()->selectFieldOption($field, $value);
 
