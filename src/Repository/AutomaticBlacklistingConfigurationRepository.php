@@ -12,12 +12,15 @@ final class AutomaticBlacklistingConfigurationRepository extends EntityRepositor
 {
     public function createListQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('o');
+        return $this->createQueryBuilder('o')
+            ->addSelect('channels')
+            ->innerJoin('o.channels', 'channels')
+        ;
     }
 
     public function findActiveByChannel(ChannelInterface $channel): array
     {
-        return $this->createListQueryBuilder()
+        return $this->createQueryBuilder('o')
             ->innerJoin('o.channels', 'channel')
             ->where('channel.id = :channelId')
             ->andWhere('o.enabled = :enabled')

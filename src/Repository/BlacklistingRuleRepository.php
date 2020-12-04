@@ -12,7 +12,10 @@ final class BlacklistingRuleRepository extends EntityRepository implements Black
 {
     public function createListQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('o');
+        return $this->createQueryBuilder('o')
+            ->addSelect('channels')
+            ->innerJoin('o.channels', 'channels')
+        ;
     }
 
     public function findActiveByChannel(ChannelInterface $channel): array
