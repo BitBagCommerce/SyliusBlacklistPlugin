@@ -22,6 +22,7 @@ final class BlacklistingRuleType extends AbstractResourceType
     public function __construct(string $dataClass, array $attributeChoices, array $validationGroups = [])
     {
         parent::__construct($dataClass, $validationGroups);
+
         $this->attributeChoices = $attributeChoices;
     }
 

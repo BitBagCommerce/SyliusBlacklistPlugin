@@ -14,16 +14,16 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 final class AutomaticBlacklistingConfigurationContext implements Context
 {
     /** @var FactoryInterface */
-    private FactoryInterface $automaticBlacklistingConfigurationFactory;
+    private $automaticBlacklistingConfigurationFactory;
 
     /** @var FactoryInterface */
-    private FactoryInterface $automaticBlacklistingRuleFactory;
+    private $automaticBlacklistingRuleFactory;
 
     /** @var SharedStorageInterface */
-    private SharedStorageInterface $sharedStorage;
+    private $sharedStorage;
 
     /** @var ObjectManager */
-    private ObjectManager $objectManager;
+    private $objectManager;
 
     public function __construct(
         FactoryInterface $automaticBlacklistingConfigurationFactory,

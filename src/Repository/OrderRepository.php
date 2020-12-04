@@ -13,7 +13,7 @@ final class OrderRepository extends BaseOrderRepository implements OrderReposito
 {
     public function findByCustomerPaymentFailuresAndPeriod(CustomerInterface $customer, \DateTime $date): int
     {
-        return (int)$this->createQueryBuilder('o')
+        return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->innerJoin('o.customer', 'customer')
             ->where('customer.id = :customerId')
@@ -27,7 +27,7 @@ final class OrderRepository extends BaseOrderRepository implements OrderReposito
         ;
     }
 
-    public function findByCustomerOrdersAndPeriod(CustomerInterface $customer, \DateTime $date): int
+    public function findPlacedOrdersByCustomerAndPeriod(CustomerInterface $customer, \DateTime $date): int
     {
         return (int)$this->createQueryBuilder('o')
             ->select(['COUNT(o.id)'])

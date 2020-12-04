@@ -51,6 +51,7 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
         /** @var AutomaticBlacklistingConfigurationInterface $automaticBlacklistingConfiguration */
         foreach ($allAutomaticBlacklistingConfiguration as $automaticBlacklistingConfiguration ) {
             $automaticBlacklistingRules = $automaticBlacklistingConfiguration->getRules();
+
             /** @var AutomaticBlacklistingRuleInterface $automaticBlacklistingRule */
             foreach ($automaticBlacklistingRules as $automaticBlacklistingRule) {
                 if (!($this->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order))) {
@@ -62,7 +63,7 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
         return true;
     }
 
-    private function isBlacklistedOrderAndCustomer(AutomaticBlacklistingRuleInterface $automaticBlacklistingRule, OrderInterface $order)
+    private function isBlacklistedOrderAndCustomer(AutomaticBlacklistingRuleInterface $automaticBlacklistingRule, OrderInterface $order): bool
     {
         $checker = $this->serviceRegistry->get($automaticBlacklistingRule->getType());
 

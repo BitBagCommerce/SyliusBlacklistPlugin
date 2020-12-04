@@ -146,7 +146,8 @@ final class FraudSuspicionContext implements Context
             ->fillField('Country', $customerLastUsedAddress->getCountryCode())
             ->fillField('Postcode', $customerLastUsedAddress->getPostcode())
             ->selectOption('Address type', 'Billing address')
-            ->fillField('Comment', 'Some comment for fraud suspicion');
+            ->fillField('Comment', 'Some comment for fraud suspicion')
+        ;
     }
 
     /**

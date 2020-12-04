@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
-final class PaymentFailuresConfigurationType extends AbstractType
+final class AutomaticBlacklistingRuleSettingsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -38,6 +38,6 @@ final class PaymentFailuresConfigurationType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'bitbag_sylius_blacklist_plugin_automatic_blacklisting_rule_payment_failures_configuration';
+        return 'bitbag_sylius_blacklist_plugin_automatic_blacklisting_rule_settings';
     }
 }

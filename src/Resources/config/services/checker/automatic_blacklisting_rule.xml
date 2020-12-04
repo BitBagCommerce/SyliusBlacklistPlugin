@@ -8,13 +8,13 @@
                  class="BitBag\SyliusBlacklistPlugin\Checker\AutomaticBlacklistingRule\PaymentFailuresAutomaticBlacklistingRuleChecker">
             <tag name="bitbag_sylius_blacklist_plugin.automatic_blacklisting_rule_checker" type="payment_failures"
                  label="bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.payment_failures"
-                 form-type="BitBag\SyliusBlacklistPlugin\Form\Rule\PaymentFailuresConfigurationType" />
+                 form-type="BitBag\SyliusBlacklistPlugin\Form\Rule\AutomaticBlacklistingRuleSettingsType" />
         </service>
         <service id="bitbag_sylius_blacklist_plugin.automatic_blacklisting_rule_checker.orders"
                  class="BitBag\SyliusBlacklistPlugin\Checker\AutomaticBlacklistingRule\OrdersAutomaticBlacklistingRuleChecker">
             <tag name="bitbag_sylius_blacklist_plugin.automatic_blacklisting_rule_checker" type="orders"
                  label="bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.orders"
-                 form-type="BitBag\SyliusBlacklistPlugin\Form\Rule\OrdersConfigurationType" />
+                 form-type="BitBag\SyliusBlacklistPlugin\Form\Rule\AutomaticBlacklistingRuleSettingsType" />
         </service>
     </services>
 </container>

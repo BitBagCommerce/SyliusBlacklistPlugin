@@ -21,6 +21,7 @@ final class FraudSuspicionOrderType extends AbstractResourceType
     public function __construct(string $dataClass, AddressTypeResolver $addressTypeResolver, array $validationGroups = [])
     {
         parent::__construct($dataClass, $validationGroups);
+
         $this->addressTypeResolver = $addressTypeResolver;
     }
 
