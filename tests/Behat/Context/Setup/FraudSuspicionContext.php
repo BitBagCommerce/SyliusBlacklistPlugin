@@ -17,7 +17,7 @@ use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Tests\BitBag\SyliusBlacklistPlugin\Behat\Service\RandomStringGeneratorInterface;
-use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 final class FraudSuspicionContext implements Context
 {

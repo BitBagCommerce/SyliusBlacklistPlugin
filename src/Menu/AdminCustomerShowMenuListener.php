@@ -6,7 +6,7 @@ namespace BitBag\SyliusBlacklistPlugin\Menu;
 
 use BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
-use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class AdminCustomerShowMenuListener

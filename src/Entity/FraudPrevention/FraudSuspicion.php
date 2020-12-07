@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 
 use Sylius\Component\Order\Model\OrderInterface;
-use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 class FraudSuspicion implements FraudSuspicionInterface
 {

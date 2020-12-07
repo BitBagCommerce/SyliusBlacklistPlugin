@@ -11,15 +11,24 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Tests\BitBag\SyliusBlacklistPlugin\Entity\Customer;
 
 final class FraudSuspicionType extends AbstractResourceType
 {
+    /** @var string */
+    private $customerClass;
+
+    public function __construct(string $dataClass, string $customerClass, array $validationGroups = [])
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->customerClass = $customerClass;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('customer', EntityType::class, [
-                'class' => Customer::class,
+                'class' => $this->customerClass,
             ])
             ->add('company', TextType::class, [
                 'required' => false
