@@ -33,7 +33,7 @@
         </service>
         <service id="bitbag.sylius_blacklist_plugin.form.type.fraud_suspicion" class="BitBag\SyliusBlacklistPlugin\Form\Type\FraudSuspicionType">
             <argument>%bitbag_sylius_blacklist_plugin.model.fraud_suspicion.class%</argument>
-            <argument>%bitbag.sylius_blacklist_plugin.form.type.validation_groups%</argument>
+            <argument>%sylius.model.customer.class%</argument>
             <tag name="form.type"/>
         </service>
 

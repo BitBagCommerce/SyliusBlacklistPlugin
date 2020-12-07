@@ -12,7 +12,7 @@ use BitBag\SyliusBlacklistPlugin\Resolver\SuspiciousOrderResolverInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
 class CheckoutAddressTypeValidator extends ConstraintValidator
