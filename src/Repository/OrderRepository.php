@@ -8,13 +8,14 @@ use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface as BaseOrderRepositoryInterface;
 
 final class OrderRepository implements OrderRepositoryInterface
 {
-    /** @var EntityRepository */
+    /** @var BaseOrderRepositoryInterface|EntityRepository */
     private $baseOrderRepository;
 
-    public function __construct(EntityRepository $baseOrderRepository)
+    public function __construct(BaseOrderRepositoryInterface $baseOrderRepository)
     {
         $this->baseOrderRepository = $baseOrderRepository;
     }
