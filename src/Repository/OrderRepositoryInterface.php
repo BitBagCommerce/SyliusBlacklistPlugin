@@ -7,7 +7,7 @@ namespace BitBag\SyliusBlacklistPlugin\Repository;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface as BaseOrderRepositoryInterface;
 use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
 
-interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
+interface OrderRepositoryInterface
 {
     public function findByCustomerPaymentFailuresAndPeriod(CustomerInterface $customer, \DateTime $date): int;
 
