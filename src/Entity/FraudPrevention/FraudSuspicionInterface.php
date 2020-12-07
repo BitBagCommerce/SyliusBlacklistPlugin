@@ -6,7 +6,7 @@ namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 interface FraudSuspicionInterface extends ResourceInterface
 {
