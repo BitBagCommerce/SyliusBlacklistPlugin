@@ -30,19 +30,31 @@ final class FraudSuspicionFactorySpec extends ObjectBehavior
 
     function it_creates_fraud_suspicion_objet_from_order(OrderInterface $order, CustomerInterface $customer, AddressInterface $address): void
     {
-        $order->getCustomer()->shouldBeCalled()->willReturn($customer);
-        $order->getCustomerIp()->shouldBeCalled()->willReturn('192.168.10.12');
-        $order->getBillingAddress()->shouldBeCalled()->willReturn($address);
-        $address->getFirstName()->shouldBeCalled()->willReturn('John');
-        $address->getLastName()->shouldBeCalled()->willReturn('Doe');
-        $customer->getEmail()->shouldBeCalled()->willReturn('john_doe@example.com');
-        $address->getCountryCode()->shouldBeCalled()->willReturn('PL');
-        $address->getProvinceName()->shouldBeCalled()->willReturn(null);
-        $address->getCompany()->shouldBeCalled()->willReturn(null);
-        $address->getPostcode()->shouldBeCalled()->willReturn('00-000');
-        $address->getCity()->shouldBeCalled()->willReturn('Warsaw');
-        $address->getStreet()->shouldBeCalled()->willReturn('Aleje Jerozolimskie 23');
+        $order->getCustomer()->willReturn($customer);
+        $order->getCustomerIp()->willReturn('192.168.10.12');
+        $order->getBillingAddress()->willReturn($address);
+        $address->getFirstName()->willReturn('John');
+        $address->getLastName()->willReturn('Doe');
+        $customer->getEmail()->willReturn('john_doe@example.com');
+        $address->getCountryCode()->willReturn('PL');
+        $address->getProvinceName()->willReturn(null);
+        $address->getCompany()->willReturn(null);
+        $address->getPostcode()->willReturn('00-000');
+        $address->getCity()->willReturn('Warsaw');
+        $address->getStreet()->willReturn('Aleje Jerozolimskie 23');
 
+        $order->getCustomer()->shouldBeCalled();
+        $order->getCustomerIp()->shouldBeCalled();
+        $order->getBillingAddress()->shouldBeCalled();
+        $address->getFirstName()->shouldBeCalled();
+        $address->getLastName()->shouldBeCalled();
+        $customer->getEmail()->shouldBeCalled();
+        $address->getCountryCode()->shouldBeCalled();
+        $address->getProvinceName()->shouldBeCalled();
+        $address->getCompany()->shouldBeCalled();
+        $address->getPostcode()->shouldBeCalled();
+        $address->getCity()->shouldBeCalled();
+        $address->getStreet()->shouldBeCalled();
 
         $model = $this->createForOrder($order);
 

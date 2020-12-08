@@ -35,20 +35,33 @@ final class FraudSuspicionCommonModelConverterSpec extends ObjectBehavior
         FraudSuspicionInterface $fraudSuspicion,
         CustomerInterface $customer
     ): void {
-        $fraudSuspicionCommonModelFactory->createNew()->shouldBeCalled()->willReturn(new FraudSuspicionCommonModel());
+        $fraudSuspicionCommonModelFactory->createNew()->willReturn(new FraudSuspicionCommonModel());
+        $fraudSuspicion->getOrder()->willReturn(null);
+        $fraudSuspicion->getCustomer()->willReturn($customer);
+        $fraudSuspicion->getCompany()->willReturn(null);
+        $fraudSuspicion->getFirstName()->willReturn('John');
+        $fraudSuspicion->getLastName()->willReturn('Doe');
+        $fraudSuspicion->getEmail()->willReturn('john_doe@example.com');
+        $fraudSuspicion->getPhoneNumber()->willReturn(null);
+        $fraudSuspicion->getCity()->willReturn('Warsaw');
+        $fraudSuspicion->getStreet()->willReturn('Aleje Jerozolimskie 23');
+        $fraudSuspicion->getProvince()->willReturn(null);
+        $fraudSuspicion->getPostcode()->willReturn('00-00');
+        $fraudSuspicion->getCountry()->willReturn('PL');
 
-        $fraudSuspicion->getOrder()->shouldBeCalled()->willReturn(null);
-        $fraudSuspicion->getCustomer()->shouldBeCalled()->willReturn($customer);
-        $fraudSuspicion->getCompany()->shouldBeCalled()->willReturn(null);
-        $fraudSuspicion->getFirstName()->shouldBeCalled()->willReturn('John');
-        $fraudSuspicion->getLastName()->shouldBeCalled()->willReturn('Doe');
-        $fraudSuspicion->getEmail()->shouldBeCalled()->willReturn('john_doe@example.com');
-        $fraudSuspicion->getPhoneNumber()->shouldBeCalled()->willReturn(null);
-        $fraudSuspicion->getCity()->shouldBeCalled()->willReturn('Warsaw');
-        $fraudSuspicion->getStreet()->shouldBeCalled()->willReturn('Aleje Jerozolimskie 23');
-        $fraudSuspicion->getProvince()->shouldBeCalled()->willReturn(null);
-        $fraudSuspicion->getPostcode()->shouldBeCalled()->willReturn('00-00');
-        $fraudSuspicion->getCountry()->shouldBeCalled()->willReturn('PL');
+        $fraudSuspicionCommonModelFactory->createNew()->shouldBeCalled();
+        $fraudSuspicion->getOrder()->shouldBeCalled();
+        $fraudSuspicion->getCustomer()->shouldBeCalled();
+        $fraudSuspicion->getCompany()->shouldBeCalled();
+        $fraudSuspicion->getFirstName()->shouldBeCalled();
+        $fraudSuspicion->getLastName()->shouldBeCalled();
+        $fraudSuspicion->getEmail()->shouldBeCalled();
+        $fraudSuspicion->getPhoneNumber()->shouldBeCalled();
+        $fraudSuspicion->getCity()->shouldBeCalled();
+        $fraudSuspicion->getStreet()->shouldBeCalled();
+        $fraudSuspicion->getProvince()->shouldBeCalled();
+        $fraudSuspicion->getPostcode()->shouldBeCalled();
+        $fraudSuspicion->getCountry()->shouldBeCalled();
 
         $model = $this->convertFraudSuspicionObject($fraudSuspicion);
 
@@ -57,34 +70,4 @@ final class FraudSuspicionCommonModelConverterSpec extends ObjectBehavior
         $model->getEmail()->shouldReturn('john_doe@example.com');
         $model->getCity()->shouldReturn('Warsaw');
     }
-
-//    function it_converts_order_with_address_type_to_model(
-//        FraudSuspicionCommonModelFactoryInterface $fraudSuspicionCommonModelFactory,
-//        OrderInterface $order,
-//        CustomerInterface $customer,
-//        AddressInterface $address
-//    ): void {
-//        $model = $this->convertOrderObject($order, FraudSuspicionInterface::BILLING_ADDRESS_TYPE);
-//        $order->getBillingAddress()->shouldBeCalled()->willReturn($address);
-//
-//        $fraudSuspicionCommonModelFactory->createNew()->shouldBeCalled()->willReturn(new FraudSuspicionCommonModel());
-//
-//        $order->getCustomer()->shouldBeCalled()->willReturn($customer);
-//        $address->getCompany()->shouldBeCalled()->willReturn(null);
-//        $address->getFirstName()->shouldBeCalled()->willReturn('John');
-//        $address->getLastName()->shouldBeCalled()->willReturn('Doe');
-//        $customer->getEmail()->shouldBeCalled()->willReturn('john_doe@example.com');
-//        $address->getPhoneNumber()->shouldBeCalled()->willReturn(null);
-//        $address->getCity()->shouldBeCalled()->willReturn('Warsaw');
-//        $address->getStreet()->shouldBeCalled()->willReturn('Aleje Jerozolimskie 23');
-//        $address->getProvinceName()->shouldBeCalled()->willReturn(null);
-//        $address->getPostcode()->shouldBeCalled()->willReturn('00-00');
-//        $address->getCountryCode()->shouldBeCalled()->willReturn('PL');
-//
-//
-//        $model->getFirstName()->shouldReturn('John');
-//        $model->getLastName()->shouldReturn('Doe');
-//        $model->getEmail()->shouldReturn('john_doe@example.com');
-//        $model->getCity()->shouldReturn('Warsaw');
-//    }
 }

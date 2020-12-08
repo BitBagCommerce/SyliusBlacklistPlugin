@@ -6,6 +6,9 @@ namespace spec\BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address;
 
 use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address\CountryBlacklistingRuleChecker;
 use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleCheckerInterface;
+use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModel;
+use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModelInterface;
+use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 
 final class CountryBlacklistingRuleCheckerSpec extends ObjectBehavior
@@ -18,6 +21,19 @@ final class CountryBlacklistingRuleCheckerSpec extends ObjectBehavior
     function it_implements_blacklisting_rule_checker_interface(): void
     {
         $this->shouldHaveType(BlacklistingRuleCheckerInterface::class);
+    }
+
+    function it_adds_part_of_query(QueryBuilder $builder, FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel): void
+    {
+        $fraudSuspicionCommonModel->getCountry()->willReturn('US');
+        $builder->andWhere('o.country = :country')->willReturn($builder);
+        $builder->setParameter('country', 'US')->willReturn($builder);
+
+        $fraudSuspicionCommonModel->getCountry()->shouldBeCalled();
+        $builder->andWhere('o.country = :country')->shouldBeCalled();
+        $builder->setParameter('country', 'US')->shouldBeCalled();
+
+        $this->checkIfCustomerIsBlacklisted($builder, $fraudSuspicionCommonModel);
     }
 
     function it_gets_attribute_name(): void

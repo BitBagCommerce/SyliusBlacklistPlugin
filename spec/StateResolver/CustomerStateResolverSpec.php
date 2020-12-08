@@ -33,10 +33,11 @@ final class CustomerStateResolverSpec extends ObjectBehavior
     function it_changes_fraud_status_of_customer(CustomerInterface $customer, FactoryInterface $stateMachineFactory, StateMachineInterface $stateMachine, ObjectManager $customerManager): void
     {
         $stateMachineFactory->get($customer, CustomerTransitions::GRAPH)->willReturn($stateMachine);
-
         $stateMachine->can(CustomerTransitions::TRANSITION_BLACKLISTING_PROCESS)->willReturn(true);
-        $stateMachine->apply(CustomerTransitions::TRANSITION_BLACKLISTING_PROCESS)->shouldBeCalled();
 
+        $stateMachineFactory->get($customer, CustomerTransitions::GRAPH)->shouldBeCalled();
+        $stateMachine->can(CustomerTransitions::TRANSITION_BLACKLISTING_PROCESS)->shouldBeCalled();
+        $stateMachine->apply(CustomerTransitions::TRANSITION_BLACKLISTING_PROCESS)->shouldBeCalled();
         $customerManager->persist($customer)->shouldBeCalled();
         $customerManager->flush()->shouldBeCalled();
 

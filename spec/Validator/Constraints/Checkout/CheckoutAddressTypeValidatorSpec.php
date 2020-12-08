@@ -48,16 +48,20 @@ final class CheckoutAddressTypeValidatorSpec extends ObjectBehavior
         $checkoutAddressTypeConstraint = new CheckoutAddressType();
 
         $order->getCustomer()->willReturn($customer);
-
         $customer->getFraudStatus()->willReturn(FraudStatusInterface::FRAUD_STATUS_NEUTRAL);
-
         $automaticBlacklistingRulesProcessor->process($order)->willReturn(false);
-
         $fraudSuspicionCommonModelConverter->convertOrderObject($order, FraudSuspicionInterface::BILLING_ADDRESS_TYPE)->willReturn($fraudSuspicionCommonModel);
         $fraudSuspicionCommonModelConverter->convertOrderObject($order, FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE)->willReturn($fraudSuspicionCommonModel);
+        $suspiciousOrderResolver->resolve($fraudSuspicionCommonModel)->willReturn(false);
+        $suspiciousOrderResolver->resolve($fraudSuspicionCommonModel)->willReturn(false);
 
-        $suspiciousOrderResolver->resolve($fraudSuspicionCommonModel)->willReturn(false);
-        $suspiciousOrderResolver->resolve($fraudSuspicionCommonModel)->willReturn(false);
+        $order->getCustomer()->shouldBeCalled();
+        $customer->getFraudStatus()->shouldBeCalled();
+        $automaticBlacklistingRulesProcessor->process($order)->shouldBeCalled();
+        $fraudSuspicionCommonModelConverter->convertOrderObject($order, FraudSuspicionInterface::BILLING_ADDRESS_TYPE)->shouldBeCalled();
+        $fraudSuspicionCommonModelConverter->convertOrderObject($order, FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE)->shouldBeCalled();
+        $suspiciousOrderResolver->resolve($fraudSuspicionCommonModel)->shouldBeCalled();
+        $suspiciousOrderResolver->resolve($fraudSuspicionCommonModel)->shouldBeCalled();
 
         $this->validate($order, $checkoutAddressTypeConstraint);
     }

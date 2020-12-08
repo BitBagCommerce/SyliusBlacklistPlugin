@@ -6,7 +6,7 @@ namespace spec\BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Customer;
 
 use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleCheckerInterface;
 use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Customer\EmailBlacklistingRuleChecker;
-use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModel;
+use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModelInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 
@@ -22,12 +22,14 @@ final class EmailBlacklistingRuleCheckerSpec extends ObjectBehavior
         $this->shouldHaveType(BlacklistingRuleCheckerInterface::class);
     }
 
-    function it_adds_part_of_query(QueryBuilder $builder, FraudSuspicionCommonModel $fraudSuspicionCommonModel): void
+    function it_adds_part_of_query(QueryBuilder $builder, FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel): void
     {
+        $fraudSuspicionCommonModel->getEmail()->willReturn('john_doe@example.com');
         $fraudSuspicionCommonModel->getEmail()->willReturn('john_doe@example.com');
         $builder->andWhere('o.email = :email')->willReturn($builder);
         $builder->setParameter('email', 'john_doe@example.com')->willReturn($builder);
 
+        $fraudSuspicionCommonModel->getEmail()->shouldBeCalled();
         $fraudSuspicionCommonModel->getEmail()->shouldBeCalled();
         $builder->andWhere('o.email = :email')->shouldBeCalled();
         $builder->setParameter('email', 'john_doe@example.com')->shouldBeCalled();
