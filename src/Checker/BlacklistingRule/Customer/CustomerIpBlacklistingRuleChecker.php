@@ -17,7 +17,7 @@ class CustomerIpBlacklistingRuleChecker implements BlacklistingRuleCheckerInterf
     {
         if (!empty($fraudSuspicionCommonModel->getCustomerIp())) {
             $builder
-                ->andWhere('o.customer_ip = :customerIp')
+                ->andWhere('o.customerIp = :customerIp')
                 ->setParameter('customerIp', $fraudSuspicionCommonModel->getCustomerIp())
             ;
         }

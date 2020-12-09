@@ -7,6 +7,8 @@ namespace spec\BitBag\SyliusBlacklistPlugin\Model;
 use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModel;
 use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModelInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\OrderInterface;
+use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
 
 final class FraudSuspicionCommonModelSpec extends ObjectBehavior
 {
@@ -83,5 +85,82 @@ final class FraudSuspicionCommonModelSpec extends ObjectBehavior
     function it_has_no_customer_ip_by_default(): void
     {
         $this->getCustomerIp()->shouldReturn(null);
+    }
+
+    function it_gets_order(OrderInterface $order): void
+    {
+        $this->setOrder($order);
+
+        $this->getOrder()->shouldReturn($order);
+    }
+
+    function it_gets_customer(CustomerInterface $customer): void
+    {
+        $this->setCustomer($customer);
+
+        $this->getCustomer()->shouldReturn($customer);
+    }
+
+    function it_gets_company(): void
+    {
+        $this->setCompany('Google');
+
+        $this->getCompany()->shouldReturn('Google');
+    }
+
+    function it_gets_first_name(): void
+    {
+        $this->setFirstName('John');
+
+        $this->getFirstName()->shouldReturn('John');
+    }
+
+    function it_gets_last_name(): void
+    {
+        $this->setLastName('Doe');
+
+        $this->getLastName()->shouldReturn('Doe');
+    }
+
+    function it_gets_email(): void
+    {
+        $this->setEmail('john_doe@example.com');
+
+        $this->getEmail()->shouldReturn('john_doe@example.com');
+    }
+
+    function it_gets_phone_number(): void
+    {
+        $this->setPhoneNumber('786524123');
+
+        $this->getPhoneNumber()->shouldReturn('786524123');
+    }
+
+    function it_gets_city(): void
+    {
+        $this->setCity('Warsaw');
+
+        $this->getCity()->shouldReturn('Warsaw');
+    }
+
+    function it_gets_province(): void
+    {
+        $this->setProvince('Mazowieckie');
+
+        $this->getProvince()->shouldReturn('Mazowieckie');
+    }
+
+    function it_gets_postcode(): void
+    {
+        $this->setPostcode('00-000');
+
+        $this->getPostcode()->shouldReturn('00-000');
+    }
+
+    function it_gets_street(): void
+    {
+        $this->setStreet('Groove Street 56');
+
+        $this->getStreet()->shouldReturn('Groove Street 56');
     }
 }

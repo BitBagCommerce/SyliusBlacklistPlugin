@@ -37,7 +37,6 @@ final class CustomerIdBlacklistingRuleCheckerSpec extends ObjectBehavior
         $this->checkIfCustomerIsBlacklisted($builder, $fraudSuspicionCommonModel);
     }
 
-
     function it_gets_attribute_name(): void
     {
         $this->getAttributeName()->shouldReturn(CustomerIdBlacklistingRuleChecker::CUSTOMER_ID_ATTRIBUTE_NAME);

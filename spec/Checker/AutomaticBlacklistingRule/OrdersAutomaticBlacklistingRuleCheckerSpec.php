@@ -59,7 +59,8 @@ final class OrdersAutomaticBlacklistingRuleCheckerSpec extends ObjectBehavior
         $this->isBlacklistedOrderAndCustomer($blacklistingRule, $order, $orderRepository)->shouldReturn(false);
     }
 
-    function it_gets_type(): void {
+    function it_gets_type(): void
+    {
         $this->getType()->shouldReturn(OrdersAutomaticBlacklistingRuleChecker::TYPE);
     }
 }

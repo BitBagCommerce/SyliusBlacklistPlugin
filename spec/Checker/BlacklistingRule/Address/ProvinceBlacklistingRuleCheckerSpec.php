@@ -43,6 +43,8 @@ final class ProvinceBlacklistingRuleCheckerSpec extends ObjectBehavior
         $fraudSuspicionCommonModel->getProvince()->willReturn(null);
 
         $fraudSuspicionCommonModel->getProvince()->shouldBeCalled();
+        $builder->andWhere('o.province = :province')->shouldNotBeCalled();
+        $builder->setParameter('province', 'California')->shouldNotBeCalled();
 
         $this->checkIfCustomerIsBlacklisted($builder, $fraudSuspicionCommonModel);
     }
