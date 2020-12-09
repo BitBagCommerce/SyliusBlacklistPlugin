@@ -43,6 +43,7 @@ final class CompanyBlacklistingRuleCheckerSpec extends ObjectBehavior
         $fraudSuspicionCommonModel->getCompany()->willReturn(null);
 
         $fraudSuspicionCommonModel->getCompany()->shouldBeCalled();
+
         $builder->andWhere('o.company = :company')->shouldNotBeCalled();
         $builder->setParameter('company', null)->shouldNotBeCalled();
 

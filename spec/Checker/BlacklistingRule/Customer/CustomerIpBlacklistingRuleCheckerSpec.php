@@ -42,6 +42,7 @@ final class CustomerIpBlacklistingRuleCheckerSpec extends ObjectBehavior
         $fraudSuspicionCommonModel->getCustomerIp()->willReturn(null);
 
         $fraudSuspicionCommonModel->getCustomerIp()->shouldBeCalled();
+        
         $builder->andWhere('o.customerIp = :customerIp')->shouldNotBeCalled();
         $builder->setParameter('customerIp', null)->shouldNotBeCalled();
 

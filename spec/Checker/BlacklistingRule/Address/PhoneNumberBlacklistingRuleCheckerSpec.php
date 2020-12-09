@@ -43,6 +43,7 @@ final class PhoneNumberBlacklistingRuleCheckerSpec extends ObjectBehavior
         $fraudSuspicionCommonModel->getPhoneNumber()->willReturn(null);
 
         $fraudSuspicionCommonModel->getPhoneNumber()->shouldBeCalled();
+
         $builder->andWhere('o.phoneNumber = :phoneNumber')->shouldNotBeCalled();
         $builder->setParameter('phoneNumber', null)->shouldNotBeCalled();
 
