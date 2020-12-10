@@ -34,6 +34,7 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
         $fraudSuspicionCommonModel->setEmail($fraudSuspicion->getEmail());
         $fraudSuspicionCommonModel->setPhoneNumber($fraudSuspicion->getPhoneNumber());
         $fraudSuspicionCommonModel->setCity($fraudSuspicion->getCity());
+        $fraudSuspicionCommonModel->setPostcode($fraudSuspicion->getPostcode());
         $fraudSuspicionCommonModel->setStreet($fraudSuspicion->getStreet());
         $fraudSuspicionCommonModel->setProvince($fraudSuspicion->getProvince());
         $fraudSuspicionCommonModel->setCountry($fraudSuspicion->getCountry());
@@ -58,6 +59,7 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
         $fraudSuspicionCommonModel->setStreet($address->getStreet());
         $fraudSuspicionCommonModel->setProvince($address->getProvinceName());
         $fraudSuspicionCommonModel->setCountry($address->getCountryCode());
+        $fraudSuspicionCommonModel->setCustomerIp($order->getCustomerIp());
 
         return $fraudSuspicionCommonModel;
     }
