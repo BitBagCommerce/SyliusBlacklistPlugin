@@ -124,8 +124,8 @@ final class BlacklistingRuleContext implements Context
     {
         $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->selectOption('Rule attributes', $arg1);
-        $currentPage->selectOption('Rule attributes', $arg2);
+        $currentPage->checkField($arg1);
+        $currentPage->checkField($arg2);
     }
 
     /**
@@ -151,8 +151,8 @@ final class BlacklistingRuleContext implements Context
     {
         $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->selectOption('Customer groups', $arg1);
-        $currentPage->selectOption('Customer groups', $arg2);
+        $currentPage->checkField($arg1);
+        $currentPage->checkField($arg2);
     }
 
     /**
