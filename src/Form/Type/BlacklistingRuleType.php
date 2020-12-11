@@ -35,6 +35,7 @@ final class BlacklistingRuleType extends AbstractResourceType
             ->add('attributes', ChoiceType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.attribute',
                 'multiple' => true,
+                'expanded' => true,
                 'choices' => $this->attributeChoices
 
             ])
@@ -49,6 +50,7 @@ final class BlacklistingRuleType extends AbstractResourceType
             ->add('customerGroups', EntityType::class, [
                 'class' => CustomerGroup::class,
                 'multiple' => true,
+                'expanded' => true,
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.customer_group',
             ])
             ->add('enabled', CheckboxType::class, [
