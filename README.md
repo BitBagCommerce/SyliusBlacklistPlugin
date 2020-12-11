@@ -159,6 +159,32 @@ sylius_customer:
             classes:
                 model: App\Entity\Customer\Customer
 ```
+Override Customer grid:
+
+```yaml
+# config/packages/_sylius.yaml
+...
+
+sylius_grid:
+    grids:
+        sylius_admin_customer:
+            fields:
+                ...
+                fraudStatus:
+                    type: twig
+                    label: bitbag_sylius_blacklist_plugin.ui.fraud_status
+                    options:
+                        template: "@BitBagSyliusBlacklistPlugin/Customer/Grid/Field/fraudStatus.html.twig"
+                filters:
+                    ...
+                    fraudStatus:
+                        type: select
+                        label: bitbag_sylius_blacklist_plugin.ui.fraud_status
+                        form_options:
+                            choices:
+                                bitbag_sylius_blacklist_plugin.ui.neutral: Neutral
+                                bitbag_sylius_blacklist_plugin.ui.blacklisted: Blacklisted
+```
 
 Update your database
 
