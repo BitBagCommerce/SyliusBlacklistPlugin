@@ -23,6 +23,7 @@ final class FraudSuspicionRepository extends EntityRepository implements FraudSu
         return $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->innerJoin('o.order', 'ord')
+            ->innerJoin('o.customer', 'customer')
         ;
     }
 
