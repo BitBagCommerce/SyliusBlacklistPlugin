@@ -26,6 +26,7 @@ class AddressTypeResolver implements AddressTypeResolverInterface
         $fraudSuspicion->setLastName($address->getLastName());
         $fraudSuspicion->setCompany($address->getCompany());
         $fraudSuspicion->setCity($address->getCity());
+        $fraudSuspicion->setStreet($address->getStreet());
         $fraudSuspicion->setProvince($address->getProvinceName());
         $fraudSuspicion->setCountry($address->getCountryCode());
         $fraudSuspicion->setPhoneNumber($address->getPhoneNumber());
