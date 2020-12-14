@@ -40,6 +40,7 @@ bitbag_sylius_blacklist_plugin:
             postcode: Postcode
             province: Province
             street: Street
+            customer_group_help: If neither customer group is checked, blacklisting rule will work for all customer groups.
         fraud_suspicion:
             comment: Comment
         automatic_blacklisting_rule:
