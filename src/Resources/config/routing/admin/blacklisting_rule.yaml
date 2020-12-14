@@ -9,6 +9,8 @@ bitbag_sylius_blacklist_plugin_admin_blacklisting_rule:
         vars:
             all:
                 subheader: bitbag_sylius_blacklist_plugin.ui.manage_blacklisting_rules
+                templates:
+                    form: "@BitBagSyliusBlacklistPlugin/BlacklistingRule/Admin/_form.html.twig"
             index:
                 icon: clipboard list
     type: sylius.resource
