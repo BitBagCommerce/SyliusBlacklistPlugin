@@ -43,6 +43,7 @@ final class AddressTypeResolverSpec extends ObjectBehavior
         $address->getLastName()->willReturn('Doe');
         $address->getCompany()->willReturn('Google');
         $address->getCity()->willReturn('Warsaw');
+        $address->getStreet()->willReturn('Groove Street');
         $address->getProvinceName()->willReturn('Mazowieckie');
         $address->getCountryCode()->willReturn('PL');
         $address->getPhoneNumber()->willReturn(null);
@@ -54,6 +55,7 @@ final class AddressTypeResolverSpec extends ObjectBehavior
         $address->getLastName()->shouldBeCalled();
         $address->getCompany()->shouldBeCalled();
         $address->getCity()->shouldBeCalled();
+        $address->getStreet()->shouldBeCalled();
         $address->getProvinceName()->shouldBeCalled();
         $address->getCountryCode()->shouldBeCalled();
         $address->getPhoneNumber()->shouldBeCalled();
@@ -61,6 +63,7 @@ final class AddressTypeResolverSpec extends ObjectBehavior
         $fraudSuspicion->setLastName('Doe')->shouldBeCalled();
         $fraudSuspicion->setCompany('Google')->shouldBeCalled();
         $fraudSuspicion->setCity('Warsaw')->shouldBeCalled();
+        $fraudSuspicion->setStreet('Groove Street')->shouldBeCalled();
         $fraudSuspicion->setProvince('Mazowieckie')->shouldBeCalled();
         $fraudSuspicion->setCountry('PL')->shouldBeCalled();
         $fraudSuspicion->setPhoneNumber(null)->shouldBeCalled();

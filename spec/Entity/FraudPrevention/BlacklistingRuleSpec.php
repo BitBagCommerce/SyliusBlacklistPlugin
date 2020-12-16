@@ -32,9 +32,9 @@ final class BlacklistingRuleSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_attributes_by_default(): void
+    function it_has_empty_array_of_attributes_by_default(): void
     {
-        $this->getAttributes()->shouldReturn(null);
+        $this->getAttributes()->shouldReturn([]);
     }
 
     function it_has_no_permitted_strikes_by_default(): void
