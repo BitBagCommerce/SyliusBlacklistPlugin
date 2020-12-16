@@ -18,7 +18,7 @@ Feature: Managing blacklisting rules
 
     @ui
     Scenario: Updating blacklisting rule
-        Given there is a blacklisting rule with "Country" name and "3" permitted strikes
+        Given there is a blacklisting rule with "Country" name and "3" permitted strikes and "country" as a rule attributes
         When I go to the update "Country" blacklisting rule page
         And I fill the rule name with "Company"
         And I update it
@@ -26,7 +26,7 @@ Feature: Managing blacklisting rules
 
     @ui
     Scenario: Disabling blacklisting rule
-        Given there is a blacklisting rule with "BitBagRule" name and "2" permitted strikes
+        Given there is a blacklisting rule with "BitBagRule" name and "2" permitted strikes and "country" as a rule attributes
         When I go to the update "BitBagRule" blacklisting rule page
         And I disable it
         And I update it
