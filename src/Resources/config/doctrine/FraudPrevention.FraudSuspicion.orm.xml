@@ -16,6 +16,7 @@
         <field name="email" type="string" column="email" />
         <field name="phoneNumber" type="string" column="phone_number" nullable="true" />
         <field name="city" type="string" column="city" />
+        <field name="street" type="string" column="street" />
         <field name="province" type="string" column="province" nullable="true" />
         <field name="country" type="string" column="country" />
         <field name="postcode" type="string" column="postcode" />
