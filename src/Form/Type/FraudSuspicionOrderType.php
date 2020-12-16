@@ -44,6 +44,7 @@ final class FraudSuspicionOrderType extends AbstractResourceType
             ])
             ->add('comment', TextareaType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.fraud_suspicion.comment',
+                'required' => false
             ])
             ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event): void {
                 $this->addressTypeResolver->resolveAndUpdateFraudSuspicion($event->getData());
