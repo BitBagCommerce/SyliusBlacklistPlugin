@@ -30,7 +30,7 @@ class BlacklistingRule implements BlacklistingRuleInterface
     protected $name;
 
     /** @var array */
-    protected $attributes;
+    protected $attributes = [];
 
     /** @var int */
     protected $permittedStrikes;

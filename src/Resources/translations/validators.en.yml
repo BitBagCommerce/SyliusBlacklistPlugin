@@ -3,6 +3,8 @@ bitbag_sylius_blacklist_plugin:
         name:
             not_blank: The rule name cannot be blank
             max_length: The rule name is too long
+        attributes:
+            min: The blacklisting rule must have at least one attribute
         permitted_strikes:
             not_blank: The permitted strikes cannot be blank
     automatic_blacklisting_rule:

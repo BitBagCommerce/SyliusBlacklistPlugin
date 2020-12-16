@@ -13,6 +13,13 @@
                 <option name="groups">bitbag</option>
             </constraint>
         </property>
+        <property name="attributes">
+            <constraint name="Count">
+                <option name="min">1</option>
+                <option name="minMessage">bitbag_sylius_blacklist_plugin.blacklisting_rule.attributes.min</option>
+                <option name="groups">bitbag</option>
+            </constraint>
+        </property>
         <property name="permittedStrikes">
             <constraint name="NotBlank">
                 <option name="message">bitbag_sylius_blacklist_plugin.blacklisting_rule.permitted_strikes.not_blank</option>
