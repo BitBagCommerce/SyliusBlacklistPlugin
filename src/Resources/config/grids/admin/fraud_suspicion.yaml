@@ -5,6 +5,8 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%bitbag_sylius_blacklist_plugin.model.fraud_suspicion.class%"
+                    repository:
+                        method: createListQueryBuilder
             sorting:
                 order: desc
             fields:
