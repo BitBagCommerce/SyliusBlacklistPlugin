@@ -7,6 +7,8 @@ bitbag_sylius_blacklist_plugin:
             min: The blacklisting rule must have at least one attribute
         permitted_strikes:
             not_blank: The permitted strikes cannot be blank
+        channels:
+            min: You have to mark at least one channel
     automatic_blacklisting_rule:
         name:
             not_blank: The configuration name cannot be blank
