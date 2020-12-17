@@ -5,17 +5,20 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%bitbag_sylius_blacklist_plugin.model.fraud_suspicion.class%"
+            sorting:
+                order: desc
             fields:
                 order:
                     type: twig
                     label: sylius.ui.order
-                    sortable: ~
+                    path: order
+                    sortable: order.number
                     options:
                         template: "@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/Grid/Field/order.html.twig"
                 customer.id:
                     type: string
                     label: sylius.ui.customer
-                    sortable: ~
+                    sortable: customer.id
                 company:
                     type: string
                     label: sylius.ui.company

@@ -49,9 +49,7 @@ final class FraudSuspicionType extends AbstractResourceType
                 'required' => false
             ])
             ->add('country', TextType::class)
-            ->add('postcode', TextType::class, [
-                'required' => false
-            ])
+            ->add('postcode', TextType::class)
             ->add('customerIp', TextType::class, [
                 'required' => false
             ])
