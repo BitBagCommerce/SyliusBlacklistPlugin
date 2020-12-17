@@ -104,7 +104,7 @@ class FraudSuspicion implements FraudSuspicionInterface
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName)
+    public function setFirstName(?string $firstName)
     {
         $this->firstName = $firstName;
     }
@@ -114,7 +114,7 @@ class FraudSuspicion implements FraudSuspicionInterface
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName)
+    public function setLastName(?string $lastName)
     {
         $this->lastName = $lastName;
     }
@@ -124,7 +124,7 @@ class FraudSuspicion implements FraudSuspicionInterface
         return $this->email;
     }
 
-    public function setEmail(string $email)
+    public function setEmail(?string $email)
     {
         $this->email = $email;
     }
@@ -144,7 +144,7 @@ class FraudSuspicion implements FraudSuspicionInterface
         return $this->street;
     }
 
-    public function setStreet(string $street)
+    public function setStreet(?string $street)
     {
         $this->street = $street;
     }
@@ -154,7 +154,7 @@ class FraudSuspicion implements FraudSuspicionInterface
         return $this->city;
     }
 
-    public function setCity(string $city)
+    public function setCity(?string $city)
     {
         $this->city = $city;
     }
@@ -174,7 +174,7 @@ class FraudSuspicion implements FraudSuspicionInterface
         return $this->country;
     }
 
-    public function setCountry(string $country)
+    public function setCountry(?string $country)
     {
         $this->country = $country;
     }
@@ -214,7 +214,7 @@ class FraudSuspicion implements FraudSuspicionInterface
         return $this->comment;
     }
 
-    public function setComment(string $comment): void
+    public function setComment(?string $comment): void
     {
         $this->comment = $comment;
     }
