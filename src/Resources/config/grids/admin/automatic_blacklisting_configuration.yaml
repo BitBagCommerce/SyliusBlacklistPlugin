@@ -7,6 +7,8 @@ sylius_grid:
                     class: "%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_configuration.class%"
                     repository:
                         method: createListQueryBuilder
+            sorting:
+                name: desc
             fields:
                 name:
                     type: string
@@ -15,6 +17,7 @@ sylius_grid:
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
+                    sortable: ~
                     options:
                         template: "@SyliusUi/Grid/Field/enabled.html.twig"
             filters:

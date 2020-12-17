@@ -7,6 +7,8 @@ sylius_grid:
                     class: "%bitbag_sylius_blacklist_plugin.model.blacklisting_rule.class%"
                     repository:
                         method: createListQueryBuilder
+            sorting:
+                name: desc
             fields:
                 name:
                     type: string
@@ -15,16 +17,16 @@ sylius_grid:
                 attributes:
                     type: twig
                     label: bitbag_sylius_blacklist_plugin.ui.rule_attributes
-                    sortable: ~
                     options:
                         template: '@BitBagSyliusBlacklistPlugin/BlacklistingRule/Admin/Grid/Field/attributes.html.twig'
                 permittedStrikes:
                     type: string
                     label: bitbag_sylius_blacklist_plugin.ui.permitted_strikes
-                    sortable: permittedStrikes
+                    sortable: ~
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
+                    sortable: ~
                     options:
                         template: "@SyliusUi/Grid/Field/enabled.html.twig"
             filters:
