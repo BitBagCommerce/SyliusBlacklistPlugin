@@ -65,7 +65,7 @@ class BlacklistingRule implements BlacklistingRuleInterface
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -94,7 +94,7 @@ class BlacklistingRule implements BlacklistingRuleInterface
         return $this->permittedStrikes;
     }
 
-    public function setPermittedStrikes(int $permittedStrikes): void
+    public function setPermittedStrikes(?int $permittedStrikes): void
     {
         $this->permittedStrikes = $permittedStrikes;
     }

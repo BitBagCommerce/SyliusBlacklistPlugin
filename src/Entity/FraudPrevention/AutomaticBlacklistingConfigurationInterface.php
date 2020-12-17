@@ -23,7 +23,7 @@ interface AutomaticBlacklistingConfigurationInterface extends ResourceInterface,
 
     public function getName(): ?string;
 
-    public function setName(string $name): void;
+    public function setName(?string $name): void;
 
     public function getRules(): Collection;
 
