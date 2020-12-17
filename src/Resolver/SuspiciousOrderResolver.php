@@ -72,7 +72,7 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
                 return false;
             }
 
-            $builder = $this->fraudSuspicionRepository->createListQueryBuilder();
+            $builder = $this->fraudSuspicionRepository->createQueryToLaunchBlacklistingRuleCheckers();
 
             foreach ($blacklistingRule->getAttributes() as $attribute) {
                 $this->checkIfCustomerIsBlacklisted($builder,$fraudSuspicionCommonModel, $attribute);

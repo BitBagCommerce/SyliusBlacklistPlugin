@@ -21,6 +21,16 @@ final class FraudSuspicionRepository extends EntityRepository implements FraudSu
     public function createListQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('o')
+            ->addSelect('customer')
+            ->addSelect('ord')
+            ->leftJoin('o.order', 'ord')
+            ->leftJoin('o.customer', 'customer')
+        ;
+    }
+
+    public function createQueryToLaunchBlacklistingRuleCheckers(): QueryBuilder
+    {
+        return $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->innerJoin('o.order', 'ord')
             ->innerJoin('o.customer', 'customer')
