@@ -90,7 +90,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName)
+    public function setFirstName(?string $firstName)
     {
         $this->firstName = $firstName;
     }
@@ -100,7 +100,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName)
+    public function setLastName(?string $lastName)
     {
         $this->lastName = $lastName;
     }
@@ -110,7 +110,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->email;
     }
 
-    public function setEmail(string $email)
+    public function setEmail(?string $email)
     {
         $this->email = $email;
     }
@@ -130,7 +130,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->street;
     }
 
-    public function setStreet(string $street)
+    public function setStreet(?string $street)
     {
         $this->street = $street;
     }
@@ -140,7 +140,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->city;
     }
 
-    public function setCity(string $city)
+    public function setCity(?string $city)
     {
         $this->city = $city;
     }
@@ -160,7 +160,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->country;
     }
 
-    public function setCountry(string $country)
+    public function setCountry(?string $country)
     {
         $this->country = $country;
     }
