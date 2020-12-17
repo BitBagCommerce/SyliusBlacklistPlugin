@@ -30,15 +30,15 @@ interface FraudSuspicionCommonModelInterface
 
     public function getFirstName(): ?string;
 
-    public function setFirstName(string $firstName);
+    public function setFirstName(?string $firstName);
 
     public function getLastName(): ?string;
 
-    public function setLastName(string $lastName);
+    public function setLastName(?string $lastName);
 
     public function getEmail(): ?string;
 
-    public function setEmail(string $email);
+    public function setEmail(?string $email);
 
     public function getPhoneNumber(): ?string;
 
@@ -46,11 +46,11 @@ interface FraudSuspicionCommonModelInterface
 
     public function getStreet(): ?string;
 
-    public function setStreet(string $street);
+    public function setStreet(?string $street);
 
     public function getCity(): ?string;
 
-    public function setCity(string $city);
+    public function setCity(?string $city);
 
     public function getProvince(): ?string;
 
@@ -58,7 +58,7 @@ interface FraudSuspicionCommonModelInterface
 
     public function getCountry(): ?string;
 
-    public function setCountry(string $country);
+    public function setCountry(?string $country);
 
     public function getPostcode(): ?string;
 
