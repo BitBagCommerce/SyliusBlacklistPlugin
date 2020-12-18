@@ -20,5 +20,11 @@
                 <option name="groups">bitbag</option>
             </constraint>
         </property>
+        <property name="rules">
+            <constraint name="Count">
+                <option name="min">1</option>
+                <option name="groups">bitbag</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

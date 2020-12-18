@@ -28,6 +28,9 @@
                 <option name="max">255</option>
                 <option name="groups">bitbag</option>
             </constraint>
+            <constraint name="Email">
+                <option name="groups">bitbag</option>
+            </constraint>
         </property>
         <property name="street">
             <constraint name="NotBlank">
