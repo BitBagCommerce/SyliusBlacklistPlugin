@@ -32,6 +32,10 @@
                 <option name="message">bitbag_sylius_blacklist_plugin.blacklisting_rule.permitted_strikes.not_blank</option>
                 <option name="groups">bitbag</option>
             </constraint>
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="groups">bitbag</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>

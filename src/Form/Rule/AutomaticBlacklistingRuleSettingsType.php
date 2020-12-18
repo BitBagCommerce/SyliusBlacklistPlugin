@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Type;
 
 final class AutomaticBlacklistingRuleSettingsType extends AbstractType
@@ -29,6 +30,7 @@ final class AutomaticBlacklistingRuleSettingsType extends AbstractType
                 'constraints' => [
                     new NotBlank(['groups' => ['bitbag']]),
                     new Type(['type' => 'numeric', 'groups' => ['bitbag']]),
+                    new Range(['min' => 1, 'groups' => ['bitbag']]),
                 ],
             ])
             ->add('date_modifier', ChoiceType::class, [
