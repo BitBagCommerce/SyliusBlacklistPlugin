@@ -78,7 +78,7 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
                 $this->checkIfCustomerIsBlacklisted($builder,$fraudSuspicionCommonModel, $attribute);
             }
 
-            if (\intval($builder->getQuery()->getSingleScalarResult()) + 1 >= $blacklistingRule->getPermittedStrikes()) {
+            if (\intval($builder->getQuery()->getSingleScalarResult()) >= $blacklistingRule->getPermittedStrikes()) {
                 return true;
             }
         }
