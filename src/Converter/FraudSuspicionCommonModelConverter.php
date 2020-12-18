@@ -40,11 +40,11 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
         $fraudSuspicionCommonModel->setLastName($fraudSuspicion->getLastName());
         $fraudSuspicionCommonModel->setEmail($fraudSuspicion->getEmail());
         $fraudSuspicionCommonModel->setPhoneNumber($fraudSuspicion->getPhoneNumber());
-        $fraudSuspicionCommonModel->setCity($fraudSuspicion->getCity());
-        $fraudSuspicionCommonModel->setPostcode($fraudSuspicion->getPostcode());
         $fraudSuspicionCommonModel->setStreet($fraudSuspicion->getStreet());
+        $fraudSuspicionCommonModel->setCity($fraudSuspicion->getCity());
         $fraudSuspicionCommonModel->setProvince($fraudSuspicion->getProvince());
         $fraudSuspicionCommonModel->setCountry($fraudSuspicion->getCountry());
+        $fraudSuspicionCommonModel->setPostcode($fraudSuspicion->getPostcode());
 
         return $fraudSuspicionCommonModel;
     }
@@ -62,10 +62,11 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
         $fraudSuspicionCommonModel->setLastName($address->getLastName());
         $fraudSuspicionCommonModel->setEmail($order->getCustomer()->getEmail());
         $fraudSuspicionCommonModel->setPhoneNumber($address->getPhoneNumber());
-        $fraudSuspicionCommonModel->setCity($address->getCity());
         $fraudSuspicionCommonModel->setStreet($address->getStreet());
+        $fraudSuspicionCommonModel->setCity($address->getCity());
         $fraudSuspicionCommonModel->setProvince($address->getProvinceName());
         $fraudSuspicionCommonModel->setCountry($address->getCountryCode());
+        $fraudSuspicionCommonModel->setPostcode($address->getPostcode());
         $fraudSuspicionCommonModel->setCustomerIp($order->getCustomerIp());
 
         return $fraudSuspicionCommonModel;

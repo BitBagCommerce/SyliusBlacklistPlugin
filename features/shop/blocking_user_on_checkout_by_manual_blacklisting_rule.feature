@@ -31,7 +31,7 @@ Feature: Blocking users on checkout
     @ui @javascript
     Scenario: Blocking users on checkout by manual blacklisting rules
         Given I have product "PHP Blouse" in the cart
-        And there is a blacklisting rule with "Country" name and "2" permitted strikes and "country" as a rule attributes
+        And there is a blacklisting rule with "Country" name and "1" permitted strikes and "country" as a rule attributes
         And I am at the checkout addressing step
         And I specify the billing address as "Francis Underwood", "Groove Street", "91920", "United States" for "Francis Underwood"
         And I complete the addressing step
