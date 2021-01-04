@@ -4,6 +4,9 @@
         xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <service id="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker.city" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address\CityBlacklistingRuleChecker">
+            <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="city" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.city" />
+        </service>
         <service id="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker.company" class="BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\Address\CompanyBlacklistingRuleChecker">
             <tag name="bitbag_sylius_blacklist_plugin.blacklisting_rule_checker" field-name="company" label="bitbag_sylius_blacklist_plugin.form.blacklisting_rule.company" />
         </service>
