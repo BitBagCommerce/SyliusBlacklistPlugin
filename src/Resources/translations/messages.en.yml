@@ -30,6 +30,7 @@ bitbag_sylius_blacklist_plugin:
             channels: Channels
             customer_group: Customer groups
             company: Company
+            city: City
             country: Country
             customer_id: Customer ID
             customer_ip: Customer IP
