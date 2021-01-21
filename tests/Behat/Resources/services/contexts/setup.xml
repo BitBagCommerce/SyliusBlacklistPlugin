@@ -36,5 +36,11 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
+        <service id="bitbag_sylius_blacklist_plugin.behat.context.setup.customer"
+                 class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Context\Setup\CustomerContext">
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.manager.customer" />
+        </service>
     </services>
 </container>

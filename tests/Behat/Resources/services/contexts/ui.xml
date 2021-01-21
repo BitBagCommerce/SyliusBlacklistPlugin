@@ -29,6 +29,7 @@
             <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.customer.show" />
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.behat.page.admin.customer.update" />
         </service>
 
         <service id="bitbag_sylius_blacklist_plugin.behat.context.ui.admin.fraud_suspicion"

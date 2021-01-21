@@ -21,6 +21,8 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\Customer\IndexPageInterface;
 use Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\Customer\ShowPageInterface;
+use Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\Customer\UpdatePage;
+use Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Webmozart\Assert\Assert;
 
 final class CustomerContext implements Context
@@ -46,6 +48,9 @@ final class CustomerContext implements Context
     /** @var EntityManagerInterface */
     private $entityManager;
 
+    /** @var UpdatePageInterface */
+    private $updatePage;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CurrentPageResolverInterface $currentPageResolver,
@@ -53,7 +58,8 @@ final class CustomerContext implements Context
         IndexPageInterface $indexPage,
         ShowPageInterface $showPage,
         CustomerRepositoryInterface $customerRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        UpdatePageInterface $updatePage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->currentPageResolver = $currentPageResolver;
@@ -62,6 +68,7 @@ final class CustomerContext implements Context
         $this->showPage = $showPage;
         $this->customerRepository = $customerRepository;
         $this->entityManager = $entityManager;
+        $this->updatePage = $updatePage;
     }
 
     /**
@@ -80,6 +87,16 @@ final class CustomerContext implements Context
         $id = $this->customerRepository->findOneBy(['email' => $email])->getId();
 
         $this->showPage->open(['id' => $id]);
+    }
+
+    /**
+     * @When I go to the update :email customer page
+     */
+    public function iGoToTheUpdateCustomerPage(string $email): void
+    {
+        $id = $this->customerRepository->findOneBy(['email' => $email])->getId();
+
+        $this->updatePage->open(['id' => $id]);
     }
 
     /**
@@ -102,17 +119,6 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @return IndexPageInterface|ShowPageInterface|SymfonyPageInterface
-     */
-    private function resolveCurrentPage(): SymfonyPageInterface
-    {
-        return $this->currentPageResolver->getCurrentPageWithForm([
-            $this->indexPage,
-            $this->showPage
-        ]);
-    }
-
-    /**
      * @Then customer :email should be :fraudStatus
      */
     public function customerShouldBe(string $email, string $expectedFraudStatus): void
@@ -122,5 +128,33 @@ final class CustomerContext implements Context
         $this->entityManager->refresh($customer);
 
         Assert::same($customer->getFraudStatus(), $expectedFraudStatus);
+    }
+
+    /**
+     * @Given I select :fraudStatus fraud status
+     */
+    public function iSelectFraudStatus(string $fraudStatus)
+    {
+        $this->resolveCurrentPage()->selectOption('Fraud status', $fraudStatus);
+    }
+
+    /**
+     * @Then I update customer
+     */
+    public function iUpdateCustomer()
+    {
+        $this->updatePage->submit();
+    }
+
+    /**
+     * @return IndexPageInterface|ShowPageInterface|SymfonyPageInterface
+     */
+    private function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([
+            $this->indexPage,
+            $this->showPage,
+            $this->updatePage
+        ]);
     }
 }

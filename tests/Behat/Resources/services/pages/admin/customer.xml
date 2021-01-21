@@ -11,5 +11,10 @@
                  parent="sylius.behat.page.admin.customer.show">
             <argument>sylius_admin_customer_show</argument>
         </service>
+
+        <service id="bitbag_sylius_blacklist_plugin.behat.page.admin.customer.update" class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\Customer\UpdatePage"
+                 parent="sylius.behat.page.admin.customer.update">
+            <argument>sylius_admin_customer_update</argument>
+        </service>
     </services>
 </container>
