@@ -4,5 +4,3 @@ bitbag_sylius_blacklist_plugin_admin_blacklisting_rule:
     resource: "admin/blacklisting_rule.yaml"
 bitbag_sylius_blacklist_plugin_admin_fraud_suspicion:
     resource: "admin/fraud_suspicion.yaml"
-bitbag_sylius_blacklist_plugin_admin_customer:
-    resource: "admin/customer.yaml"
