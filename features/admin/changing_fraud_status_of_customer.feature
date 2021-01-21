@@ -9,13 +9,18 @@ Feature: Changing fraud status of customer
         And the store operates on a single channel in "United States"
         And the store has customer "john_doe@example.com"
 
-    @ui
-    Scenario: Changing fraud status of customer
+    @ui @javascript
+    Scenario: Marking customer as blacklisted
         When I go to the customer page
-        Then I go to the show "john_doe@example.com" customer page
-        And I click "Mark blacklisted" button
-        Then I should be notified that the customer has been successfully updated
-        And customer "john_doe@example.com" should be "blacklisted"
-        And I click "Mark neutral" button
-        Then I should be notified that the customer has been successfully updated
-        And customer "john_doe@example.com" should be "neutral"
+        And I go to the update "john_doe@example.com" customer page
+        And I select "Blacklisted" fraud status
+        Then I update customer
+        And I should be notified that the customer has been successfully updated
+
+    @ui @javascript
+    Scenario: Marking customer as whitelisted
+        When I go to the customer page
+        And I go to the update "john_doe@example.com" customer page
+        And I select "Whitelisted" fraud status
+        Then I update customer
+        And I should be notified that the customer has been successfully updated
