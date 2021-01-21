@@ -1,0 +1,11 @@
+<container
+        xmlns="http://symfony.com/schema/dic/services"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="bitbag.sylius_blacklist_plugin.form.extension.type.customer_profile" class="BitBag\SyliusBlacklistPlugin\Form\Extension\CustomerProfileTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType"/>
+        </service>
+    </services>
+</container>

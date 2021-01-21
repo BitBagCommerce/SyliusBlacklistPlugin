@@ -13,9 +13,5 @@
             <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.fraud_suspicion"/>
             <tag name="kernel.event_listener" event="sylius.menu.admin.order.show" method="addAdminOrderShowMenuItems"/>
         </service>
-        <service id="bitbag.sylius_blacklist_plugin.menu.admin_customer_show_menu_listener" class="BitBag\SyliusBlacklistPlugin\Menu\AdminCustomerShowMenuListener">
-            <argument type="service" id="security.csrf.token_manager"/>
-            <tag name="kernel.event_listener" event="sylius.menu.admin.customer.show" method="addAdminCustomerShowMenuItems"/>
-        </service>
     </services>
 </container>
