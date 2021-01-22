@@ -36,3 +36,4 @@ sylius_grid:
                         choices:
                             bitbag_sylius_blacklist_plugin.ui.neutral: Neutral
                             bitbag_sylius_blacklist_plugin.ui.blacklisted: Blacklisted
+                            bitbag_sylius_blacklist_plugin.ui.whitelisted: Whitelisted
