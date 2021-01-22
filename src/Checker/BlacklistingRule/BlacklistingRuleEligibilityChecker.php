@@ -29,16 +29,19 @@ class BlacklistingRuleEligibilityChecker implements BlacklistingRuleEligibilityC
 
     private function checkCustomerGroupRestriction(BlacklistingRuleInterface $blacklistingRule, CustomerInterface $customer): bool
     {
+        if ($blacklistingRule->getCustomerGroups()->isEmpty()) {
+            return true;
+        }
+
         $customerGroup = $customer->getGroup();
 
         if (
             !empty($customerGroup) &&
-            !$blacklistingRule->getCustomerGroups()->isEmpty() &&
-            !$blacklistingRule->hasCustomerGroup($customerGroup)
+            $blacklistingRule->hasCustomerGroup($customerGroup)
         ) {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 }
