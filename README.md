@@ -186,6 +186,15 @@ sylius_grid:
                                 bitbag_sylius_blacklist_plugin.ui.blacklisted: Blacklisted
 ```
 
+Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig`) by adding lines below
+
+```html
+<div class="ui segment">
+    <h4 class="ui dividing header">{{ 'bitbag_sylius_blacklist_plugin.ui.fraud_status'|trans }}</h4>
+    {{ form_row(form.fraudStatus) }}
+</div>
+```
+
 Update your database
 
 ```
