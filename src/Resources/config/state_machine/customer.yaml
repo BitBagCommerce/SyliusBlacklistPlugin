@@ -14,3 +14,6 @@ winzou_state_machine:
             blacklisting:
                 from: [neutral]
                 to: blacklisted
+            whitelisting:
+                from: [neutral]
+                to: whitelisted
