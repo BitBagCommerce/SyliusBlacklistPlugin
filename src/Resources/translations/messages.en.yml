@@ -30,6 +30,7 @@ bitbag_sylius_blacklist_plugin:
             permitted_strikes: Permitted strikes
             channels: Channels
             customer_group: Customer groups
+            only_for_guests: Only for guests
             company: Company
             city: City
             country: Country

@@ -35,6 +35,9 @@ class BlacklistingRule implements BlacklistingRuleInterface
     /** @var int */
     protected $permittedStrikes;
 
+    /** @var bool */
+    protected $onlyForGuests = true;
+
     /**
      * @var Collection|ChannelInterface[]
      *
@@ -145,5 +148,15 @@ class BlacklistingRule implements BlacklistingRuleInterface
     public function hasCustomerGroup(CustomerGroupInterface $customerGroup): bool
     {
         return $this->customerGroups->contains($customerGroup);
+    }
+
+    public function isOnlyForGuests(): bool
+    {
+        return $this->onlyForGuests;
+    }
+
+    public function setOnlyForGuests(bool $onlyForGuests): void
+    {
+        $this->onlyForGuests = $onlyForGuests;
     }
 }

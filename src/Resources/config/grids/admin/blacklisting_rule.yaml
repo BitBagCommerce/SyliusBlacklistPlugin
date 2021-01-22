@@ -29,6 +29,12 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                onlyForGuests:
+                    type: twig
+                    label: bitbag_sylius_blacklist_plugin.form.blacklisting_rule.only_for_guests
+                    sortable: ~
+                    options:
+                        template: "@BitBagSyliusBlacklistPlugin/BlacklistingRule/Admin/Grid/Field/only_for_guests.html.twig"
             filters:
                 name:
                     type: string
@@ -45,6 +51,9 @@ sylius_grid:
                 enabled:
                     type: boolean
                     label: sylius.ui.enabled
+                onlyForGuests:
+                    type: boolean
+                    label: bitbag_sylius_blacklist_plugin.form.blacklisting_rule.only_for_guests
             actions:
                 item:
                     update:

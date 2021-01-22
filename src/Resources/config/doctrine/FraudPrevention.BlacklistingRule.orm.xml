@@ -14,6 +14,7 @@
         <field name="name" type="string" column="name" />
         <field name="attributes" type="array" column="attributes" />
         <field name="permittedStrikes" type="integer" column="permitted_strikes" />
+        <field name="onlyForGuests" type="boolean" column="only_for_guests" />
         <field name="enabled" type="boolean" column="enabled" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
