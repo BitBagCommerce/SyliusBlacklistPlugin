@@ -11,6 +11,7 @@
             <div class="one field">
                 {{ form_row(form.enabled) }}
             </div>
+
             <h4 class="ui dividing header">{{ 'bitbag_sylius_blacklist_plugin.ui.settings'|trans }}</h4>
             <div class="one field">
                 {{ form_row(form.attributes) }}
@@ -26,6 +27,12 @@
                     </div>
                 </div>
                 {{ form_row(form.customerGroups) }}
+            </div>
+
+            <div class="ui divider hidden"></div>
+
+            <div class="one field">
+                {{ form_row(form.onlyForGuests) }}
             </div>
         </div>
     </div>

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Resolver;
 
+use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleEligibilityCheckerInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRuleInterface;
 use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModelInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\BlacklistingRuleRepositoryInterface;
@@ -38,18 +39,23 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
     /** @var ObjectManager */
     private $customerManager;
 
+    /** @var BlacklistingRuleEligibilityCheckerInterface */
+    private $blacklistingRuleEligibilityChecker;
+
     public function __construct(
         ServiceRegistryInterface $serviceRegistry,
         FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
         BlacklistingRuleRepositoryInterface $blacklistingRuleRepository,
         ChannelContextInterface $channelContext,
-        ObjectManager $customerManager
+        ObjectManager $customerManager,
+        BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker
     ) {
         $this->serviceRegistry = $serviceRegistry;
         $this->fraudSuspicionRepository = $fraudSuspicionRepository;
         $this->blacklistingRuleRepository = $blacklistingRuleRepository;
         $this->channelContext = $channelContext;
         $this->customerManager = $customerManager;
+        $this->blacklistingRuleEligibilityChecker = $blacklistingRuleEligibilityChecker;
     }
 
     public function resolve(FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel): bool
@@ -60,15 +66,11 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
             return false;
         }
 
-        $customerGroup = $fraudSuspicionCommonModel->getCustomer()->getGroup();
+        $customer = $fraudSuspicionCommonModel->getCustomer();
 
         /** @var BlacklistingRuleInterface $blacklistingRule */
         foreach ($blacklistingRules as $blacklistingRule) {
-            if (
-                !empty($customerGroup) &&
-                !$blacklistingRule->getCustomerGroups()->isEmpty() &&
-                !$blacklistingRule->hasCustomerGroup($customerGroup)
-            ) {
+            if (!$this->blacklistingRuleEligibilityChecker->isEligible($blacklistingRule, $customer)) {
                 return false;
             }
 

@@ -12,6 +12,7 @@
             <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.blacklisting_rule" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.manager.customer" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.checker.blacklisting_rule_eligibility" />
         </service>
     </services>
 </container>
