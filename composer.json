@@ -40,7 +40,8 @@
         "vimeo/psalm": "3.11.4"
     },
     "conflict":  {
-        "api-platform/core": ">=2.6.0"
+        "api-platform/core": ">=2.6.0",
+        "lexik/jwt-authentication-bundle": "*"
     },
     "autoload": {
         "psr-4": {
