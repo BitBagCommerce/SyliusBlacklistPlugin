@@ -7,7 +7,8 @@
     "require": {
         "php": "^7.3",
         "api-platform/core": "2.5.9",
-        "sylius/sylius": "^1.7"
+        "sylius/sylius": "^1.7",
+        "lexik/jwt-authentication-bundle": "*"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
@@ -40,8 +41,7 @@
         "vimeo/psalm": "3.11.4"
     },
     "conflict":  {
-        "api-platform/core": ">=2.6.0",
-        "lexik/jwt-authentication-bundle": "*"
+        "api-platform/core": ">=2.6.0"
     },
     "autoload": {
         "psr-4": {
