@@ -49,7 +49,6 @@ final class CheckoutAddressTypeValidatorSpec extends ObjectBehavior
 
         $order->getCustomer()->willReturn($customer);
         $customer->getFraudStatus()->willReturn(FraudStatusInterface::FRAUD_STATUS_NEUTRAL);
-        $customer->getFraudStatus()->willReturn(FraudStatusInterface::FRAUD_STATUS_NEUTRAL);
         $automaticBlacklistingRulesProcessor->process($order)->willReturn(false);
         $fraudSuspicionCommonModelConverter->convertOrderObject($order, FraudSuspicionInterface::BILLING_ADDRESS_TYPE)->willReturn($fraudSuspicionCommonModel);
         $fraudSuspicionCommonModelConverter->convertOrderObject($order, FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE)->willReturn($fraudSuspicionCommonModel);
@@ -58,14 +57,13 @@ final class CheckoutAddressTypeValidatorSpec extends ObjectBehavior
 
         $order->getCustomer()->shouldBeCalled();
         $customer->getFraudStatus()->shouldBeCalled();
-        $customer->getFraudStatus()->shouldBeCalled();
         $automaticBlacklistingRulesProcessor->process($order)->shouldBeCalled();
         $fraudSuspicionCommonModelConverter->convertOrderObject($order, FraudSuspicionInterface::BILLING_ADDRESS_TYPE)->shouldBeCalled();
         $fraudSuspicionCommonModelConverter->convertOrderObject($order, FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE)->shouldBeCalled();
         $suspiciousOrderResolver->resolve($fraudSuspicionCommonModel)->shouldBeCalled();
         $suspiciousOrderResolver->resolve($fraudSuspicionCommonModel)->shouldBeCalled();
 
-        $this->validate($order, $checkoutAddressTypeConstraint);
+        $this->validate($order, $checkoutAddressTypeConstraint)->shouldReturn(null);
     }
 
     function it_does_not_block_if_customer_is_whitelisted(OrderInterface $order, CustomerInterface $customer): void
@@ -78,6 +76,6 @@ final class CheckoutAddressTypeValidatorSpec extends ObjectBehavior
         $order->getCustomer()->shouldBeCalled();
         $customer->getFraudStatus()->shouldBeCalled();
 
-        $this->validate($order, $checkoutAddressTypeConstraint);
+        $this->validate($order, $checkoutAddressTypeConstraint)->shouldReturn(null);
     }
 }
