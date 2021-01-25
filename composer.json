@@ -6,9 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
-        "api-platform/core": "2.5.9",
-        "sylius/sylius": "^1.8",
-        "lexik/jwt-authentication-bundle": "*"
+
+        "sylius/sylius": "^1.8"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
