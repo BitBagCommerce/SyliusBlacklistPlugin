@@ -50,7 +50,7 @@ interface BlacklistingRuleInterface extends ResourceInterface, ToggleableInterfa
 
     public function removeCustomerGroup(CustomerGroupInterface $customerGroup): void;
 
-    public function hasCustomerGroup(CustomerGroupInterface $customerGroup): bool;
+    public function hasCustomerGroup(?CustomerGroupInterface $customerGroup): bool;
 
     public function isOnlyForGuests(): bool;
 

@@ -9,6 +9,7 @@ bitbag_sylius_blacklist_plugin:
             not_blank: The permitted strikes cannot be blank
         channels:
             min: You have to mark at least one channel
+        guests_cannot_have_group: You cannot mark any customer group if you want to apply this rule only for guests
     automatic_blacklisting_rule:
         name:
             not_blank: The configuration name cannot be blank
