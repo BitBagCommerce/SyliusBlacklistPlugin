@@ -37,5 +37,9 @@
                 <option name="groups">bitbag</option>
             </constraint>
         </property>
+        <constraint name="BitBag\SyliusBlacklistPlugin\Validator\Constraints\BlacklistingRule\BlacklistingRuleCustomerGroups">
+            <option name="message">bitbag_sylius_blacklist_plugin.blacklisting_rule.guests_cannot_have_group</option>
+            <option name="groups">bitbag</option>
+        </constraint>
     </class>
 </constraint-mapping>

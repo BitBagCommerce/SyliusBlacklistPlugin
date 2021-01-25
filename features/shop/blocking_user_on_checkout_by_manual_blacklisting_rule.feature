@@ -19,7 +19,7 @@ Feature: Blocking users on checkout
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And the order "#00000022" is marked as suspicious by fake "billing" address
 
-    @ui @javascript
+    @ui
     Scenario: Successfully complete checkout addressing step
         Given I have product "PHP Pullover" in the cart
         And there is a blacklisting rule with "Country" name and "3" permitted strikes and "country" as a rule attributes
@@ -28,7 +28,7 @@ Feature: Blocking users on checkout
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @ui @javascript
+    @ui
     Scenario: Blocking users on checkout by manual blacklisting rules
         Given I have product "PHP Blouse" in the cart
         And there is a blacklisting rule with "Country" name and "1" permitted strikes and "country" as a rule attributes

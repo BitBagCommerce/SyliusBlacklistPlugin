@@ -18,30 +18,16 @@ class BlacklistingRuleEligibilityChecker implements BlacklistingRuleEligibilityC
 {
     public function isEligible(BlacklistingRuleInterface $blacklistingRule, CustomerInterface $customer): bool
     {
-        return !$this->checkOnlyForGuestsRestriction($blacklistingRule, $customer) ||
-        !$this->checkCustomerGroupRestriction($blacklistingRule, $customer) ? false : true;
-    }
+        if ($blacklistingRule->isOnlyForGuests() && $customer->getUser() !== null) {
+            return false;
+        }
 
-    private function checkOnlyForGuestsRestriction(BlacklistingRuleInterface $blacklistingRule, CustomerInterface $customer): bool
-    {
-        return $blacklistingRule->isOnlyForGuests() && $customer->getUser() !== null ? false : true;
-    }
-
-    private function checkCustomerGroupRestriction(BlacklistingRuleInterface $blacklistingRule, CustomerInterface $customer): bool
-    {
         if ($blacklistingRule->getCustomerGroups()->isEmpty()) {
             return true;
+        } else {
+            $customerGroup = $customer->getGroup();
+
+            return $blacklistingRule->hasCustomerGroup($customerGroup);
         }
-
-        $customerGroup = $customer->getGroup();
-
-        if (
-            !empty($customerGroup) &&
-            $blacklistingRule->hasCustomerGroup($customerGroup)
-        ) {
-            return true;
-        }
-
-        return false;
     }
 }
