@@ -7,7 +7,7 @@
     "require": {
         "php": "^7.3",
         "api-platform/core": "2.5.9",
-        "sylius/sylius": "^1.7",
+        "sylius/sylius": "^1.8",
         "lexik/jwt-authentication-bundle": "*"
     },
     "require-dev": {
