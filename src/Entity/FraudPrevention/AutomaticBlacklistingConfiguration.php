@@ -42,6 +42,9 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
      */
     protected $rules;
 
+    /** @var bool */
+    protected $addFraudSuspicionRowAfterExceedLimit = true;
+
     public function __construct()
     {
         $this->channels = new ArrayCollection();
@@ -116,5 +119,15 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
     public function hasChannel(ChannelInterface $channel): bool
     {
         return $this->channels->contains($channel);
+    }
+
+    public function isAddFraudSuspicionRowAfterExceedLimit(): bool
+    {
+        return $this->addFraudSuspicionRowAfterExceedLimit;
+    }
+
+    public function setAddFraudSuspicionRowAfterExceedLimit(bool $addFraudSuspicionRowAfterExceedLimit): void
+    {
+        $this->addFraudSuspicionRowAfterExceedLimit = $addFraudSuspicionRowAfterExceedLimit;
     }
 }

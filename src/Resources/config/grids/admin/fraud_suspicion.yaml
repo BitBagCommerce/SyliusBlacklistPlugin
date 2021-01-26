@@ -90,6 +90,8 @@ sylius_grid:
                 item:
                     update:
                         type: update
+                    show:
+                        type: show
                 main:
                     create:
                         type: create
