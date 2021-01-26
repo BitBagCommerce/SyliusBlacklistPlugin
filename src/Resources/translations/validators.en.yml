@@ -17,3 +17,7 @@ bitbag_sylius_blacklist_plugin:
     form:
         error:
             cannot_place_order: Something went wrong. You cannot place the order.
+            cannot_deactivate_manual_blacklisting_rule: |
+                You cannot deactivate manual blacklisting rule when the store has some automatic blacklisting configurations with "Add fraud suspicion row after exceeding limit" set to true
+            cannot_add_automatic_blacklisting_configuration: |
+                You cannot add automatic blacklisting configuration with "Add fraud suspicion row after exceeding limit" set to true if the store has no active manual blacklisting rules

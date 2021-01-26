@@ -71,13 +71,13 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
         /** @var BlacklistingRuleInterface $blacklistingRule */
         foreach ($blacklistingRules as $blacklistingRule) {
             if (!$this->blacklistingRuleEligibilityChecker->isEligible($blacklistingRule, $customer)) {
-                return false;
+                continue;
             }
 
             $builder = $this->fraudSuspicionRepository->createQueryToLaunchBlacklistingRuleCheckers();
 
             foreach ($blacklistingRule->getAttributes() as $attribute) {
-                $this->checkIfCustomerIsBlacklisted($builder,$fraudSuspicionCommonModel, $attribute);
+                $this->checkIfCustomerIsBlacklisted($builder, $fraudSuspicionCommonModel, $attribute);
             }
 
             if (\intval($builder->getQuery()->getSingleScalarResult()) >= $blacklistingRule->getPermittedStrikes()) {
