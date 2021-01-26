@@ -12,6 +12,8 @@
             <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.order" />
             <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.automatic_blacklisting_configuration" />
             <argument type="service" id="bitbag.sylius_blacklist_plugin.state_resolver.customer" />
+            <argument type="service" id="bitbag.sylius_blacklist_plugin.factory.fraud_suspicion" />
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.fraud_suspicion" />
         </service>
     </services>
 </container>

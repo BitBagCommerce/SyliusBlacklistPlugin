@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusBlacklistPlugin\EventListener;
+namespace BitBag\SyliusBlacklistPlugin\EntityListener;
 
 use BitBag\SyliusBlacklistPlugin\Converter\FraudSuspicionCommonModelConverterInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use BitBag\SyliusBlacklistPlugin\Resolver\SuspiciousOrderResolverInterface;
 use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolverInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 
-class FraudSuspicionListener
+class FraudSuspicionEntityListener
 {
     /** @var SuspiciousOrderResolverInterface */
     private $suspiciousOrderResolver;
@@ -38,15 +38,13 @@ class FraudSuspicionListener
         $this->fraudSuspicionCommonModelConverter = $fraudSuspicionCommonModelConverter;
     }
 
-    public function processSuspicionOrder(GenericEvent $event): void
+    public function prePersist(FraudSuspicionInterface $newFraudSuspicion, LifecycleEventArgs $event)
     {
-        /** @var FraudSuspicionInterface $newFraudSuspicion */
-        $newFraudSuspicion = $event->getSubject();
-
         $fraudSuspicionCommonModel = $this->fraudSuspicionCommonModelConverter->convertFraudSuspicionObject($newFraudSuspicion);
 
         if ($this->suspiciousOrderResolver->resolve($fraudSuspicionCommonModel)) {
-            $this->customerStateResolver->changeStateOnBlacklisted($newFraudSuspicion->getOrder()->getCustomer());
+            $this->customerStateResolver->changeStateOnBlacklisted($newFraudSuspicion->getCustomer());
         }
     }
+
 }

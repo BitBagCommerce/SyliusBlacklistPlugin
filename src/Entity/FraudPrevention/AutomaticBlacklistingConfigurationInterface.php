@@ -42,4 +42,8 @@ interface AutomaticBlacklistingConfigurationInterface extends ResourceInterface,
     public function removeChannel(ChannelInterface $channel): void;
 
     public function hasChannel(ChannelInterface $channel): bool;
+
+    public function isAddFraudSuspicionRowAfterExceedLimit(): bool;
+
+    public function setAddFraudSuspicionRowAfterExceedLimit(bool $addFraudSuspicionRowAfterExceedLimit): void;
 }

@@ -1,0 +1,23 @@
+<h4 class="ui top attached large header">{{ 'sylius.ui.order'|trans }}</h4>
+<div class="ui attached segment">
+    <table class="ui very basic celled table">
+        <tbody>
+        <tr>
+            <td>
+                {% if fraudSuspicion.order != null %}
+                    {% if fraudSuspicion.order.number != null %}
+                        <i class="circular cart icon"></i>
+                        <a href="{{ path('sylius_admin_order_show', {'id': fraudSuspicion.order.id}) }}">
+                            {{ 'bitbag_sylius_blacklist_plugin.ui.see_more_info_about_order'|trans ~ ' #' ~ fraudSuspicion.order.number }}
+                        </a>
+                    {% endif %}
+                {% endif %}
+
+                {% if fraudSuspicion.order == null or fraudSuspicion.order == null %}
+                    <span>{{ 'bitbag_sylius_blacklist_plugin.ui.no_related_order'|trans }}</span>
+                {% endif %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

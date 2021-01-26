@@ -23,6 +23,11 @@ bitbag_sylius_blacklist_plugin:
         new_automatic_blacklisting_configuration: Add new configuration
         edit_automatic_blacklisting_configuration: Edit configuration
         settings: Settings
+        add_fraud_suspicion_row_after_exceed_limit: Add fraud suspicion row after exceeding limit
+        no_related_order: No related order
+        see_details_fraud_suspicion: See more details about fraud suspicion
+        see_more_info_about_order: See more info about order
+        no_related_customer: No related customer
     form:
         blacklisting_rule:
             name: Rule name

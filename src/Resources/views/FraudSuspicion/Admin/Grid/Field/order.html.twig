@@ -1,3 +1,9 @@
 {% if data != null %}
-    <a href="{{ path('sylius_admin_order_show', {'id' : data.id })|raw }}">#{{ data.number }}</a>
+    {% if data.number != null %}
+        <a href="{{ path('sylius_admin_order_show', {'id' : data.id })|raw }}">#{{ data.number }}</a>
+    {% endif %}
+{% endif %}
+
+{% if data == null or data.number == null %}
+    <span>{{ 'bitbag_sylius_blacklist_plugin.ui.no_related_order'|trans }}</span>
 {% endif %}

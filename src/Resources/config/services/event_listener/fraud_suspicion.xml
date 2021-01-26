@@ -4,11 +4,11 @@
         xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="bitbag.sylius_blacklist_plugin.event_listener.fraud_suspicion" class="BitBag\SyliusBlacklistPlugin\EventListener\FraudSuspicionListener">
+        <service id="bitbag.sylius_blacklist_plugin.entity_listener.fraud_suspicion" class="BitBag\SyliusBlacklistPlugin\EntityListener\FraudSuspicionEntityListener">
             <argument type="service" id="bitbag.sylius_blacklist_plugin.resolver.suspicious_order" />
             <argument type="service" id="bitbag.sylius_blacklist_plugin.state_resolver.customer" />
             <argument type="service" id="bitbag.sylius_blacklist_plugin.converter.fraud_suspicion_common_model" />
-            <tag name="kernel.event_listener" event="bitbag_sylius_blacklist_plugin.fraud_suspicion.pre_create" method="processSuspicionOrder" />
+            <tag name="doctrine.orm.entity_listener" />
         </service>
     </services>
 </container>
