@@ -11,12 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Validator\Constraints\AutomaticBlacklistingConfiguration;
 
-use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingConfigurationInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\BlacklistingRuleRepositoryInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Webmozart\Assert\Assert;
 
 class AddFraudSuspicionByAutomaticBlacklistingConfigurationValidator extends ConstraintValidator
 {
@@ -32,11 +30,9 @@ class AddFraudSuspicionByAutomaticBlacklistingConfigurationValidator extends Con
         $this->channelContext = $channelContext;
     }
 
-    public function validate($automaticBlacklistingConfiguration, Constraint $constraint): void
+    public function validate($addFraudSuspicionRowAfterExceedLimit, Constraint $constraint): void
     {
-        Assert::isInstanceOf($automaticBlacklistingConfiguration, AutomaticBlacklistingConfigurationInterface::class);
-
-        if ($automaticBlacklistingConfiguration->isAddFraudSuspicionRowAfterExceedLimit()) {
+        if ($addFraudSuspicionRowAfterExceedLimit) {
             $channel = $this->channelContext->getChannel();
 
             $blacklistingRules = $this->blacklistingRuleRepository->findActiveByChannel($channel);

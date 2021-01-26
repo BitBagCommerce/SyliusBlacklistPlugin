@@ -77,7 +77,7 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
             $builder = $this->fraudSuspicionRepository->createQueryToLaunchBlacklistingRuleCheckers();
 
             foreach ($blacklistingRule->getAttributes() as $attribute) {
-                $this->checkIfCustomerIsBlacklisted($builder,$fraudSuspicionCommonModel, $attribute);
+                $this->checkIfCustomerIsBlacklisted($builder, $fraudSuspicionCommonModel, $attribute);
             }
 
             if (\intval($builder->getQuery()->getSingleScalarResult()) >= $blacklistingRule->getPermittedStrikes()) {

@@ -11,14 +11,17 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Processor;
 
+use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleEligibilityCheckerInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingConfigurationInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingRuleInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use BitBag\SyliusBlacklistPlugin\Factory\FraudSuspicionFactoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\AutomaticBlacklistingConfigurationRepositoryInterface;
+use BitBag\SyliusBlacklistPlugin\Repository\BlacklistingRuleRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\FraudSuspicionRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\OrderRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolverInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
@@ -42,13 +45,21 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
     /** @var FraudSuspicionRepositoryInterface */
     private $fraudSuspicionRepository;
 
+    /** @var BlacklistingRuleEligibilityCheckerInterface */
+    private $blacklistingRuleEligibilityChecker;
+
+    /** @var BlacklistingRuleRepositoryInterface */
+    private $blacklistingRuleRepository;
+
     public function __construct(
         ServiceRegistryInterface $serviceRegistry,
         OrderRepositoryInterface $orderRepository,
         AutomaticBlacklistingConfigurationRepositoryInterface $automaticBlacklistingConfigurationRepository,
         CustomerStateResolverInterface $customerStateResolver,
         FraudSuspicionFactoryInterface $fraudSuspicionFactory,
-        FraudSuspicionRepositoryInterface $fraudSuspicionRepository
+        FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
+        BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker,
+        BlacklistingRuleRepositoryInterface $blacklistingRuleRepository
     ) {
         $this->serviceRegistry = $serviceRegistry;
         $this->orderRepository = $orderRepository;
@@ -56,6 +67,8 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
         $this->customerStateResolver = $customerStateResolver;
         $this->fraudSuspicionFactory = $fraudSuspicionFactory;
         $this->fraudSuspicionRepository = $fraudSuspicionRepository;
+        $this->blacklistingRuleEligibilityChecker = $blacklistingRuleEligibilityChecker;
+        $this->blacklistingRuleRepository = $blacklistingRuleRepository;
     }
 
     public function process(OrderInterface $order): bool
@@ -80,7 +93,7 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
             }
 
             if ($automaticBlacklistingConfiguration->isAddFraudSuspicionRowAfterExceedLimit()) {
-                $this->addFraudSuspicionRow($order);
+                $this->addFraudSuspicionRowIfStoreHasEligibleBlacklisitngRule($order, $channel);
             }
         }
 
@@ -94,11 +107,22 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
         return $checker->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order, $this->orderRepository);
     }
 
+    private function addFraudSuspicionRowIfStoreHasEligibleBlacklisitngRule(OrderInterface $order, ChannelInterface $channel): void
+    {
+        $blacklistingRules = $this->blacklistingRuleRepository->findActiveByChannel($channel);
+
+        foreach ($blacklistingRules as $blacklistingRule) {
+            if ($this->blacklistingRuleEligibilityChecker->isEligible($blacklistingRule, $order->getCustomer())) {
+                $this->addFraudSuspicionRow($order);
+
+                return;
+            }
+        }
+    }
+
     private function addFraudSuspicionRow(OrderInterface $order): void
     {
-        if (
-            null === $this->fraudSuspicionRepository->findOneBy(['order' => $order])
-        ) {
+        if (null === $this->fraudSuspicionRepository->findOneBy(['order' => $order])) {
             $fraudSuspicion = $this->fraudSuspicionFactory->createForOrder($order);
             $fraudSuspicion->setAddressType(FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE);
 

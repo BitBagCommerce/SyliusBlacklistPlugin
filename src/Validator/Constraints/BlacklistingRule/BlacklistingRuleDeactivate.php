@@ -9,20 +9,20 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusBlacklistPlugin\Validator\Constraints\AutomaticBlacklistingConfiguration;
+namespace BitBag\SyliusBlacklistPlugin\Validator\Constraints\BlacklistingRule;
 
 use Symfony\Component\Validator\Constraint;
 
-class AddFraudSuspicionRowByAutomaticBlacklistingConfiguration extends Constraint
+class BlacklistingRuleDeactivate extends Constraint
 {
-    public $message = 'bitbag_sylius_blacklist_plugin.form.error.cannot_add_automatic_blacklisting_configuration';
+    public $message = 'bitbag_sylius_blacklist_plugin.form.error.cannot_deactivate_manual_blacklisting_rule';
 
     /** @var array */
     public $options;
 
     public function validatedBy(): string
     {
-        return AddFraudSuspicionByAutomaticBlacklistingConfigurationValidator::class;
+        return BlacklistingRuleDeactivateValidator::class;
     }
 
     public function getTargets(): array
