@@ -29,8 +29,7 @@ final class BlacklistingRuleEligibilityCheckerSpec extends ObjectBehavior
         BlacklistingRuleInterface $blacklistingRule,
         CustomerInterface $customer,
         ShopUserInterface $shopUser
-    ): void
-    {
+    ): void {
         $blacklistingRule->isOnlyForGuests()->willReturn(true);
         $customer->getUser()->willReturn($shopUser);
 
@@ -45,8 +44,7 @@ final class BlacklistingRuleEligibilityCheckerSpec extends ObjectBehavior
         CustomerInterface $customer,
         CustomerGroupInterface $customerGroup,
         CustomerGroupInterface $otherCustomerGroup
-    ): void
-    {
+    ): void {
         $customerGroups = new ArrayCollection([$customerGroup->getWrappedObject()]);
 
         $blacklistingRule->isOnlyForGuests()->willReturn(false);
@@ -65,8 +63,7 @@ final class BlacklistingRuleEligibilityCheckerSpec extends ObjectBehavior
     function it_returns_true_if_blacklisting_rule_is_eligible(
         BlacklistingRuleInterface $blacklistingRule,
         CustomerInterface $customer
-    ): void
-    {
+    ): void {
         $blacklistingRule->isOnlyForGuests()->willReturn(false);
         $blacklistingRule->getCustomerGroups()->willReturn(new ArrayCollection());
 
