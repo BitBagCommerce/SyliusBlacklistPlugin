@@ -26,5 +26,10 @@
                 <option name="groups">bitbag</option>
             </constraint>
         </property>
+        <constraint
+                name="BitBag\SyliusBlacklistPlugin\Validator\Constraints\AutomaticBlacklistingConfiguration\AddFraudSuspicionRowByAutomaticBlacklistingConfiguration">
+            <option name="message">bitbag_sylius_blacklist_plugin.form.error.cannot_add_automatic_blacklisting_configuration</option>
+            <option name="groups">bitbag</option>
+        </constraint>
     </class>
 </constraint-mapping>

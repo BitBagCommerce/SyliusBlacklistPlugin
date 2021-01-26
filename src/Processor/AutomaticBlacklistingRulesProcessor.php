@@ -96,7 +96,9 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
 
     private function addFraudSuspicionRow(OrderInterface $order): void
     {
-        if (null === $this->fraudSuspicionRepository->findOneBy(['order' => $order])) {
+        if (
+            null === $this->fraudSuspicionRepository->findOneBy(['order' => $order])
+        ) {
             $fraudSuspicion = $this->fraudSuspicionFactory->createForOrder($order);
             $fraudSuspicion->setAddressType(FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE);
 
