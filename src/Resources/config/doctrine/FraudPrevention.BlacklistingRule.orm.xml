@@ -16,6 +16,7 @@
         <field name="permittedStrikes" type="integer" column="permitted_strikes" />
         <field name="onlyForGuests" type="boolean" column="only_for_guests" />
         <field name="enabled" type="boolean" column="enabled" />
+        <field name="forUnassignedCustomers" type="boolean" column="for_unassigned_customers" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

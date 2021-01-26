@@ -34,7 +34,7 @@ sylius_grid:
                     label: bitbag_sylius_blacklist_plugin.form.blacklisting_rule.only_for_guests
                     sortable: ~
                     options:
-                        template: "@BitBagSyliusBlacklistPlugin/BlacklistingRule/Admin/Grid/Field/only_for_guests.html.twig"
+                        template: "@SyliusUi/Grid/Field/yesNo.html.twig"
             filters:
                 name:
                     type: string
