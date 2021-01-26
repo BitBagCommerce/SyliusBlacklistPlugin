@@ -14,7 +14,7 @@ namespace BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRuleInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 
-class BlacklistingRuleEligibilityChecker implements BlacklistingRuleEligibilityCheckerInterface
+final class BlacklistingRuleEligibilityChecker implements BlacklistingRuleEligibilityCheckerInterface
 {
     public function isEligible(BlacklistingRuleInterface $blacklistingRule, CustomerInterface $customer): bool
     {

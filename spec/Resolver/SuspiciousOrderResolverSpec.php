@@ -40,6 +40,7 @@ final class SuspiciousOrderResolverSpec extends ObjectBehavior
             $blacklistingRuleEligibilityChecker
         );
     }
+
     function it_is_initializable(): void
     {
         $this->shouldHaveType(SuspiciousOrderResolver::class);
@@ -55,8 +56,7 @@ final class SuspiciousOrderResolverSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel,
         ChannelInterface $channel
-    ): void
-    {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
         $blacklistingRuleRepository->findActiveByChannel($channel)->willReturn([]);
 
@@ -74,8 +74,7 @@ final class SuspiciousOrderResolverSpec extends ObjectBehavior
         BlacklistingRuleInterface $blacklistingRule,
         CustomerInterface $customer,
         BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker
-    ): void
-    {
+    ): void {
         $blacklistingRules = [$blacklistingRule];
 
         $channelContext->getChannel()->willReturn($channel);
@@ -104,8 +103,7 @@ final class SuspiciousOrderResolverSpec extends ObjectBehavior
         ServiceRegistryInterface $serviceRegistry,
         CityBlacklistingRuleChecker $cityBlacklistingRuleChecker,
         AbstractQuery $query
-    ): void
-    {
+    ): void {
         $blacklistingRules = [$blacklistingRule];
         $blacklistingRuleAttributes = ['city'];
 

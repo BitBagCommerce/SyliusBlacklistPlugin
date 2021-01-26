@@ -24,8 +24,6 @@ class BlacklistingRuleCustomerGroupsValidator extends ConstraintValidator
 
         if ($blacklistingRule->isOnlyForGuests() && !$blacklistingRule->getCustomerGroups()->isEmpty()) {
             $this->context->buildViolation($constraint->message)->addViolation();
-
-            return;
         }
     }
 }
