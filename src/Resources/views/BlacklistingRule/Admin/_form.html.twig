@@ -26,7 +26,9 @@
                         {{ 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.customer_group_help'|trans }}
                     </div>
                 </div>
-                {{ form_row(form.customerGroups) }}
+                {{ form_label(form.customerGroups) }}
+                {{ form_widget(form.customerGroups) }}
+                {{ form_row(form.forUnassignedCustomers) }}
             </div>
 
             <div class="ui divider hidden"></div>
