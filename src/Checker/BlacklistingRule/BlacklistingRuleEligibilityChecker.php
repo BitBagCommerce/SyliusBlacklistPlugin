@@ -23,6 +23,10 @@ final class BlacklistingRuleEligibilityChecker implements BlacklistingRuleEligib
         }
 
         if ($blacklistingRule->getCustomerGroups()->isEmpty()) {
+            if ($blacklistingRule->isForUnassignedCustomers()) {
+
+            }
+
             return true;
         } else {
             $customerGroup = $customer->getGroup();
