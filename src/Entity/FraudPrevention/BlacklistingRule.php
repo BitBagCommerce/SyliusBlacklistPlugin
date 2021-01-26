@@ -52,9 +52,6 @@ class BlacklistingRule implements BlacklistingRuleInterface
      */
     protected $customerGroups;
 
-    /** @var bool */
-    protected $forUnassignedCustomers = false;
-
     public function __construct()
     {
         $this->channels = new ArrayCollection();
@@ -165,15 +162,5 @@ class BlacklistingRule implements BlacklistingRuleInterface
     public function setOnlyForGuests(bool $onlyForGuests): void
     {
         $this->onlyForGuests = $onlyForGuests;
-    }
-
-    public function isForUnassignedCustomers(): bool
-    {
-        return $this->forUnassignedCustomers;
-    }
-
-    public function setForUnassignedCustomers(bool $forUnassignedCustomers): void
-    {
-        $this->forUnassignedCustomers = $forUnassignedCustomers;
     }
 }

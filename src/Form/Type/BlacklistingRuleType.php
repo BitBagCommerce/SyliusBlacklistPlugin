@@ -44,6 +44,7 @@ final class BlacklistingRuleType extends AbstractResourceType
                 'multiple' => true,
                 'expanded' => true,
                 'choices' => $this->attributeChoices
+
             ])
             ->add('permittedStrikes', NumberType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.permitted_strikes',
@@ -58,10 +59,6 @@ final class BlacklistingRuleType extends AbstractResourceType
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.customer_group',
-            ])
-            ->add('forUnassignedCustomers', CheckboxType::class, [
-                'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.for_unassigned_customers',
-                'required' => false
             ])
             ->add('onlyForGuests', CheckboxType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.only_for_guests',

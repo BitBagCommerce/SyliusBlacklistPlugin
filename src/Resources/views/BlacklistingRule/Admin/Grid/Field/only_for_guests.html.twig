@@ -1,0 +1,11 @@
+{% if data %}
+    <span class="ui basic label">
+        <i class="checkmark icon"></i>
+        {{ 'sylius.ui.yes_label'|trans }}
+    </span>
+{% else %}
+    <span class="ui basic label">
+        <i class="remove icon"></i>
+        {{ 'sylius.ui.no_label'|trans }}
+    </span>
+{% endif %}

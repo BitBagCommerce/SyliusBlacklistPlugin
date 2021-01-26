@@ -55,8 +55,4 @@ interface BlacklistingRuleInterface extends ResourceInterface, ToggleableInterfa
     public function isOnlyForGuests(): bool;
 
     public function setOnlyForGuests(bool $onlyForGuests): void;
-
-    public function isForUnassignedCustomers(): bool;
-
-    public function setForUnassignedCustomers(bool $forUnassignedCustomers): void;
 }
