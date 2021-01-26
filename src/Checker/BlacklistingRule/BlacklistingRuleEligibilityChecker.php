@@ -22,16 +22,20 @@ final class BlacklistingRuleEligibilityChecker implements BlacklistingRuleEligib
             return false;
         }
 
-        if ($blacklistingRule->getCustomerGroups()->isEmpty()) {
-            if ($blacklistingRule->isForUnassignedCustomers()) {
+        $customerGroup = $customer->getGroup();
 
+        if ($customerGroup !== null) {
+            if ($blacklistingRule->getCustomerGroups()->isEmpty() && $blacklistingRule->isForUnassignedCustomers()) {
+                return false;
+            }
+
+            if (!$blacklistingRule->getCustomerGroups()->isEmpty()) {
+                return $blacklistingRule->hasCustomerGroup($customerGroup);
             }
 
             return true;
         } else {
-            $customerGroup = $customer->getGroup();
-
-            return $blacklistingRule->hasCustomerGroup($customerGroup);
+            return !$blacklistingRule->getCustomerGroups()->isEmpty() && !$blacklistingRule->isForUnassignedCustomers() ? false : true;
         }
     }
 }
