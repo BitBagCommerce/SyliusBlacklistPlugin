@@ -9,6 +9,8 @@ Feature: Blocking users on checkout
         And the store has a product "PHP T-Shirt"
         And the store has a product "PHP Blouse"
         And the store has a product "PHP Pullover"
+        And the store has a customer group "Wholesale"
+        And the store has a customer group "Retail"
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
         And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "whitehouse"
@@ -23,8 +25,29 @@ Feature: Blocking users on checkout
     Scenario: Successfully complete checkout addressing step
         Given I have product "PHP Pullover" in the cart
         And there is a blacklisting rule with "Country" name and "3" permitted strikes and "country" as a rule attributes
-        Then I am at the checkout addressing step
+        And I am at the checkout addressing step
         And I specify the billing address as "Francis Underwood", "Groove Street", "91920", "United States" for "Francis Snow"
+        And I complete the addressing step
+        Then I should be on the checkout shipping step
+
+    @ui
+    Scenario: Successfully complete checkout by users for who manual blacklisting rule is not eligible
+        Given the customer belongs to group "Wholesale"
+        And I have product "PHP Pullover" in the cart
+        And there is a blacklisting rule with "Country" name and "1" permitted strikes and "country" as a rule attributes
+        And the blacklisting rule is only for unassigned customers
+        And I am at the checkout addressing step
+        And I specify the billing address as "Francis Underwood", "Groove Street", "91920", "United States" for "Francis Underwood"
+        And I complete the addressing step
+        Then I should be on the checkout shipping step
+
+    @ui
+    Scenario: Successfully complete checkout by users for who manual blacklisting rule is not eligible
+        Given I have product "PHP Pullover" in the cart
+        And there is a blacklisting rule with "Country" name and "1" permitted strikes and "country" as a rule attributes
+        And the blacklisting rule is only for guests
+        And I am at the checkout addressing step
+        And I specify the billing address as "Francis Underwood", "Groove Street", "91920", "United States" for "Francis Underwood"
         And I complete the addressing step
         Then I should be on the checkout shipping step
 

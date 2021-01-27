@@ -37,4 +37,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return $this->getDocument()->findField('Enabled')->isChecked();
     }
+
+    public function checkField(string $field): void
+    {
+        $this->getDocument()->checkField($field);
+    }
 }

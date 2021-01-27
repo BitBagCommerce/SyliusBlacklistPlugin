@@ -23,4 +23,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface, ChecksCodeImmutab
     public function disable(): void;
 
     public function isBlacklistingRuleDisabled(): bool;
+
+    public function checkField(string $field): void;
 }
