@@ -72,6 +72,19 @@ final class BlacklistingRuleContext implements Context
         $this->saveBlacklistingRule($blacklistingRule);
     }
 
+    /**
+     * @Given /^the blacklisting rule is only for unassigned customers$/
+     */
+    public function theBlacklistingRuleIsOnlyForUnassignedCustomers()
+    {
+        /** @var BlacklistingRuleInterface $blacklistingRule */
+        $blacklistingRule = $this->sharedStorage->get('blacklistingRule');
+
+        $blacklistingRule->setForUnassignedCustomers(true);
+
+        $this->saveBlacklistingRule($blacklistingRule);
+    }
+
     private function createBlacklistingRule(
         ?string $name = null,
         ?int $permittedStrikes = null,
@@ -102,6 +115,19 @@ final class BlacklistingRuleContext implements Context
         $blacklistingRule->addChannel($channel);
 
         return $blacklistingRule;
+    }
+
+    /**
+     * @Given the blacklisting rule is only for guests
+     */
+    public function theBlacklistingRuleIsOnlyForGuests()
+    {
+        /** @var BlacklistingRuleInterface $blacklistingRule */
+        $blacklistingRule = $this->sharedStorage->get('blacklistingRule');
+
+        $blacklistingRule->setOnlyForGuests(true);
+
+        $this->saveBlacklistingRule($blacklistingRule);
     }
 
     private function saveBlacklistingRule(BlacklistingRuleInterface $blacklistingRule): void

@@ -18,6 +18,7 @@ Feature: Adding blacklisting rules
         And I fill the permittedStrikes with "2"
         And I select "United States" as channels
         And I select "Retail" and "Wholesale" as customer groups
+        And I want to this blacklisting rule will be applied to unassigned customers
         And I check enabled
         And I add it
         Then I should be notified that the blacklisting rule has been created

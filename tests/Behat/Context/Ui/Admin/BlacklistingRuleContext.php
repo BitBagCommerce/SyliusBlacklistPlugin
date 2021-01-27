@@ -269,6 +269,24 @@ final class BlacklistingRuleContext implements Context
     }
 
     /**
+     * @Given I delete this blacklisting rule
+     */
+    public function iDeleteThisBlacklistingRule(): void
+    {
+        $blacklistingRule = $this->sharedStorage->get('blacklistingRule');
+
+        $this->indexPage->deleteBlacklistingRule($blacklistingRule->getName());
+    }
+
+    /**
+     * @Given I want to this blacklisting rule will be applied to unassigned customers
+     */
+    public function iWantToThisBlacklistingRuleWillBeAppliedToCustomers()
+    {
+        $this->resolveCurrentPage()->checkField('Unassigned');
+    }
+
+    /**
      * @return IndexPageInterface|CreatePageInterface|UpdatePageInterface|SymfonyPageInterface
      */
     private function resolveCurrentPage(): SymfonyPageInterface
@@ -278,15 +296,5 @@ final class BlacklistingRuleContext implements Context
             $this->createPage,
             $this->updatePage,
         ]);
-    }
-
-    /**
-     * @Given I delete this blacklisting rule
-     */
-    public function iDeleteThisBlacklistingRule(): void
-    {
-        $blacklistingRule = $this->sharedStorage->get('blacklistingRule');
-
-        $this->indexPage->deleteBlacklistingRule($blacklistingRule->getName());
     }
 }

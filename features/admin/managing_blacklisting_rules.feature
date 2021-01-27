@@ -21,6 +21,7 @@ Feature: Managing blacklisting rules
         Given there is a blacklisting rule with "Country" name and "3" permitted strikes and "country" as a rule attributes
         When I go to the update "Country" blacklisting rule page
         And I fill the rule name with "Company"
+        And I want to this blacklisting rule will be applied to unassigned customers
         And I update it
         Then I should be notified that the blacklisting rule has been successfully updated
 
