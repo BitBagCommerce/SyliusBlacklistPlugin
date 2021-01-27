@@ -42,33 +42,92 @@ final class BlacklistingRuleEligibilityCheckerSpec extends ObjectBehavior
     function it_returns_false_if_blacklisting_rule_is_not_eligible_due_to_customer_group(
         BlacklistingRuleInterface $blacklistingRule,
         CustomerInterface $customer,
+        CustomerGroupInterface $otherCustomerGroup
+    ): void {
+        $blacklistingRule->isOnlyForGuests()->willReturn(false);
+        $customer->getGroup()->willReturn($otherCustomerGroup);
+        $blacklistingRule->getCustomerGroups()->willReturn(new ArrayCollection());
+        $blacklistingRule->isForUnassignedCustomers()->willReturn(true);
+
+        $blacklistingRule->isOnlyForGuests()->shouldBeCalled();
+        $customer->getGroup()->shouldBeCalled();
+        $blacklistingRule->getCustomerGroups()->shouldBeCalled();
+        $blacklistingRule->isForUnassignedCustomers()->shouldBeCalled();
+
+        $this->isEligible($blacklistingRule, $customer)->shouldReturn(false);
+    }
+
+    function it_returns_false_if_blacklisting_rule_does_not_contain_customer_group(
+        BlacklistingRuleInterface $blacklistingRule,
+        CustomerInterface $customer,
         CustomerGroupInterface $customerGroup,
         CustomerGroupInterface $otherCustomerGroup
     ): void {
-        $customerGroups = new ArrayCollection([$customerGroup->getWrappedObject()]);
+        $blacklistingRuleCustomerGroups = new ArrayCollection([$customerGroup]);
 
         $blacklistingRule->isOnlyForGuests()->willReturn(false);
-        $blacklistingRule->getCustomerGroups()->willReturn($customerGroups);
         $customer->getGroup()->willReturn($otherCustomerGroup);
+        $blacklistingRule->getCustomerGroups()->willReturn($blacklistingRuleCustomerGroups);
         $blacklistingRule->hasCustomerGroup($otherCustomerGroup)->willReturn(false);
 
         $blacklistingRule->isOnlyForGuests()->shouldBeCalled();
-        $blacklistingRule->getCustomerGroups()->shouldBeCalled();
         $customer->getGroup()->shouldBeCalled();
+        $blacklistingRule->getCustomerGroups()->shouldBeCalled();
         $blacklistingRule->hasCustomerGroup($otherCustomerGroup)->shouldBeCalled();
 
         $this->isEligible($blacklistingRule, $customer)->shouldReturn(false);
     }
 
-    function it_returns_true_if_blacklisting_rule_is_eligible(
+    function it_returns_false_if_customer_has_no_group(
         BlacklistingRuleInterface $blacklistingRule,
-        CustomerInterface $customer
+        CustomerInterface $customer,
+        CustomerGroupInterface $customerGroup
+    ): void {
+        $blacklistingRuleCustomerGroups = new ArrayCollection([$customerGroup]);
+
+        $blacklistingRule->isOnlyForGuests()->willReturn(false);
+        $customer->getGroup()->willReturn(null);
+        $blacklistingRule->getCustomerGroups()->willReturn($blacklistingRuleCustomerGroups);
+        $blacklistingRule->isForUnassignedCustomers()->willReturn(false);
+
+        $blacklistingRule->isOnlyForGuests()->shouldBeCalled();
+        $customer->getGroup()->shouldBeCalled();
+        $blacklistingRule->getCustomerGroups()->shouldBeCalled();
+        $blacklistingRule->isForUnassignedCustomers()->shouldBeCalled();
+
+        $this->isEligible($blacklistingRule, $customer)->shouldReturn(false);
+    }
+
+    function it_returns_true_if_customer_has_no_group(
+        BlacklistingRuleInterface $blacklistingRule,
+        CustomerInterface $customer,
+        CustomerGroupInterface $customerGroup
     ): void {
         $blacklistingRule->isOnlyForGuests()->willReturn(false);
+        $customer->getGroup()->willReturn(null);
         $blacklistingRule->getCustomerGroups()->willReturn(new ArrayCollection());
 
         $blacklistingRule->isOnlyForGuests()->shouldBeCalled();
+        $customer->getGroup()->shouldBeCalled();
         $blacklistingRule->getCustomerGroups()->shouldBeCalled();
+
+        $this->isEligible($blacklistingRule, $customer)->shouldReturn(true);
+    }
+
+    function it_returns_true_if_blacklisting_rule_is_eligible(
+        BlacklistingRuleInterface $blacklistingRule,
+        CustomerInterface $customer,
+        CustomerGroupInterface $customerGroup
+    ): void {
+        $blacklistingRule->isOnlyForGuests()->willReturn(false);
+        $customer->getGroup()->willReturn($customerGroup);
+        $blacklistingRule->getCustomerGroups()->willReturn(new ArrayCollection());
+        $blacklistingRule->isForUnassignedCustomers()->willReturn(false);
+
+        $blacklistingRule->isOnlyForGuests()->shouldBeCalled();
+        $customer->getGroup()->shouldBeCalled();
+        $blacklistingRule->getCustomerGroups()->shouldBeCalled();
+        $blacklistingRule->isForUnassignedCustomers()->shouldBeCalled();
 
         $this->isEligible($blacklistingRule, $customer)->shouldReturn(true);
     }
