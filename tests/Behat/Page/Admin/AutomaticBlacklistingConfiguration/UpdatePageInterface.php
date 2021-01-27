@@ -23,4 +23,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface, ChecksCodeImmutab
     public function update(): void;
 
     public function fillRuleOption(string $option, string $value): void;
+
+    public function uncheckField(string $locator): void;
 }

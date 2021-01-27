@@ -200,6 +200,30 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     }
 
     /**
+     * @Given I do not want to add fraud suspicion row after exceeding limit
+     */
+    public function iDoNotWantToAddFraudSuspicionRowAfterExceedingLimit()
+    {
+        $this->resolveCurrentPage()->uncheckField('Add fraud suspicion row after exceeding limit');
+    }
+
+    /**
+     * @Given I change last rule count with :count
+     */
+    public function iChangeLastRuleCountWith(string $count): void
+    {
+        $this->resolveCurrentPage()->fillRuleOption('Count', $count);
+    }
+
+    /**
+     * @Then I should be notified that the store has to have some manual blacklisting rule
+     */
+    public function iShouldBeNotifiedThatTheStoreHasToHaveSomeManualBlacklistingRule()
+    {
+        $this->resolveCurrentPage()->containsErrorWithMessage('You cannot deactivate manual blacklisting rule when the store has some automatic blacklisting configurations with "Add fraud suspicion row after exceeding limit" set to true');
+    }
+
+    /**
      * @return IndexPageInterface|CreatePageInterface|UpdatePageInterface|SymfonyPageInterface
      */
     private function resolveCurrentPage(): SymfonyPageInterface
@@ -209,13 +233,5 @@ final class AutomaticBlacklistingConfigurationContext implements Context
             $this->createPage,
             $this->updatePage,
         ]);
-    }
-
-    /**
-     * @Given I change last rule count with :count
-     */
-    public function iChangeLastRuleCountWith(string $count): void
-    {
-        $this->resolveCurrentPage()->fillRuleOption('Count', $count);
     }
 }

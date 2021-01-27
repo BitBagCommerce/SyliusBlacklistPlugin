@@ -26,6 +26,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->fillField($field, $value);
     }
 
+    public function uncheckField(string $locator): void
+    {
+        $this->getDocument()->uncheckField($locator);
+    }
+
     public function selectOption(string $field, string $value): void
     {
         $this->getDocument()->selectFieldOption($field, $value);

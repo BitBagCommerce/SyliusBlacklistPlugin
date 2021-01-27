@@ -48,6 +48,7 @@ final class FraudSuspicionCommonModelConverterSpec extends ObjectBehavior
         $fraudSuspicion->getProvince()->willReturn(null);
         $fraudSuspicion->getPostcode()->willReturn('00-00');
         $fraudSuspicion->getCountry()->willReturn('PL');
+        $fraudSuspicion->getCustomerIp()->willReturn('127.0.0.1');
 
         $fraudSuspicionCommonModelFactory->createNew()->shouldBeCalled();
         $fraudSuspicion->getOrder()->shouldBeCalled();
@@ -62,6 +63,7 @@ final class FraudSuspicionCommonModelConverterSpec extends ObjectBehavior
         $fraudSuspicion->getProvince()->shouldBeCalled();
         $fraudSuspicion->getPostcode()->shouldBeCalled();
         $fraudSuspicion->getCountry()->shouldBeCalled();
+        $fraudSuspicion->getCustomerIp()->shouldBeCalled();
 
         $model = $this->convertFraudSuspicionObject($fraudSuspicion);
 

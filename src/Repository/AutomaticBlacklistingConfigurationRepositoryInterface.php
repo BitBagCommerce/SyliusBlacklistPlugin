@@ -20,4 +20,6 @@ interface AutomaticBlacklistingConfigurationRepositoryInterface extends Reposito
     public function createListQueryBuilder(): QueryBuilder;
 
     public function findActiveByChannel(ChannelInterface $channel): array;
+
+    public function findActiveByChannelWithAddingRowsToFraudSuspicion(ChannelInterface $channel): array;
 }

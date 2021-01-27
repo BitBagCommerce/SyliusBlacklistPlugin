@@ -7,6 +7,7 @@ namespace spec\BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingConfiguration;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingConfigurationInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingRuleInterface;
+use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 
@@ -30,6 +31,20 @@ final class AutomaticBlacklistingConfigurationSpec extends ObjectBehavior
     function it_has_no_name_by_default(): void
     {
         $this->getName()->shouldReturn(null);
+    }
+
+    function it_has_add_fraud_suspicion_after_exceed_limit_set_true_by_default(): void
+    {
+        $this->isAddFraudSuspicionRowAfterExceedLimit()->shouldReturn(true);
+    }
+
+    function it_sets_add_fraud_suspicion_after_exceed_limit(): void
+    {
+        $this->isAddFraudSuspicionRowAfterExceedLimit()->shouldReturn(true);
+
+        $this->setAddFraudSuspicionRowAfterExceedLimit(false);
+
+        $this->isAddFraudSuspicionRowAfterExceedLimit()->shouldReturn(false);
     }
 
     function it_has_empty_collection_of_channels_by_default(): void
