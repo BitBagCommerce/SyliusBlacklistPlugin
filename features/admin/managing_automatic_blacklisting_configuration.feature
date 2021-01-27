@@ -20,5 +20,6 @@ Feature: Adding a new automatic blacklisting configuration
         When I go to update configuration "First configuration" page
         Then I fill configuration name with "First configuration updated"
         And I change last rule count with "10"
+        And I do not want to add fraud suspicion row after exceeding limit
         And I update it
         Then I should be notified that the automatic blacklisting configuration has been successfully updated

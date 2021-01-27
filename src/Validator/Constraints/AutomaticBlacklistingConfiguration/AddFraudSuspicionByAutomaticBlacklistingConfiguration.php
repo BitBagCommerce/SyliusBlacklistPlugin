@@ -13,7 +13,7 @@ namespace BitBag\SyliusBlacklistPlugin\Validator\Constraints\AutomaticBlacklisti
 
 use Symfony\Component\Validator\Constraint;
 
-class AddFraudSuspicionRowByAutomaticBlacklistingConfiguration extends Constraint
+class AddFraudSuspicionByAutomaticBlacklistingConfiguration extends Constraint
 {
     public $message = 'bitbag_sylius_blacklist_plugin.form.error.cannot_add_automatic_blacklisting_configuration';
 

@@ -19,6 +19,8 @@ interface CreatePageInterface extends BaseCreatePageInterface, ContainsErrorInte
 {
     public function fillField(string $field, string $value): void;
 
+    public function uncheckField(string $locator): void;
+
     public function selectOption(string $field, string $value): void;
 
     public function addRule(string $ruleName): void;

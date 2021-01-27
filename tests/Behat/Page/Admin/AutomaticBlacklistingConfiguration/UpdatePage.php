@@ -30,6 +30,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->uncheckField('Enabled');
     }
 
+    public function uncheckField(string $locator): void
+    {
+        $this->getDocument()->uncheckField($locator);
+    }
+
     public function update(): void
     {
         $this->getDocument()->pressButton('Save changes');
