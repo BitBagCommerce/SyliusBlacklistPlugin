@@ -69,4 +69,18 @@ final class BlacklistingRuleSpec extends ObjectBehavior
 
         $this->hasCustomerGroup($customerGroup)->shouldReturn(true);
     }
+
+    function it_has_for_unassigned_customers_set_on_false_by_default(): void
+    {
+        $this->isForUnassignedCustomers()->shouldReturn(false);
+    }
+
+    function it_sets_for_unassigned_customers(): void
+    {
+        $this->isForUnassignedCustomers()->shouldReturn(false);
+
+        $this->setForUnassignedCustomers(true);
+
+        $this->isForUnassignedCustomers()->shouldReturn(true);
+    }
 }
