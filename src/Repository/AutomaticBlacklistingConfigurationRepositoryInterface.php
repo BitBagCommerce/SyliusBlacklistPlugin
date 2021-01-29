@@ -21,5 +21,5 @@ interface AutomaticBlacklistingConfigurationRepositoryInterface extends Reposito
 
     public function findActiveByChannel(ChannelInterface $channel): array;
 
-    public function findActiveByChannelWithAddingRowsToFraudSuspicion(ChannelInterface $channel): array;
+    public function findActiveByChannelWithAddFraudSuspicion(ChannelInterface $channel): array;
 }

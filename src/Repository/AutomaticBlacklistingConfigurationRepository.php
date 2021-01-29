@@ -38,16 +38,16 @@ final class AutomaticBlacklistingConfigurationRepository extends EntityRepositor
         ;
     }
 
-    public function findActiveByChannelWithAddingRowsToFraudSuspicion(ChannelInterface $channel): array
+    public function findActiveByChannelWithAddFraudSuspicion(ChannelInterface $channel): array
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.channels', 'channel')
             ->where('channel.id = :channelId')
             ->andWhere('o.enabled = :enabled')
-            ->andWhere('o.addFraudSuspicionRowAfterExceedLimit = :addFraudSuspicionRowAfterExceedLimit')
+            ->andWhere('o.addFraudSuspicion = :addFraudSuspicion')
             ->setParameter('channelId', $channel->getId())
             ->setParameter('enabled', true)
-            ->setParameter('addFraudSuspicionRowAfterExceedLimit', true)
+            ->setParameter('addFraudSuspicion', true)
             ->getQuery()
             ->getResult()
         ;
