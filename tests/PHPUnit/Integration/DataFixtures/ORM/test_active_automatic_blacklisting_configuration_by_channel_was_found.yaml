@@ -2,8 +2,30 @@ Sylius\Component\Core\Model\Channel:
   fashion_web_store:
     code: "FASHION_WEB_STORE"
     name: "Fashion Web Store"
+    hostname: "localhost"
+    description: "Lorem ipsum"
+    baseCurrency: "@pound"
+    defaultLocale: "@locale_en_gb"
+    locales: [ "@locale_en_gb", "@locale_de_de" ]
+    color: "black"
+    enabled: true
+    taxCalculationStrategy: "order_items_based"
+    accountVerificationRequired: true
+
+Sylius\Component\Currency\Model\Currency:
+  pound:
+    code: GBP
+  euro:
+    code: EUR
+
+Sylius\Component\Locale\Model\Locale:
+  locale_en_gb:
+    code: en_GB
+  locale_de_de:
+    code: de_DE
 
 BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingConfiguration:
   example_configuration:
     name: "Examle Config"
     channels: ['@fashion_web_store']
+    enabled: true
