@@ -43,7 +43,7 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
     protected $rules;
 
     /** @var bool */
-    protected $addFraudSuspicionRowAfterExceedLimit = true;
+    protected $addFraudSuspicion = true;
 
     public function __construct()
     {
@@ -121,13 +121,13 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
         return $this->channels->contains($channel);
     }
 
-    public function isAddFraudSuspicionRowAfterExceedLimit(): bool
+    public function isAddFraudSuspicion(): bool
     {
-        return $this->addFraudSuspicionRowAfterExceedLimit;
+        return $this->addFraudSuspicion;
     }
 
-    public function setAddFraudSuspicionRowAfterExceedLimit(bool $addFraudSuspicionRowAfterExceedLimit): void
+    public function setAddFraudSuspicion(bool $addFraudSuspicion): void
     {
-        $this->addFraudSuspicionRowAfterExceedLimit = $addFraudSuspicionRowAfterExceedLimit;
+        $this->addFraudSuspicion = $addFraudSuspicion;
     }
 }

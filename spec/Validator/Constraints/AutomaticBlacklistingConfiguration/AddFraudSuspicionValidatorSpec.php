@@ -6,15 +6,11 @@ namespace spec\BitBag\SyliusBlacklistPlugin\Validator\Constraints\AutomaticBlack
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRuleInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\BlacklistingRuleRepositoryInterface;
-use BitBag\SyliusBlacklistPlugin\Validator\Constraints\AutomaticBlacklistingConfiguration\AddFraudSuspicionByAutomaticBlacklistingConfiguration;
-use BitBag\SyliusBlacklistPlugin\Validator\Constraints\AutomaticBlacklistingConfiguration\AddFraudSuspicionByAutomaticBlacklistingConfigurationValidator;
-use BitBag\SyliusBlacklistPlugin\Validator\Constraints\BlacklistingRule\BlacklistingRuleCustomerGroups;
-use BitBag\SyliusBlacklistPlugin\Validator\Constraints\BlacklistingRule\BlacklistingRuleCustomerGroupsValidator;
-use Doctrine\Common\Collections\ArrayCollection;
+use BitBag\SyliusBlacklistPlugin\Validator\Constraints\AutomaticBlacklistingConfiguration\AddFraudSuspicion;
+use BitBag\SyliusBlacklistPlugin\Validator\Constraints\AutomaticBlacklistingConfiguration\AddFraudSuspicionValidator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
@@ -30,7 +26,7 @@ final class AddFraudSuspicionByAutomaticBlacklistingConfigurationValidatorSpec e
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(AddFraudSuspicionByAutomaticBlacklistingConfigurationValidator::class);
+        $this->shouldHaveType(AddFraudSuspicionValidator::class);
     }
 
     function it_extends_constraint_validator_class(): void
@@ -45,7 +41,7 @@ final class AddFraudSuspicionByAutomaticBlacklistingConfigurationValidatorSpec e
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $constraintViolationBuilder
     ): void {
-        $constraint = new AddFraudSuspicionByAutomaticBlacklistingConfiguration();
+        $constraint = new AddFraudSuspicion();
 
         $channelContext->getChannel()->willReturn($channel);
         $blacklistingRuleRepository->findActiveByChannel($channel)->willReturn([]);
@@ -67,7 +63,7 @@ final class AddFraudSuspicionByAutomaticBlacklistingConfigurationValidatorSpec e
         BlacklistingRuleInterface $blacklistingRule
     ): void
     {
-        $constraint = new AddFraudSuspicionByAutomaticBlacklistingConfiguration();
+        $constraint = new AddFraudSuspicion();
 
         $channelContext->getChannel()->willReturn($channel);
         $blacklistingRuleRepository->findActiveByChannel($channel)->willReturn([$blacklistingRule]);

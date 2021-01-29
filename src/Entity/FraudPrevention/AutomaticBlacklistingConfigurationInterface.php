@@ -43,7 +43,7 @@ interface AutomaticBlacklistingConfigurationInterface extends ResourceInterface,
 
     public function hasChannel(ChannelInterface $channel): bool;
 
-    public function isAddFraudSuspicionRowAfterExceedLimit(): bool;
+    public function isAddFraudSuspicion(): bool;
 
-    public function setAddFraudSuspicionRowAfterExceedLimit(bool $addFraudSuspicionRowAfterExceedLimit): void;
+    public function setAddFraudSuspicion(bool $addFraudSuspicionRowAfterExceedLimit): void;
 }

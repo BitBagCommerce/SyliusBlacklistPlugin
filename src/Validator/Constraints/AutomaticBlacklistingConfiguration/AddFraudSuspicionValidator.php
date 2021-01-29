@@ -16,7 +16,7 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class AddFraudSuspicionByAutomaticBlacklistingConfigurationValidator extends ConstraintValidator
+class AddFraudSuspicionValidator extends ConstraintValidator
 {
     /** @var BlacklistingRuleRepositoryInterface */
     private $blacklistingRuleRepository;

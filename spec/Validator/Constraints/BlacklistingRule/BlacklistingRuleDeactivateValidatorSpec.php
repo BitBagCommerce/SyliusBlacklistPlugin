@@ -56,12 +56,12 @@ final class BlacklistingRuleDeactivateValidatorSpec extends ObjectBehavior
 
         $channelContext->getChannel()->willReturn($channel);
         $blacklistingRuleRepository->findActiveByChannel($channel)->willReturn([$blacklistingRule]);
-        $automaticBlacklistingConfigurationRepository->findActiveByChannelWithAddingRowsToFraudSuspicion($channel)->willReturn([$automaticBlacklistingConfiguration]);
+        $automaticBlacklistingConfigurationRepository->findActiveByChannelWithAddFraudSuspicion($channel)->willReturn([$automaticBlacklistingConfiguration]);
         $context->buildViolation('bitbag_sylius_blacklist_plugin.form.error.cannot_deactivate_manual_blacklisting_rule')->willReturn($constraintViolationBuilder);
 
         $channelContext->getChannel()->shouldBeCalled();
         $blacklistingRuleRepository->findActiveByChannel($channel)->shouldBeCalled();
-        $automaticBlacklistingConfigurationRepository->findActiveByChannelWithAddingRowsToFraudSuspicion($channel)->shouldBeCalled();
+        $automaticBlacklistingConfigurationRepository->findActiveByChannelWithAddFraudSuspicion($channel)->shouldBeCalled();
         $context->buildViolation('bitbag_sylius_blacklist_plugin.form.error.cannot_deactivate_manual_blacklisting_rule')->shouldBeCalled();
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
@@ -80,7 +80,7 @@ final class BlacklistingRuleDeactivateValidatorSpec extends ObjectBehavior
 
         $channelContext->getChannel()->willReturn($channel);
         $blacklistingRuleRepository->findActiveByChannel($channel)->willReturn([$blacklistingRule]);
-        $automaticBlacklistingConfigurationRepository->findActiveByChannelWithAddingRowsToFraudSuspicion($channel)->willReturn([]);
+        $automaticBlacklistingConfigurationRepository->findActiveByChannelWithAddFraudSuspicion($channel)->willReturn([]);
 
         $this->validate(false, $constraint)->shouldReturn(null);
     }

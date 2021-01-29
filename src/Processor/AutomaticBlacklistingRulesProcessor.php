@@ -92,8 +92,8 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
                 }
             }
 
-            if ($automaticBlacklistingConfiguration->isAddFraudSuspicionRowAfterExceedLimit()) {
-                $this->addFraudSuspicionRowIfStoreHasEligibleBlacklisitngRule($order, $channel);
+            if ($automaticBlacklistingConfiguration->isAddFraudSuspicion()) {
+                $this->addFraudSuspicion($order, $channel);
             }
         }
 
@@ -107,20 +107,20 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
         return $checker->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order, $this->orderRepository);
     }
 
-    private function addFraudSuspicionRowIfStoreHasEligibleBlacklisitngRule(OrderInterface $order, ChannelInterface $channel): void
+    private function addFraudSuspicion(OrderInterface $order, ChannelInterface $channel): void
     {
         $blacklistingRules = $this->blacklistingRuleRepository->findActiveByChannel($channel);
 
         foreach ($blacklistingRules as $blacklistingRule) {
             if ($this->blacklistingRuleEligibilityChecker->isEligible($blacklistingRule, $order->getCustomer())) {
-                $this->addFraudSuspicionRow($order);
+                $this->configureAndAddFraudSuspicion($order);
 
                 return;
             }
         }
     }
 
-    private function addFraudSuspicionRow(OrderInterface $order): void
+    private function configureAndAddFraudSuspicion(OrderInterface $order): void
     {
         if (null === $this->fraudSuspicionRepository->findOneBy(['order' => $order])) {
             $fraudSuspicion = $this->fraudSuspicionFactory->createForOrder($order);

@@ -46,7 +46,7 @@ class BlacklistingRuleDeactivateValidator extends ConstraintValidator
             $channel = $this->channelContext->getChannel();
 
             $activeBlacklistingRules = $this->blacklistingRuleRepository->findActiveByChannel($channel);
-            $automaticBlacklistingConfigurations = $this->automaticBlacklistingConfigurationRepository->findActiveByChannelWithAddingRowsToFraudSuspicion($channel);
+            $automaticBlacklistingConfigurations = $this->automaticBlacklistingConfigurationRepository->findActiveByChannelWithAddFraudSuspicion($channel);
 
             $countActiveBlacklistingRules = \count($activeBlacklistingRules);
             $countAutomaticBlacklistingConfigurations = \count($automaticBlacklistingConfigurations);
