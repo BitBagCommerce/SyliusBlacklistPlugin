@@ -20,7 +20,7 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "@SyliusUi/Grid/Field/enabled.html.twig"
-                addFraudSuspicionRowAfterExceedLimit:
+                addFraudSuspicion:
                     type: twig
                     label: bitbag_sylius_blacklist_plugin.ui.add_fraud_suspicion_row_after_exceed_limit
                     sortable: ~

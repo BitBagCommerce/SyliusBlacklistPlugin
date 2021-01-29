@@ -30,9 +30,9 @@ class AddFraudSuspicionValidator extends ConstraintValidator
         $this->channelContext = $channelContext;
     }
 
-    public function validate($addFraudSuspicionRowAfterExceedLimit, Constraint $constraint): void
+    public function validate($addFraudSuspicion, Constraint $constraint): void
     {
-        if ($addFraudSuspicionRowAfterExceedLimit) {
+        if ($addFraudSuspicion) {
             $channel = $this->channelContext->getChannel();
 
             $blacklistingRules = $this->blacklistingRuleRepository->findActiveByChannel($channel);
