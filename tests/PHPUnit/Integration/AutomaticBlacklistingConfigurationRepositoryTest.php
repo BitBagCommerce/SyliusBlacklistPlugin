@@ -46,8 +46,8 @@ class AutomaticBlacklistingConfigurationRepositoryTest extends IntegrationTestCa
     {
         $this->loadFixturesFromFiles(['test_active_automatic_blacklisting_configuration_by_channel_was_not_found.yaml']);
 
-        $channel = $this->channelRepository->findOneByCode('GB_WEB_STORE');
-        $this->assertNull($channel);
+        $channel = $this->channelRepository->findOneByCode('FASHION_WEB_STORE');
+        $this->assertNotNull($channel);
 
         $automaticBlacklistingConfiguration = $this->automaticBlacklistingConfigurationRepository->findActiveByChannel($channel);
         $this->assertEmpty($automaticBlacklistingConfiguration);
@@ -68,8 +68,8 @@ class AutomaticBlacklistingConfigurationRepositoryTest extends IntegrationTestCa
     {
         $this->loadFixturesFromFiles(['test_active_automatic_blacklisting_configuration_by_channel_and_add_fraud_suspicion_was_not_found.yaml']);
 
-        $channel = $this->channelRepository->findOneByCode('GB_WEB_STORE');
-        $this->assertNull($channel);
+        $channel = $this->channelRepository->findOneByCode('FASHION_WEB_STORE');
+        $this->assertNotNull($channel);
 
         $automaticBlacklistingConfiguration = $this->automaticBlacklistingConfigurationRepository->findActiveByChannelWithAddFraudSuspicion($channel);
         $this->assertEmpty($automaticBlacklistingConfiguration);

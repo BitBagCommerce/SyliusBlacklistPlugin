@@ -28,4 +28,4 @@ BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingConfigu
   example_configuration:
     name: "Examle Config"
     channels: ['@fashion_web_store']
-    enabled: true
+    enabled: false
