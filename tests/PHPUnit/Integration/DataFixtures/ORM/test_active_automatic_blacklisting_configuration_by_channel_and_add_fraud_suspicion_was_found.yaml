@@ -29,3 +29,4 @@ BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingConfigu
     name: "Examle Config"
     channels: ['@fashion_web_store']
     enabled: true
+    addFraudSuspicion: true
