@@ -45,5 +45,5 @@ interface AutomaticBlacklistingConfigurationInterface extends ResourceInterface,
 
     public function isAddFraudSuspicion(): bool;
 
-    public function setAddFraudSuspicion(bool $addFraudSuspicionRowAfterExceedLimit): void;
+    public function setAddFraudSuspicion(bool $addFraudSuspicion): void;
 }

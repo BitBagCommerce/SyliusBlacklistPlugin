@@ -43,7 +43,7 @@ final class AutomaticBlacklistingConfigurationType extends AbstractResourceType
                 'label' => 'sylius.ui.enabled',
                 'required' => false
             ])
-            ->add('addFraudSuspicionRowAfterExceedLimit', CheckboxType::class, [
+            ->add('addFraudSuspicion', CheckboxType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.ui.add_fraud_suspicion_row_after_exceed_limit',
                 'required' => false
             ])
