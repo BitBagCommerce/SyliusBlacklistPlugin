@@ -87,17 +87,17 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
 
             /** @var AutomaticBlacklistingRuleInterface $automaticBlacklistingRule */
             foreach ($automaticBlacklistingRules as $automaticBlacklistingRule) {
-                if (!($this->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order))) {
-                    return false;
-                }
-            }
+                if ($this->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order)) {
+                    if ($automaticBlacklistingConfiguration->isAddFraudSuspicion()) {
+                        $this->addFraudSuspicion($order, $channel);
+                    }
 
-            if ($automaticBlacklistingConfiguration->isAddFraudSuspicion()) {
-                $this->addFraudSuspicion($order, $channel);
+                    return true;
+                }
             }
         }
 
-        return true;
+        return false;
     }
 
     private function isBlacklistedOrderAndCustomer(AutomaticBlacklistingRuleInterface $automaticBlacklistingRule, OrderInterface $order): bool

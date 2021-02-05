@@ -20,7 +20,15 @@
 <div class="ui segment">
     <h4 class="ui dividing header">{{ 'bitbag_sylius_blacklist_plugin.ui.settings'|trans }}</h4>
 
+    <div class="ui divider hidden"></div>
+
     <div class="ui one column stackable grid">
+        <div class="ui icon info message">
+            <i class="info circle icon"></i>
+            <div class="content">
+                {{ 'bitbag_sylius_blacklist_plugin.ui.rules_are_connected_by_or'|trans }}!
+            </div>
+        </div>
         <div class="column" id="rules">
             {{ form_row(form.rules) }}
         </div>
