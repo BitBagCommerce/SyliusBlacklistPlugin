@@ -66,6 +66,7 @@ final class BlacklistingRuleType extends AbstractResourceType
             ])
             ->add('onlyForGuests', CheckboxType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.only_for_guests',
+                'required' => false
             ])
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.ui.enabled',
