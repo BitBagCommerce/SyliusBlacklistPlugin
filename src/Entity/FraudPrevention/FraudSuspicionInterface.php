@@ -23,6 +23,9 @@ interface FraudSuspicionInterface extends ResourceInterface
     /** @var string */
     public const SHIPPING_ADDRESS_TYPE = 'shipping';
 
+    /** @var string */
+    public const AUTOMATIC_BLACKLISTING_CONFIGURATION_COMMENT = 'Auto-generated comment from automatic blacklisting configuration';
+
     public function getId(): ?int;
 
     public function getOrder(): ?OrderInterface;
