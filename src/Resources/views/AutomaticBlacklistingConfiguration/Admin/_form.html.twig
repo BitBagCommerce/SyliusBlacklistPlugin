@@ -2,6 +2,10 @@
     {{ form_errors(form) }}
     <div class="column">
         <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.general'|trans }}</h4>
+
+            <div class="ui divider hidden"></div>
+
             <div class="one field">
                 {{ form_row(form.name) }}
             </div>
@@ -15,9 +19,14 @@
     </div>
     <div class="column">
         <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'bitbag_sylius_blacklist_plugin.ui.fraud_suspicions'|trans }}</h4>
+
+            <div class="ui divider hidden"></div>
+
             <div class="one field">
                 {{ form_row(form.addFraudSuspicion) }}
             </div>
+            <div class="ui divider hidden"></div>
             <div class="two fields">
                 {{ form_row(form.permittedFraudSuspicionCount) }}
                 {{ form_row(form.permittedFraudSuspicionTime) }}

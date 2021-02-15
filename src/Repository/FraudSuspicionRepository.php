@@ -15,6 +15,7 @@ use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 final class FraudSuspicionRepository extends EntityRepository implements FraudSuspicionRepositoryInterface
 {
@@ -58,6 +59,22 @@ final class FraudSuspicionRepository extends EntityRepository implements FraudSu
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    public function countByCustomerAndCommentAndDate(CustomerInterface $customer, string $comment, \DateTime $date): string
+    {
+        return $this->createQueryBuilder('o')
+            ->select(['COUNT(o.id)'])
+            ->innerJoin('o.customer', 'customer')
+            ->andWhere('customer = :customer')
+            ->andWhere('o.comment = :comment')
+            ->andWhere('o.createdAt >= :date')
+            ->setParameter('customer', $customer)
+            ->setParameter('comment', $comment)
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getSingleScalarResult()
         ;
     }
 }

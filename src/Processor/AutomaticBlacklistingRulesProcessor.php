@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\Processor;
 
 use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleEligibilityCheckerInterface;
+use BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingConfigurationInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingRuleInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
@@ -120,11 +121,28 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
         }
     }
 
-    private function configureAndAddFraudSuspicion(OrderInterface $order): void
-    {
+    private function configureAndAddFraudSuspicion(
+        OrderInterface $order,
+        AutomaticBlacklistingConfigurationInterface $automaticBlacklistingConfiguration
+    ): void {
+        $date = (new \DateTime())->modify('- ' . $automaticBlacklistingConfiguration->getPermittedFraudSuspicionTime());
+
+        $customer = $order->getCustomer();
+
+        $lastFraudSuspicionsOfCustomer = $this->fraudSuspicionRepository->countByCustomerAndCommentAndDate(
+            $order->getCustomer(),
+            FraudSuspicionInterface::AUTOMATIC_BLACKLISTING_CONFIGURATION_COMMENT,
+            $date
+        );
+
+        if ($lastFraudSuspicionsOfCustomer >= $automaticBlacklistingConfiguration->getPermittedFraudSuspicionCount()) {
+            $customer->setFraudStatus(FraudStatusInterface::FRAUD_STATUS_BLACKLISTED);
+        }
+
         if (null === $this->fraudSuspicionRepository->findOneBy(['order' => $order])) {
             $fraudSuspicion = $this->fraudSuspicionFactory->createForOrder($order);
             $fraudSuspicion->setAddressType(FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE);
+            $fraudSuspicion->setComment(FraudSuspicionInterface::AUTOMATIC_BLACKLISTING_CONFIGURATION_COMMENT);
 
             if (null === $fraudSuspicion->getCustomerIp()) {
                 $fraudSuspicion->setCustomerIp($_SERVER['REMOTE_ADDR']);

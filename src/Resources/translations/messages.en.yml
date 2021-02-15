@@ -30,6 +30,8 @@ bitbag_sylius_blacklist_plugin:
         no_related_customer: No related customer
         edit_blacklisting_rule: Edit manual blacklisting rule
         rules_are_connected_by_or: The automatic blacklisitng configuration will be applied after the user meets one of the rules you will add below
+        permitted_fraud_suspicion_count: Permitted fraud suspicions count
+        permitted_fraud_suspicion_time: Permitted fraud suspicions time
     form:
         blacklisting_rule:
             name: Rule name
