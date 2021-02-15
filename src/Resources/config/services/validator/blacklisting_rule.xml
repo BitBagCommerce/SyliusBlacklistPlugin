@@ -11,13 +11,5 @@
                  class="BitBag\SyliusBlacklistPlugin\Validator\Constraints\BlacklistingRule\BlacklistingRuleCustomerGroupsValidator">
             <tag name="validator.constraint_validator" />
         </service>
-
-        <service id="bitbag_sylius_blacklist_plugin.validator.constraints.blacklisting_rule.deactivate"
-                 class="BitBag\SyliusBlacklistPlugin\Validator\Constraints\BlacklistingRule\BlacklistingRuleDeactivateValidator">
-                <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.automatic_blacklisting_configuration" />
-                <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.blacklisting_rule" />
-                <argument type="service" id="sylius.context.channel" />
-            <tag name="validator.constraint_validator" />
-        </service>
     </services>
 </container>
