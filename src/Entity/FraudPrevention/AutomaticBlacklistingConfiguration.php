@@ -45,6 +45,12 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
     /** @var bool */
     protected $addFraudSuspicion = true;
 
+    /** @var int */
+    protected $permittedFraudSuspicionCount;
+
+    /** @var string */
+    protected $permittedFraudSuspicionTime;
+
     public function __construct()
     {
         $this->channels = new ArrayCollection();
@@ -129,5 +135,25 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
     public function setAddFraudSuspicion(bool $addFraudSuspicion): void
     {
         $this->addFraudSuspicion = $addFraudSuspicion;
+    }
+
+    public function getPermittedFraudSuspicionCount(): ?int
+    {
+        return $this->permittedFraudSuspicionCount;
+    }
+
+    public function setPermittedFraudSuspicionCount(?int $permittedFraudSuspicionCount): void
+    {
+        $this->permittedFraudSuspicionCount = $permittedFraudSuspicionCount;
+    }
+
+    public function getPermittedFraudSuspicionTime(): ?string
+    {
+        return $this->permittedFraudSuspicionTime;
+    }
+
+    public function setPermittedFraudSuspicionTime(?string $permittedFraudSuspicionTime): void
+    {
+        $this->permittedFraudSuspicionTime = $permittedFraudSuspicionTime;
     }
 }
