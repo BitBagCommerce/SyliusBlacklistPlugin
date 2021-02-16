@@ -26,5 +26,8 @@
                 <option name="groups">bitbag</option>
             </constraint>
         </property>
+        <constraint name="BitBag\SyliusBlacklistPlugin\Validator\Constraints\AutomaticBlacklistingConfiguration\AddFraudSuspicionWithSettings">
+            <option name="groups">bitbag</option>
+        </constraint>
     </class>
 </constraint-mapping>

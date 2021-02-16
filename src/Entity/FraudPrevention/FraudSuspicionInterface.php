@@ -14,8 +14,9 @@ namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
-interface FraudSuspicionInterface extends ResourceInterface
+interface FraudSuspicionInterface extends ResourceInterface, TimestampableInterface
 {
     /** @var string */
     public const BILLING_ADDRESS_TYPE = 'billing';

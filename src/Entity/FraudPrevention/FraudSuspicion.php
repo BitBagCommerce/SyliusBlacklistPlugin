@@ -13,9 +13,12 @@ namespace BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 class FraudSuspicion implements FraudSuspicionInterface
 {
+    use TimestampableTrait;
+
     /** @var int|null */
     protected $id;
 
