@@ -27,14 +27,22 @@ final class AddFraudSuspicionWithSettingsValidator extends ConstraintValidator
         }
 
         if (
-            null === $automaticBlacklistingConfiguration->getPermittedFraudSuspicionCount() ||
-            0 === $automaticBlacklistingConfiguration->getPermittedFraudSuspicionCount()
+            null === $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber() ||
+            0 === $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber()
         ) {
-            $this->context->buildViolation($constraint->message)->addViolation();
+            $this->context
+                ->buildViolation($constraint->fraudSuspicionsNumberNotBlankMessage)
+                ->atPath('permittedFraudSuspicionsNumber')
+                ->addViolation()
+            ;
         }
 
         if (null === $automaticBlacklistingConfiguration->getPermittedFraudSuspicionTime()) {
-            $this->context->buildViolation($constraint->message)->addViolation();
+            $this->context
+                ->buildViolation($constraint->fraudSuspicionTimeNotBlankMessage)
+                ->atPath('permittedFraudSuspicionTime')
+                ->addViolation()
+            ;
         }
     }
 }

@@ -14,6 +14,11 @@ bitbag_sylius_blacklist_plugin:
         name:
             not_blank: The configuration name cannot be blank
             max_length: The configuration name is too long
+    automatic_blacklisting_configuration:
+        fraud_suspicions_number:
+            not_blank: Permitted fraud suspicions number cannot be blank
+        fraud_suspicions_time:
+            not_blank: Permitted fraud suspicions time cannot be blank
     form:
         error:
             cannot_place_order: Something went wrong. You cannot place the order.

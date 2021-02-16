@@ -11,14 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Processor;
 
-use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleEligibilityCheckerInterface;
-use BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface;
+use BitBag\SyliusBlacklistPlugin\Checker\FraudSuspicion\FraudSuspicionActionEligibilityCheckerInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingConfigurationInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingRuleInterface;
-use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use BitBag\SyliusBlacklistPlugin\Factory\FraudSuspicionFactoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\AutomaticBlacklistingConfigurationRepositoryInterface;
-use BitBag\SyliusBlacklistPlugin\Repository\BlacklistingRuleRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\FraudSuspicionRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\OrderRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolverInterface;
@@ -45,13 +42,17 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
     /** @var FraudSuspicionRepositoryInterface */
     private $fraudSuspicionRepository;
 
+    /** @var FraudSuspicionActionEligibilityCheckerInterface */
+    private $fraudSuspicionActionEligibilityChecker;
+
     public function __construct(
         ServiceRegistryInterface $serviceRegistry,
         OrderRepositoryInterface $orderRepository,
         AutomaticBlacklistingConfigurationRepositoryInterface $automaticBlacklistingConfigurationRepository,
         CustomerStateResolverInterface $customerStateResolver,
         FraudSuspicionFactoryInterface $fraudSuspicionFactory,
-        FraudSuspicionRepositoryInterface $fraudSuspicionRepository
+        FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
+        FraudSuspicionActionEligibilityCheckerInterface $fraudSuspicionActionEligibilityChecker
     ) {
         $this->serviceRegistry = $serviceRegistry;
         $this->orderRepository = $orderRepository;
@@ -59,6 +60,7 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
         $this->customerStateResolver = $customerStateResolver;
         $this->fraudSuspicionFactory = $fraudSuspicionFactory;
         $this->fraudSuspicionRepository = $fraudSuspicionRepository;
+        $this->fraudSuspicionActionEligibilityChecker = $fraudSuspicionActionEligibilityChecker;
     }
 
     public function process(OrderInterface $order): bool
@@ -80,7 +82,7 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
                 if ($this->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order)) {
                     if (
                         $automaticBlacklistingConfiguration->isAddFraudSuspicion() &&
-                        $this->canAddFraudSuspicion($order, $automaticBlacklistingConfiguration)
+                        $this->fraudSuspicionActionEligibilityChecker->canAddFraudSuspicion($order, $automaticBlacklistingConfiguration)
                     ) {
                         $fraudSuspicion = $this->fraudSuspicionFactory->createForAutomaticBlacklistingConfiguration($order);
 
@@ -100,32 +102,5 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
         $checker = $this->serviceRegistry->get($automaticBlacklistingRule->getType());
 
         return $checker->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order, $this->orderRepository);
-    }
-
-    private function canAddFraudSuspicion(
-        OrderInterface $order,
-        AutomaticBlacklistingConfigurationInterface $automaticBlacklistingConfiguration
-    ): bool {
-        if (null === $this->fraudSuspicionRepository->findOneBy(['order' => $order])) {
-            return false;
-        }
-
-        $date = (new \DateTime())->modify('- ' . $automaticBlacklistingConfiguration->getPermittedFraudSuspicionTime());
-
-        $customer = $order->getCustomer();
-
-        $lastFraudSuspicionsOfCustomer = $this->fraudSuspicionRepository->countByCustomerAndCommentAndDate(
-            $order->getCustomer(),
-            FraudSuspicionInterface::AUTOMATIC_BLACKLISTING_CONFIGURATION_COMMENT,
-            $date
-        );
-
-        if ($lastFraudSuspicionsOfCustomer >= $automaticBlacklistingConfiguration->getPermittedFraudSuspicionCount()) {
-            $customer->setFraudStatus(FraudStatusInterface::FRAUD_STATUS_BLACKLISTED);
-
-            return false;
-        }
-
-        return true;
     }
 }

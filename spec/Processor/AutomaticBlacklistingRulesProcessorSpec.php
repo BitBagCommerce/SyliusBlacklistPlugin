@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace spec\BitBag\SyliusBlacklistPlugin\Processor;
 
 use BitBag\SyliusBlacklistPlugin\Checker\AutomaticBlacklistingRule\OrdersAutomaticBlacklistingRuleChecker;
-use BitBag\SyliusBlacklistPlugin\Checker\BlacklistingRule\BlacklistingRuleEligibilityCheckerInterface;
+use BitBag\SyliusBlacklistPlugin\Checker\FraudSuspicion\FraudSuspicionActionEligibilityCheckerInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingConfigurationInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingRuleInterface;
-use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\BlacklistingRuleInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use BitBag\SyliusBlacklistPlugin\Factory\FraudSuspicionFactoryInterface;
 use BitBag\SyliusBlacklistPlugin\Processor\AutomaticBlacklistingRulesProcessor;
 use BitBag\SyliusBlacklistPlugin\Processor\AutomaticBlacklistingRulesProcessorInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\AutomaticBlacklistingConfigurationRepositoryInterface;
-use BitBag\SyliusBlacklistPlugin\Repository\BlacklistingRuleRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\FraudSuspicionRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\OrderRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolverInterface;
@@ -23,7 +21,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
 
 final class AutomaticBlacklistingRulesProcessorSpec extends ObjectBehavior
 {
@@ -34,8 +31,7 @@ final class AutomaticBlacklistingRulesProcessorSpec extends ObjectBehavior
         CustomerStateResolverInterface $customerStateResolver,
         FraudSuspicionFactoryInterface $fraudSuspicionFactory,
         FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
-        BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker,
-        BlacklistingRuleRepositoryInterface $blacklistingRuleRepository
+        FraudSuspicionActionEligibilityCheckerInterface $fraudSuspicionActionEligibilityChecker
     ): void {
         $this->beConstructedWith(
             $serviceRegistry,
@@ -44,8 +40,7 @@ final class AutomaticBlacklistingRulesProcessorSpec extends ObjectBehavior
             $customerStateResolver,
             $fraudSuspicionFactory,
             $fraudSuspicionRepository,
-            $blacklistingRuleEligibilityChecker,
-            $blacklistingRuleRepository
+            $fraudSuspicionActionEligibilityChecker
         );
     }
 
@@ -112,13 +107,10 @@ final class AutomaticBlacklistingRulesProcessorSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         ServiceRegistryInterface $serviceRegistry,
         OrdersAutomaticBlacklistingRuleChecker $ordersAutomaticBlacklistingRuleChecker,
-        BlacklistingRuleRepositoryInterface $blacklistingRuleRepository,
-        BlacklistingRuleInterface $blacklistingRule,
-        BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker,
-        CustomerInterface $customer,
         FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
         FraudSuspicionFactoryInterface $fraudSuspicionFactory,
-        FraudSuspicionInterface $fraudSuspicion
+        FraudSuspicionInterface $fraudSuspicion,
+        FraudSuspicionActionEligibilityCheckerInterface $fraudSuspicionActionEligibilityChecker
     ): void {
         $automaticBlacklistingRules = new ArrayCollection([$automaticBlacklistingRule->getWrappedObject()]);
 
@@ -129,12 +121,8 @@ final class AutomaticBlacklistingRulesProcessorSpec extends ObjectBehavior
         $serviceRegistry->get('orders')->willReturn($ordersAutomaticBlacklistingRuleChecker);
         $ordersAutomaticBlacklistingRuleChecker->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order, $orderRepository)->willReturn(true);
         $automaticBlacklistingConfiguration->isAddFraudSuspicion()->willReturn(true);
-        $blacklistingRuleRepository->findActiveByChannel($channel)->willReturn([$blacklistingRule]);
-        $order->getCustomer()->willReturn($customer);
-        $blacklistingRuleEligibilityChecker->isEligible($blacklistingRule, $customer)->willReturn(true);
-        $fraudSuspicionRepository->findOneBy(['order' => $order])->willReturn(null);
-        $fraudSuspicionFactory->createForOrder($order)->willReturn($fraudSuspicion);
-        $fraudSuspicion->getCustomerIp()->willReturn(null);
+        $fraudSuspicionActionEligibilityChecker->canAddFraudSuspicion($order, $automaticBlacklistingConfiguration)->willReturn(true);
+        $fraudSuspicionFactory->createForAutomaticBlacklistingConfiguration($order)->willReturn($fraudSuspicion);
 
         $order->getChannel()->shouldBeCalled();
         $automaticBlacklistingConfigurationRepository->findActiveByChannel($channel)->shouldBeCalled();
@@ -142,13 +130,9 @@ final class AutomaticBlacklistingRulesProcessorSpec extends ObjectBehavior
         $automaticBlacklistingRule->getType()->shouldBeCalled();
         $serviceRegistry->get('orders')->shouldBeCalled();
         $ordersAutomaticBlacklistingRuleChecker->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order, $orderRepository)->shouldBeCalled();
-        $blacklistingRuleRepository->findActiveByChannel($channel)->shouldBeCalled();
-        $order->getCustomer()->shouldBeCalled();
-        $blacklistingRuleEligibilityChecker->isEligible($blacklistingRule, $customer)->shouldBeCalled();
-        $fraudSuspicionRepository->findOneBy(['order' => $order])->shouldBeCalled();
-        $fraudSuspicionFactory->createForOrder($order)->shouldBeCalled();
-        $fraudSuspicion->setAddressType(FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE)->shouldBeCalled();
-        $fraudSuspicion->getCustomerIp()->willReturn('127.0.0.1');
+        $automaticBlacklistingConfiguration->isAddFraudSuspicion()->shouldBeCalled();
+        $fraudSuspicionActionEligibilityChecker->canAddFraudSuspicion($order, $automaticBlacklistingConfiguration)->shouldBeCalled();
+        $fraudSuspicionFactory->createForAutomaticBlacklistingConfiguration($order)->shouldBeCalled();
         $fraudSuspicionRepository->add($fraudSuspicion)->shouldBeCalled();
 
         $this->process($order)->shouldReturn(true);
