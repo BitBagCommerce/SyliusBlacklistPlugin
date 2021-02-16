@@ -47,9 +47,9 @@ interface AutomaticBlacklistingConfigurationInterface extends ResourceInterface,
 
     public function setAddFraudSuspicion(bool $addFraudSuspicion): void;
 
-    public function getPermittedFraudSuspicionCount(): ?int;
+    public function getPermittedFraudSuspicionsNumber(): ?int;
 
-    public function setPermittedFraudSuspicionCount(?int $permittedFraudSuspicionCount): void;
+    public function setPermittedFraudSuspicionsNumber(?int $permittedFraudSuspicionsNumber): void;
 
     public function getPermittedFraudSuspicionTime(): ?string;
 

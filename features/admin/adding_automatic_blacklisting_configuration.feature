@@ -21,24 +21,38 @@ Feature: Adding a new automatic blacklisting configuration
         And the "First configuration" should appear in the registry
 
     @ui @javascript
-    Scenario: Successfully adding a new automatic blacklisting configuration with max number of payment failures
+    Scenario: Successfully adding a new automatic blacklisting configuration
         When I go to the create automatic blacklisting configuration page
         And I name it "Second configuration"
+        And I select "United States" as channels
+        And I enable it
+        And I add the "Max number of payment failures" rule configured with count "3" and "Per day" as date modifier
+        And I want to add fraud suspicion row after exceeding limit
+        And I complete permitted fraud suspicions number with "2"
+        And I select "Per day" as permitted fraud suspicions time
+        And I add it
+        Then I should be notified that the automatic blacklisting configuration has been created
+        And the "Second configuration" should appear in the registry
+
+    @ui @javascript
+    Scenario: Successfully adding a new automatic blacklisting configuration with max number of payment failures
+        When I go to the create automatic blacklisting configuration page
+        And I name it "Third configuration"
         And I select "United States" as channels
         And I enable it
         And I add the "Max number of payment failures" rule configured with count "3" and "Per day" as date modifier
         And I do not want to add fraud suspicion row after exceeding limit
         And I add it
         Then I should be notified that the automatic blacklisting configuration has been created
-        And the "Second configuration" should appear in the registry
+        And the "Third configuration" should appear in the registry
 
     @ui @javascript
-    Scenario: Unsuccessfully adding a new automatic blacklisting configuration with max number of orders and max number of payment failures
+    Scenario: Unsuccessfully adding a new automatic blacklisting configuration
         When I go to the create automatic blacklisting configuration page
-        And I name it "Third configuration"
+        And I name it "Fourth configuration"
         And I select "United States" as channels
         And I enable it
-        And I add the "Max number of payment failures" rule configured with count "3" and "Per day" as date modifier
         And I add the "Max number of orders" rule configured with count "5" and "Per day" as date modifier
+        And I want to add fraud suspicion row after exceeding limit
         And I add it
-        Then I should be notified that the store has to have some manual blacklisting rule
+        Then I should be notified that I need to add settings to fraud suspicion section

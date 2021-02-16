@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\Form\Type;
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingRuleInterface;
+use Imagine\Image\Histogram\Range;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -19,6 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 final class AutomaticBlacklistingConfigurationType extends AbstractResourceType
 {
@@ -50,9 +52,12 @@ final class AutomaticBlacklistingConfigurationType extends AbstractResourceType
                 'label' => 'bitbag_sylius_blacklist_plugin.ui.add_fraud_suspicion_row_after_exceed_limit',
                 'required' => false
             ])
-            ->add('permittedFraudSuspicionCount', NumberType::class, [
-                'label' => 'bitbag_sylius_blacklist_plugin.ui.permitted_fraud_suspicion_count',
+            ->add('permittedFraudSuspicionsNumber', NumberType::class, [
+                'label' => 'bitbag_sylius_blacklist_plugin.ui.permitted_fraud_suspicions_number',
                 'required' => false,
+                'constraints' => [
+                    new GreaterThanOrEqual(['value' => 1, 'groups' => ['bitbag']])
+                ]
             ])
             ->add('permittedFraudSuspicionTime', ChoiceType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.ui.permitted_fraud_suspicion_time',

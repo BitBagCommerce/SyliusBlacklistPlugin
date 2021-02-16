@@ -15,7 +15,9 @@ use Symfony\Component\Validator\Constraint;
 
 class AddFraudSuspicionWithSettings extends Constraint
 {
-    public $message = 'bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.add_settings';
+    public $fraudSuspicionsNumberNotBlankMessage = 'bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.fraud_suspicions_number.not_blank';
+
+    public $fraudSuspicionTimeNotBlankMessage = 'bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.fraud_suspicions_time.not_blank';
 
     /** @var array */
     public $options;

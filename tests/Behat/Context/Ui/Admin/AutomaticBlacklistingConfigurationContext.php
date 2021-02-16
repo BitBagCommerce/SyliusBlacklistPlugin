@@ -208,6 +208,23 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     }
 
     /**
+     * @Given I want to add fraud suspicion row after exceeding limit
+     */
+    public function iWantToAddFraudSuspicionRowAfterExceedingLimit()
+    {
+        $this->resolveCurrentPage()->checkField('Add fraud suspicion row after exceeding limit');
+    }
+
+    /**
+     * @Then I should be notified that I need to add settings to fraud suspicion section
+     */
+    public function iShouldBeNotifiedThatINeedToAddSettingsToFraudSuspicionSection()
+    {
+        Assert::true($this->resolveCurrentPage()->containsErrorWithMessage('Permitted fraud suspicions number cannot be blank'));
+        Assert::true($this->resolveCurrentPage()->containsErrorWithMessage('Permitted fraud suspicions time cannot be blank'));
+    }
+
+    /**
      * @Given I change last rule count with :count
      */
     public function iChangeLastRuleCountWith(string $count): void
@@ -216,11 +233,19 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     }
 
     /**
-     * @Then I should be notified that the store has to have some manual blacklisting rule
+     * @Given I complete permitted fraud suspicions number with :number
      */
-    public function iShouldBeNotifiedThatTheStoreHasToHaveSomeManualBlacklistingRule()
+    public function iCompletePermittedFraudSuspicionsNumberWith(string $permittedFraudSuspicionsNumber)
     {
-        $this->resolveCurrentPage()->containsErrorWithMessage('You cannot deactivate manual blacklisting rule when the store has some automatic blacklisting configurations with "Add fraud suspicion row after exceeding limit" set to true');
+        $this->resolveCurrentPage()->fillField('Permitted fraud suspicions number', $permittedFraudSuspicionsNumber);
+    }
+
+    /**
+     * @Given I select :option as permitted fraud suspicions time
+     */
+    public function iSelectAsPermittedFraudSuspicionsTime(string $option)
+    {
+        $this->resolveCurrentPage()->selectOption('Permitted fraud suspicions time', $option);
     }
 
     /**

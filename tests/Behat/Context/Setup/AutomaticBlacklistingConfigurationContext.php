@@ -75,6 +75,7 @@ final class AutomaticBlacklistingConfigurationContext implements Context
         $automaticBlacklistingConfiguration->setName($name);
         $automaticBlacklistingConfiguration->addChannel($channel);
         $automaticBlacklistingConfiguration->enable();
+        $automaticBlacklistingConfiguration->setAddFraudSuspicion(false);
 
         return $automaticBlacklistingConfiguration;
     }

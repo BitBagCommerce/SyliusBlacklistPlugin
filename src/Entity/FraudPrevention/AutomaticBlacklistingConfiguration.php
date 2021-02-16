@@ -46,7 +46,7 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
     protected $addFraudSuspicion = true;
 
     /** @var int */
-    protected $permittedFraudSuspicionCount;
+    protected $permittedFraudSuspicionsNumber;
 
     /** @var string */
     protected $permittedFraudSuspicionTime;
@@ -137,14 +137,14 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
         $this->addFraudSuspicion = $addFraudSuspicion;
     }
 
-    public function getPermittedFraudSuspicionCount(): ?int
+    public function getPermittedFraudSuspicionsNumber(): ?int
     {
-        return $this->permittedFraudSuspicionCount;
+        return $this->permittedFraudSuspicionsNumber;
     }
 
-    public function setPermittedFraudSuspicionCount(?int $permittedFraudSuspicionCount): void
+    public function setPermittedFraudSuspicionsNumber(?int $permittedFraudSuspicionsNumber): void
     {
-        $this->permittedFraudSuspicionCount = $permittedFraudSuspicionCount;
+        $this->permittedFraudSuspicionsNumber = $permittedFraudSuspicionsNumber;
     }
 
     public function getPermittedFraudSuspicionTime(): ?string
