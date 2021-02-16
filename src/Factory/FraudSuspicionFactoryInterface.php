@@ -20,5 +20,7 @@ interface FraudSuspicionFactoryInterface extends FactoryInterface
     public function createNew(): FraudSuspicionInterface;
 
     public function createForOrder(OrderInterface $order): FraudSuspicionInterface;
+
+    public function createForAutomaticBlacklistingConfiguration(OrderInterface $order): FraudSuspicionInterface;
 }
 
