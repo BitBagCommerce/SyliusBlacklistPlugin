@@ -241,11 +241,12 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     }
 
     /**
-     * @Given I select :option as permitted fraud suspicions time
+     * @Given I select :option as time range
      */
     public function iSelectAsPermittedFraudSuspicionsTime(string $option)
     {
-        $this->resolveCurrentPage()->selectOption('Permitted fraud suspicions time', $option);
+        $selectTimeRangeId = 'bitbag_sylius_blacklist_plugin_automatic_blacklisting_configuration_permittedFraudSuspicionsTime';
+        $this->resolveCurrentPage()->selectOption($selectTimeRangeId, $option);
     }
 
     /**
