@@ -41,7 +41,7 @@ final class FraudSuspicionActionEligibilityChecker implements FraudSuspicionActi
             return false;
         }
 
-        $date = (new \DateTime())->modify('- ' . $automaticBlacklistingConfiguration->getPermittedFraudSuspicionTime());
+        $date = (new \DateTime())->modify('- ' . $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsTime());
 
         $customer = $order->getCustomer();
 

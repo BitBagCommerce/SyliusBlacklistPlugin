@@ -15,7 +15,7 @@
         <field name="enabled" type="boolean" column="enabled" />
         <field name="addFraudSuspicion" type="boolean" column="add_fraud_suspicion" />
         <field name="permittedFraudSuspicionsNumber" type="integer" column="permitted_fraud_suspicions_number" nullable="true" />
-        <field name="permittedFraudSuspicionTime" type="string" column="permitted_fraud_suspicion_time" nullable="true" />
+        <field name="permittedFraudSuspicionsTime" type="string" column="permitted_fraud_suspicions_time" nullable="true" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
