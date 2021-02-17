@@ -47,7 +47,7 @@ class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
         $fraudSuspicion = $this->createForOrder($order);
 
         $fraudSuspicion->setAddressType(FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE);
-        $fraudSuspicion->setComment(FraudSuspicionInterface::AUTOMATIC_BLACKLISTING_CONFIGURATION_COMMENT);
+        $fraudSuspicion->setStatus(FraudSuspicionInterface::AUTO_GENERATED_STATUS);
 
         if (null === $fraudSuspicion->getCustomerIp()) {
             $fraudSuspicion->setCustomerIp($_SERVER['REMOTE_ADDR']);

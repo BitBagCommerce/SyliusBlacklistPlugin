@@ -47,7 +47,7 @@ final class FraudSuspicionActionEligibilityChecker implements FraudSuspicionActi
 
         $lastFraudSuspicionsOfCustomer = $this->fraudSuspicionRepository->countByCustomerAndCommentAndDate(
             $customer,
-            FraudSuspicionInterface::AUTOMATIC_BLACKLISTING_CONFIGURATION_COMMENT,
+            FraudSuspicionInterface::AUTO_GENERATED_STATUS,
             $date
         );
 

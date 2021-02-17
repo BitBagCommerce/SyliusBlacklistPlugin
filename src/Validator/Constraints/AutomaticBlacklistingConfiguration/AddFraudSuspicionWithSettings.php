@@ -13,7 +13,7 @@ namespace BitBag\SyliusBlacklistPlugin\Validator\Constraints\AutomaticBlacklisti
 
 use Symfony\Component\Validator\Constraint;
 
-class AddFraudSuspicionWithSettings extends Constraint
+final class AddFraudSuspicionWithSettings extends Constraint
 {
     public $fraudSuspicionsNumberNotBlankMessage = 'bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.fraud_suspicions_number.not_blank';
 
