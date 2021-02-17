@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\Form\Type;
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingRuleInterface;
-use Imagine\Image\Histogram\Range;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -59,14 +58,16 @@ final class AutomaticBlacklistingConfigurationType extends AbstractResourceType
                     new GreaterThanOrEqual(['value' => 1, 'groups' => ['bitbag']])
                 ]
             ])
-            ->add('permittedFraudSuspicionTime', ChoiceType::class, [
-                'label' => 'bitbag_sylius_blacklist_plugin.ui.permitted_fraud_suspicion_time',
+            ->add('permittedFraudSuspicionsTime', ChoiceType::class, [
+                'label' => false,
+                'empty_data' => null,
                 'required' => false,
                 'choices' => [
                     'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_day' => AutomaticBlacklistingRuleInterface::PER_DAY,
                     'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_week' => AutomaticBlacklistingRuleInterface::PER_WEEK,
                     'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_month' => AutomaticBlacklistingRuleInterface::PER_MONTH,
                 ],
+                'placeholder' => 'bitbag_sylius_blacklist_plugin.ui.choose_time_range'
             ])
             ->add('rules', AutomaticBlacklistingRuleCollectionType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.rules',

@@ -37,10 +37,10 @@ final class AddFraudSuspicionWithSettingsValidator extends ConstraintValidator
             ;
         }
 
-        if (null === $automaticBlacklistingConfiguration->getPermittedFraudSuspicionTime()) {
+        if (null === $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsTime()) {
             $this->context
                 ->buildViolation($constraint->fraudSuspicionTimeNotBlankMessage)
-                ->atPath('permittedFraudSuspicionTime')
+                ->atPath('permittedFraudSuspicionsTime')
                 ->addViolation()
             ;
         }

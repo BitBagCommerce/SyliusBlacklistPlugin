@@ -31,7 +31,8 @@ bitbag_sylius_blacklist_plugin:
         edit_blacklisting_rule: Edit manual blacklisting rule
         rules_are_connected_by_or: The automatic blacklisitng configuration will be applied after the user meets one of the rules you will add below
         permitted_fraud_suspicions_number: Permitted fraud suspicions number
-        permitted_fraud_suspicion_time: Permitted fraud suspicions time
+        permitted_fraud_suspicions_time: Permitted fraud suspicions time
+        choose_time_range: Choose time range
     form:
         blacklisting_rule:
             name: Rule name

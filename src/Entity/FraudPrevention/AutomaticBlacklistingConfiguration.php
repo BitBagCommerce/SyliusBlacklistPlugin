@@ -43,13 +43,13 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
     protected $rules;
 
     /** @var bool */
-    protected $addFraudSuspicion = true;
+    protected $addFraudSuspicion = false;
 
     /** @var int */
     protected $permittedFraudSuspicionsNumber;
 
     /** @var string */
-    protected $permittedFraudSuspicionTime;
+    protected $permittedFraudSuspicionsTime;
 
     public function __construct()
     {
@@ -147,13 +147,13 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
         $this->permittedFraudSuspicionsNumber = $permittedFraudSuspicionsNumber;
     }
 
-    public function getPermittedFraudSuspicionTime(): ?string
+    public function getPermittedFraudSuspicionsTime(): ?string
     {
-        return $this->permittedFraudSuspicionTime;
+        return $this->permittedFraudSuspicionsTime;
     }
 
-    public function setPermittedFraudSuspicionTime(?string $permittedFraudSuspicionTime): void
+    public function setPermittedFraudSuspicionsTime(?string $permittedFraudSuspicionsTime): void
     {
-        $this->permittedFraudSuspicionTime = $permittedFraudSuspicionTime;
+        $this->permittedFraudSuspicionsTime = $permittedFraudSuspicionsTime;
     }
 }
