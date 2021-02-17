@@ -35,16 +35,16 @@ final class AutomaticBlacklistingConfigurationSpec extends ObjectBehavior
 
     function it_has_add_fraud_suspicion_after_exceed_limit_set_true_by_default(): void
     {
-        $this->isAddFraudSuspicion()->shouldReturn(true);
+        $this->isAddFraudSuspicion()->shouldReturn(false);
     }
 
     function it_sets_add_fraud_suspicion_after_exceed_limit(): void
     {
-        $this->isAddFraudSuspicion()->shouldReturn(true);
-
-        $this->setAddFraudSuspicion(false);
-
         $this->isAddFraudSuspicion()->shouldReturn(false);
+
+        $this->setAddFraudSuspicion(true);
+
+        $this->isAddFraudSuspicion()->shouldReturn(true);
     }
 
     function it_has_empty_collection_of_channels_by_default(): void

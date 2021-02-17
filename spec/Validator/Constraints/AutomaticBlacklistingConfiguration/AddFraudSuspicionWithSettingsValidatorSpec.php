@@ -47,18 +47,18 @@ final class AddFraudSuspicionWithSettingsValidatorSpec extends ObjectBehavior
         $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber()->willReturn(null);
         $context->buildViolation('bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.fraud_suspicions_number.not_blank')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('permittedFraudSuspicionsNumber')->willReturn($constraintViolationBuilder);
-        $automaticBlacklistingConfiguration->getPermittedFraudSuspicionTime()->willReturn(null);
+        $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsTime()->willReturn(null);
         $context->buildViolation('bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.fraud_suspicions_time.not_blank')->willReturn($secondConstraintViolationBuilder);
-        $secondConstraintViolationBuilder->atPath('permittedFraudSuspicionTime')->willReturn($secondConstraintViolationBuilder);
+        $secondConstraintViolationBuilder->atPath('permittedFraudSuspicionsTime')->willReturn($secondConstraintViolationBuilder);
 
         $automaticBlacklistingConfiguration->isAddFraudSuspicion()->shouldBeCalled();
         $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber()->shouldBeCalled();
         $context->buildViolation('bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.fraud_suspicions_number.not_blank')->shouldBeCalled();
         $constraintViolationBuilder->atPath('permittedFraudSuspicionsNumber')->shouldBeCalled();
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
-        $automaticBlacklistingConfiguration->getPermittedFraudSuspicionTime()->shouldBeCalled();
+        $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsTime()->shouldBeCalled();
         $context->buildViolation('bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.fraud_suspicions_time.not_blank')->shouldBeCalled();
-        $secondConstraintViolationBuilder->atPath('permittedFraudSuspicionTime')->shouldBeCalled();
+        $secondConstraintViolationBuilder->atPath('permittedFraudSuspicionsTime')->shouldBeCalled();
         $secondConstraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $this->initialize($context);

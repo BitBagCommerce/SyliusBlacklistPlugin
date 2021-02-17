@@ -55,7 +55,7 @@ final class FraudSuspicionActionEligibilityCheckerSpec extends ObjectBehavior
         CustomerStateResolverInterface $customerStateResolver
     ): void {
         $fraudSuspicionRepository->findOneBy(['order' => $order])->willReturn(null);
-        $automaticBlacklistingConfiguration->getPermittedFraudSuspicionTime()->willReturn('1 day');
+        $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsTime()->willReturn('1 day');
         $order->getCustomer()->willReturn($customer);
         $fraudSuspicionRepository->countByCustomerAndCommentAndDate(
             $customer,
@@ -65,7 +65,7 @@ final class FraudSuspicionActionEligibilityCheckerSpec extends ObjectBehavior
         $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber()->willReturn(2);
 
         $fraudSuspicionRepository->findOneBy(['order' => $order])->shouldBeCalled();
-        $automaticBlacklistingConfiguration->getPermittedFraudSuspicionTime()->shouldBeCalled();
+        $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsTime()->shouldBeCalled();
         $order->getCustomer()->shouldBeCalled();
         $fraudSuspicionRepository->countByCustomerAndCommentAndDate(
             $customer,
@@ -86,7 +86,7 @@ final class FraudSuspicionActionEligibilityCheckerSpec extends ObjectBehavior
         CustomerStateResolverInterface $customerStateResolver
     ): void {
         $fraudSuspicionRepository->findOneBy(['order' => $order])->willReturn(null);
-        $automaticBlacklistingConfiguration->getPermittedFraudSuspicionTime()->willReturn('1 day');
+        $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsTime()->willReturn('1 day');
         $order->getCustomer()->willReturn($customer);
         $fraudSuspicionRepository->countByCustomerAndCommentAndDate(
             $customer,
@@ -96,7 +96,7 @@ final class FraudSuspicionActionEligibilityCheckerSpec extends ObjectBehavior
         $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber()->willReturn(3);
 
         $fraudSuspicionRepository->findOneBy(['order' => $order])->shouldBeCalled();
-        $automaticBlacklistingConfiguration->getPermittedFraudSuspicionTime()->shouldBeCalled();
+        $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsTime()->shouldBeCalled();
         $order->getCustomer()->shouldBeCalled();
         $fraudSuspicionRepository->countByCustomerAndCommentAndDate(
             $customer,

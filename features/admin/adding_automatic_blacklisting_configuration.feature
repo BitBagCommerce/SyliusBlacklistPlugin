@@ -29,7 +29,7 @@ Feature: Adding a new automatic blacklisting configuration
         And I add the "Max number of payment failures" rule configured with count "3" and "Per day" as date modifier
         And I want to add fraud suspicion row after exceeding limit
         And I complete permitted fraud suspicions number with "2"
-        And I select "Per day" as permitted fraud suspicions time
+        And I select "Per day" as time range
         And I add it
         Then I should be notified that the automatic blacklisting configuration has been created
         And the "Second configuration" should appear in the registry
