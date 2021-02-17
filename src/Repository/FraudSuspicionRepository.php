@@ -62,16 +62,16 @@ final class FraudSuspicionRepository extends EntityRepository implements FraudSu
         ;
     }
 
-    public function countByCustomerAndCommentAndDate(CustomerInterface $customer, string $comment, \DateTime $date): string
+    public function countByCustomerAndCommentAndDate(CustomerInterface $customer, string $status, \DateTime $date): string
     {
         return $this->createQueryBuilder('o')
             ->select(['COUNT(o.id)'])
             ->innerJoin('o.customer', 'customer')
             ->andWhere('customer = :customer')
-            ->andWhere('o.comment = :comment')
+            ->andWhere('o.status = :comment')
             ->andWhere('o.createdAt >= :date')
             ->setParameter('customer', $customer)
-            ->setParameter('comment', $comment)
+            ->setParameter('comment', $status)
             ->setParameter('date', $date)
             ->getQuery()
             ->getSingleScalarResult()

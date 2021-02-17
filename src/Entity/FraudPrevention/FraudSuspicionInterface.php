@@ -25,7 +25,10 @@ interface FraudSuspicionInterface extends ResourceInterface, TimestampableInterf
     public const SHIPPING_ADDRESS_TYPE = 'shipping';
 
     /** @var string */
-    public const AUTOMATIC_BLACKLISTING_CONFIGURATION_COMMENT = 'Auto-generated comment from automatic blacklisting configuration';
+    public const AUTO_GENERATED_STATUS = 'auto-generated';
+
+    /** @var string */
+    public const MANUALLY_ADDED_STATUS = 'manually-added';
 
     public function getId(): ?int;
 
@@ -88,4 +91,8 @@ interface FraudSuspicionInterface extends ResourceInterface, TimestampableInterf
     public function getComment(): ?string;
 
     public function setComment(?string $comment): void;
+
+    public function getStatus(): ?string;
+
+    public function setStatus(?string $status): void;
 }

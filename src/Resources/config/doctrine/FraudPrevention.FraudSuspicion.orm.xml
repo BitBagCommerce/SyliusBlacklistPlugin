@@ -28,6 +28,7 @@
         <field name="customerIp" type="string" column="customer_ip" nullable="true" />
         <field name="addressType" type="string" column="address_type" />
         <field name="comment" type="string" column="comment" nullable="true" />
+        <field name="status" type="string" column="status" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

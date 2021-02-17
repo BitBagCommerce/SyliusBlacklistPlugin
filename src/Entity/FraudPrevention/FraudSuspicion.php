@@ -67,6 +67,9 @@ class FraudSuspicion implements FraudSuspicionInterface
     /** @var string|null */
     protected $comment;
 
+    /** @var string|null */
+    protected $status = self::MANUALLY_ADDED_STATUS;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -220,5 +223,15 @@ class FraudSuspicion implements FraudSuspicionInterface
     public function setComment(?string $comment): void
     {
         $this->comment = $comment;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): void
+    {
+        $this->status = $status;
     }
 }

@@ -59,7 +59,7 @@ final class FraudSuspicionActionEligibilityCheckerSpec extends ObjectBehavior
         $order->getCustomer()->willReturn($customer);
         $fraudSuspicionRepository->countByCustomerAndCommentAndDate(
             $customer,
-            FraudSuspicionInterface::AUTOMATIC_BLACKLISTING_CONFIGURATION_COMMENT,
+            FraudSuspicionInterface::AUTO_GENERATED_STATUS,
             Argument::type(\DateTime::class)
         )->willReturn('2');
         $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber()->willReturn(2);
@@ -69,7 +69,7 @@ final class FraudSuspicionActionEligibilityCheckerSpec extends ObjectBehavior
         $order->getCustomer()->shouldBeCalled();
         $fraudSuspicionRepository->countByCustomerAndCommentAndDate(
             $customer,
-            FraudSuspicionInterface::AUTOMATIC_BLACKLISTING_CONFIGURATION_COMMENT,
+            FraudSuspicionInterface::AUTO_GENERATED_STATUS,
             Argument::type(\DateTime::class)
         )->shouldBeCalled();
         $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber()->shouldBeCalled();
@@ -90,7 +90,7 @@ final class FraudSuspicionActionEligibilityCheckerSpec extends ObjectBehavior
         $order->getCustomer()->willReturn($customer);
         $fraudSuspicionRepository->countByCustomerAndCommentAndDate(
             $customer,
-            FraudSuspicionInterface::AUTOMATIC_BLACKLISTING_CONFIGURATION_COMMENT,
+            FraudSuspicionInterface::AUTO_GENERATED_STATUS,
             Argument::type(\DateTime::class)
         )->willReturn('2');
         $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber()->willReturn(3);
@@ -100,7 +100,7 @@ final class FraudSuspicionActionEligibilityCheckerSpec extends ObjectBehavior
         $order->getCustomer()->shouldBeCalled();
         $fraudSuspicionRepository->countByCustomerAndCommentAndDate(
             $customer,
-            FraudSuspicionInterface::AUTOMATIC_BLACKLISTING_CONFIGURATION_COMMENT,
+            FraudSuspicionInterface::AUTO_GENERATED_STATUS,
             Argument::type(\DateTime::class)
         )->shouldBeCalled();
         $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber()->shouldBeCalled();

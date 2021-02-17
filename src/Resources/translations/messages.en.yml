@@ -33,6 +33,9 @@ bitbag_sylius_blacklist_plugin:
         permitted_fraud_suspicions_number: Permitted fraud suspicions number
         permitted_fraud_suspicions_time: Permitted fraud suspicions time
         choose_time_range: Choose time range
+        status: Status
+        auto_generated: Auto generated
+        manually_added: Manually added
     form:
         blacklisting_rule:
             name: Rule name

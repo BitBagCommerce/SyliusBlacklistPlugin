@@ -19,6 +19,7 @@ use BitBag\SyliusBlacklistPlugin\Repository\AutomaticBlacklistingConfigurationRe
 use BitBag\SyliusBlacklistPlugin\Repository\FraudSuspicionRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\OrderRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolverInterface;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
@@ -75,22 +76,34 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
 
         /** @var AutomaticBlacklistingConfigurationInterface $automaticBlacklistingConfiguration */
         foreach ($allAutomaticBlacklistingConfiguration as $automaticBlacklistingConfiguration) {
-            $automaticBlacklistingRules = $automaticBlacklistingConfiguration->getRules();
+            if ($this->shouldOrderBeBlocked($automaticBlacklistingConfiguration, $order)) {
 
-            /** @var AutomaticBlacklistingRuleInterface $automaticBlacklistingRule */
-            foreach ($automaticBlacklistingRules as $automaticBlacklistingRule) {
-                if ($this->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order)) {
-                    if (
-                        $automaticBlacklistingConfiguration->isAddFraudSuspicion() &&
-                        $this->fraudSuspicionActionEligibilityChecker->canAddFraudSuspicion($order, $automaticBlacklistingConfiguration)
-                    ) {
-                        $fraudSuspicion = $this->fraudSuspicionFactory->createForAutomaticBlacklistingConfiguration($order);
+                return true;
+            }
+        }
 
-                        $this->fraudSuspicionRepository->add($fraudSuspicion);
-                    }
+        return false;
+    }
 
-                    return true;
+    private function shouldOrderBeBlocked(
+        AutomaticBlacklistingConfigurationInterface $automaticBlacklistingConfiguration,
+        OrderInterface $order
+    ): bool {
+        $automaticBlacklistingRules = $automaticBlacklistingConfiguration->getRules();
+
+        /** @var AutomaticBlacklistingRuleInterface $automaticBlacklistingRule */
+        foreach ($automaticBlacklistingRules as $automaticBlacklistingRule) {
+            if ($this->isBlacklistedOrderAndCustomer($automaticBlacklistingRule, $order)) {
+                if (
+                    $automaticBlacklistingConfiguration->isAddFraudSuspicion() &&
+                    $this->fraudSuspicionActionEligibilityChecker->canAddFraudSuspicion($order, $automaticBlacklistingConfiguration)
+                ) {
+                    $fraudSuspicion = $this->fraudSuspicionFactory->createForAutomaticBlacklistingConfiguration($order);
+
+                    $this->fraudSuspicionRepository->add($fraudSuspicion);
                 }
+
+                return true;
             }
         }
 
