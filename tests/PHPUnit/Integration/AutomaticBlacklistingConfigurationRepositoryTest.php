@@ -31,6 +31,12 @@ class AutomaticBlacklistingConfigurationRepositoryTest extends IntegrationTestCa
         $this->channelRepository = self::$container->get('sylius.repository.channel');
     }
 
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        self::ensureKernelShutdown();
+    }
+
     public function test_active_automatic_blacklisting_configurations_by_channel_were_found(): void
     {
         $this->loadFixturesFromFiles(['test_active_automatic_blacklisting_configurations_by_channel_were_found.yaml']);

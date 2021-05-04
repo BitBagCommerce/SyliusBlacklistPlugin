@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusBlacklistPlugin\StateResolver;
 
 use BitBag\SyliusBlacklistPlugin\Transitions\CustomerTransitions;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 

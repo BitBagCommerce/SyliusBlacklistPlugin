@@ -7,7 +7,7 @@ namespace spec\BitBag\SyliusBlacklistPlugin\StateResolver;
 use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolver;
 use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolverInterface;
 use BitBag\SyliusBlacklistPlugin\Transitions\CustomerTransitions;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
