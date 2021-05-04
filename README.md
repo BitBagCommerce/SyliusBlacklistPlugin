@@ -1,7 +1,4 @@
 <h1 align="center">
-    <a href="http://bitbag.shop" target="_blank">
-        <img src="doc/logo.png" width="55%" />
-    </a>
     <br />
     <a href="https://packagist.org/packages/bitbag/blacklist-plugin" title="License" target="_blank">
         <img src="https://img.shields.io/packagist/l/bitbag/blacklist-plugin.svg" />
