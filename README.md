@@ -8,9 +8,9 @@
 
 ----
 
-[![](https://img.shields.io/packagist/l/bitbag/blacklist-plugin.svg) ](https://packagist.org/packages/bitbag/blacklist-plugin "License") [ ![](https://img.shields.io/packagist/v/bitbag/product-bundle-plugin.svg) ](https://packagist.org/packages/bitbag/blacklist-plugin "Version") [ ![](https://img.shields.io/github/workflow/status/BitBagCommerce/SyliusBlacklistPlugin/Build) ](https://github.com/BitBagCommerce/SyliusBlacklistPlugin/actions "Build status") [![](https://poser.pugx.org/bitbag/blacklist-plugin/downloads)](https://packagist.org/packages/bitbag/blacklist-plugin "Total Downloads") [![Slack](https://img.shields.io/badge/community%20chat-slack-FF1493.svg)](http://sylius-devs.slack.com) [![Support](https://img.shields.io/badge/support-contact%20author-blue])](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_productbundle)
+[![](https://img.shields.io/packagist/l/bitbag/blacklist-plugin.svg) ](https://packagist.org/packages/bitbag/blacklist-plugin "License") [ ![](https://img.shields.io/packagist/v/bitbag/product-bundle-plugin.svg) ](https://packagist.org/packages/bitbag/blacklist-plugin "Version") [ ![](https://img.shields.io/github/workflow/status/BitBagCommerce/SyliusBlacklistPlugin/Build) ](https://github.com/BitBagCommerce/SyliusBlacklistPlugin/actions "Build status") [![](https://poser.pugx.org/bitbag/blacklist-plugin/downloads)](https://packagist.org/packages/bitbag/blacklist-plugin "Total Downloads") [![Slack](https://img.shields.io/badge/community%20chat-slack-FF1493.svg)](http://sylius-devs.slack.com) [![Support](https://img.shields.io/badge/support-contact%20author-blue])](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_blacklist)
 
-At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us working together, feel free to reach us out. You will find out more about our professional services, technologies and contact details at [https://bitbag.io/](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_productbundle).
+At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us working together, feel free to reach us out. You will find out more about our professional services, technologies and contact details at [https://bitbag.io/](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_blacklist).
 
 # Table of Content
 
@@ -37,7 +37,7 @@ This plugin allows you to integrate blacklist features with Sylius platform app.
 ## We are here to help
 This **open-source plugin was developed to help the Sylius community** and make Mollie payments platform available to any Sylius store. If you have any additional questions, would like help with installing or configuring the plugin or need any assistance with your Sylius project - let us know!
 
-[![](https://bitbag.io/wp-content/uploads/2020/10/button-contact.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_productbundle)
+[![](https://bitbag.io/wp-content/uploads/2020/10/button-contact.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_blacklist)
 
 ## About us
 
@@ -253,11 +253,11 @@ Some numbers regarding Sylius:
 
 ---
 
-If you need some help with Sylius development, don't be hesitate to contact us directly. You can fill the form on [this site](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_productbundle) or send us an e-mail to hello@bitbag.io!
+If you need some help with Sylius development, don't be hesitate to contact us directly. You can fill the form on [this site](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_blacklist) or send us an e-mail to hello@bitbag.io!
 
 ---
 
-[![](https://bitbag.io/wp-content/uploads/2020/10/badges-sylius.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_productbundle)
+[![](https://bitbag.io/wp-content/uploads/2020/10/badges-sylius.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_blacklist)
 
 ## Community
 
@@ -288,7 +288,7 @@ Plugins that we have used in the demo:
 
 **If you need an overview of Sylius' capabilities, schedule a consultation with our expert.**
 
-[![](https://bitbag.io/wp-content/uploads/2020/10/button_free_consulatation-1.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_productbundle)
+[![](https://bitbag.io/wp-content/uploads/2020/10/button_free_consulatation-1.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_blacklist)
 
 ## Additional resources for developers
 
@@ -309,6 +309,6 @@ This plugin's source code is completely free and released under the terms of the
 ## Contact
 
 ---
-If you want to contact us, the best way is to fill the form on [our website](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_productbundle) or send us an e-mail to hello@bitbag.io with your question(s). We guarantee that we answer as soon as we can!
+If you want to contact us, the best way is to fill the form on [our website](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_blacklist) or send us an e-mail to hello@bitbag.io with your question(s). We guarantee that we answer as soon as we can!
 
-[![](https://bitbag.io/wp-content/uploads/2020/10/footer.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_productbundle)
+[![](https://bitbag.io/wp-content/uploads/2020/10/footer.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_blacklist)
