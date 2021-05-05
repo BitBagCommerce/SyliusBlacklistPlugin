@@ -2,7 +2,7 @@ bitbag_sylius_blacklist_plugin_admin_blacklisting_rule:
     resource: |
         alias: bitbag_sylius_blacklist_plugin.blacklisting_rule
         section: admin
-        templates: SyliusAdminBundle:Crud
+        templates: "@SyliusAdmin/Crud"
         grid: bitbag_sylius_blacklist_plugin_blacklisting_rule
         except: ['show']
         permission: true
