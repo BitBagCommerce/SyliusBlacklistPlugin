@@ -5,6 +5,7 @@
 >
     <services>
         <service id="bitbag.sylius_blacklist_plugin.form.extension.type.customer_profile" class="BitBag\SyliusBlacklistPlugin\Form\Extension\CustomerProfileTypeExtension">
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.checker.user_role" />
             <tag name="form.type_extension" extended_type="Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType"/>
         </service>
     </services>
