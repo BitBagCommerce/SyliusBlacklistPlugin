@@ -18,7 +18,7 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class CustomerProfileTypeExtension extends AbstractTypeExtension
+final class CustomerProfileTypeExtension extends AbstractTypeExtension
 {
     /** @var UserRoleCheckerInterface */
     private $userRoleChecker;
@@ -35,9 +35,9 @@ class CustomerProfileTypeExtension extends AbstractTypeExtension
                'choices' => [
                    'bitbag_sylius_blacklist_plugin.ui.neutral' => FraudStatusInterface::FRAUD_STATUS_NEUTRAL,
                    'bitbag_sylius_blacklist_plugin.ui.blacklisted' => FraudStatusInterface::FRAUD_STATUS_BLACKLISTED,
-                   'bitbag_sylius_blacklist_plugin.ui.whitelisted' => FraudStatusInterface::FRAUD_STATUS_WHITELISTED
+                   'bitbag_sylius_blacklist_plugin.ui.whitelisted' => FraudStatusInterface::FRAUD_STATUS_WHITELISTED,
                ],
-                'mapped' => $this->userRoleChecker->isAdmin()
+                'mapped' => $this->userRoleChecker->isAdmin(),
             ]);
     }
 
