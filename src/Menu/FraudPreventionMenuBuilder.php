@@ -3,18 +3,18 @@
 /*
  * This file has been created by developers from BitBag.
  * Feel free to contact us once you face any issues or want to start
- * You can find more information about us on https://bitbag.io and write us
- * an email on hello@bitbag.io.
+ * another great project.
+ * You can find more information about us on https://bitbag.shop and write us
+ * an email on mikolaj.krol@bitbag.pl.
  */
 
 declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Menu;
 
-use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
-final class AdminMenuListener
+final class FraudPreventionMenuBuilder
 {
     public const AUTOMATIC_BLACKLISTING_CONFIGURATION_TYPE_MENU_KEY = 'automatic_blacklisting_configuration';
 
@@ -22,17 +22,16 @@ final class AdminMenuListener
 
     public const FRAUD_SUSPICION_TYPE_MENU_KEY = 'fraud_suspicion';
 
-    public function addAdminMenuItems(MenuBuilderEvent $event): void
+    public function buildMenu(MenuBuilderEvent $menuBuilderEvent): void
     {
-        $menu = $event->getMenu();
-        $this->addToCatalogMenu($menu);
-    }
+        $menu = $menuBuilderEvent->getMenu();
 
-    private function addToCatalogMenu(ItemInterface $menu): void
-    {
-        $salesMenu = $menu->getChild('sales');
+        $rootMenuItem = $menu
+            ->addChild('bitbag_fraud_prevention')
+            ->setLabel('bitbag_sylius_blacklist_plugin.ui.fraud_prevention')
+        ;
 
-        $salesMenu
+        $rootMenuItem
             ->addChild(self::BLACKLISTING_RULE_TYPE_MENU_KEY, [
                 'route' => 'bitbag_sylius_blacklist_plugin_admin_blacklisting_rule_index',
             ])
@@ -40,7 +39,7 @@ final class AdminMenuListener
             ->setLabelAttribute('icon', 'hand paper')
         ;
 
-        $salesMenu
+        $rootMenuItem
             ->addChild(self::AUTOMATIC_BLACKLISTING_CONFIGURATION_TYPE_MENU_KEY, [
                 'route' => 'bitbag_sylius_blacklist_plugin_admin_automatic_blacklisting_configuration_index',
             ])
@@ -48,7 +47,7 @@ final class AdminMenuListener
             ->setLabelAttribute('icon', 'microchip')
         ;
 
-        $salesMenu
+        $rootMenuItem
             ->addChild(self::FRAUD_SUSPICION_TYPE_MENU_KEY, [
                 'route' => 'bitbag_sylius_blacklist_plugin_admin_fraud_suspicion_index',
             ])
@@ -56,7 +55,7 @@ final class AdminMenuListener
             ->setLabelAttribute('icon', 'exclamation triangle')
         ;
 
-        $salesMenu
+        $rootMenuItem
             ->addChild(self::AUTOMATIC_BLACKLISTING_CONFIGURATION_TYPE_MENU_KEY, [
                 'route' => 'bitbag_sylius_blacklist_plugin_admin_automatic_blacklisting_configuration_index',
             ])
