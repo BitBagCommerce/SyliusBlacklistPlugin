@@ -180,15 +180,15 @@ sylius_grid:
                     label: bitbag_sylius_blacklist_plugin.ui.fraud_status
                     options:
                         template: "@BitBagSyliusBlacklistPlugin/Customer/Grid/Field/fraudStatus.html.twig"
-                filters:
-                    ...
-                    fraudStatus:
-                        type: select
-                        label: bitbag_sylius_blacklist_plugin.ui.fraud_status
-                        form_options:
-                            choices:
-                                bitbag_sylius_blacklist_plugin.ui.neutral: Neutral
-                                bitbag_sylius_blacklist_plugin.ui.blacklisted: Blacklisted
+            filters:
+                ...
+                fraudStatus:
+                    type: select
+                    label: bitbag_sylius_blacklist_plugin.ui.fraud_status
+                    form_options:
+                        choices:
+                            bitbag_sylius_blacklist_plugin.ui.neutral: Neutral
+                            bitbag_sylius_blacklist_plugin.ui.blacklisted: Blacklisted
 ```
 
 Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig`) by adding lines below
