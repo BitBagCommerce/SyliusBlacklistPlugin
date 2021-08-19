@@ -7,6 +7,7 @@
 */
 
 declare(strict_types=1);
+
 namespace BitBag\SyliusBlacklistPlugin\Validator\Constraints\BlacklistingRule;
 
 use Symfony\Component\Validator\Constraint;

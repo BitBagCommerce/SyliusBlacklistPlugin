@@ -6,7 +6,7 @@
  * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
 */
 
-declare(strict_types=1);namespace spec\BitBag\SyliusBlacklistPlugin\Processor;
+namespace spec\BitBag\SyliusBlacklistPlugin\Processor;
 
 use BitBag\SyliusBlacklistPlugin\Checker\AutomaticBlacklistingRule\OrdersAutomaticBlacklistingRuleChecker;
 use BitBag\SyliusBlacklistPlugin\Checker\FraudSuspicion\FraudSuspicionActionEligibilityCheckerInterface;

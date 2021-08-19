@@ -6,7 +6,9 @@
  * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
 */
 
-declare(strict_types=1);namespace BitBag\SyliusBlacklistPlugin\Model;
+declare(strict_types=1);
+
+namespace BitBag\SyliusBlacklistPlugin\Model;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
