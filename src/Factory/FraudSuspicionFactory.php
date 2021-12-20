@@ -31,7 +31,7 @@ class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
 
     public function createForOrder(OrderInterface $order): FraudSuspicionInterface
     {
-        $fraudSuspicion = $this->decoratedFactory->createNew();
+        $fraudSuspicion = $this->createNew();
 
         $fraudSuspicion->setOrder($order);
         $fraudSuspicion->setCustomer($order->getCustomer());
