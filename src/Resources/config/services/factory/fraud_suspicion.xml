@@ -4,7 +4,13 @@
         xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="bitbag.sylius_blacklist_plugin.factory.fraud_suspicion" class="BitBag\SyliusBlacklistPlugin\Factory\FraudSuspicionFactory"/>
+        <service
+                id="bitbag_sylius_blacklist_plugin.custom_factory.fraud_suspicion"
+                class="BitBag\SyliusBlacklistPlugin\Factory\FraudSuspicionFactory"
+                decorates="bitbag_sylius_blacklist_plugin.factory.fraud_suspicion"
+        >
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.custom_factory.fraud_suspicion.inner" />
+        </service>
         <service id="bitbag.sylius_blacklist_plugin.factory.fraud_suspicion_common_model" class="BitBag\SyliusBlacklistPlugin\Factory\FraudSuspicionCommonModelFactory"/>
     </services>
 </container>

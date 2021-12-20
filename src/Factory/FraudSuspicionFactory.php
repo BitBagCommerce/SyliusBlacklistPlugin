@@ -13,17 +13,25 @@ namespace BitBag\SyliusBlacklistPlugin\Factory;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicion;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
 {
+    private FactoryInterface $decoratedFactory;
+
+    public function __construct(FactoryInterface $decoratedFactory)
+    {
+        $this->decoratedFactory = $decoratedFactory;
+    }
+
     public function createNew(): FraudSuspicionInterface
     {
-        return new FraudSuspicion();
+        return $this->decoratedFactory->createNew();
     }
 
     public function createForOrder(OrderInterface $order): FraudSuspicionInterface
     {
-        $fraudSuspicion = $this->createNew();
+        $fraudSuspicion = $this->decoratedFactory->createNew();
 
         $fraudSuspicion->setOrder($order);
         $fraudSuspicion->setCustomer($order->getCustomer());
