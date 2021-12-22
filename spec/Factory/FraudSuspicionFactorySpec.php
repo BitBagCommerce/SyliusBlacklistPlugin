@@ -45,9 +45,13 @@ final class FraudSuspicionFactorySpec extends ObjectBehavior
 
         $this->createNew()->getId()->shouldReturn(null);
     }
-
-    function it_creates_fraud_suspicion_objet_from_order(OrderInterface $order, CustomerInterface $customer, AddressInterface $address,        FactoryInterface $decoratedFactory,
-        FraudSuspicionInterface $fraudSuspicion): void
+    function it_creates_fraud_suspicion_objet_from_order(
+        OrderInterface $order,
+        CustomerInterface $customer,
+        AddressInterface $address,
+        FactoryInterface $decoratedFactory,
+        FraudSuspicionInterface $fraudSuspicion
+    ): void
     {
         $order->getCustomer()->willReturn($customer);
         $order->getCustomerIp()->willReturn('192.168.10.12');
@@ -62,7 +66,21 @@ final class FraudSuspicionFactorySpec extends ObjectBehavior
         $address->getCity()->willReturn('Warsaw');
         $address->getStreet()->willReturn('Aleje Jerozolimskie 23');
 
+        $order->getCustomer()->shouldBeCalled();
+        $order->getCustomerIp()->shouldBeCalled();
+        $order->getBillingAddress()->shouldBeCalled();
+        $address->getFirstName()->shouldBeCalled();
+        $address->getLastName()->shouldBeCalled();
+        $customer->getEmail()->shouldBeCalled();
+        $address->getCountryCode()->shouldBeCalled();
+        $address->getProvinceName()->shouldBeCalled();
+        $address->getCompany()->shouldBeCalled();
+        $address->getPostcode()->shouldBeCalled();
+        $address->getCity()->shouldBeCalled();
+        $address->getStreet()->shouldBeCalled();
+
         $decoratedFactory->createNew()->willReturn($fraudSuspicion);
+
 
         $this->createForOrder($order)->shouldReturn($fraudSuspicion);
     }
