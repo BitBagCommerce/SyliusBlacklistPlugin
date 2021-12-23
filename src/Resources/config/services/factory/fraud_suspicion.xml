@@ -11,7 +11,7 @@
         <service
                 id="bitbag_sylius_blacklist_plugin.custom_factory.fraud_suspicion"
                 class="BitBag\SyliusBlacklistPlugin\Factory\FraudSuspicionFactory"
-                decorates="bitbag.sylius_blacklist_plugin.factory.fraud_suspicion"
+                decorates="bitbag_sylius_blacklist_plugin.factory.fraud_suspicion"
         >
             <argument type="service" id="bitbag_sylius_blacklist_plugin.custom_factory.fraud_suspicion.inner" />
         </service>
