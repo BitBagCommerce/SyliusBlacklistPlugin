@@ -13,9 +13,8 @@ namespace BitBag\SyliusBlacklistPlugin\Factory;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
-class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
+final class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
 {
     private FactoryInterface $decoratedFactory;
 
