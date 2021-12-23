@@ -25,7 +25,7 @@
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.factory.order" />
             <argument type="service" id="sylius.factory.address" />
-            <argument type="service" id="bitbag_sylius_blacklist_plugin.factory.fraud_suspicion" />
+            <argument type="service" id="bitbag.sylius_blacklist_plugin.factory.fraud_suspicion" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
