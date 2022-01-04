@@ -9,8 +9,8 @@
 namespace spec\BitBag\SyliusBlacklistPlugin\Factory;
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
-use BitBag\SyliusBlacklistPlugin\Factory\FraudSuspicionFactory;
 use BitBag\SyliusBlacklistPlugin\Factory\FraudSuspicionFactoryInterface;
+use BitBag\SyliusBlacklistPlugin\Factory\FraudSuspicionFactory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
