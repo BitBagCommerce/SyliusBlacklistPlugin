@@ -33,8 +33,7 @@ final class BlacklistingRuleType extends AbstractResourceType
         array $attributeChoices,
         string $customerGroupClass,
         array $validationGroups = []
-    )
-    {
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->attributeChoices = $attributeChoices;
