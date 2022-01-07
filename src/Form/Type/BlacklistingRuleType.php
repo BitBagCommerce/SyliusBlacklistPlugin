@@ -63,7 +63,7 @@ final class BlacklistingRuleType extends AbstractResourceType
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.channels',
             ])
             ->add('customerGroups', EntityType::class, [
-                'class' => CustomerGroup::class,
+                'class' => $this->customerGroupClass,
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.customer_group',
