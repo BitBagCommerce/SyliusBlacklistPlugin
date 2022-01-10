@@ -25,11 +25,19 @@ final class BlacklistingRuleType extends AbstractResourceType
     /** @var array */
     private $attributeChoices;
 
-    public function __construct(string $dataClass, array $attributeChoices, array $validationGroups = [])
-    {
+    /* @var string */
+    private $customerGroupClass;
+
+    public function __construct(
+        string $dataClass,
+        array $attributeChoices,
+        string $customerGroupClass,
+        array $validationGroups = []
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->attributeChoices = $attributeChoices;
+        $this->customerGroupClass = $customerGroupClass;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -54,7 +62,7 @@ final class BlacklistingRuleType extends AbstractResourceType
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.channels',
             ])
             ->add('customerGroups', EntityType::class, [
-                'class' => CustomerGroup::class,
+                'class' => $this->customerGroupClass,
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.customer_group',
