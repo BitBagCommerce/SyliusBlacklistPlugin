@@ -9,12 +9,5 @@
         <service id="bitbag_sylius_blacklist_plugin.repository.order" class="BitBag\SyliusBlacklistPlugin\Repository\OrderRepository">
             <argument type="service" id="sylius.repository.order" />
         </service>
-        <service
-                id="bitbag_sylius_blacklist_plugin.custom_repository.fraud_suspicion"
-                class="BitBag\SyliusBlacklistPlugin\Repository\FraudSuspicionRepository"
-                decorates="bitbag_sylius_blacklist_plugin.repository.fraud_suspicion"
-        >
-            <argument type="service" id="bitbag_sylius_blacklist_plugin.custom_repository.fraud_suspicion.inner" />
-        </service>
     </services>
 </container>

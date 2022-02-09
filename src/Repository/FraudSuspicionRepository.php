@@ -15,21 +15,12 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
-final class FraudSuspicionRepository implements FraudSuspicionRepositoryInterface
+class FraudSuspicionRepository extends EntityRepository implements FraudSuspicionRepositoryInterface
 {
-    private EntityRepository $decoratedRepository;
-
-    public function __construct(EntityRepository $decoratedRepository)
-    {
-        $this->decoratedRepository = $decoratedRepository;
-    }
-
-
     public function createListQueryBuilder(): QueryBuilder
     {
-        return $this->decoratedRepository->createQueryBuilder('o')
+        return $this->createQueryBuilder('o')
             ->addSelect('customer')
             ->addSelect('ord')
             ->leftJoin('o.order', 'ord')
@@ -39,7 +30,7 @@ final class FraudSuspicionRepository implements FraudSuspicionRepositoryInterfac
 
     public function createQueryToLaunchBlacklistingRuleCheckers(): QueryBuilder
     {
-        return $this->decoratedRepository->createQueryBuilder('o')
+        return $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->leftJoin('o.order', 'ord')
             ->leftJoin('o.customer', 'customer')
@@ -48,7 +39,7 @@ final class FraudSuspicionRepository implements FraudSuspicionRepositoryInterfac
 
     public function findOneByOrder(OrderInterface $order): ?FraudSuspicionInterface
     {
-        return $this->decoratedRepository->createQueryBuilder('o')
+        return $this->createQueryBuilder('o')
             ->innerJoin('o.order', 'ord')
             ->andWhere('ord.id = :orderId')
             ->setParameter('orderId', $order->getId())
@@ -60,7 +51,7 @@ final class FraudSuspicionRepository implements FraudSuspicionRepositoryInterfac
 
     public function findOneByOrderNumber(string $orderNumber): ?FraudSuspicionInterface
     {
-        return $this->decoratedRepository->createQueryBuilder('o')
+        return $this->createQueryBuilder('o')
             ->innerJoin('o.order', 'ord')
             ->andWhere('ord.number = :orderNumber')
             ->setParameter('orderNumber', $orderNumber)
@@ -72,7 +63,7 @@ final class FraudSuspicionRepository implements FraudSuspicionRepositoryInterfac
 
     public function countByCustomerAndCommentAndDate(CustomerInterface $customer, string $status, \DateTime $date): string
     {
-        return $this->decoratedRepository->createQueryBuilder('o')
+        return $this->createQueryBuilder('o')
             ->select(['COUNT(o.id)'])
             ->innerJoin('o.customer', 'customer')
             ->andWhere('customer = :customer')
@@ -84,45 +75,5 @@ final class FraudSuspicionRepository implements FraudSuspicionRepositoryInterfac
             ->getQuery()
             ->getSingleScalarResult()
         ;
-    }
-
-    public function find($id)
-    {
-        return $this->decoratedRepository->find($id);
-    }
-
-    public function findAll()
-    {
-        return $this->decoratedRepository->findAll();
-    }
-
-    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
-    {
-        return $this->decoratedRepository->findBy($criteria, $orderBy, $limit, $offset);
-    }
-
-    public function findOneBy(array $criteria)
-    {
-        return $this->decoratedRepository->findOneBy($criteria);
-    }
-
-    public function getClassName()
-    {
-        return $this->decoratedRepository->getClassName();
-    }
-
-    public function createPaginator(array $criteria = [], array $sorting = []): iterable
-    {
-        return $this->decoratedRepository->createPaginator($criteria, $sorting);
-    }
-
-    public function add(ResourceInterface $resource): void
-    {
-        $this->decoratedRepository->add($resource);
-    }
-
-    public function remove(ResourceInterface $resource): void
-    {
-        $this->decoratedRepository->remove($resource);
     }
 }
