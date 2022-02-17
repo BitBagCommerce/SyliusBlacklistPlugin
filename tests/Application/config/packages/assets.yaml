@@ -1,0 +1,11 @@
+framework:
+    assets:
+        packages:
+            shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
+            admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
+            blacklist_shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/blacklist/shop/manifest.json'
+            blacklist_admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/blacklist/admin/manifest.json'
