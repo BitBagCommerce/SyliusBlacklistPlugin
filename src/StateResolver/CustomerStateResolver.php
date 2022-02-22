@@ -21,12 +21,12 @@ class CustomerStateResolver implements CustomerStateResolverInterface
     private $stateMachineFactory;
 
     /** @var ObjectManager */
-    private $productManager;
+    private $customerManager;
 
     public function __construct(FactoryInterface $stateMachineFactory, ObjectManager $customerManager)
     {
         $this->stateMachineFactory = $stateMachineFactory;
-        $this->productManager = $customerManager;
+        $this->customerManager = $customerManager;
     }
 
     public function changeStateOnBlacklisted(CustomerInterface $customer): void
@@ -40,7 +40,7 @@ class CustomerStateResolver implements CustomerStateResolverInterface
 
         $stateMachine->apply($transition);
 
-        $this->productManager->persist($customer);
-        $this->productManager->flush();
+        $this->customerManager->persist($customer);
+        $this->customerManager->flush();
     }
 }
