@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Model\ToggleableTrait;
 class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigurationInterface
 {
     use ToggleableTrait;
+
     use TimestampableTrait;
 
     /** @var int|null */

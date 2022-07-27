@@ -18,7 +18,6 @@ use BitBag\SyliusBlacklistPlugin\Repository\AutomaticBlacklistingConfigurationRe
 use BitBag\SyliusBlacklistPlugin\Repository\FraudSuspicionRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\Repository\OrderRepositoryInterface;
 use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolverInterface;
-use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
@@ -69,14 +68,13 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
 
         $allAutomaticBlacklistingConfiguration = $this->automaticBlacklistingConfigurationRepository->findActiveByChannel($channel);
 
-        if (\count($allAutomaticBlacklistingConfiguration) === 0) {
+        if (0 === \count($allAutomaticBlacklistingConfiguration)) {
             return false;
         }
 
         /** @var AutomaticBlacklistingConfigurationInterface $automaticBlacklistingConfiguration */
         foreach ($allAutomaticBlacklistingConfiguration as $automaticBlacklistingConfiguration) {
             if ($this->shouldOrderBeBlocked($automaticBlacklistingConfiguration, $order)) {
-
                 return true;
             }
         }

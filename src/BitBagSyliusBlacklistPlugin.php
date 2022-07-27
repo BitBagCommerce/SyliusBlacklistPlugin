@@ -7,6 +7,7 @@
 */
 
 declare(strict_types=1);
+
 namespace BitBag\SyliusBlacklistPlugin;
 
 use BitBag\SyliusBlacklistPlugin\DependencyInjection\Compiler\RegisterAutomaticBlacklistingRuleCheckersPass;
