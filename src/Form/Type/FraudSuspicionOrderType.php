@@ -24,8 +24,11 @@ final class FraudSuspicionOrderType extends AbstractResourceType
     /** @var AddressTypeResolver */
     private $addressTypeResolver;
 
-    public function __construct(string $dataClass, AddressTypeResolver $addressTypeResolver, array $validationGroups = [])
-    {
+    public function __construct(
+        string $dataClass,
+        AddressTypeResolver $addressTypeResolver,
+        array $validationGroups = []
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->addressTypeResolver = $addressTypeResolver;
@@ -38,12 +41,12 @@ final class FraudSuspicionOrderType extends AbstractResourceType
                 'label' => 'bitbag_sylius_blacklist_plugin.ui.address_type',
                 'choices' => [
                     'sylius.ui.shipping_address' => FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE,
-                    'sylius.ui.billing_address' => FraudSuspicionInterface::BILLING_ADDRESS_TYPE
-                ]
+                    'sylius.ui.billing_address' => FraudSuspicionInterface::BILLING_ADDRESS_TYPE,
+                ],
             ])
             ->add('comment', TextareaType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.fraud_suspicion.comment',
-                'required' => false
+                'required' => false,
             ])
             ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event): void {
                 $this->addressTypeResolver->resolveAndUpdateFraudSuspicion($event->getData());

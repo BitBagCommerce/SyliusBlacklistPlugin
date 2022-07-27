@@ -40,7 +40,7 @@ final class AutomaticBlacklistingRuleSettingsType extends AbstractType
                     'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_week' => AutomaticBlacklistingRuleInterface::PER_WEEK,
                     'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_month' => AutomaticBlacklistingRuleInterface::PER_MONTH,
                 ],
-                'attr' => ['style' => 'margin-bottom: 10px;']
+                'attr' => ['style' => 'margin-bottom: 10px;'],
             ])
         ;
     }

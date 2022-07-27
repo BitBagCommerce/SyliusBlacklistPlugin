@@ -23,8 +23,11 @@ final class FraudSuspicionType extends AbstractResourceType
     /** @var string */
     private $customerClass;
 
-    public function __construct(string $dataClass, string $customerClass, array $validationGroups = [])
-    {
+    public function __construct(
+        string $dataClass,
+        string $customerClass,
+        array $validationGroups = []
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->customerClass = $customerClass;
@@ -37,7 +40,7 @@ final class FraudSuspicionType extends AbstractResourceType
                 'class' => $this->customerClass,
             ])
             ->add('company', TextType::class, [
-                'required' => false
+                'required' => false,
             ])
             ->add('firstName', TextType::class)
             ->add('lastName', TextType::class)
@@ -45,23 +48,23 @@ final class FraudSuspicionType extends AbstractResourceType
             ->add('street', TextType::class)
             ->add('city', TextType::class)
             ->add('province', TextType::class, [
-                'required' => false
+                'required' => false,
             ])
             ->add('country', TextType::class)
             ->add('postcode', TextType::class)
             ->add('customerIp', TextType::class, [
-                'required' => false
+                'required' => false,
             ])
             ->add('addressType', ChoiceType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.ui.address_type',
                 'choices' => [
                     'sylius.ui.shipping_address' => FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE,
-                    'sylius.ui.billing_address' => FraudSuspicionInterface::BILLING_ADDRESS_TYPE
-                ]
+                    'sylius.ui.billing_address' => FraudSuspicionInterface::BILLING_ADDRESS_TYPE,
+                ],
             ])
             ->add('comment', TextareaType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.fraud_suspicion.comment',
-                'required' => false
+                'required' => false,
             ])
         ;
     }

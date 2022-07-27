@@ -17,4 +17,3 @@ interface FraudSuspicionCommonModelFactoryInterface extends FactoryInterface
 {
     public function createNew(): FraudSuspicionCommonModelInterface;
 }
-
