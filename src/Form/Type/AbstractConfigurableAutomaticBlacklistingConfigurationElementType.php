@@ -24,8 +24,11 @@ abstract class AbstractConfigurableAutomaticBlacklistingConfigurationElementType
     /** @var FormTypeRegistryInterface */
     private $formTypeRegistry;
 
-    public function __construct(string $dataClass, FormTypeRegistryInterface $formTypeRegistry, array $validationGroups = [])
-    {
+    public function __construct(
+        string $dataClass,
+        FormTypeRegistryInterface $formTypeRegistry,
+        array $validationGroups = []
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->formTypeRegistry = $formTypeRegistry;

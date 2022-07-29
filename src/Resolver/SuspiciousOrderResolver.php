@@ -61,7 +61,7 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
     {
         $blacklistingRules = $this->blacklistingRuleRepository->findActiveByChannel($this->getChannel());
 
-        if (\count($blacklistingRules) === 0) {
+        if (0 === \count($blacklistingRules)) {
             return false;
         }
 
@@ -79,7 +79,7 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
                 $this->checkIfCustomerIsBlacklisted($builder, $fraudSuspicionCommonModel, $attribute);
             }
 
-            if (\intval($builder->getQuery()->getSingleScalarResult()) >= $blacklistingRule->getPermittedStrikes()) {
+            if ((int) ($builder->getQuery()->getSingleScalarResult()) >= $blacklistingRule->getPermittedStrikes()) {
                 return true;
             }
         }

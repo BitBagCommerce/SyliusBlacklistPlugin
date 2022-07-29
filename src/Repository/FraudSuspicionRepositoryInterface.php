@@ -26,5 +26,9 @@ interface FraudSuspicionRepositoryInterface extends RepositoryInterface
 
     public function findOneByOrderNumber(string $orderNumber): ?FraudSuspicionInterface;
 
-    public function countByCustomerAndCommentAndDate(CustomerInterface $customer, string $comment, \DateTime $date): string;
+    public function countByCustomerAndCommentAndDate(
+        CustomerInterface $customer,
+        string $comment,
+        \DateTime $date
+    ): string;
 }

@@ -26,7 +26,6 @@ final class FraudSuspicionRepository implements FraudSuspicionRepositoryInterfac
         $this->decoratedRepository = $decoratedRepository;
     }
 
-
     public function createListQueryBuilder(): QueryBuilder
     {
         return $this->decoratedRepository->createQueryBuilder('o')
@@ -70,8 +69,11 @@ final class FraudSuspicionRepository implements FraudSuspicionRepositoryInterfac
         ;
     }
 
-    public function countByCustomerAndCommentAndDate(CustomerInterface $customer, string $status, \DateTime $date): string
-    {
+    public function countByCustomerAndCommentAndDate(
+        CustomerInterface $customer,
+        string $status,
+        \DateTime $date
+    ): string {
         return $this->decoratedRepository->createQueryBuilder('o')
             ->select(['COUNT(o.id)'])
             ->innerJoin('o.customer', 'customer')
@@ -96,8 +98,12 @@ final class FraudSuspicionRepository implements FraudSuspicionRepositoryInterfac
         return $this->decoratedRepository->findAll();
     }
 
-    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
-    {
+    public function findBy(
+        array $criteria,
+        ?array $orderBy = null,
+        $limit = null,
+        $offset = null
+    ) {
         return $this->decoratedRepository->findBy($criteria, $orderBy, $limit, $offset);
     }
 

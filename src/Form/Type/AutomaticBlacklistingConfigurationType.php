@@ -25,8 +25,11 @@ final class AutomaticBlacklistingConfigurationType extends AbstractResourceType
     /** @var array */
     private $attributeChoices;
 
-    public function __construct(string $dataClass, array $attributeChoices, array $validationGroups = [])
-    {
+    public function __construct(
+        string $dataClass,
+        array $attributeChoices,
+        array $validationGroups = []
+    ) {
         parent::__construct($dataClass, $validationGroups);
         $this->attributeChoices = $attributeChoices;
     }
@@ -44,18 +47,18 @@ final class AutomaticBlacklistingConfigurationType extends AbstractResourceType
             ])
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.ui.enabled',
-                'required' => false
+                'required' => false,
             ])
             ->add('addFraudSuspicion', CheckboxType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.ui.add_fraud_suspicion_row_after_exceed_limit',
-                'required' => false
+                'required' => false,
             ])
             ->add('permittedFraudSuspicionsNumber', NumberType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.ui.permitted_fraud_suspicions_number',
                 'required' => false,
                 'constraints' => [
-                    new GreaterThanOrEqual(['value' => 1, 'groups' => ['bitbag']])
-                ]
+                    new GreaterThanOrEqual(['value' => 1, 'groups' => ['bitbag']]),
+                ],
             ])
             ->add('permittedFraudSuspicionsTime', ChoiceType::class, [
                 'label' => false,
@@ -66,7 +69,7 @@ final class AutomaticBlacklistingConfigurationType extends AbstractResourceType
                     'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_week' => AutomaticBlacklistingRuleInterface::PER_WEEK,
                     'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_month' => AutomaticBlacklistingRuleInterface::PER_MONTH,
                 ],
-                'placeholder' => 'bitbag_sylius_blacklist_plugin.ui.choose_time_range'
+                'placeholder' => 'bitbag_sylius_blacklist_plugin.ui.choose_time_range',
             ])
             ->add('rules', AutomaticBlacklistingRuleCollectionType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.rules',

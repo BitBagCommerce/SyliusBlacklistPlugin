@@ -20,6 +20,7 @@ use Sylius\Component\Resource\Model\ToggleableTrait;
 class BlacklistingRule implements BlacklistingRuleInterface
 {
     use ToggleableTrait;
+
     use TimestampableTrait;
 
     /** @var int|null */
@@ -89,7 +90,7 @@ class BlacklistingRule implements BlacklistingRuleInterface
     {
         $index = array_search($attribute, $this->attributes);
 
-        if ($index !== false) {
+        if (false !== $index) {
             unset($this->attributes[$index]);
         }
     }
@@ -149,7 +150,7 @@ class BlacklistingRule implements BlacklistingRuleInterface
 
     public function hasCustomerGroup(?CustomerGroupInterface $customerGroup): bool
     {
-        if ($customerGroup === null) {
+        if (null === $customerGroup) {
             return false;
         }
 

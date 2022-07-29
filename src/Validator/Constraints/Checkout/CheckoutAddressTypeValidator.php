@@ -7,6 +7,7 @@
 */
 
 declare(strict_types=1);
+
 namespace BitBag\SyliusBlacklistPlugin\Validator\Constraints\Checkout;
 
 use BitBag\SyliusBlacklistPlugin\Converter\FraudSuspicionCommonModelConverterInterface;
@@ -14,10 +15,10 @@ use BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use BitBag\SyliusBlacklistPlugin\Processor\AutomaticBlacklistingRulesProcessorInterface;
 use BitBag\SyliusBlacklistPlugin\Resolver\SuspiciousOrderResolverInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Sylius\Component\Customer\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
 class CheckoutAddressTypeValidator extends ConstraintValidator
@@ -43,23 +44,24 @@ class CheckoutAddressTypeValidator extends ConstraintValidator
 
     public function validate($order, Constraint $constraint): void
     {
-        /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
         /** @var CustomerInterface $customer */
         $customer = $order->getCustomer();
 
-        if ($customer->getFraudStatus() === FraudStatusInterface::FRAUD_STATUS_WHITELISTED) {
+        if (FraudStatusInterface::FRAUD_STATUS_WHITELISTED === $customer->getFraudStatus()) {
             return;
         }
 
-        if ($customer->getFraudStatus() === FraudStatusInterface::FRAUD_STATUS_BLACKLISTED) {
+        if (FraudStatusInterface::FRAUD_STATUS_BLACKLISTED === $customer->getFraudStatus()) {
             $this->buildViolation($constraint);
+
             return;
         }
 
         if ($this->automaticBlacklistingRulesProcessor->process($order)) {
             $this->buildViolation($constraint);
+
             return;
         }
 
@@ -71,6 +73,7 @@ class CheckoutAddressTypeValidator extends ConstraintValidator
             $this->suspiciousOrderResolver->resolve($fraudSuspicionCommonModelWithShippingAddressType)
         ) {
             $this->buildViolation($constraint);
+
             return;
         }
     }
