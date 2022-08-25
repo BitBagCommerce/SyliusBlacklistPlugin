@@ -40,9 +40,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
         $this->getDocument()->clickLink('Add rule');
 
-        $this->getDocument()->waitFor(1000, function() {
-            return $this->hasElement('countField');
-        });
+        $this->getSession()->wait(100);
 
         $this->selectRuleOption('Type', $ruleName);
     }
@@ -95,7 +93,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return [
             'rules' => '#bitbag_sylius_blacklist_plugin_automatic_blacklisting_configuration_rules',
-            'countField' => 'div[data-form-collection="list"] div[data-form-collection="item"] input[type="number"]'
         ];
     }
 
