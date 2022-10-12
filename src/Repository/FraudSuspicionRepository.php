@@ -26,7 +26,7 @@ final class FraudSuspicionRepository implements FraudSuspicionRepositoryInterfac
         $this->decoratedRepository = $decoratedRepository;
     }
 
-    public function createQueryBuilder($alias, $indexBy = null): QueryBuilder
+    public function createQueryBuilder($alias, $indexBy = null)
     {
         return $this->decoratedRepository->createQueryBuilder($alias, $indexBy);
     }
@@ -79,7 +79,7 @@ final class FraudSuspicionRepository implements FraudSuspicionRepositoryInterfac
         string $status,
         \DateTime $date
     ): string {
-        return $this->decoratedRepository->createQueryBuilder('o')
+        return (string) $this->decoratedRepository->createQueryBuilder('o')
             ->select(['COUNT(o.id)'])
             ->innerJoin('o.customer', 'customer')
             ->andWhere('customer = :customer')

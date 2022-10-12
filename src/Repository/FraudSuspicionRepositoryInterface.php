@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface FraudSuspicionRepositoryInterface extends RepositoryInterface
 {
-    public function createQueryBuilder($alias, $indexBy = null): QueryBuilder;
+    public function createQueryBuilder($alias, $indexBy = null);
 
     public function createListQueryBuilder(): QueryBuilder;
 
