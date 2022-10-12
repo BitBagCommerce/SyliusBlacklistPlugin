@@ -18,6 +18,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface FraudSuspicionRepositoryInterface extends RepositoryInterface
 {
+    public function createQueryBuilder($alias, $indexBy = null): QueryBuilder;
+
     public function createListQueryBuilder(): QueryBuilder;
 
     public function createQueryToLaunchBlacklistingRuleCheckers(): QueryBuilder;

@@ -26,6 +26,11 @@ final class FraudSuspicionRepository implements FraudSuspicionRepositoryInterfac
         $this->decoratedRepository = $decoratedRepository;
     }
 
+    public function createQueryBuilder($alias, $indexBy = null): QueryBuilder
+    {
+        return $this->decoratedRepository->createQueryBuilder($alias, $indexBy);
+    }
+
     public function createListQueryBuilder(): QueryBuilder
     {
         return $this->decoratedRepository->createQueryBuilder('o')
