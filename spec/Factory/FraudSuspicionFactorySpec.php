@@ -74,6 +74,7 @@ final class FraudSuspicionFactorySpec extends ObjectBehavior
         $customer->getEmail()->shouldBeCalled();
         $address->getCountryCode()->shouldBeCalled();
         $address->getProvinceName()->shouldBeCalled();
+        $address->getProvinceCode()->shouldBeCalled();
         $address->getCompany()->shouldBeCalled();
         $address->getPostcode()->shouldBeCalled();
         $address->getCity()->shouldBeCalled();
