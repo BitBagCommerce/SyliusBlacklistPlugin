@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class UserRoleCheckerSpec extends ObjectBehavior
 {
@@ -41,9 +42,10 @@ final class UserRoleCheckerSpec extends ObjectBehavior
 
     public function it_returns_false_if_object_returned_from_storage_is_not_an_admin_user_interface(
         TokenStorageInterface $tokenStorage,
-        TokenInterface $token
+        TokenInterface $token,
+        UserInterface $user
     ): void {
-        $token->getUser()->willReturn(new \stdClass());
+        $token->getUser()->willReturn($user);
         $tokenStorage->getToken()->willReturn($token);
 
         $this->isAdmin()->shouldReturn(false);
