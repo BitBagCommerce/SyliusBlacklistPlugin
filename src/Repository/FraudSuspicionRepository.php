@@ -16,7 +16,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 
-class FraudSuspicionRepository extends EntityRepository implements FraudSuspicionRepositoryInterface
+final class FraudSuspicionRepository extends EntityRepository implements FraudSuspicionRepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder
     {
@@ -61,9 +61,12 @@ class FraudSuspicionRepository extends EntityRepository implements FraudSuspicio
         ;
     }
 
-    public function countByCustomerAndCommentAndDate(CustomerInterface $customer, string $status, \DateTime $date): string
-    {
-        return $this->createQueryBuilder('o')
+    public function countByCustomerAndCommentAndDate(
+        CustomerInterface $customer,
+        string $status,
+        \DateTime $date
+    ): string {
+        return (string) $this->createQueryBuilder('o')
             ->select(['COUNT(o.id)'])
             ->innerJoin('o.customer', 'customer')
             ->andWhere('customer = :customer')
