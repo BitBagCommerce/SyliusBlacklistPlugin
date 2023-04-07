@@ -18,6 +18,11 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 
 final class FraudSuspicionRepository extends EntityRepository implements FraudSuspicionRepositoryInterface
 {
+    public function createQueryBuilder($alias, $indexBy = null)
+    {
+        return $this->createQueryBuilder($alias, $indexBy);
+    }
+
     public function createListQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('o')

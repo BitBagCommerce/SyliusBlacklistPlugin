@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Model;
 
-use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 
 class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
 {

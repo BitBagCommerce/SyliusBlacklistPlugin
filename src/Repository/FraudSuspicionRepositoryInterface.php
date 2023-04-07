@@ -18,6 +18,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface FraudSuspicionRepositoryInterface extends RepositoryInterface
 {
+    public function createQueryBuilder($alias, $indexBy = null);
+
     public function createListQueryBuilder(): QueryBuilder;
 
     public function createQueryToLaunchBlacklistingRuleCheckers(): QueryBuilder;
@@ -26,5 +28,9 @@ interface FraudSuspicionRepositoryInterface extends RepositoryInterface
 
     public function findOneByOrderNumber(string $orderNumber): ?FraudSuspicionInterface;
 
-    public function countByCustomerAndCommentAndDate(CustomerInterface $customer, string $comment, \DateTime $date): string;
+    public function countByCustomerAndCommentAndDate(
+        CustomerInterface $customer,
+        string $comment,
+        \DateTime $date
+    ): string;
 }

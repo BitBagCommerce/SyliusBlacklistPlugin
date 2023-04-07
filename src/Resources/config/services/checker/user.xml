@@ -6,7 +6,7 @@
     <services>
         <service id="bitbag_sylius_blacklist_plugin.checker.user_role"
                  class="BitBag\SyliusBlacklistPlugin\Checker\UserRoleChecker">
-            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="security.token_storage" />
         </service>
     </services>
 </container>

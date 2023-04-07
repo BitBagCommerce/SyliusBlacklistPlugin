@@ -12,7 +12,6 @@ namespace BitBag\SyliusBlacklistPlugin\Form\Type;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Customer\Model\CustomerGroup;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -50,8 +49,7 @@ final class BlacklistingRuleType extends AbstractResourceType
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.attribute',
                 'multiple' => true,
                 'expanded' => true,
-                'choices' => $this->attributeChoices
-
+                'choices' => $this->attributeChoices,
             ])
             ->add('permittedStrikes', NumberType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.permitted_strikes',
@@ -69,11 +67,11 @@ final class BlacklistingRuleType extends AbstractResourceType
             ])
             ->add('forUnassignedCustomers', CheckboxType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.for_unassigned_customers',
-                'required' => false
+                'required' => false,
             ])
             ->add('onlyForGuests', CheckboxType::class, [
                 'label' => 'bitbag_sylius_blacklist_plugin.form.blacklisting_rule.only_for_guests',
-                'required' => false
+                'required' => false,
             ])
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.ui.enabled',

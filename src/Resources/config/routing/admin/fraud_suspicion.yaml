@@ -16,7 +16,7 @@ bitbag_sylius_blacklist_plugin_admin_fraud_suspicion_show:
     path: fraud-suspicions/{id}
     methods: [GET]
     defaults:
-        _controller: bitbag_sylius_blacklist_plugin.controller.fraud_suspicion:showAction
+        _controller: bitbag_sylius_blacklist_plugin.controller.fraud_suspicion::showAction
         _sylius:
             template: "@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/show.html.twig"
             criteria:
@@ -26,7 +26,7 @@ bitbag_sylius_blacklist_plugin_admin_order_mark_suspicious:
     path: /order/{orderId}/fraud-suspicion/new
     methods: [GET, POST]
     defaults:
-        _controller: bitbag_sylius_blacklist_plugin.controller.fraud_suspicion:createAction
+        _controller: bitbag_sylius_blacklist_plugin.controller.fraud_suspicion::createAction
         _sylius:
             vars:
                 route:

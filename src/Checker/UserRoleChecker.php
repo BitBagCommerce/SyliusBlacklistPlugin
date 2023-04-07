@@ -10,22 +10,21 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Checker;
 
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 final class UserRoleChecker implements UserRoleCheckerInterface
 {
-    /** @var UserContextInterface */
-    private $userContext;
+    private TokenStorageInterface $tokenStorage;
 
-    public function __construct(UserContextInterface $userContext)
+    public function __construct(TokenStorageInterface $tokenStorage)
     {
-        $this->userContext = $userContext;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function isAdmin(): bool
     {
-        $user = $this->userContext->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         return $user instanceof AdminUserInterface;
     }
