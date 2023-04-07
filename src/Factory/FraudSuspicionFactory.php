@@ -35,18 +35,19 @@ final class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
     {
         /** @var FraudSuspicionInterface $fraudSuspicion */
         $fraudSuspicion = $this->createNew();
+        $billingAddress = $order->getBillingAddress();
 
         $fraudSuspicion->setOrder($order);
         $fraudSuspicion->setCustomer($order->getCustomer());
-        $fraudSuspicion->setCompany($order->getBillingAddress()->getCompany());
-        $fraudSuspicion->setFirstName($order->getBillingAddress()->getFirstName());
-        $fraudSuspicion->setLastName($order->getBillingAddress()->getLastName());
+        $fraudSuspicion->setCompany($billingAddress->getCompany());
+        $fraudSuspicion->setFirstName($billingAddress->getFirstName());
+        $fraudSuspicion->setLastName($billingAddress->getLastName());
         $fraudSuspicion->setEmail($order->getCustomer()->getEmail());
-        $fraudSuspicion->setStreet($order->getBillingAddress()->getStreet());
-        $fraudSuspicion->setCity($order->getBillingAddress()->getCity());
-        $fraudSuspicion->setProvince($order->getBillingAddress()->getProvinceName());
-        $fraudSuspicion->setCountry($order->getBillingAddress()->getCountryCode());
-        $fraudSuspicion->setPostcode($order->getBillingAddress()->getPostcode());
+        $fraudSuspicion->setStreet($billingAddress->getStreet());
+        $fraudSuspicion->setCity($billingAddress->getCity());
+        $fraudSuspicion->setProvince($billingAddress->getProvinceName() ?? $billingAddress->getProvinceCode());
+        $fraudSuspicion->setCountry($billingAddress->getCountryCode());
+        $fraudSuspicion->setPostcode($billingAddress->getPostcode());
         $fraudSuspicion->setCustomerIp($order->getCustomerIp());
 
         return $fraudSuspicion;
