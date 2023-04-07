@@ -20,7 +20,7 @@ final class FraudSuspicionRepository extends EntityRepository implements FraudSu
 {
     public function createQueryBuilder($alias, $indexBy = null)
     {
-        return $this->createQueryBuilder($alias, $indexBy);
+        return parent::createQueryBuilder($alias, $indexBy);
     }
 
     public function createListQueryBuilder(): QueryBuilder
