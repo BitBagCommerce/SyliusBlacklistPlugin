@@ -3,7 +3,6 @@ default:
         ui_blocking_users_on_checkout:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
-                - sylius.behat.context.hook.email_spool
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.country

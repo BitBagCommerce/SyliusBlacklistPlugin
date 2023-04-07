@@ -16,7 +16,7 @@ use BitBag\SyliusBlacklistPlugin\Resolver\SuspiciousOrderResolverInterface;
 use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolverInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
-final class FraudSuspicionEntityListener
+class FraudSuspicionEntityListener
 {
     /** @var SuspiciousOrderResolverInterface */
     private $suspiciousOrderResolver;
@@ -45,5 +45,4 @@ final class FraudSuspicionEntityListener
             $this->customerStateResolver->changeStateOnBlacklisted($newFraudSuspicion->getCustomer());
         }
     }
-
 }

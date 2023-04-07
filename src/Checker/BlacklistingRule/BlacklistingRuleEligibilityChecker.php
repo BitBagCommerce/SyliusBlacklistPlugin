@@ -17,7 +17,7 @@ final class BlacklistingRuleEligibilityChecker implements BlacklistingRuleEligib
 {
     public function isEligible(BlacklistingRuleInterface $blacklistingRule, CustomerInterface $customer): bool
     {
-        if ($blacklistingRule->isOnlyForGuests() && $customer->getUser() !== null) {
+        if ($blacklistingRule->isOnlyForGuests() && null !== $customer->getUser()) {
             return false;
         }
 
@@ -33,8 +33,8 @@ final class BlacklistingRuleEligibilityChecker implements BlacklistingRuleEligib
             }
 
             return true;
-        } else {
-            return !$blacklistingRule->getCustomerGroups()->isEmpty() && !$blacklistingRule->isForUnassignedCustomers() ? false : true;
         }
+
+        return !$blacklistingRule->getCustomerGroups()->isEmpty() && !$blacklistingRule->isForUnassignedCustomers() ? false : true;
     }
 }
