@@ -48,7 +48,7 @@ composer require bitbag/blacklist-plugin -W
 
 You will see error during cache:clear operation. It will disappear after whole installation process.
 
-![Origin](doc/installation-error.png)
+![Origin](doc/images/installation-error.png)
 
 Add plugin dependencies to your `config/bundles.php` file:
 ```php
@@ -233,6 +233,10 @@ doctrine:schema:update -f
 ```
 
 If there is other changes make sure that will not destroy your database schema.
+
+## Functionalities
+
+All main functionalities of the plugin are described [here.](doc/functionalities.md)
 
 ## Customization
 
