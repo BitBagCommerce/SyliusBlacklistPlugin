@@ -43,9 +43,13 @@ This **open-source plugin was developed to help the Sylius community**. If you h
 
 ## Installation
 ```bash
-$ composer require bitbag/blacklist-plugin
+composer require bitbag/blacklist-plugin -W
 ```
-    
+
+You will see error during cache:clear operation. It will disappear after whole installation process.
+
+![Origin](doc/installation-error.png)
+
 Add plugin dependencies to your `config/bundles.php` file:
 ```php
 return [
@@ -92,7 +96,24 @@ class Customer extends BaseCustomer implements CustomerInterface
 }
 ```
 
-Or this way if you use annotations:
+Define new Entity mapping inside your src/Resources/config/doctrine directory.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                            http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+    <entity name="App\Entity\Customer\Customer" table="sylius_customer">
+        <field name="fraudStatus" column="fraud_status" type="string" />
+    </entity>
+</doctrine-mapping>
+```
+
+Or edit Customer Entity this way if you use annotations:
 
 ```php
 <?php
@@ -112,28 +133,21 @@ use Sylius\Component\Core\Model\Customer as BaseCustomer;
 class Customer extends BaseCustomer implements CustomerInterface
 {
     /**
-    * @var string
-    * @ORM\Column(type="string", nullable=false)
-    */   
+     * @var string
+     * @ORM\Column(type="string", nullable=false)
+     */
     protected $fraudStatus = FraudStatusInterface::FRAUD_STATUS_NEUTRAL;
+
+    public function getFraudStatus(): ?string
+    {
+        return $this->fraudStatus;
+    }
+
+    public function setFraudStatus(?string $fraudStatus): void
+    {
+        $this->fraudStatus = $fraudStatus;
+    }
 }
-```
-
-If you don't use annotations, define new Entity mapping inside your src/Resources/config/doctrine directory.
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-
-<doctrine-mapping
-    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                            http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
->
-    <entity name="App\Entity\Customer\Customer" table="sylius_customer">
-        <field name="fraudStatus" column="fraud_status" type="string" />
-    </entity>
-</doctrine-mapping>
 ```
 
 Create also interface, which is implemented by customer entity
@@ -200,11 +214,25 @@ Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig`) 
 
 Update your database
 
-```
-$ bin/console doctrine:migrations:migrate
+```bash
+bin/console doctrine:migrations:migrate
 ```
 
 **Note:** If you are running it on production, add the `-e prod` flag to this command.
+
+Update your database schema:
+
+```bash
+doctrine:schema:update --dump-sql
+```
+
+If the list only includes changes for updating the database by adding 'fraud_status,' you can use:
+
+```bash
+doctrine:schema:update -f
+```
+
+If there is other changes make sure that will not destroy your database schema.
 
 ## Customization
 
@@ -212,22 +240,22 @@ $ bin/console doctrine:migrations:migrate
 
 Run the below command to see what Symfony services are shared with this plugin:
 ```bash
-$ bin/console debug:container | grep bitbag_sylius_blacklist_plugin
+bin/console debug:container | grep bitbag_sylius_blacklist_plugin
 ```
 
 ## Testing
 ```bash
-$ composer install
-$ cd tests/Application
-$ yarn install
-$ yarn build
-$ bin/console assets:install public -e test
-$ bin/console doctrine:schema:create -e test
-$ bin/console server:run 127.0.0.1:8080 -d public -e test
-$ open http://localhost:8080
-$ cd ../..
-$ vendor/bin/behat
-$ vendor/bin/phpspec run
+composer install
+cd tests/Application
+yarn install
+yarn build
+bin/console assets:install public -e test
+bin/console doctrine:schema:create -e test
+bin/console server:run 127.0.0.1:8080 -d public -e test
+open http://localhost:8080
+cd ../..
+vendor/bin/behat
+vendor/bin/phpspec run
 ```
 
 # About us
