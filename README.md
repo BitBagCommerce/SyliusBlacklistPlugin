@@ -43,12 +43,8 @@ This **open-source plugin was developed to help the Sylius community**. If you h
 
 ## Installation
 ```bash
-composer require bitbag/blacklist-plugin -W
+composer require bitbag/blacklist-plugin --no-scripts
 ```
-
-You will see error during cache:clear operation. It will disappear after whole installation process.
-
-![Origin](doc/images/installation-error.png)
 
 Add plugin dependencies to your `config/bundles.php` file:
 ```php
@@ -226,13 +222,13 @@ Update your database schema:
 doctrine:schema:update --dump-sql
 ```
 
-If the list only includes changes for updating the database by adding 'fraud_status,' you can use:
+If the list includes only changes for updating the database by adding 'fraud_status' you can use:
 
 ```bash
 doctrine:schema:update -f
 ```
 
-If there is other changes make sure that will not destroy your database schema.
+If there are another changes, please make sure they will not destroy your database schema.
 
 ## Functionalities
 

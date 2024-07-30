@@ -13,7 +13,7 @@ Customers are divided into three types:
 - whitelisted → trusted, not checked by the plugin during purchases
 - neutral → regular customer who can make purchases and is checked by the plugin with every order
 
-The customer's status can be changed manually in the customer edit panel or automatically using plugin functionalities.
+The customer's status can be changed manually in the customer edit panel(admin panel) or automatically using plugin functionalities.
 
 ![Origin](images/change-status-manually.png)
 
