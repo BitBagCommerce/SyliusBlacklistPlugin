@@ -4,11 +4,11 @@
 
 ----
 
-[ ![](https://img.shields.io/packagist/l/bitbag/blacklist-plugin.svg) ](https://packagist.org/packages/bitbag/blacklist-plugin "License") 
+[ ![](https://img.shields.io/packagist/l/bitbag/blacklist-plugin.svg) ](https://packagist.org/packages/bitbag/blacklist-plugin "License")
 [ ![](https://img.shields.io/packagist/v/bitbag/product-bundle-plugin.svg) ](https://packagist.org/packages/bitbag/blacklist-plugin "Version")
-[ ![](https://img.shields.io/github/actions/workflow/status/BitBagCommerce/SyliusBlacklistPlugin/build.yml?branch=main) ](https://github.com/BitBagCommerce/SyliusBlacklistPlugin/actions "Build status") 
-[ ![](https://poser.pugx.org/bitbag/blacklist-plugin/downloads)](https://packagist.org/packages/bitbag/blacklist-plugin "Total Downloads") 
-[ ![Slack](https://img.shields.io/badge/community%20chat-slack-FF1493.svg)](http://sylius-devs.slack.com) 
+[ ![](https://img.shields.io/github/actions/workflow/status/BitBagCommerce/SyliusBlacklistPlugin/build.yml?branch=main) ](https://github.com/BitBagCommerce/SyliusBlacklistPlugin/actions "Build status")
+[ ![](https://poser.pugx.org/bitbag/blacklist-plugin/downloads)](https://packagist.org/packages/bitbag/blacklist-plugin "Total Downloads")
+[ ![Slack](https://img.shields.io/badge/community%20chat-slack-FF1493.svg)](http://sylius-devs.slack.com)
 [ ![Support](https://img.shields.io/badge/support-contact%20author-blue])](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_blacklist)
 
 At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us to work  together, feel free to reach out. You will find out more about our professional services, technologies, and contact details at [https://bitbag.io/](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_blacklist).
@@ -22,10 +22,10 @@ Like what we do? Want to join us? Check out our job listings on our [career page
 * [Overview](#overview)
 * [Support](#we-are-here-to-help)
 * [Installation](#installation)
-    * [Testing](#testing)
-    * [Customization](#Customization)
+  * [Testing](#testing)
+  * [Customization](#Customization)
 * [About us](#about-us)
-    * [Community](#community)
+  * [Community](#community)
 * [Demo](#demo-sylius-shop)
 * [License](#license)
 * [Contact](#contact)
@@ -43,9 +43,9 @@ This **open-source plugin was developed to help the Sylius community**. If you h
 
 ## Installation
 ```bash
-$ composer require bitbag/blacklist-plugin
+composer require bitbag/blacklist-plugin --no-scripts
 ```
-    
+
 Add plugin dependencies to your `config/bundles.php` file:
 ```php
 return [
@@ -92,7 +92,24 @@ class Customer extends BaseCustomer implements CustomerInterface
 }
 ```
 
-Or this way if you use annotations:
+Define new Entity mapping inside your src/Resources/config/doctrine directory.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                            http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+    <entity name="App\Entity\Customer\Customer" table="sylius_customer">
+        <field name="fraudStatus" column="fraud_status" type="string" />
+    </entity>
+</doctrine-mapping>
+```
+
+Or edit Customer Entity this way if you use annotations:
 
 ```php
 <?php
@@ -112,28 +129,21 @@ use Sylius\Component\Core\Model\Customer as BaseCustomer;
 class Customer extends BaseCustomer implements CustomerInterface
 {
     /**
-    * @var string
-    * @ORM\Column(type="string", nullable=false)
-    */   
+     * @var string
+     * @ORM\Column(type="string", nullable=false)
+     */
     protected $fraudStatus = FraudStatusInterface::FRAUD_STATUS_NEUTRAL;
+
+    public function getFraudStatus(): ?string
+    {
+        return $this->fraudStatus;
+    }
+
+    public function setFraudStatus(?string $fraudStatus): void
+    {
+        $this->fraudStatus = $fraudStatus;
+    }
 }
-```
-
-If you don't use annotations, define new Entity mapping inside your src/Resources/config/doctrine directory.
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-
-<doctrine-mapping
-    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                            http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
->
-    <entity name="App\Entity\Customer\Customer" table="sylius_customer">
-        <field name="fraudStatus" column="fraud_status" type="string" />
-    </entity>
-</doctrine-mapping>
 ```
 
 Create also interface, which is implemented by customer entity
@@ -161,7 +171,17 @@ sylius_customer:
         customer:
             classes:
                 model: App\Entity\Customer\Customer
+                repository: App\Repository\Customer\CustomerRepository
 ```
+
+Create or edit `CustomerRepository.php` file:
+```php
+class CustomerRepository extends BaseCustomerRepository
+{
+    use CustomerRepositoryTrait;
+}
+```
+
 Override Customer grid:
 
 ```yaml
@@ -188,6 +208,32 @@ sylius_grid:
                             bitbag_sylius_blacklist_plugin.ui.neutral: Neutral
                             bitbag_sylius_blacklist_plugin.ui.blacklisted: Blacklisted
 ```
+Override twig config:
+
+```yaml
+# config/packages/twig.yaml
+...
+
+twig:
+  paths: ['%kernel.project_dir%/templates']
+  debug: '%kernel.debug%'
+  strict_variables: '%kernel.debug%'
+  form_themes:
+    - '@BitBagSyliusBlacklistPlugin/Form/theme.html.twig'
+    - '@SyliusUi/Form/theme.html.twig'
+services:
+  _defaults:
+    public: false
+    autowire: true
+    autoconfigure: true
+
+  Twig\Extra\Intl\IntlExtension: ~
+
+when@test_cached:
+  twig:
+    strict_variables: true
+
+```
 
 Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig`) by adding lines below
 
@@ -200,11 +246,29 @@ Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig`) 
 
 Update your database
 
-```
-$ bin/console doctrine:migrations:migrate
+```bash
+bin/console doctrine:migrations:migrate
 ```
 
 **Note:** If you are running it on production, add the `-e prod` flag to this command.
+
+Update your database schema:
+
+```bash
+bin/console doctrine:schema:update --dump-sql
+```
+
+If the list includes only changes for updating the database by adding 'fraud_status' you can use:
+
+```bash
+bin/console doctrine:schema:update -f
+```
+
+If there are another changes, please make sure they will not destroy your database schema.
+
+## Functionalities
+
+All main functionalities of the plugin are described [here.](doc/functionalities.md)
 
 ## Customization
 
@@ -212,22 +276,22 @@ $ bin/console doctrine:migrations:migrate
 
 Run the below command to see what Symfony services are shared with this plugin:
 ```bash
-$ bin/console debug:container | grep bitbag_sylius_blacklist_plugin
+bin/console debug:container | grep bitbag_sylius_blacklist_plugin
 ```
 
 ## Testing
 ```bash
-$ composer install
-$ cd tests/Application
-$ yarn install
-$ yarn build
-$ bin/console assets:install public -e test
-$ bin/console doctrine:schema:create -e test
-$ bin/console server:run 127.0.0.1:8080 -d public -e test
-$ open http://localhost:8080
-$ cd ../..
-$ vendor/bin/behat
-$ vendor/bin/phpspec run
+composer install
+cd tests/Application
+yarn install
+yarn build
+bin/console assets:install public -e test
+bin/console doctrine:schema:create -e test
+bin/console server:run 127.0.0.1:8080 -d public -e test
+open http://localhost:8080
+cd ../..
+vendor/bin/behat
+vendor/bin/phpspec run
 ```
 
 # About us
