@@ -13,7 +13,6 @@ namespace BitBag\SyliusBlacklistPlugin\Repository;
 
 trait CustomerRepositoryTrait
 {
-
     public function findByEmailPart(string $email, ?int $limit = null): array
     {
         return $this->createQueryBuilder('c')
