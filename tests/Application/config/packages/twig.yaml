@@ -2,6 +2,9 @@ twig:
     paths: ['%kernel.project_dir%/templates']
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes:
+        - '@BitBagSyliusBlacklistPlugin/Form/theme.html.twig'
+        - '@SyliusUi/Form/theme.html.twig'
 
 services:
     _defaults:

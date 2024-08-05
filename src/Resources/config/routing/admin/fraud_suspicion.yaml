@@ -40,3 +40,29 @@ bitbag_sylius_blacklist_plugin_admin_order_mark_suspicious:
                 method: createForOrder
                 arguments:
                     - "expr:notFoundOnNull(service('sylius.repository.order').find($orderId))"
+
+bitbag_sylius_blacklist_plugin_admin_ajax_customer_by_email:
+    path: /customer-search
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.customer::indexAction
+        _format: json
+        _sylius:
+            permission: true
+            repository:
+                method: findByEmailPart
+                arguments:
+                    email: $email
+                    limit: "!!int %bitbag.ajax.customer.autocomplete_limit%"
+
+bitbag_sylius_blacklist_plugin_admin_ajax_customer_by_id:
+    path: /customer-search-by-id
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.customer::indexAction
+        _format: json
+        _sylius:
+            permission: true
+            repository:
+                method: findBy
+                arguments: [id: $id]
