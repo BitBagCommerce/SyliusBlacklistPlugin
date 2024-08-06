@@ -140,7 +140,7 @@ final class FraudSuspicionContext implements Context
         $customerLastUsedAddress = $order->getBillingAddress();
 
         $this->resolveCurrentPage()
-            ->selectOption('Customer', $order->getCustomer()->getEmail())
+            ->selectCustomer($order->getCustomer()->getEmail())
             ->fillField('Company', $customerLastUsedAddress->getCompany())
             ->fillField('Company', $customerLastUsedAddress->getCompany())
             ->fillField('First name', $customerLastUsedAddress->getFirstName())

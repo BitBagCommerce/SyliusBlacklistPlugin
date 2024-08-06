@@ -17,4 +17,6 @@ interface CreatePageInterface extends BaseCreatePageInterface, ContainsErrorInte
     public function fillField(string $field, ?string $value): self;
 
     public function selectOption(string $field, string $value): self;
+
+    public function selectCustomer(string $customerEmail): CreatePageInterface;
 }
