@@ -1,10 +1,11 @@
 <?php
 
 /*
- * This file was created by developers working at BitBag
- * Do you need more information about us and what we do? Visit our https://bitbag.io website!
- * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
-*/
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
 
 declare(strict_types=1);
 
@@ -26,7 +27,7 @@ final class FraudSuspicionActionEligibilityChecker implements FraudSuspicionActi
 
     public function __construct(
         FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
-        CustomerStateResolverInterface $customerStateResolver
+        CustomerStateResolverInterface $customerStateResolver,
     ) {
         $this->fraudSuspicionRepository = $fraudSuspicionRepository;
         $this->customerStateResolver = $customerStateResolver;
@@ -34,7 +35,7 @@ final class FraudSuspicionActionEligibilityChecker implements FraudSuspicionActi
 
     public function canAddFraudSuspicion(
         OrderInterface $order,
-        AutomaticBlacklistingConfigurationInterface $automaticBlacklistingConfiguration
+        AutomaticBlacklistingConfigurationInterface $automaticBlacklistingConfiguration,
     ): bool {
         if (null !== $this->fraudSuspicionRepository->findOneBy(['order' => $order])) {
             return false;
@@ -47,7 +48,7 @@ final class FraudSuspicionActionEligibilityChecker implements FraudSuspicionActi
         $lastFraudSuspicionsOfCustomer = $this->fraudSuspicionRepository->countByCustomerAndCommentAndDate(
             $customer,
             FraudSuspicionInterface::AUTO_GENERATED_STATUS,
-            $date
+            $date,
         );
 
         if ((int) $lastFraudSuspicionsOfCustomer >= $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber()) {
