@@ -43,9 +43,9 @@ This **open-source plugin was developed to help the Sylius community**. If you h
 
 ## Installation
 ```bash
-$ composer require bitbag/blacklist-plugin
+composer require bitbag/blacklist-plugin --no-scripts
 ```
-    
+
 Add plugin dependencies to your `config/bundles.php` file:
 ```php
 return [
@@ -92,34 +92,7 @@ class Customer extends BaseCustomer implements CustomerInterface
 }
 ```
 
-Or this way if you use annotations:
-
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace App\Entity\Customer;
-
-use Doctrine\ORM\Mapping as ORM;
-use BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface;use BitBag\SyliusBlacklistPlugin\Model\FraudStatusTrait;
-use Sylius\Component\Core\Model\Customer as BaseCustomer;
-
-/**
-* @ORM\Entity 
-* @ORM\Table(name="sylius_customer")
-*/
-class Customer extends BaseCustomer implements CustomerInterface
-{
-    /**
-    * @var string
-    * @ORM\Column(type="string", nullable=false)
-    */   
-    protected $fraudStatus = FraudStatusInterface::FRAUD_STATUS_NEUTRAL;
-}
-```
-
-If you don't use annotations, define new Entity mapping inside your src/Resources/config/doctrine directory.
+Define new Entity mapping inside your src/Resources/config/doctrine directory.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -134,6 +107,74 @@ If you don't use annotations, define new Entity mapping inside your src/Resource
         <field name="fraudStatus" column="fraud_status" type="string" />
     </entity>
 </doctrine-mapping>
+```
+
+Or edit Customer Entity this way if you use attributes:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Entity\Customer;
+
+use Doctrine\ORM\Mapping as ORM;
+use Sylius\Component\Core\Model\Customer as BaseCustomer;
+
+#[ORM\Entity]
+#[ORM\Table(name: 'sylius_customer')]
+class Customer extends BaseCustomer implements CustomerInterface
+{
+    #[ORM\Column(type: 'string', nullable: false)]
+    protected $fraudStatus = FraudStatusInterface::FRAUD_STATUS_NEUTRAL;
+
+    public function getFraudStatus(): ?string
+    {
+        return $this->fraudStatus;
+    }
+
+    public function setFraudStatus(?string $fraudStatus): void
+    {
+        $this->fraudStatus = $fraudStatus;
+    }
+}
+
+```
+
+Or edit Customer Entity this way if you use annotations:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Entity\Customer;
+
+use Doctrine\ORM\Mapping as ORM;
+use Sylius\Component\Core\Model\Customer as BaseCustomer;
+
+/**
+* @ORM\Entity 
+* @ORM\Table(name="sylius_customer")
+*/
+class Customer extends BaseCustomer implements CustomerInterface
+{
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=false)
+     */
+    protected $fraudStatus = FraudStatusInterface::FRAUD_STATUS_NEUTRAL;
+
+    public function getFraudStatus(): ?string
+    {
+        return $this->fraudStatus;
+    }
+
+    public function setFraudStatus(?string $fraudStatus): void
+    {
+        $this->fraudStatus = $fraudStatus;
+    }
+}
 ```
 
 Create also interface, which is implemented by customer entity
@@ -189,7 +230,7 @@ sylius_grid:
                             bitbag_sylius_blacklist_plugin.ui.blacklisted: Blacklisted
 ```
 
-Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig`) by adding lines below
+Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig` or `@SyliusAdminBundle/Customer/Form/_firstColumn.html.twig`) by adding lines below
 
 ```html
 <div class="ui segment">
@@ -200,11 +241,29 @@ Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig`) 
 
 Update your database
 
-```
-$ bin/console doctrine:migrations:migrate
+```bash
+bin/console doctrine:migrations:migrate
 ```
 
 **Note:** If you are running it on production, add the `-e prod` flag to this command.
+
+Update your database schema:
+
+```bash
+doctrine:schema:update --dump-sql
+```
+
+If the list includes only changes for updating the database by adding 'fraud_status' you can use:
+
+```bash
+doctrine:schema:update -f
+```
+
+If there are another changes, please make sure they will not destroy your database schema.
+
+## Functionalities
+
+All main functionalities of the plugin are described [here.](doc/functionalities.md)
 
 ## Customization
 
@@ -212,22 +271,22 @@ $ bin/console doctrine:migrations:migrate
 
 Run the below command to see what Symfony services are shared with this plugin:
 ```bash
-$ bin/console debug:container | grep bitbag_sylius_blacklist_plugin
+bin/console debug:container | grep bitbag_sylius_blacklist_plugin
 ```
 
 ## Testing
 ```bash
-$ composer install
-$ cd tests/Application
-$ yarn install
-$ yarn build
-$ bin/console assets:install public -e test
-$ bin/console doctrine:schema:create -e test
-$ bin/console server:run 127.0.0.1:8080 -d public -e test
-$ open http://localhost:8080
-$ cd ../..
-$ vendor/bin/behat
-$ vendor/bin/phpspec run
+composer install
+cd tests/Application
+yarn install
+yarn build
+bin/console assets:install public -e test
+bin/console doctrine:schema:create -e test
+bin/console server:run 127.0.0.1:8080 -d public -e test
+open http://localhost:8080
+cd ../..
+vendor/bin/behat
+vendor/bin/phpspec run
 ```
 
 # About us
