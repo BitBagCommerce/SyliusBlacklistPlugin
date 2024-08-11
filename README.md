@@ -239,8 +239,6 @@ Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig` o
 </div>
 ```
 
-Note. 
-
 Update your database
 
 ```bash
