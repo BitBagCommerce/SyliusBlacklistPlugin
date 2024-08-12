@@ -176,6 +176,15 @@ sylius_customer:
 
 Create or edit `CustomerRepository.php` file:
 ```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Repository\Customer;
+
+use BitBag\SyliusBlacklistPlugin\Repository\CustomerRepositoryTrait;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\CustomerRepository as BaseCustomerRepository;
+
 class CustomerRepository extends BaseCustomerRepository
 {
     use CustomerRepositoryTrait;
@@ -208,7 +217,6 @@ sylius_grid:
                             bitbag_sylius_blacklist_plugin.ui.neutral: Neutral
                             bitbag_sylius_blacklist_plugin.ui.blacklisted: Blacklisted
 ```
-Override twig config:
 
 ```yaml
 # config/packages/twig.yaml

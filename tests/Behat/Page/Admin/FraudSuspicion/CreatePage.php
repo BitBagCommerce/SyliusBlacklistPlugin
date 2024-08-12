@@ -37,11 +37,10 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function selectCustomer(string $customerEmail): CreatePageInterface
     {
-
         $dropdown = $this->getElement('customer_dropdown');
         $dropdown->click();
 
-        $dropdown->waitFor(5, function () use ($customerEmail) {
+        $dropdown->waitFor(1, function () use ($customerEmail) {
             return $this->hasElement('customer_dropdown_item', [
                 '%item%' => $customerEmail,
             ]);
