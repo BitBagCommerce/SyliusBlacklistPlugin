@@ -109,6 +109,38 @@ Define new Entity mapping inside your src/Resources/config/doctrine directory.
 </doctrine-mapping>
 ```
 
+Or edit Customer Entity this way if you use attributes:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Entity\Customer;
+
+use Doctrine\ORM\Mapping as ORM;
+use Sylius\Component\Core\Model\Customer as BaseCustomer;
+
+#[ORM\Entity]
+#[ORM\Table(name: 'sylius_customer')]
+class Customer extends BaseCustomer implements CustomerInterface
+{
+    #[ORM\Column(type: 'string', nullable: false)]
+    protected $fraudStatus = FraudStatusInterface::FRAUD_STATUS_NEUTRAL;
+
+    public function getFraudStatus(): ?string
+    {
+        return $this->fraudStatus;
+    }
+
+    public function setFraudStatus(?string $fraudStatus): void
+    {
+        $this->fraudStatus = $fraudStatus;
+    }
+}
+
+```
+
 Or edit Customer Entity this way if you use annotations:
 
 ```php
@@ -119,7 +151,6 @@ declare(strict_types=1);
 namespace App\Entity\Customer;
 
 use Doctrine\ORM\Mapping as ORM;
-use BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface;use BitBag\SyliusBlacklistPlugin\Model\FraudStatusTrait;
 use Sylius\Component\Core\Model\Customer as BaseCustomer;
 
 /**
@@ -243,7 +274,7 @@ when@test_cached:
 
 ```
 
-Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig`) by adding lines below
+Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig` or `@SyliusAdminBundle/Customer/Form/_firstColumn.html.twig`) by adding lines below
 
 ```html
 <div class="ui segment">
