@@ -4,11 +4,11 @@
 
 ----
 
-[ ![](https://img.shields.io/packagist/l/bitbag/blacklist-plugin.svg) ](https://packagist.org/packages/bitbag/blacklist-plugin "License") 
+[ ![](https://img.shields.io/packagist/l/bitbag/blacklist-plugin.svg) ](https://packagist.org/packages/bitbag/blacklist-plugin "License")
 [ ![](https://img.shields.io/packagist/v/bitbag/product-bundle-plugin.svg) ](https://packagist.org/packages/bitbag/blacklist-plugin "Version")
-[ ![](https://img.shields.io/github/actions/workflow/status/BitBagCommerce/SyliusBlacklistPlugin/build.yml?branch=main) ](https://github.com/BitBagCommerce/SyliusBlacklistPlugin/actions "Build status") 
-[ ![](https://poser.pugx.org/bitbag/blacklist-plugin/downloads)](https://packagist.org/packages/bitbag/blacklist-plugin "Total Downloads") 
-[ ![Slack](https://img.shields.io/badge/community%20chat-slack-FF1493.svg)](http://sylius-devs.slack.com) 
+[ ![](https://img.shields.io/github/actions/workflow/status/BitBagCommerce/SyliusBlacklistPlugin/build.yml?branch=main) ](https://github.com/BitBagCommerce/SyliusBlacklistPlugin/actions "Build status")
+[ ![](https://poser.pugx.org/bitbag/blacklist-plugin/downloads)](https://packagist.org/packages/bitbag/blacklist-plugin "Total Downloads")
+[ ![Slack](https://img.shields.io/badge/community%20chat-slack-FF1493.svg)](http://sylius-devs.slack.com)
 [ ![Support](https://img.shields.io/badge/support-contact%20author-blue])](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_blacklist)
 
 At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us to work  together, feel free to reach out. You will find out more about our professional services, technologies, and contact details at [https://bitbag.io/](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_blacklist).
@@ -22,10 +22,10 @@ Like what we do? Want to join us? Check out our job listings on our [career page
 * [Overview](#overview)
 * [Support](#we-are-here-to-help)
 * [Installation](#installation)
-    * [Testing](#testing)
-    * [Customization](#Customization)
+  * [Testing](#testing)
+  * [Customization](#Customization)
 * [About us](#about-us)
-    * [Community](#community)
+  * [Community](#community)
 * [Demo](#demo-sylius-shop)
 * [License](#license)
 * [Contact](#contact)
@@ -202,7 +202,26 @@ sylius_customer:
         customer:
             classes:
                 model: App\Entity\Customer\Customer
+                repository: App\Repository\Customer\CustomerRepository
 ```
+
+Create or edit `CustomerRepository.php` file:
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Repository\Customer;
+
+use BitBag\SyliusBlacklistPlugin\Repository\CustomerRepositoryTrait;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\CustomerRepository as BaseCustomerRepository;
+
+class CustomerRepository extends BaseCustomerRepository
+{
+    use CustomerRepositoryTrait;
+}
+```
+
 Override Customer grid:
 
 ```yaml
@@ -230,6 +249,31 @@ sylius_grid:
                             bitbag_sylius_blacklist_plugin.ui.blacklisted: Blacklisted
 ```
 
+```yaml
+# config/packages/twig.yaml
+...
+
+twig:
+  paths: ['%kernel.project_dir%/templates']
+  debug: '%kernel.debug%'
+  strict_variables: '%kernel.debug%'
+  form_themes:
+    - '@BitBagSyliusBlacklistPlugin/Form/theme.html.twig'
+    - '@SyliusUi/Form/theme.html.twig'
+services:
+  _defaults:
+    public: false
+    autowire: true
+    autoconfigure: true
+
+  Twig\Extra\Intl\IntlExtension: ~
+
+when@test_cached:
+  twig:
+    strict_variables: true
+
+```
+
 Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig` or `@SyliusAdminBundle/Customer/Form/_firstColumn.html.twig`) by adding lines below
 
 ```html
@@ -250,13 +294,13 @@ bin/console doctrine:migrations:migrate
 Update your database schema:
 
 ```bash
-doctrine:schema:update --dump-sql
+bin/console doctrine:schema:update --dump-sql
 ```
 
 If the list includes only changes for updating the database by adding 'fraud_status' you can use:
 
 ```bash
-doctrine:schema:update -f
+bin/console doctrine:schema:update -f
 ```
 
 If there are another changes, please make sure they will not destroy your database schema.

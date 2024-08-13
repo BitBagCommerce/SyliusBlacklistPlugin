@@ -1,0 +1,10 @@
+Tests\BitBag\SyliusBlacklistPlugin\Entity\Customer:
+  customer_1:
+    email: "customer1@example.com"
+    firstName: "John"
+    lastName: "Doe"
+    gender: "u"
+    birthday: <date_create('2021-04-03')>
+    createdAt: <date_create('2021-04-03')>
+    updatedAt: <date_create('2021-04-03')>
+    fraudStatus: "neutral"

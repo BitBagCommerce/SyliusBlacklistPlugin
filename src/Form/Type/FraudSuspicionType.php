@@ -13,32 +13,30 @@ namespace BitBag\SyliusBlacklistPlugin\Form\Type;
 
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 final class FraudSuspicionType extends AbstractResourceType
 {
-    /** @var string */
-    private $customerClass;
-
     public function __construct(
         string $dataClass,
-        string $customerClass,
         array $validationGroups = [],
     ) {
         parent::__construct($dataClass, $validationGroups);
-
-        $this->customerClass = $customerClass;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('customer', EntityType::class, [
-                'class' => $this->customerClass,
+            ->add('customer', CustomerAutocompleteChoiceType::class, [
+                'label' => 'sylius.ui.customer',
+                'priority' => 1,
+                'constraints' => [
+                    new NotNull(),
+                ],
             ])
             ->add('company', TextType::class, [
                 'required' => false,

@@ -24,8 +24,8 @@ class AutomaticBlacklistingConfigurationRepositoryTest extends IntegrationTestCa
     {
         parent::SetUp();
 
-        $this->automaticBlacklistingConfigurationRepository = self::$container->get('bitbag_sylius_blacklist_plugin.repository.automatic_blacklisting_configuration');
-        $this->channelRepository = self::$container->get('sylius.repository.channel');
+        $this->automaticBlacklistingConfigurationRepository = self::getContainer()->get('bitbag_sylius_blacklist_plugin.repository.automatic_blacklisting_configuration');
+        $this->channelRepository = self::getContainer()->get('sylius.repository.channel');
     }
 
     public function tearDown(): void

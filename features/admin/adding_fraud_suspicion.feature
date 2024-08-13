@@ -14,7 +14,7 @@ Feature: Adding fraud suspicion
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @ui @javascript
     Scenario: Adding fraud suspicion
         When I go to the create fraud suspicion page
         And I fill all required fields basing on order "#00000022" address

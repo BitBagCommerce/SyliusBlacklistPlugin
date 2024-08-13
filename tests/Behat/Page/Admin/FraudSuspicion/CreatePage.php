@@ -34,4 +34,32 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
         return $this;
     }
+
+    public function selectCustomer(string $customerEmail): CreatePageInterface
+    {
+        $dropdown = $this->getElement('customer_dropdown');
+        $dropdown->click();
+
+        $dropdown->waitFor(1, function () use ($customerEmail) {
+            return $this->hasElement('customer_dropdown_item', [
+                '%item%' => $customerEmail,
+            ]);
+        });
+
+        $item = $this->getElement('customer_dropdown_item', [
+            '%item%' => $customerEmail,
+        ]);
+
+        $item->click();
+
+        return $this;
+    }
+
+    protected function getDefinedElements(): array
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'customer_dropdown' => '.field > label:contains("Customer") ~ .sylius-autocomplete',
+            'customer_dropdown_item' => '.field > label:contains("Customer") ~ .sylius-autocomplete > div.menu > div.item:contains("%item%")',
+        ]);
+    }
 }

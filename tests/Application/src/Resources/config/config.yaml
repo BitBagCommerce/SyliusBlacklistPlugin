@@ -3,3 +3,4 @@ sylius_customer:
     customer:
       classes:
         model: Tests\BitBag\SyliusBlacklistPlugin\Entity\Customer
+        repository: Tests\BitBag\SyliusBlacklistPlugin\Repository\CustomerRepository
