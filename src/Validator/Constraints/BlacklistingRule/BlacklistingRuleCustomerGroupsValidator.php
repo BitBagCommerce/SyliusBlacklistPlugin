@@ -18,7 +18,7 @@ use Webmozart\Assert\Assert;
 
 class BlacklistingRuleCustomerGroupsValidator extends ConstraintValidator
 {
-    public function validate($blacklistingRule, Constraint $constraint): void
+    public function validate(mixed $blacklistingRule, Constraint $constraint): void
     {
         Assert::isInstanceOf($blacklistingRule, BlacklistingRuleInterface::class);
 

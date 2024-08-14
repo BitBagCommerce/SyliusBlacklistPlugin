@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraint;
 
 class BlacklistingRuleCustomerGroups extends Constraint
 {
-    public $message = 'bitbag_sylius_blacklist_plugin.blacklisting_rule.guests_cannot_have_group';
+    public string $message = 'bitbag_sylius_blacklist_plugin.blacklisting_rule.guests_cannot_have_group';
 
     /** @var array */
     public $options;
@@ -25,6 +25,9 @@ class BlacklistingRuleCustomerGroups extends Constraint
         return BlacklistingRuleCustomerGroupsValidator::class;
     }
 
+    /**
+     * @return array<string>
+     */
     public function getTargets(): array
     {
         return [self::CLASS_CONSTRAINT];

@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraint;
 
 class CheckoutAddressType extends Constraint
 {
-    public $message = 'bitbag_sylius_blacklist_plugin.form.error.cannot_place_order';
+    public string $message = 'bitbag_sylius_blacklist_plugin.form.error.cannot_place_order';
 
     /** @var array */
     public $options;
@@ -25,6 +25,9 @@ class CheckoutAddressType extends Constraint
         return CheckoutAddressTypeValidator::class;
     }
 
+    /**
+     * @return array<string>
+     */
     public function getTargets(): array
     {
         return [self::CLASS_CONSTRAINT];

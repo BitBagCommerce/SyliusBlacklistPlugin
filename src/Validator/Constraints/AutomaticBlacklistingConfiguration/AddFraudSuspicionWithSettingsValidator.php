@@ -18,7 +18,7 @@ use Webmozart\Assert\Assert;
 
 final class AddFraudSuspicionWithSettingsValidator extends ConstraintValidator
 {
-    public function validate($automaticBlacklistingConfiguration, Constraint $constraint): void
+    public function validate(mixed $automaticBlacklistingConfiguration, Constraint $constraint): void
     {
         Assert::isInstanceOf($automaticBlacklistingConfiguration, AutomaticBlacklistingConfigurationInterface::class);
 

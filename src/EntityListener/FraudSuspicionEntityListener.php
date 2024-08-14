@@ -38,7 +38,7 @@ class FraudSuspicionEntityListener
         $this->fraudSuspicionCommonModelConverter = $fraudSuspicionCommonModelConverter;
     }
 
-    public function prePersist(FraudSuspicionInterface $newFraudSuspicion, LifecycleEventArgs $event)
+    public function prePersist(FraudSuspicionInterface $newFraudSuspicion, LifecycleEventArgs $event): void
     {
         $fraudSuspicionCommonModel = $this->fraudSuspicionCommonModelConverter->convertFraudSuspicionObject($newFraudSuspicion);
 

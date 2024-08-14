@@ -26,13 +26,13 @@ class BlacklistingRule implements BlacklistingRuleInterface
     /** @var int|null */
     protected $id;
 
-    /** @var string */
+    /** @var string|null */
     protected $name;
 
     /** @var array */
     protected $attributes = [];
 
-    /** @var int */
+    /** @var int|null */
     protected $permittedStrikes;
 
     /** @var bool */
@@ -86,7 +86,7 @@ class BlacklistingRule implements BlacklistingRuleInterface
 
     public function removeAttribute(string $attribute): void
     {
-        $index = array_search($attribute, $this->attributes);
+        $index = array_search($attribute, $this->attributes, true);
 
         if (false !== $index) {
             unset($this->attributes[$index]);

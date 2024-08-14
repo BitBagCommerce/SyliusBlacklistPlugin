@@ -24,7 +24,7 @@ final class SyliusBehatPolyfillCompilerPass implements CompilerPassInterface
 
     private const TEST = 'test';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         /** @var string $environment */
         $environment = $container->getParameter(self::KERNEL_ENVIRONMENT_KEY);

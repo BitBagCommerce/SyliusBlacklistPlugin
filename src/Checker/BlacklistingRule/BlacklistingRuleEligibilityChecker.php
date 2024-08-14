@@ -16,8 +16,12 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 
 final class BlacklistingRuleEligibilityChecker implements BlacklistingRuleEligibilityCheckerInterface
 {
-    public function isEligible(BlacklistingRuleInterface $blacklistingRule, CustomerInterface $customer): bool
+    public function isEligible(BlacklistingRuleInterface $blacklistingRule, ?CustomerInterface $customer): bool
     {
+        if (null === $customer) {
+            return false;
+        }
+
         if ($blacklistingRule->isOnlyForGuests() && null !== $customer->getUser()) {
             return false;
         }

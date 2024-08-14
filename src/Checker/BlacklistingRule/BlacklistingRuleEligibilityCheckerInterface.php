@@ -16,5 +16,5 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 
 interface BlacklistingRuleEligibilityCheckerInterface
 {
-    public function isEligible(BlacklistingRuleInterface $blacklistingRule, CustomerInterface $customer): bool;
+    public function isEligible(BlacklistingRuleInterface $blacklistingRule, ?CustomerInterface $customer): bool;
 }
