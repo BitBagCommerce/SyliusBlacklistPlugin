@@ -78,15 +78,17 @@ abstract class AbstractConfigurableAutomaticBlacklistingConfigurationElementType
         ;
     }
 
-    protected function addConfigurationFields(FormInterface $form, string $configurationType): void
+    protected function addConfigurationFields(FormInterface $form, ?string $configurationType): void
     {
         $form->add('settings', $configurationType, [
             'label' => false,
         ]);
     }
 
-    protected function getRegistryIdentifier(FormInterface $form, $data = null): ?string
-    {
+    protected function getRegistryIdentifier(
+        FormInterface $form,
+        AutomaticBlacklistingRuleInterface $data = null,
+    ): ?string {
         if ($data instanceof AutomaticBlacklistingRuleInterface && null !== $data->getType()) {
             return $data->getType();
         }

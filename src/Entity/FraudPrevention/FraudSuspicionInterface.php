@@ -42,39 +42,39 @@ interface FraudSuspicionInterface extends ResourceInterface, TimestampableInterf
 
     public function getCompany(): ?string;
 
-    public function setCompany(?string $company);
+    public function setCompany(?string $company): void;
 
     public function getFirstName(): ?string;
 
-    public function setFirstName(?string $firstName);
+    public function setFirstName(?string $firstName): void;
 
     public function getLastName(): ?string;
 
-    public function setLastName(?string $lastName);
+    public function setLastName(?string $lastName): void;
 
     public function getEmail(): ?string;
 
-    public function setEmail(?string $email);
+    public function setEmail(?string $email): void;
 
     public function getPhoneNumber(): ?string;
 
-    public function setPhoneNumber(?string $phoneNumber);
+    public function setPhoneNumber(?string $phoneNumber): void;
 
     public function getStreet(): ?string;
 
-    public function setStreet(?string $street);
+    public function setStreet(?string $street): void;
 
     public function getCity(): ?string;
 
-    public function setCity(?string $city);
+    public function setCity(?string $city): void;
 
     public function getProvince(): ?string;
 
-    public function setProvince(?string $province);
+    public function setProvince(?string $province): void;
 
     public function getCountry(): ?string;
 
-    public function setCountry(?string $country);
+    public function setCountry(?string $country): void;
 
     public function getPostcode(): ?string;
 
@@ -86,7 +86,7 @@ interface FraudSuspicionInterface extends ResourceInterface, TimestampableInterf
 
     public function getAddressType(): ?string;
 
-    public function setAddressType(string $addressType);
+    public function setAddressType(string $addressType): void;
 
     public function getComment(): ?string;
 

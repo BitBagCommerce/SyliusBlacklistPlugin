@@ -25,7 +25,7 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
     /** @var int|null */
     protected $id;
 
-    /** @var string */
+    /** @var string|null */
     protected $name;
 
     /**
@@ -43,10 +43,10 @@ class AutomaticBlacklistingConfiguration implements AutomaticBlacklistingConfigu
     /** @var bool */
     protected $addFraudSuspicion = false;
 
-    /** @var int */
+    /** @var int|null */
     protected $permittedFraudSuspicionsNumber;
 
-    /** @var string */
+    /** @var string|null */
     protected $permittedFraudSuspicionsTime;
 
     public function __construct()

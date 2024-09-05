@@ -15,9 +15,9 @@ use Symfony\Component\Validator\Constraint;
 
 final class AddFraudSuspicionWithSettings extends Constraint
 {
-    public $fraudSuspicionsNumberNotBlankMessage = 'bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.fraud_suspicions_number.not_blank';
+    public string $fraudSuspicionsNumberNotBlankMessage = 'bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.fraud_suspicions_number.not_blank';
 
-    public $fraudSuspicionTimeNotBlankMessage = 'bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.fraud_suspicions_time.not_blank';
+    public string $fraudSuspicionTimeNotBlankMessage = 'bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.fraud_suspicions_time.not_blank';
 
     /** @var array */
     public $options;
@@ -27,6 +27,9 @@ final class AddFraudSuspicionWithSettings extends Constraint
         return AddFraudSuspicionWithSettingsValidator::class;
     }
 
+    /**
+     * @return array<string>
+     */
     public function getTargets(): array
     {
         return [self::CLASS_CONSTRAINT];

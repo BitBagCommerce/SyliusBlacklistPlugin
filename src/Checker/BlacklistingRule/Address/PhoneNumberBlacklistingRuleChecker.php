@@ -22,7 +22,8 @@ class PhoneNumberBlacklistingRuleChecker implements BlacklistingRuleCheckerInter
 
     public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel): void
     {
-        if (!empty($fraudSuspicionCommonModel->getPhoneNumber())) {
+        if (null !== $fraudSuspicionCommonModel->getPhoneNumber() &&
+            '' !== $fraudSuspicionCommonModel->getPhoneNumber()) {
             $builder
                 ->andWhere('o.phoneNumber = :phoneNumber')
                 ->setParameter('phoneNumber', $fraudSuspicionCommonModel->getPhoneNumber())

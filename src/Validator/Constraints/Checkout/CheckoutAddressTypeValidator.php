@@ -43,7 +43,7 @@ class CheckoutAddressTypeValidator extends ConstraintValidator
         $this->fraudSuspicionCommonModelConverter = $fraudSuspicionCommonModelConverter;
     }
 
-    public function validate($order, Constraint $constraint): void
+    public function validate(mixed $order, Constraint $constraint): void
     {
         Assert::isInstanceOf($order, OrderInterface::class);
 

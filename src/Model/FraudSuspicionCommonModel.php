@@ -19,34 +19,34 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
     /** @var OrderInterface|null */
     protected $order;
 
-    /** @var CustomerInterface */
+    /** @var CustomerInterface|null */
     protected $customer;
 
     /** @var string|null */
     protected $company;
 
-    /** @var string */
+    /** @var string|null */
     protected $firstName;
 
-    /** @var string */
+    /** @var string|null */
     protected $lastName;
 
-    /** @var string */
+    /** @var string|null */
     protected $email;
 
-    /** @var string */
+    /** @var string|null */
     protected $phoneNumber;
 
-    /** @var string */
+    /** @var string|null */
     protected $street;
 
-    /** @var string */
+    /** @var string|null */
     protected $city;
 
-    /** @var string */
+    /** @var string|null */
     protected $province;
 
-    /** @var string */
+    /** @var string|null */
     protected $country;
 
     /** @var string|null */
@@ -70,7 +70,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->customer;
     }
 
-    public function setCustomer(CustomerInterface $customer): void
+    public function setCustomer(?CustomerInterface $customer): void
     {
         $this->customer = $customer;
     }
@@ -80,7 +80,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->company;
     }
 
-    public function setCompany(?string $company)
+    public function setCompany(?string $company): void
     {
         $this->company = $company;
     }
@@ -90,7 +90,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->firstName;
     }
 
-    public function setFirstName(?string $firstName)
+    public function setFirstName(?string $firstName): void
     {
         $this->firstName = $firstName;
     }
@@ -100,7 +100,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->lastName;
     }
 
-    public function setLastName(?string $lastName)
+    public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
     }
@@ -110,7 +110,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->email;
     }
 
-    public function setEmail(?string $email)
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
@@ -130,7 +130,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->street;
     }
 
-    public function setStreet(?string $street)
+    public function setStreet(?string $street): void
     {
         $this->street = $street;
     }
@@ -140,7 +140,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->city;
     }
 
-    public function setCity(?string $city)
+    public function setCity(?string $city): void
     {
         $this->city = $city;
     }
@@ -150,7 +150,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->province;
     }
 
-    public function setProvince(?string $province)
+    public function setProvince(?string $province): void
     {
         $this->province = $province;
     }
@@ -160,7 +160,7 @@ class FraudSuspicionCommonModel implements FraudSuspicionCommonModelInterface
         return $this->country;
     }
 
-    public function setCountry(?string $country)
+    public function setCountry(?string $country): void
     {
         $this->country = $country;
     }

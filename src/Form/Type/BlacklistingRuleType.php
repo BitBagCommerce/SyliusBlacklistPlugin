@@ -25,7 +25,7 @@ final class BlacklistingRuleType extends AbstractResourceType
     /** @var array */
     private $attributeChoices;
 
-    /* @var string */
+    /** @var string */
     private $customerGroupClass;
 
     public function __construct(

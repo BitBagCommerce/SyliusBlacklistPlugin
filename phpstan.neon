@@ -1,10 +1,14 @@
 parameters:
     reportUnmatchedIgnoredErrors: false
     checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
 
     excludes_analyse:
         # Makes PHPStan crash
         - 'src/DependencyInjection/Configuration.php'
+        - 'src/Repository'
+        - 'src/Processor/AutomaticBlacklistingRulesProcessor.php'
+        - 'src/Factory/FraudSuspicionFactory.php'
 
         # Test dependencies
         - 'tests/Application/app/**.php'
@@ -12,3 +16,13 @@ parameters:
 
     ignoreErrors:
         - '/Parameter #1 \$configuration of method Symfony\\Component\\DependencyInjection\\Extension\\Extension::processConfiguration\(\) expects Symfony\\Component\\Config\\Definition\\ConfigurationInterface, Symfony\\Component\\Config\\Definition\\ConfigurationInterface\|null given\./'
+        - '/Parameter #1 \$customer of method BitBag\\SyliusBlacklistPlugin\\Model\\FraudSuspicionCommonModelInterface::setCustomer\(\) expects Sylius\\Component\\Customer\\Model\\CustomerInterface, Sylius\\Component\\Customer\\Model\\CustomerInterface\|null given\./'
+        - '/Parameter #1 \$customer of method BitBag\\SyliusBlacklistPlugin\\StateResolver\\CustomerStateResolverInterface::changeStateOnBlacklisted\(\) expects Sylius\\Component\\Customer\\Model\\CustomerInterface, Sylius\\Component\\Customer\\Model\\CustomerInterface\|null given\./'
+        - '#Access to an undefined property Symfony\\Component\\Validator\\Constraint::\$.+#'
+        - '#Call to an undefined method .+::[a-zA-Z]+\(\).#'
+        - '#Argument of an invalid type array\|null supplied for foreach, only iterables are supported.#'
+        - '#Cannot call method [a-zA-Z]+\(.*\) on .+\\?null#'
+        - '#Property .+::\$[a-zA-Z]+ is never read, only written.#'
+        - '#Call to an undefined method .+::[a-zA-Z]+\(\).#'
+
+

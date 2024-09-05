@@ -22,7 +22,7 @@ class CompanyBlacklistingRuleChecker implements BlacklistingRuleCheckerInterface
 
     public function checkIfCustomerIsBlacklisted(QueryBuilder $builder, FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel): void
     {
-        if (!empty($fraudSuspicionCommonModel->getCompany())) {
+        if (null !== $fraudSuspicionCommonModel->getCompany() && '' !== $fraudSuspicionCommonModel->getCompany()) {
             $builder
                 ->andWhere('o.company = :company')
                 ->setParameter('company', $fraudSuspicionCommonModel->getCompany())
