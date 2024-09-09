@@ -4,11 +4,15 @@ Check the mapping settings in `config/packages/doctrine.yaml` and, if necessary,
 ```yaml
 doctrine:
     ...
+doctrine:
+    ...
     orm:
-        ...
-        mappings:
-            App:
+        entity_managers:
+            default:
                 ...
+                mappings:
+                    App:
+                        ...
                 type: xml
                 dir: '%kernel.project_dir%/src/Resources/config/doctrine'
 ```
