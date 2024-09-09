@@ -5,11 +5,13 @@ Check the mapping settings in `config/packages/doctrine.yaml` and, if necessary,
 doctrine:
     ...
     orm:
-        ...
-        mappings:
-            App:
+        entity_managers:
+            default:
                 ...
-                type: attribute
+                mappings:
+                    App:
+                        ...
+                        type: attribute
 ```
 
 Extend entities with parameters and methods using attributes and traits:
