@@ -13,8 +13,8 @@ doctrine:
                 mappings:
                     App:
                         ...
-                type: xml
-                dir: '%kernel.project_dir%/src/Resources/config/doctrine'
+                        type: xml
+                        dir: '%kernel.project_dir%/src/Resources/config/doctrine'
 ```
 
 Extend entities with parameters and methods using attributes and traits:
