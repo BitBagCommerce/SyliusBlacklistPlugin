@@ -2,7 +2,7 @@ bitbag_sylius_blacklist_plugin_admin_fraud_suspicion:
     resource: |
         alias: bitbag_sylius_blacklist_plugin.fraud_suspicion
         section: admin
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         grid: bitbag_sylius_blacklist_plugin_fraud_suspicion
         permission: true
         vars:

@@ -50,6 +50,7 @@
             <argument>%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_configuration.class%</argument>
             <argument>%bitbag.sylius_blacklist_plugin.form.type.automatic_blacklisting_configuration.validation_groups%</argument>
             <argument>%bitbag.sylius_blacklist_plugin.form.type.validation_groups%</argument>
+            <argument>%bitbag.sylius_blacklist_plugin.automatic_blacklisting_rules%</argument>
             <tag name="form.type" />
         </service>
         <service id="bitbag.sylius_blacklist_plugin.form.type.automatic_blacklisting_rule"

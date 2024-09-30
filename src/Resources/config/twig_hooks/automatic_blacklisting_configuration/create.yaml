@@ -1,0 +1,13 @@
+twig_hooks:
+    hooks:
+        'bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.create.content':
+            form:
+                component: 'bitbag_sylius_blacklist_plugin:automatic_blacklisting_configuration:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                configuration:
+                    render_rest: false
+        'bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration.create.content.form':
+            sections:
+                template: '@SyliusAdmin/promotion/form/sections.html.twig'

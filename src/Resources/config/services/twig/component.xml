@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<container
+        xmlns="http://symfony.com/schema/dic/services"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service
+                id="bitbag.sylius_blacklist_plugin.twig.component.automatic_blacklisting_configuration.form"
+                class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.automatic_blacklisting_configuration" />
+            <argument type="service" id="form.factory" />
+            <argument>%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_configuration.class%</argument>
+            <argument>BitBag\SyliusBlacklistPlugin\Form\Type\AutomaticBlacklistingConfigurationType</argument>
+
+            <tag
+                    name="sylius.live_component"
+                    key="bitbag_sylius_blacklist_plugin:automatic_blacklisting_configuration:form"
+                    template="@BitBagSyliusBlacklistPlugin/AutomaticBlacklistingConfiguration/Admin/form.html.twig"
+            />
+        </service>
+    </services>
+</container>

@@ -2,10 +2,12 @@ bitbag_sylius_blacklist_plugin_admin_automatic_blacklisting_configuration:
     resource: |
         alias: bitbag_sylius_blacklist_plugin.automatic_blacklisting_configuration
         section: admin
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         grid: bitbag_sylius_blacklist_plugin_automatic_blacklisting_configuration
         except: ['show']
         permission: true
+        form:
+            type: BitBag\SyliusBlacklistPlugin\Form\Type\AutomaticBlacklistingConfigurationType
         vars:
             all:
                 subheader: bitbag_sylius_blacklist_plugin.ui.configure_automatic_blacklisting_configurations
