@@ -14,40 +14,46 @@
         </div>
         <div class="card-body">
             <div class="row align-items-center">
-                <div class="col-12 col-md-6">
-                    {{ form_row(form.name) }}
+                <div class="col-12 mb-3">
+                    {{ form_row(form.customer) }}
                 </div>
                 <div class="col-12">
-                    {{ form_row(form.channels) }}
+                    {{ form_row(form.company) }}
                 </div>
                 <div class="col-12">
-                    {{ form_row(form.enabled) }}
+                    {{ form_row(form.firstName) }}
                 </div>
                 <div class="col-12">
-                    {{ form_row(form.addFraudSuspicion) }}
+                    {{ form_row(form.lastName) }}
                 </div>
                 <div class="col-12">
-                    {{ form_row(form.permittedFraudSuspicionsNumber) }}
+                    {{ form_row(form.email) }}
                 </div>
                 <div class="col-12">
-                    {{ form_row(form.permittedFraudSuspicionsTime) }}
+                    {{ form_row(form.street) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.city) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.province) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.country) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.postcode) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.customerIp) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.addressType) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.comment) }}
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="card mb-3">
-        <div class="card-header">
-            <h3 class="card-title">{{ 'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.rules'|trans }}</h3>
-        </div>
-        <div class="card-body">
-            <div class="row align-items-center">
-                <div class="col-6">
-                    {{ form_row(form.rules, {label: false}) }}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{ form_end(form, {render_rest: hookable.configuration.render_rest|default(false)}) }}
 </div>

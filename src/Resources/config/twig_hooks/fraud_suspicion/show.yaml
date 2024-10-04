@@ -1,0 +1,5 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.fraud_suspicion.show.content':
+            general:
+                template: '@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/show.html.twig'

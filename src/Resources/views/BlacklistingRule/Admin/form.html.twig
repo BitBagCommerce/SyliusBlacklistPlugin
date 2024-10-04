@@ -24,30 +24,21 @@
                     {{ form_row(form.enabled) }}
                 </div>
                 <div class="col-12">
-                    {{ form_row(form.addFraudSuspicion) }}
+                    {{ form_row(form.attributes) }}
                 </div>
                 <div class="col-12">
-                    {{ form_row(form.permittedFraudSuspicionsNumber) }}
+                    {{ form_row(form.permittedStrikes) }}
                 </div>
                 <div class="col-12">
-                    {{ form_row(form.permittedFraudSuspicionsTime) }}
+                    {{ form_row(form.customerGroups) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.forUnassignedCustomers) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.onlyForGuests) }}
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="card mb-3">
-        <div class="card-header">
-            <h3 class="card-title">{{ 'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.rules'|trans }}</h3>
-        </div>
-        <div class="card-body">
-            <div class="row align-items-center">
-                <div class="col-6">
-                    {{ form_row(form.rules, {label: false}) }}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{ form_end(form, {render_rest: hookable.configuration.render_rest|default(false)}) }}
 </div>

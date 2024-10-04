@@ -31,7 +31,7 @@ final class FraudSuspicionType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('customer', CustomerAutocompleteChoiceType::class, [
+            ->add('customer', CustomerAutocompleteType::class, [
                 'label' => 'sylius.ui.customer',
                 'priority' => 1,
                 'constraints' => [

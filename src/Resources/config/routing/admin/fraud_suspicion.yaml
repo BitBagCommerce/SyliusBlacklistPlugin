@@ -12,7 +12,7 @@ bitbag_sylius_blacklist_plugin_admin_fraud_suspicion:
                 icon: clipboard list
     type: sylius.resource
 
-bitbag_sylius_blacklist_plugin_admin_fraud_suspicion_show:
+sylius_admin_fraud_suspicion_show:
     path: fraud-suspicions/{id}
     methods: [GET]
     defaults:

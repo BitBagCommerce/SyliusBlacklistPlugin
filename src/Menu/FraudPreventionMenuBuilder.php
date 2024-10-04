@@ -28,6 +28,7 @@ final class FraudPreventionMenuBuilder
         $rootMenuItem = $menu
             ->addChild('bitbag_fraud_prevention')
             ->setLabel('bitbag_sylius_blacklist_plugin.ui.fraud_prevention')
+            ->setLabelAttribute('icon', 'spy')
         ;
 
         $rootMenuItem
@@ -35,7 +36,6 @@ final class FraudPreventionMenuBuilder
                 'route' => 'bitbag_sylius_blacklist_plugin_admin_blacklisting_rule_index',
             ])
             ->setLabel('bitbag_sylius_blacklist_plugin.ui.blacklisting_rules')
-            ->setLabelAttribute('icon', 'hand paper')
         ;
 
         $rootMenuItem
@@ -43,7 +43,6 @@ final class FraudPreventionMenuBuilder
                 'route' => 'bitbag_sylius_blacklist_plugin_admin_automatic_blacklisting_configuration_index',
             ])
             ->setLabel('bitbag_sylius_blacklist_plugin.ui.automatic_blacklisting_configurations')
-            ->setLabelAttribute('icon', 'microchip')
         ;
 
         $rootMenuItem
@@ -51,7 +50,6 @@ final class FraudPreventionMenuBuilder
                 'route' => 'bitbag_sylius_blacklist_plugin_admin_fraud_suspicion_index',
             ])
             ->setLabel('bitbag_sylius_blacklist_plugin.ui.fraud_suspicions')
-            ->setLabelAttribute('icon', 'exclamation triangle')
         ;
 
         $rootMenuItem
@@ -59,7 +57,6 @@ final class FraudPreventionMenuBuilder
                 'route' => 'bitbag_sylius_blacklist_plugin_admin_automatic_blacklisting_configuration_index',
             ])
             ->setLabel('bitbag_sylius_blacklist_plugin.ui.automatic_blacklisting_configurations')
-            ->setLabelAttribute('icon', 'cog')
         ;
     }
 }

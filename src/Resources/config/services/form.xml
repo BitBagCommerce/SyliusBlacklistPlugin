@@ -47,10 +47,10 @@
 
         <service id="bitbag.sylius_blacklist_plugin.form.type.automatic_blacklisting_configuration"
                  class="BitBag\SyliusBlacklistPlugin\Form\Type\AutomaticBlacklistingConfigurationType">
+            <argument>%bitbag.sylius_blacklist_plugin.automatic_blacklisting_rules%</argument>
             <argument>%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_configuration.class%</argument>
             <argument>%bitbag.sylius_blacklist_plugin.form.type.automatic_blacklisting_configuration.validation_groups%</argument>
             <argument>%bitbag.sylius_blacklist_plugin.form.type.validation_groups%</argument>
-            <argument>%bitbag.sylius_blacklist_plugin.automatic_blacklisting_rules%</argument>
             <tag name="form.type" />
         </service>
         <service id="bitbag.sylius_blacklist_plugin.form.type.automatic_blacklisting_rule"
@@ -69,6 +69,11 @@
                  class="BitBag\SyliusBlacklistPlugin\Form\Type\AutomaticBlacklistingRuleChoiceType">
             <argument>%bitbag.sylius_blacklist_plugin.automatic_blacklisting_rules%</argument>
             <tag name="form.type" />
+        </service>
+        <service id="bitbag.sylius_blacklist_plugin.form.type.customer_autocomplete" class="BitBag\SyliusBlacklistPlugin\Form\Type\CustomerAutocompleteType" >
+            <argument>%sylius.model.customer.class%</argument>
+            <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
         </service>
     </services>
 </container>

@@ -1,13 +1,13 @@
 twig_hooks:
     hooks:
-        'sylius_admin.automatic_blacklisting_configuration.create.content':
+        'sylius_admin.automatic_blacklisting_configuration.update.content':
             form:
                 component: 'sylius_admin:automatic_blacklisting_configuration:form'
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
                 configuration:
-                    render_rest: false
-        'sylius_admin.automatic_blacklisting_configuration.create.content.form':
+                    method: 'PUT'
+        'sylius_admin.automatic_blacklisting_configuration.update.content.form':
             sections:
                 template: '@BitBagSyliusBlacklistPlugin/AutomaticBlacklistingConfiguration/Admin/form.html.twig'

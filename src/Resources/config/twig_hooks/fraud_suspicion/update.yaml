@@ -1,0 +1,13 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.fraud_suspicion.update.content':
+            form:
+                component: 'sylius_admin:fraud_suspicion:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                configuration:
+                    method: 'PUT'
+        'sylius_admin.fraud_suspicion.update.content.form':
+            sections:
+                template: '@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/form.html.twig'

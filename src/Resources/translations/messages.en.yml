@@ -1,7 +1,9 @@
 bitbag_sylius_blacklist_plugin:
     ui:
         blacklisting_rules: Blacklisting rules
+        blacklisting_rule: Blacklisting rule
         fraud_suspicions: Fraud suspicions
+        fraud_suspicion: Fraud suspicion
         manage_blacklisting_rules: Manage blacklisting rules
         manage_fraud_suspicions: Manage fraud suspicions
         edit_fraud_suspicion: Edit fraud suspicion
@@ -18,6 +20,7 @@ bitbag_sylius_blacklist_plugin:
         mark_suspicious: Mark suspicious
         mark_blacklisted: Mark blacklisted
         mark_neutral: Mark neutral
+        automatic_blacklisting_configuration: Auto-block rules
         automatic_blacklisting_configurations: Auto-block rules
         configure_automatic_blacklisting_configurations: Configure auto-blacklisitng
         new_automatic_blacklisting_configuration: Add new automatic blacklisting configuration

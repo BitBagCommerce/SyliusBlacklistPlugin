@@ -14,7 +14,6 @@ namespace BitBag\SyliusBlacklistPlugin\Form\Type;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\AutomaticBlacklistingRuleInterface;
 use Sylius\Bundle\AdminBundle\Form\Type\AddButtonType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
-use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -30,10 +29,10 @@ final class AutomaticBlacklistingConfigurationType extends AbstractResourceType
     private $attributeChoices;
 
     public function __construct(
+        private array $rules,
         string $dataClass,
         array $attributeChoices,
         array $validationGroups = [],
-        private array $rules,
     ) {
         parent::__construct($dataClass, $validationGroups);
         $this->attributeChoices = $attributeChoices;
