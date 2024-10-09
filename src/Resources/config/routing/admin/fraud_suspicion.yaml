@@ -2,7 +2,7 @@ bitbag_sylius_blacklist_plugin_admin_fraud_suspicion:
     resource: |
         alias: bitbag_sylius_blacklist_plugin.fraud_suspicion
         section: admin
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         grid: bitbag_sylius_blacklist_plugin_fraud_suspicion
         permission: true
         vars:
@@ -12,7 +12,7 @@ bitbag_sylius_blacklist_plugin_admin_fraud_suspicion:
                 icon: clipboard list
     type: sylius.resource
 
-bitbag_sylius_blacklist_plugin_admin_fraud_suspicion_show:
+sylius_admin_fraud_suspicion_show:
     path: fraud-suspicions/{id}
     methods: [GET]
     defaults:
@@ -34,8 +34,7 @@ bitbag_sylius_blacklist_plugin_admin_order_mark_suspicious:
                     parameters:
                         orderId: $orderId
             section: admin
-            template: "@SyliusAdmin/Crud/create.html.twig"
-            form: BitBag\SyliusBlacklistPlugin\Form\Type\FraudSuspicionOrderType
+            template: "@SyliusAdmin/shared/crud/create.html.twig"
             factory:
                 method: createForOrder
                 arguments:

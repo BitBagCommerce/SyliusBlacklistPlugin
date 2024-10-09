@@ -17,7 +17,7 @@ Feature: Blocking users on checkout
         And the customer bought a single "PHP T-Shirt"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
 
-    @ui
+    @ui @javascript
     Scenario: Successfully complete checkout addressing step
         Given I have product "PHP Pullover" in the cart
         And there is a automatic blacklisting configuration "First configuration" with rule "orders" configured with count "2" and date modifier "1 day"
@@ -26,7 +26,7 @@ Feature: Blocking users on checkout
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @ui
+    @ui @javascript
     Scenario: Blocking users on checkout by automatic blacklisting rules
         Given I have product "PHP Blouse" in the cart
         And there is a automatic blacklisting configuration "First configuration" with rule "orders" configured with count "1" and date modifier "1 day"

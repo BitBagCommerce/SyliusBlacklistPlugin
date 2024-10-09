@@ -35,7 +35,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function update(): void
     {
-        $this->getDocument()->pressButton('Save changes');
+        $this->getDocument()->pressButton('Update');
     }
 
     public function fillRuleOption(string $option, string $value): void
@@ -64,7 +64,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     private function getCollectionItems(string $collection): array
     {
-        $items = $this->getElement($collection)->findAll('css', 'div[data-form-collection="item"]');
+        $items = $this->getElement($collection)->findAll('css', '[data-test-entry-row]');
 
         Assert::isArray($items);
 

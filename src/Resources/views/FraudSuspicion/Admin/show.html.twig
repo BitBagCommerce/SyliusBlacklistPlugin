@@ -1,22 +1,16 @@
-{% extends '@SyliusAdmin/layout.html.twig' %}
+{% set fraudSuspicion = hookable_metadata.context.resource %}
 
-{% set fraudSuspicion = resource %}
-
-{% block content %}
-    {% include '@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/Show/_header.html.twig' %}
-
-    <div class="ui divider hidden"></div>
-
-    <div class="ui grid">
-        <div class="sixteen wide mobile eight wide computer column">
+<div class="container-xl mt-3">
+    <div class="row">
+        <div class="col-12 col-md-6">
             {% include '@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/Show/_customer.html.twig' with {'fraudSuspicion': fraudSuspicion} %}
         </div>
-        <div class="sixteen wide mobile eight wide computer column">
+        <div class="col-12 col-md-6">
             {% include '@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/Show/_order.html.twig' with {'fraudSuspicion': fraudSuspicion} %}
         </div>
-        <div class="sixteen wide mobile sixteen wide computer column">
+        <div class="col-12">
             {% include '@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/Show/_details.html.twig' with {'fraudSuspicion': fraudSuspicion} %}
         </div>
     </div>
-{% endblock %}
+</div>
 

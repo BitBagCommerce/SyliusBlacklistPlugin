@@ -36,13 +36,12 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function addRule(string $ruleName): void
     {
-        $count = count($this->getCollectionItems('rules'));
+        $this->getElement($ruleName)->press();
 
-        $this->getDocument()->clickLink('Add rule');
+        $form = $this->getElement('form');
 
-        $this->getSession()->wait(100);
-
-        $this->selectRuleOption('Type', $ruleName);
+        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(1500, fn () => !$form->hasAttribute('busy'));
     }
 
     public function selectRuleOption(string $option, string $value, bool $multiple = false): void
@@ -93,6 +92,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return [
             'rules' => '#bitbag_sylius_blacklist_plugin_automatic_blacklisting_configuration_rules',
+            'Max number of orders' => '[data-test-add-orders]',
+            'Max number of payment failures' => '[data-test-add-payment_failures]',
+            'form' => 'form',
         ];
     }
 
@@ -110,8 +112,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     private function getCollectionItems(string $collection): array
     {
-        $items = $this->getElement($collection)->findAll('css', 'div[data-form-collection="item"]');
-
+        $items = $this->getElement($collection)->findAll('css', '[data-test-entry-row]');
         Assert::isArray($items);
 
         return $items;

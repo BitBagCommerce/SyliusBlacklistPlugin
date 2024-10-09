@@ -11,39 +11,38 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
+use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
-final class CustomerAutocompleteChoiceType extends AbstractType
+#[AsEntityAutocompleteField(
+    alias: 'sylius_admin_customer',
+    route: 'sylius_admin_entity_autocomplete',
+)]
+final class CustomerAutocompleteType extends AbstractType
 {
+    public function __construct(
+        private string $customerClass,
+    ) {
+    }
+
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'resource' => 'sylius.customer',
-            'choice_name' => 'email',
+            'class' => $this->customerClass,
+            'choice_label' => 'email',
             'choice_value' => 'id',
         ]);
     }
 
-    public function buildView(
-        FormView $view,
-        FormInterface $form,
-        array $options,
-    ): void {
-        $view->vars['remote_criteria_type'] = 'contains';
-        $view->vars['remote_criteria_name'] = 'email';
-    }
-
     public function getBlockPrefix(): string
     {
-        return 'bitbag_sylius_customer_autocomplete_choice';
+        return 'bitbag_sylius_admin_customer_autocomplete';
     }
 
     public function getParent(): string
     {
-        return ResourceAutocompleteChoiceType::class;
+        return BaseEntityAutocompleteType::class;
     }
 }

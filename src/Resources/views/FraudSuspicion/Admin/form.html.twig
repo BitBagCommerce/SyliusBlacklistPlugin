@@ -1,0 +1,59 @@
+{% form_theme form '@BitBagSyliusBlacklistPlugin/Form/theme.html.twig' %}
+
+<div class="container-xl" {{ attributes }}>
+    {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    {% if hookable_metadata.configuration.method is defined %}
+        <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}"/>
+    {% endif %}
+    {{ form_errors(form) }}
+    {{ form_widget(form._token) }}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3 class="card-title">{{ 'sylius.ui.configuration'|trans }}</h3>
+        </div>
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-12 mb-3">
+                    {{ form_row(form.customer) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.company) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.firstName) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.lastName) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.email) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.street) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.city) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.province) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.country) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.postcode) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.customerIp) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.addressType) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.comment) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

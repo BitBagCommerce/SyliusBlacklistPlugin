@@ -23,12 +23,12 @@ ADDITIONAL
 ## Requirements:
 We work on stable, supported and up-to-date versions of packages. We recommend you to do the same.
 
-| Package       | Version         |
-|---------------|-----------------|
-| PHP           | \>8.0           |
-| sylius/sylius | 1.12.x - 1.13.x |
-| MySQL         | \>= 5.7         |
-| NodeJS        | \>= 18.x        |
+| Package       | Version  |
+|---------------|----------|
+| PHP           | \>=8.2   |
+| sylius/sylius | 2.0.x    |
+| MySQL         | \>= 5.7  |
+| NodeJS        | \>= 18.x |
 
 ## Composer:
 ```bash
@@ -178,20 +178,26 @@ bin/console cache:clear
 
 **AdminBundle** (`templates/bundles/SyliusAdminBundle`):
 
-Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig`
-or `@SyliusAdminBundle/Customer/Form/_firstColumn.html.twig`) by adding lines below:
+Override Customer section form template (`@SyliusAdminBundle\customer\form\sections\_extra_information.html.twig`
+by adding lines below:
 
 ```php
-<div class="ui segment">
-    <h4 class="ui dividing header">{{ 'bitbag_sylius_blacklist_plugin.ui.fraud_status'|trans }}</h4>
-    {{ form_row(form.fraudStatus) }}
+<div class="card-body">
+    {% hook 'extra_information' %}
+    {{ form_row(hookable_metadata.context.form.fraudStatus) }}
 </div>
 ```
 
 or copy from the path:
 
 ```
-vendor/bitbag/blacklist-plugin/tests/Application/templates/bundles/SyliusAdminBundle/Customer/_form.html.twig
+vendor/bitbag/blacklist-plugin/tests/Application/templates/bundles/SyliusAdminBundle/customer/form/sections/extra_information.html.twig
+```
+
+Copy order actions template from the path:
+
+```
+vendor/bitbag/blacklist-plugin/tests/Application/templates/bundles/SyliusAdminBundle/order/show/content/header/title_block/actions.html.twig
 ```
 
 ## Tests
