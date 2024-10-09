@@ -20,6 +20,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function submit(): void
     {
-        $this->getDocument()->pressButton('Save changes');
+        $this->getDocument()->pressButton('Update');
     }
 }

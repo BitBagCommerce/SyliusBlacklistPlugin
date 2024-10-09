@@ -37,6 +37,9 @@ final class FraudSuspicionType extends AbstractResourceType
                 'constraints' => [
                     new NotNull(),
                 ],
+                'attr' => [
+                    'data-test-fraud-suspicion-customer-autocomplete' => '',
+                ],
             ])
             ->add('company', TextType::class, [
                 'required' => false,

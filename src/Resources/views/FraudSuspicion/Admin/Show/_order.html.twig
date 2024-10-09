@@ -5,7 +5,6 @@
     <div class="card-body">
         {% if fraudSuspicion.order != null %}
             {% if fraudSuspicion.order.number != null %}
-                <i class="circular cart icon"></i>
                 <a href="{{ path('sylius_admin_order_show', {'id': fraudSuspicion.order.id}) }}">
                     {{ 'bitbag_sylius_blacklist_plugin.ui.see_more_info_about_order'|trans ~ ' #' ~ fraudSuspicion.order.number }}
                 </a>

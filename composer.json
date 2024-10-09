@@ -5,7 +5,7 @@
     "description": "Blacklist plugin for Sylius.",
     "license": "MIT",
     "require": {
-        "php": "^8.0 || ^8.1 || ^8.2 || ^8.3",
+        "php": "^8.2",
         "doctrine/annotations": "^2.0.0",
         "sylius-labs/polyfill-symfony-security": "^1.1",
         "sylius/calendar": "^0.5.0",

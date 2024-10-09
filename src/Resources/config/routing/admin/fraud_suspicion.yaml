@@ -34,8 +34,7 @@ bitbag_sylius_blacklist_plugin_admin_order_mark_suspicious:
                     parameters:
                         orderId: $orderId
             section: admin
-            template: "@SyliusAdmin/Crud/create.html.twig"
-            form: BitBag\SyliusBlacklistPlugin\Form\Type\FraudSuspicionOrderType
+            template: "@SyliusAdmin/shared/crud/create.html.twig"
             factory:
                 method: createForOrder
                 arguments:

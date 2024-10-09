@@ -12,7 +12,6 @@ Feature: Adding a new automatic blacklisting configuration
     Scenario: Successfully adding a new automatic blacklisting configuration with max number of orders
         When I go to the create automatic blacklisting configuration page
         And I name it "First configuration"
-        And I select "United States" as channels
         And I enable it
         And I add the "Max number of orders" rule configured with count "5" and "Per day" as date modifier
         And I do not want to add fraud suspicion row after exceeding limit
@@ -24,7 +23,6 @@ Feature: Adding a new automatic blacklisting configuration
     Scenario: Successfully adding a new automatic blacklisting configuration
         When I go to the create automatic blacklisting configuration page
         And I name it "Second configuration"
-        And I select "United States" as channels
         And I enable it
         And I add the "Max number of payment failures" rule configured with count "3" and "Per day" as date modifier
         And I want to add fraud suspicion row after exceeding limit
@@ -38,7 +36,6 @@ Feature: Adding a new automatic blacklisting configuration
     Scenario: Successfully adding a new automatic blacklisting configuration with max number of payment failures
         When I go to the create automatic blacklisting configuration page
         And I name it "Third configuration"
-        And I select "United States" as channels
         And I enable it
         And I add the "Max number of payment failures" rule configured with count "3" and "Per day" as date modifier
         And I do not want to add fraud suspicion row after exceeding limit
