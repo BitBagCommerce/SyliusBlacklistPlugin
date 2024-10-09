@@ -49,7 +49,6 @@
                  class="BitBag\SyliusBlacklistPlugin\Form\Type\AutomaticBlacklistingConfigurationType">
             <argument>%bitbag.sylius_blacklist_plugin.automatic_blacklisting_rules%</argument>
             <argument>%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_configuration.class%</argument>
-            <argument>%bitbag.sylius_blacklist_plugin.form.type.automatic_blacklisting_configuration.validation_groups%</argument>
             <argument>%bitbag.sylius_blacklist_plugin.form.type.validation_groups%</argument>
             <tag name="form.type" />
         </service>

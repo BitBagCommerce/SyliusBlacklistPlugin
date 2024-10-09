@@ -25,17 +25,12 @@ use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 final class AutomaticBlacklistingConfigurationType extends AbstractResourceType
 {
-    /** @var array */
-    private $attributeChoices;
-
     public function __construct(
         private array $rules,
         string $dataClass,
-        array $attributeChoices,
         array $validationGroups = [],
     ) {
         parent::__construct($dataClass, $validationGroups);
-        $this->attributeChoices = $attributeChoices;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -75,10 +70,6 @@ final class AutomaticBlacklistingConfigurationType extends AbstractResourceType
                 ],
                 'placeholder' => 'bitbag_sylius_blacklist_plugin.ui.choose_time_range',
             ])
-//            ->add('rules', AutomaticBlacklistingRuleCollectionType::class, [
-//                'label' => 'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.rules',
-//                'button_add_label' => 'sylius.form.promotion.add_rule',
-//            ])
             ->add('rules', LiveCollectionType::class, [
                 'entry_type' => AutomaticBlacklistingRuleType::class,
                 'allow_add' => true,

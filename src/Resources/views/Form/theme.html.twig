@@ -1,33 +1,5 @@
 {% extends '@SyliusAdmin/shared/form_theme.html.twig' %}
 
-{% block bitbag_sylius_customer_autocomplete_choice_row %}
-    <div class="{% if required %}required {% endif %}{% if disabled %}disabled {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
-        {{- form_label(form) -}}
-        <div
-                class="sylius-autocomplete ui fluid search selection dropdown {% if multiple %}multiple{% endif %}"
-                data-url="{{ path('bitbag_sylius_blacklist_plugin_admin_ajax_customer_by_email') }}"
-                data-choice-name="{{ choice_name }}"
-                data-choice-value="{{ choice_value }}"
-                data-criteria-type="{{ remote_criteria_type }}"
-                data-criteria-name="{{ remote_criteria_name }}"
-                data-load-edit-url="{{ path('bitbag_sylius_blacklist_plugin_admin_ajax_customer_by_id') }}"
-        >
-            {{- form_widget(form, {'attr': {'class' : 'autocomplete'}}) -}}
-            <i class="dropdown icon"></i>
-            <div class="default text">{% if placeholder is defined %} {{ placeholder|trans }} {% endif %}</div>
-            <div class="menu"></div>
-        </div>
-        {{- form_errors(form) -}}
-    </div>
-
-{% endblock %}
-
-{% block bitbag_sylius_blacklist_plugin_automatic_blacklisting_rule_widget %}
-    <div class="ui segment">
-        {{ block('form_widget') }}
-    </div>
-{% endblock %}
-
 {%- block bitbag_sylius_blacklist_plugin_automatic_blacklisting_rule_row -%}
     <div id="{{ id }}" {{ block('attributes') }} {{ sylius_test_html_attribute('entry-row') }}>
         {{- form_errors(form) -}}
