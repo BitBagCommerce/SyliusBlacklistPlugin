@@ -1,0 +1,28 @@
+bitbag_sylius_blacklist_plugin:
+    blacklisting_rule:
+        name:
+            not_blank: Der Regelname darf nicht leer sein
+            max_length: Der Regelname ist zu lang
+        attributes:
+            min: Die Blacklisting-Regel muss mindestens ein Attribut haben
+        permitted_strikes:
+            not_blank: Die erlaubten Schläge dürfen nicht leer sein
+        channels:
+            min: Sie müssen mindestens einen Kanal auswählen
+        guests_cannot_have_group: Sie können keine Kundengruppe auswählen, wenn Sie diese Regel nur für Gäste anwenden möchten
+    automatic_blacklisting_rule:
+        name:
+            not_blank: Der Konfigurationsname darf nicht leer sein
+            max_length: Der Konfigurationsname ist zu lang
+    automatic_blacklisting_configuration:
+        fraud_suspicions_number:
+            not_blank: Die Anzahl der erlaubten Betrugsverdachtsfälle darf nicht leer sein
+        fraud_suspicions_time:
+            not_blank: Die erlaubte Zeit für Betrugsverdachtsfälle darf nicht leer sein
+    form:
+        error:
+            cannot_place_order: Etwas ist schief gelaufen. Sie können die Bestellung nicht aufgeben.
+            cannot_deactivate_manual_blacklisting_rule: |
+                Sie können die manuelle Blacklisting-Regel nicht deaktivieren, wenn der Shop automatische Blacklisting-Konfigurationen hat, bei denen "Betrugsverdacht hinzufügen, nachdem das Limit überschritten wurde" auf wahr gesetzt ist.
+            cannot_add_automatic_blacklisting_configuration: |
+                Sie können keine automatische Blacklisting-Konfiguration hinzufügen, wenn "Betrugsverdacht hinzufügen, nachdem das Limit überschritten wurde" auf wahr gesetzt ist, wenn der Shop keine aktiven manuellen Blacklisting-Regeln hat.
