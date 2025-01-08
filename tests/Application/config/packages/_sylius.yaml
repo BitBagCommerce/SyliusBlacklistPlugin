@@ -7,7 +7,7 @@ imports:
 
     - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
 
-    - { resource: "@BitBagSyliusBlacklistPlugin/Resources/config/config.yaml" }
+    - { resource: "@BitBagSyliusBlacklistPlugin/config/config.yaml" }
 
     - { resource: "../../src/Resources/config/config.yaml" }
 

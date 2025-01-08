@@ -62,7 +62,7 @@ Add routing to your `config/routes.yaml` file:
 # config/routes.yaml
 
 bitbag_sylius_blacklist_plugin:
-    resource: "@BitBagSyliusBlacklistPlugin/Resources/config/routing.yaml"
+    resource: "@BitBagSyliusBlacklistPlugin/config/routing.yaml"
 ```
 
 Override Customer grid in `config/packages/_sylius_grid.yml` file:

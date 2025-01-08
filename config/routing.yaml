@@ -1,0 +1,7 @@
+bitbag_sylius_blacklist_plugin_admin:
+    resource: "@BitBagSyliusBlacklistPlugin/config/routing/admin.yaml"
+    prefix: /admin
+
+bitbag_sylius_blacklist_plugin_shop:
+    resource: "@BitBagSyliusBlacklistPlugin/config/routing/shop.yaml"
+    prefix: /{_locale}
