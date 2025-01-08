@@ -47,10 +47,9 @@
             <argument>%bitbag_sylius_blacklist_plugin.model.fraud_suspicion.class%</argument>
             <argument>BitBag\SyliusBlacklistPlugin\Form\Type\FraudSuspicionType</argument>
 
-            <tag
-                    name="sylius.live_component"
-                    key="sylius_admin:fraud_suspicion:form"
-                    template="@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/form.html.twig"
+            <tag name="sylius.live_component"
+                 key="sylius_admin:fraud_suspicion:form"
+                 template="@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/form.html.twig"
             />
         </service>
     </services>
