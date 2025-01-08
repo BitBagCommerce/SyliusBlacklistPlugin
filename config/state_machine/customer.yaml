@@ -1,4 +1,4 @@
-winzou_state_machine:
+sylius_state_machine_abstraction:
     bitbag_sylius_blacklist_plugin_customer:
         class: "%sylius.model.customer.class%"
         property_path: fraudStatus
