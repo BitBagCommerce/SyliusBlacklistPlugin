@@ -1,4 +1,23 @@
-#winzou_state_machine:
+#framework:
+#    workflows:
+#        bitbag_sylius_blacklist_plugin_customer_state_machine:
+#            type: state_machine
+#            marking_store:
+#                type: method
+#                property: getMarking # Metoda w Twojej encji odpowiedzialna za przechowywanie stanu
+#            supports:
+#                - App\Entity\Customer
+#            places:
+#                - active
+#                - inactive
+#            transitions:
+#                deactivate:
+#                    from: active
+#                    to: inactive
+#                activate:
+#                    from: inactive
+#                    to: active
+
 #    bitbag_sylius_blacklist_plugin_customer:
 #        class: "%sylius.model.customer.class%"
 #        property_path: fraudStatus

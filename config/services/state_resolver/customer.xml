@@ -7,8 +7,8 @@
 >
     <services>
         <service id="bitbag.sylius_blacklist_plugin.state_resolver.customer" class="BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolver">
-            <argument type="service" id="sm.factory" />
-            <argument type="service" id="sylius.manager.customer" />
+<!--            <argument type="service" id="sm.factory" />-->
+<!--            <argument type="service" id="sylius.manager.customer" />-->
         </service>
     </services>
 </container>

@@ -3,8 +3,9 @@ parameters:
   test_sylius_state_machine_adapter: '%env(string:default:test_default_state_machine_adapter:TEST_SYLIUS_STATE_MACHINE_ADAPTER)%'
 
 sylius_state_machine_abstraction:
-  graphs_to_adapters_mapping:
-    sylius_refund_refund_payment: '%test_sylius_state_machine_adapter%'
+  default_adapter: symfony_workflow
+#  graphs_to_adapters_mapping:
+#    sylius_refund_refund_payment: '%test_sylius_state_machine_adapter%'
 
 sylius_api:
   enabled: true
