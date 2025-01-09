@@ -28,7 +28,7 @@ final class FraudPreventionMenuBuilder
         $rootMenuItem = $menu
             ->addChild('bitbag_fraud_prevention')
             ->setLabel('bitbag_sylius_blacklist_plugin.ui.fraud_prevention')
-            ->setLabelAttribute('icon', 'spy')
+            ->setLabelAttribute('icon', 'tabler:spy')
         ;
 
         $rootMenuItem
