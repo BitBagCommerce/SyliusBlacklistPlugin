@@ -16,7 +16,7 @@
             <argument>BitBag\SyliusBlacklistPlugin\Form\Type\AutomaticBlacklistingConfigurationType</argument>
 
             <tag
-                    name="sylius.live_component"
+                    name="sylius.live_component.admin"
                     key="sylius_admin:automatic_blacklisting_configuration:form"
                     template="@BitBagSyliusBlacklistPlugin/AutomaticBlacklistingConfiguration/Admin/form.html.twig"
             />
@@ -32,7 +32,7 @@
             <argument>BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType</argument>
 
             <tag
-                    name="sylius.live_component"
+                    name="sylius.live_component.admin"
                     key="sylius_admin:blacklisting_rule:form"
                     template="@BitBagSyliusBlacklistPlugin/BlacklistingRule/Admin/form.html.twig"
             />
@@ -47,7 +47,7 @@
             <argument>%bitbag_sylius_blacklist_plugin.model.fraud_suspicion.class%</argument>
             <argument>BitBag\SyliusBlacklistPlugin\Form\Type\FraudSuspicionType</argument>
 
-            <tag name="sylius.live_component"
+            <tag name="sylius.live_component.admin"
                  key="sylius_admin:fraud_suspicion:form"
                  template="@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/form.html.twig"
             />
