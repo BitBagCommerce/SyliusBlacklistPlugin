@@ -6,7 +6,7 @@ framework:
         property: fraudStatus
         type: method
       supports:
-        - Sylius\Component\Core\Model\CustomerInterface
+        - BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface
       initial_marking: !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_NEUTRAL
       places:
         - !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_NEUTRAL
