@@ -7,7 +7,8 @@
 >
     <services>
         <service id="bitbag.sylius_blacklist_plugin.state_resolver.customer" class="BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolver">
-            <argument key="$workflow">@state_machine.customer_fraud_status</argument>
+            <argument type="service" id="state_machine.bitbag_sylius_blacklist_plugin_customer" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
     </services>
 
