@@ -46,5 +46,4 @@ class FraudSuspicionEntityListener
             $this->customerStateResolver->changeStateOnBlacklisted($newFraudSuspicion->getCustomer());
         }
     }
-
 }
