@@ -40,7 +40,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
         $form = $this->getElement('form');
 
-        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        usleep(1000000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
         $form->waitFor(1500, fn () => !$form->hasAttribute('busy'));
     }
 
@@ -53,6 +53,27 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getLastCollectionItem('rules')->fillField($option, $value);
     }
+
+    public function fillRuleOption2(string $optionName, string $value): void
+    {
+        $field = $this->getDocument()->findField($optionName);
+        if (null === $field) {
+            throw new \InvalidArgumentException(sprintf('Field "%s" not found.', $optionName));
+        }
+        $field->setValue($value);
+    }
+
+    public function selectRuleOption2(string $optionName, string $value): void
+    {
+        $field = $this->getDocument()->findField($optionName);
+
+        if (null === $field) {
+            throw new \InvalidArgumentException(sprintf('Field "%s" not found.', $optionName));
+        }
+        $field->selectOption($value);
+    }
+
+
 
     public function selectAutocompleteRuleOption(string $option, $value, bool $multiple = false): void
     {
