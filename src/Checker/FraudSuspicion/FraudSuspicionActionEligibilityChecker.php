@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Checker\FraudSuspicion;
@@ -14,14 +21,15 @@ final class FraudSuspicionActionEligibilityChecker implements FraudSuspicionActi
 {
     public function __construct(
         private FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
-        private CustomerStateResolverInterface $customerStateResolver
-    ) {}
+        private CustomerStateResolverInterface $customerStateResolver,
+    ) {
+    }
 
     public function canAddFraudSuspicion(
         OrderInterface $order,
-        AutomaticBlacklistingConfigurationInterface $automaticBlacklistingConfiguration
+        AutomaticBlacklistingConfigurationInterface $automaticBlacklistingConfiguration,
     ): bool {
-        if ($this->fraudSuspicionRepository->findOneBy(['order' => $order]) !== null) {
+        if (null !== $this->fraudSuspicionRepository->findOneBy(['order' => $order])) {
             return false;
         }
 
@@ -31,7 +39,7 @@ final class FraudSuspicionActionEligibilityChecker implements FraudSuspicionActi
         $lastFraudSuspicionsOfCustomer = $this->fraudSuspicionRepository->countByCustomerAndCommentAndDate(
             $customer,
             FraudSuspicionInterface::AUTO_GENERATED_STATUS,
-            $date
+            $date,
         );
 
         if ($lastFraudSuspicionsOfCustomer >= $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber()) {

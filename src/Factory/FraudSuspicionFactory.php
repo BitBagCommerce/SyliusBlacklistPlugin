@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Factory;
@@ -11,8 +18,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 final class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
 {
     public function __construct(
-        private FactoryInterface $decoratedFactory
-    ) {}
+        private FactoryInterface $decoratedFactory,
+    ) {
+    }
 
     public function createNew(): FraudSuspicionInterface
     {
@@ -48,7 +56,7 @@ final class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
         $fraudSuspicion->setAddressType(FraudSuspicionInterface::SHIPPING_ADDRESS_TYPE);
         $fraudSuspicion->setStatus(FraudSuspicionInterface::AUTO_GENERATED_STATUS);
 
-        if ($fraudSuspicion->getCustomerIp() === null) {
+        if (null === $fraudSuspicion->getCustomerIp()) {
             $fraudSuspicion->setCustomerIp($_SERVER['REMOTE_ADDR'] ?? '');
         }
 
