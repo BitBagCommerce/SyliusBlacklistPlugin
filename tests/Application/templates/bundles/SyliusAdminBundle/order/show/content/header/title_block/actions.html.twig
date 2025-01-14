@@ -1,11 +1,11 @@
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+{#{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}#}
 {% set resource = hookable_metadata.context.resource %}
 
 <div class="col-12 col-md-auto ms-auto d-flex">
     {% if resource.customer.fraudStatus != 'blacklisted' %}
         <a class="btn btn-danger me-2"
            href="{{ path('bitbag_sylius_blacklist_plugin_admin_order_mark_suspicious', {'orderId': resource.id}) }}">
-            {{ icon({ icon: 'warning', class: 'icon icon-tabler' }) }}
+            {{ ux_icon('tabler:alert-triangle', {'class': 'icon icon-tabler'}) }}
             {{ 'bitbag_sylius_blacklist_plugin.ui.mark_suspicious'|trans }}
         </a>
     {% endif %}
