@@ -19,8 +19,9 @@ class CustomerStateResolver implements CustomerStateResolverInterface
 {
     public function __construct(
         private WorkflowInterface $workflow,
-        private ObjectManager $customerManager
-    ) {}
+        private ObjectManager $customerManager,
+    ) {
+    }
 
     public function changeStateOnBlacklisted(CustomerInterface $customer): void
     {

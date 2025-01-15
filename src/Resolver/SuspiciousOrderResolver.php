@@ -30,8 +30,9 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
         private BlacklistingRuleRepositoryInterface $blacklistingRuleRepository,
         private ChannelContextInterface $channelContext,
         private ObjectManager $customerManager,
-        private BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker
-    ) {}
+        private BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker,
+    ) {
+    }
 
     public function resolve(FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel): bool
     {

@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Converter;
@@ -39,7 +46,7 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
                 'country' => $fraudSuspicion->getCountry(),
                 'postcode' => $fraudSuspicion->getPostcode(),
                 'customerIp' => $fraudSuspicion->getCustomerIp(),
-            ]
+            ],
         );
     }
 
@@ -63,7 +70,7 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
                 'country' => $address->getCountryCode(),
                 'postcode' => $address->getPostcode(),
                 'customerIp' => $order->getCustomerIp(),
-            ]
+            ],
         );
     }
 
@@ -78,7 +85,7 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
 
     private function populateFraudSuspicionCommonModel(
         FraudSuspicionCommonModelInterface $model,
-        array $data
+        array $data,
     ): FraudSuspicionCommonModelInterface {
         $model->setOrder($data['order']);
         $model->setCustomer($data['customer']);
