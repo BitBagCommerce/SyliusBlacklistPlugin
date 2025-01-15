@@ -17,15 +17,10 @@ use Symfony\Component\Workflow\WorkflowInterface;
 
 class CustomerStateResolver implements CustomerStateResolverInterface
 {
-    private WorkflowInterface $workflow;
-
-    private ObjectManager $customerManager;
-
-    public function __construct(WorkflowInterface $workflow, ObjectManager $customerManager)
-    {
-        $this->workflow = $workflow;
-        $this->customerManager = $customerManager;
-    }
+    public function __construct(
+        private WorkflowInterface $workflow,
+        private ObjectManager $customerManager
+    ) {}
 
     public function changeStateOnBlacklisted(CustomerInterface $customer): void
     {

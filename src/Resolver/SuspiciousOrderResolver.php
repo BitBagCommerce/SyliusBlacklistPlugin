@@ -24,45 +24,20 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 
 class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
 {
-    /** @var ServiceRegistryInterface */
-    private $serviceRegistry;
-
-    /** @var FraudSuspicionRepositoryInterface */
-    private $fraudSuspicionRepository;
-
-    /** @var BlacklistingRuleRepositoryInterface */
-    private $blacklistingRuleRepository;
-
-    /** @var ChannelContextInterface */
-    private $channelContext;
-
-    /** @var ObjectManager */
-    private $customerManager;
-
-    /** @var BlacklistingRuleEligibilityCheckerInterface */
-    private $blacklistingRuleEligibilityChecker;
-
     public function __construct(
-        ServiceRegistryInterface $serviceRegistry,
-        FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
-        BlacklistingRuleRepositoryInterface $blacklistingRuleRepository,
-        ChannelContextInterface $channelContext,
-        ObjectManager $customerManager,
-        BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker,
-    ) {
-        $this->serviceRegistry = $serviceRegistry;
-        $this->fraudSuspicionRepository = $fraudSuspicionRepository;
-        $this->blacklistingRuleRepository = $blacklistingRuleRepository;
-        $this->channelContext = $channelContext;
-        $this->customerManager = $customerManager;
-        $this->blacklistingRuleEligibilityChecker = $blacklistingRuleEligibilityChecker;
-    }
+        private ServiceRegistryInterface $serviceRegistry,
+        private FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
+        private BlacklistingRuleRepositoryInterface $blacklistingRuleRepository,
+        private ChannelContextInterface $channelContext,
+        private ObjectManager $customerManager,
+        private BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker
+    ) {}
 
     public function resolve(FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel): bool
     {
         $blacklistingRules = $this->blacklistingRuleRepository->findActiveByChannel($this->getChannel());
 
-        if (0 === \count($blacklistingRules)) {
+        if (empty($blacklistingRules)) {
             return false;
         }
 
@@ -94,7 +69,6 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
         string $attribute,
     ): void {
         $checker = $this->serviceRegistry->get($attribute);
-
         $checker->checkIfCustomerIsBlacklisted($builder, $fraudSuspicionCommonModel);
     }
 
