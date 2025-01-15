@@ -50,6 +50,10 @@ class CheckoutAddressTypeValidator extends ConstraintValidator
         /** @var CustomerInterface $customer */
         $customer = $order->getCustomer();
 
+        if (null === $customer) {
+            return;
+        }
+
         if (FraudStatusInterface::FRAUD_STATUS_WHITELISTED === $customer->getFraudStatus()) {
             return;
         }
