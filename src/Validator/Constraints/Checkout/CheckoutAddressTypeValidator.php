@@ -50,7 +50,7 @@ class CheckoutAddressTypeValidator extends ConstraintValidator
         /** @var CustomerInterface $customer */
         $customer = $order->getCustomer();
 
-        if (null === $customer) {
+        if (null == $customer) {
             return;
         }
 

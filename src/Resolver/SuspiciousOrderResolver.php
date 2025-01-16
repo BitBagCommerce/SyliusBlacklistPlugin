@@ -38,7 +38,7 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
     {
         $blacklistingRules = $this->blacklistingRuleRepository->findActiveByChannel($this->getChannel());
 
-        if (empty($blacklistingRules)) {
+        if ([] === $blacklistingRules) {
             return false;
         }
 
