@@ -7,7 +7,7 @@
 >
     <services>
         <service
-                id="bitbag_sylius_blacklist_plugin.twig.component.automatic_blacklisting_configuration.form"
+                id="bitbag.sylius_blacklist_plugin.twig.component.automatic_blacklisting_configuration.form"
                 class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
             <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.automatic_blacklisting_configuration" />
@@ -23,7 +23,7 @@
         </service>
 
         <service
-                id="bitbag_sylius_blacklist_plugin.twig.component.blacklisting_rule.form"
+                id="bitbag.sylius_blacklist_plugin.twig.component.blacklisting_rule.form"
                 class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
             <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.blacklisting_rule" />
@@ -39,7 +39,7 @@
         </service>
 
         <service
-                id="bitbag_sylius_blacklist_plugin.twig.component.fraud_suspicion.form"
+                id="bitbag.sylius_blacklist_plugin.twig.component.fraud_suspicion.form"
                 class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
             <argument type="service" id="bitbag_sylius_blacklist_plugin.repository.fraud_suspicion" />
