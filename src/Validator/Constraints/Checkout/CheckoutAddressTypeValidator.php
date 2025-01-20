@@ -47,10 +47,10 @@ class CheckoutAddressTypeValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        /** @var CustomerInterface $customer */
+        /** @var CustomerInterface|null $customer */
         $customer = $order->getCustomer();
 
-        if (null == $customer) {
+        if (null === $customer) {
             return;
         }
 
