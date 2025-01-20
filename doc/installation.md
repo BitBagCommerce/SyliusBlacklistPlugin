@@ -101,7 +101,6 @@ twig:
     strict_variables: '%kernel.debug%'
     form_themes:
         - '@BitBagSyliusBlacklistPlugin/Form/theme.html.twig'
-        - '@SyliusUi/Form/theme.html.twig'
 services:
     _defaults:
         public: false

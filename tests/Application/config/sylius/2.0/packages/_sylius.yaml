@@ -4,8 +4,6 @@ parameters:
 
 sylius_state_machine_abstraction:
   default_adapter: symfony_workflow
-#  graphs_to_adapters_mapping:
-#    sylius_refund_refund_payment: '%test_sylius_state_machine_adapter%'
 
 sylius_api:
   enabled: true

@@ -22,24 +22,3 @@ framework:
         !php/const BitBag\SyliusBlacklistPlugin\Transitions\CustomerTransitions::TRANSITION_WHITELISTING_PROCESS:
           from: !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_NEUTRAL
           to: !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_WHITELISTED
-
-#winzou_state_machine:
-#  bitbag_sylius_blacklist_plugin_customer:
-#    class: "%sylius.model.customer.class%"
-#    property_path: fraudStatus
-#    graph: bitbag_sylius_blacklist_plugin_customer
-#    state_machine_class: "%sylius.state_machine.class%"
-#    states:
-#      neutral: ~
-#      blacklisted: ~
-#    transitions:
-#      neutralizing:
-#        from: [blacklisted]
-#        to: neutral
-#      blacklisting:
-#        from: [neutral]
-#        to: blacklisted
-#      whitelisting:
-#        from: [neutral]
-#        to: whitelisted
-
