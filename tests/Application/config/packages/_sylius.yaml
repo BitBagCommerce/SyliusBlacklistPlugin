@@ -16,6 +16,9 @@ sylius_shop:
 sylius_state_machine_abstraction:
     default_adapter: symfony_workflow
 
+sylius_api:
+    enabled: true
+
 sylius_grid:
     grids:
         sylius_admin_customer:
