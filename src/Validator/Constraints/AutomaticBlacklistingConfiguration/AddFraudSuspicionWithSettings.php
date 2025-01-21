@@ -34,5 +34,4 @@ final class AddFraudSuspicionWithSettings extends Constraint
     {
         return [self::CLASS_CONSTRAINT];
     }
-
 }
