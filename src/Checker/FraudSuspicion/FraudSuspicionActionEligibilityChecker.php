@@ -42,7 +42,7 @@ final class FraudSuspicionActionEligibilityChecker implements FraudSuspicionActi
             $date,
         );
 
-        if ($lastFraudSuspicionsOfCustomer >= $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber()) {
+        if ((int) $lastFraudSuspicionsOfCustomer >= $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsNumber()) {
             $this->customerStateResolver->changeStateOnBlacklisted($customer);
 
             return false;

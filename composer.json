@@ -7,7 +7,6 @@
     "require": {
         "php": "^8.2",
         "sylius/sylius": "~2.0",
-        "sylius/calendar": "^0.5.0",
         "sylius/grid-bundle": "^1.13.0",
         "sylius/twig-extra": "^0.5",
         "sylius/twig-hooks": "^0.5",
@@ -17,8 +16,7 @@
         "symfony/ux-live-component": "^2.20",
         "symfony/ux-twig-component": "^2.20",
         "symfony/webpack-encore-bundle": "^2.1",
-        "symfony/workflow": "^7.2",
-        "willdurand/hateoas-bundle": "2.5.0"
+        "symfony/workflow": "^7.2"
     },
     "require-dev": {
         "behat/behat": "^3.14",
