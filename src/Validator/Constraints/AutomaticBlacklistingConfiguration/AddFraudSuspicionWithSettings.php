@@ -28,10 +28,11 @@ final class AddFraudSuspicionWithSettings extends Constraint
     }
 
     /**
-     * @return array<string>
+     * @return array{'class'|'property'}
      */
     public function getTargets(): array
     {
         return [self::CLASS_CONSTRAINT];
     }
+
 }
