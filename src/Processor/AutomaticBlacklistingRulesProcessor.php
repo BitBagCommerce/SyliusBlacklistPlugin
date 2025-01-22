@@ -25,14 +25,15 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesProcessorInterface
 {
     public function __construct(
-        private readonly ServiceRegistryInterface                     $serviceRegistry,
-        private OrderRepositoryInterface                              $orderRepository,
+        private readonly ServiceRegistryInterface $serviceRegistry,
+        private OrderRepositoryInterface $orderRepository,
         private AutomaticBlacklistingConfigurationRepositoryInterface $automaticBlacklistingConfigurationRepository,
-        private CustomerStateResolverInterface                        $customerStateResolver,
-        private FraudSuspicionFactoryInterface                        $fraudSuspicionFactory,
-        private FraudSuspicionRepositoryInterface                     $fraudSuspicionRepository,
-        private FraudSuspicionActionEligibilityCheckerInterface       $fraudSuspicionActionEligibilityChecker
-    ) {}
+        private CustomerStateResolverInterface $customerStateResolver,
+        private FraudSuspicionFactoryInterface $fraudSuspicionFactory,
+        private FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
+        private FraudSuspicionActionEligibilityCheckerInterface $fraudSuspicionActionEligibilityChecker,
+    ) {
+    }
 
     public function process(OrderInterface $order): bool
     {

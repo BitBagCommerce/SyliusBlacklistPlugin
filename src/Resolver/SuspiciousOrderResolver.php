@@ -25,11 +25,11 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
 {
     public function __construct(
-        private readonly ServiceRegistryInterface           $serviceRegistry,
-        private FraudSuspicionRepositoryInterface           $fraudSuspicionRepository,
-        private BlacklistingRuleRepositoryInterface         $blacklistingRuleRepository,
-        private ChannelContextInterface                     $channelContext,
-        private ObjectManager                               $customerManager,
+        private readonly ServiceRegistryInterface $serviceRegistry,
+        private FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
+        private BlacklistingRuleRepositoryInterface $blacklistingRuleRepository,
+        private ChannelContextInterface $channelContext,
+        private ObjectManager $customerManager,
         private BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker,
     ) {
     }
