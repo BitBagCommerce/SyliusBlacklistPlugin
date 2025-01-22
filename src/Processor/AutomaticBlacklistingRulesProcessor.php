@@ -24,44 +24,15 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 
 class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesProcessorInterface
 {
-    /** @var ServiceRegistryInterface */
-    private $serviceRegistry;
-
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
-
-    /** @var CustomerStateResolverInterface */
-    private $customerStateResolver;
-
-    /** @var AutomaticBlacklistingConfigurationRepositoryInterface */
-    private $automaticBlacklistingConfigurationRepository;
-
-    /** @var FraudSuspicionFactoryInterface */
-    private $fraudSuspicionFactory;
-
-    /** @var FraudSuspicionRepositoryInterface */
-    private $fraudSuspicionRepository;
-
-    /** @var FraudSuspicionActionEligibilityCheckerInterface */
-    private $fraudSuspicionActionEligibilityChecker;
-
     public function __construct(
-        ServiceRegistryInterface $serviceRegistry,
-        OrderRepositoryInterface $orderRepository,
-        AutomaticBlacklistingConfigurationRepositoryInterface $automaticBlacklistingConfigurationRepository,
-        CustomerStateResolverInterface $customerStateResolver,
-        FraudSuspicionFactoryInterface $fraudSuspicionFactory,
-        FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
-        FraudSuspicionActionEligibilityCheckerInterface $fraudSuspicionActionEligibilityChecker,
-    ) {
-        $this->serviceRegistry = $serviceRegistry;
-        $this->orderRepository = $orderRepository;
-        $this->automaticBlacklistingConfigurationRepository = $automaticBlacklistingConfigurationRepository;
-        $this->customerStateResolver = $customerStateResolver;
-        $this->fraudSuspicionFactory = $fraudSuspicionFactory;
-        $this->fraudSuspicionRepository = $fraudSuspicionRepository;
-        $this->fraudSuspicionActionEligibilityChecker = $fraudSuspicionActionEligibilityChecker;
-    }
+        private readonly ServiceRegistryInterface                     $serviceRegistry,
+        private OrderRepositoryInterface                              $orderRepository,
+        private AutomaticBlacklistingConfigurationRepositoryInterface $automaticBlacklistingConfigurationRepository,
+        private CustomerStateResolverInterface                        $customerStateResolver,
+        private FraudSuspicionFactoryInterface                        $fraudSuspicionFactory,
+        private FraudSuspicionRepositoryInterface                     $fraudSuspicionRepository,
+        private FraudSuspicionActionEligibilityCheckerInterface       $fraudSuspicionActionEligibilityChecker
+    ) {}
 
     public function process(OrderInterface $order): bool
     {
