@@ -18,3 +18,16 @@
   - `@SyliusBlacklistPlugin/Resources/config` -> `@SyliusBlacklistPlugin/config`
   - `@SyliusBlacklistPlugin/Resources/translations` -> `@SyliusBlacklistPlugin/translations`
   - `@SyliusBlacklistPlugin/Resources/views` -> `@SyliusBlacklistPlugin/templates`
+
+1. Some services have been modified. For example, the service **bitbag.sylius_blacklist_plugin.form.type.automatic_blacklisting_configuration** has been updated:
+
+   `<service id="bitbag.sylius_blacklist_plugin.form.type.automatic_blacklisting_configuration"
+   class="BitBag\SyliusBlacklistPlugin\Form\Type\AutomaticBlacklistingConfigurationType">
+   <argument>%bitbag.sylius_blacklist_plugin.automatic_blacklisting_rules%</argument>
+   <argument>%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_configuration.class%</argument>
+   <argument>%bitbag.sylius_blacklist_plugin.form.type.validation_groups%</argument>
+   <tag name="form.type" />
+   </service>`
+
+
+1. The route **bitbag_sylius_blacklist_plugin_admin_fraud_suspicion_show** has been replaced with **sylius_admin_fraud_suspicion_show**. Update your routes configuration as follows:
