@@ -173,32 +173,6 @@ bin/console cache:clear
 ```
 **Note:** If you are running it on production, add the `-e prod` flag to this command.
 
-## Templates
-
-**AdminBundle** (`templates/bundles/SyliusAdminBundle`):
-
-Override Customer section form template (`@SyliusAdminBundle\customer\form\sections\_extra_information.html.twig`
-by adding lines below:
-
-```php
-<div class="card-body">
-    {% hook 'extra_information' %}
-    {{ form_row(hookable_metadata.context.form.fraudStatus) }}
-</div>
-```
-
-or copy from the path:
-
-```
-vendor/bitbag/blacklist-plugin/tests/Application/templates/bundles/SyliusAdminBundle/customer/form/sections/extra_information.html.twig
-```
-
-Copy order actions template from the path:
-
-```
-vendor/bitbag/blacklist-plugin/tests/Application/templates/bundles/SyliusAdminBundle/order/show/content/header/title_block/actions.html.twig
-```
-
 ## Tests
 To run the tests, execute the commands:
 ```bash
