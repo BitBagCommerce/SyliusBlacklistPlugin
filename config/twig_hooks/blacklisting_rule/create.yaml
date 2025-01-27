@@ -6,8 +6,6 @@ sylius_twig_hooks:
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
+                    template: '@BitBagSyliusBlacklistPlugin/BlacklistingRule/Admin/form.html.twig'
                 configuration:
                     render_rest: false
-        'sylius_admin.blacklisting_rule.create.content.form':
-            sections:
-                template: '@BitBagSyliusBlacklistPlugin/BlacklistingRule/Admin/form.html.twig'

@@ -11,7 +11,7 @@
             <argument type="service" id="form.factory" />
             <argument>%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_configuration.class%</argument>
             <argument>BitBag\SyliusBlacklistPlugin\Form\Type\AutomaticBlacklistingConfigurationType</argument>
-            <tag name="sylius.live_component.admin" key="sylius_admin:automatic_blacklisting_configuration:form" template="@BitBagSyliusBlacklistPlugin/AutomaticBlacklistingConfiguration/Admin/form.html.twig"/>
+            <tag name="sylius.live_component.admin" key="sylius_admin:automatic_blacklisting_configuration:form"/>
         </service>
 
         <service id="bitbag.sylius_blacklist_plugin.twig.component.blacklisting_rule.form" class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent">
@@ -19,7 +19,7 @@
             <argument type="service" id="form.factory" />
             <argument>%bitbag_sylius_blacklist_plugin.model.blacklisting_rule.class%</argument>
             <argument>BitBag\SyliusBlacklistPlugin\Form\Type\BlacklistingRuleType</argument>
-            <tag name="sylius.live_component.admin" key="sylius_admin:blacklisting_rule:form" template="@BitBagSyliusBlacklistPlugin/BlacklistingRule/Admin/form.html.twig"/>
+            <tag name="sylius.live_component.admin" key="sylius_admin:blacklisting_rule:form"/>
         </service>
 
         <service id="bitbag.sylius_blacklist_plugin.twig.component.fraud_suspicion.form" class="Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent">
@@ -27,7 +27,7 @@
             <argument type="service" id="form.factory" />
             <argument>%bitbag_sylius_blacklist_plugin.model.fraud_suspicion.class%</argument>
             <argument>BitBag\SyliusBlacklistPlugin\Form\Type\FraudSuspicionType</argument>
-            <tag name="sylius.live_component.admin" key="sylius_admin:fraud_suspicion:form" template="@BitBagSyliusBlacklistPlugin/FraudSuspicion/Admin/form.html.twig"/>
+            <tag name="sylius.live_component.admin" key="sylius_admin:fraud_suspicion:form"/>
         </service>
     </services>
 </container>
