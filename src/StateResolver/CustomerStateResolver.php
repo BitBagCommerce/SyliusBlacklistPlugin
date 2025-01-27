@@ -18,8 +18,8 @@ use Symfony\Component\Workflow\WorkflowInterface;
 class CustomerStateResolver implements CustomerStateResolverInterface
 {
     public function __construct(
-        private WorkflowInterface $workflow,
-        private ObjectManager $customerManager,
+        private readonly WorkflowInterface $workflow,
+        private readonly ObjectManager $customerManager,
     ) {
     }
 

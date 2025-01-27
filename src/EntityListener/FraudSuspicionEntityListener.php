@@ -20,9 +20,9 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 class FraudSuspicionEntityListener
 {
     public function __construct(
-        private SuspiciousOrderResolverInterface $suspiciousOrderResolver,
-        private CustomerStateResolverInterface $customerStateResolver,
-        private FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter,
+        private readonly SuspiciousOrderResolverInterface $suspiciousOrderResolver,
+        private readonly CustomerStateResolverInterface $customerStateResolver,
+        private readonly FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter,
     ) {
     }
 

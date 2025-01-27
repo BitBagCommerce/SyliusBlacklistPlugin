@@ -20,8 +20,8 @@ use Sylius\Component\Order\Model\OrderInterface;
 final class FraudSuspicionActionEligibilityChecker implements FraudSuspicionActionEligibilityCheckerInterface
 {
     public function __construct(
-        private FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
-        private CustomerStateResolverInterface $customerStateResolver,
+        private readonly FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
+        private readonly CustomerStateResolverInterface $customerStateResolver,
     ) {
     }
 

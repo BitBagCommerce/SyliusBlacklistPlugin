@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 final class FraudSuspicionFactory implements FraudSuspicionFactoryInterface
 {
     public function __construct(
-        private FactoryInterface $decoratedFactory,
+        private readonly FactoryInterface $decoratedFactory,
     ) {
     }
 

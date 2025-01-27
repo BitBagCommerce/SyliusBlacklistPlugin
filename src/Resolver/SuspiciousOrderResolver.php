@@ -26,11 +26,11 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
 {
     public function __construct(
         private readonly ServiceRegistryInterface $serviceRegistry,
-        private FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
-        private BlacklistingRuleRepositoryInterface $blacklistingRuleRepository,
-        private ChannelContextInterface $channelContext,
-        private ObjectManager $customerManager,
-        private BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker,
+        private readonly FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
+        private readonly BlacklistingRuleRepositoryInterface $blacklistingRuleRepository,
+        private readonly ChannelContextInterface $channelContext,
+        private readonly ObjectManager $customerManager,
+        private readonly BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker,
     ) {
     }
 
