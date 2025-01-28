@@ -22,8 +22,9 @@ use Sylius\Component\Order\Model\OrderInterface;
 class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelConverterInterface
 {
     public function __construct(
-        private readonly FraudSuspicionCommonModelFactoryInterface $fraudSuspicionCommonModelFactory
-    ) {}
+        private readonly FraudSuspicionCommonModelFactoryInterface $fraudSuspicionCommonModelFactory,
+    ) {
+    }
 
     public function convertFraudSuspicionObject(FraudSuspicionInterface $fraudSuspicion): FraudSuspicionCommonModelInterface
     {
