@@ -100,10 +100,17 @@ Following Symfony's latest recommendations, the directory structure has been upd
 ## How to Upgrade
 
 1. Ensure your application is upgraded to Sylius 2.0.
+   ```bash
+   composer require sylius/sylius:~2.0.0 --no-update
+   ```
 2. To update the plugin, run the following command:
    ```bash
-   composer require bitbag/blacklist-plugin
+   composer require bitbag/blacklist-plugin:^2.0 --no-update
    ```
+3. Update your dependencies:
+   ```bash
+   composer update
+   ```   
 3. Verify your routes and service configurations as described above.
 4. Verify your templates and hooks for any required adjustments.
 
