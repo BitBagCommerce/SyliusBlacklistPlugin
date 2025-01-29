@@ -7,18 +7,27 @@ framework:
         type: method
       supports:
         - BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface
-      initial_marking: !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_NEUTRAL
+      initial_marking:
+        !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_NEUTRAL
       places:
         - !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_NEUTRAL
         - !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_BLACKLISTED
         - !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_WHITELISTED
       transitions:
         !php/const BitBag\SyliusBlacklistPlugin\Transitions\CustomerTransitions::TRANSITION_NEUTRALIZING_PROCESS:
-          from: !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_BLACKLISTED
-          to: !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_NEUTRAL
+          from:
+            - !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_BLACKLISTED
+          to:
+            - !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_NEUTRAL
+
         !php/const BitBag\SyliusBlacklistPlugin\Transitions\CustomerTransitions::TRANSITION_BLACKLISTING_PROCESS:
-          from: !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_NEUTRAL
-          to: !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_BLACKLISTED
+          from:
+            - !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_NEUTRAL
+          to:
+            - !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_BLACKLISTED
+
         !php/const BitBag\SyliusBlacklistPlugin\Transitions\CustomerTransitions::TRANSITION_WHITELISTING_PROCESS:
-          from: !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_NEUTRAL
-          to: !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_WHITELISTED
+          from:
+            - !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_NEUTRAL
+          to:
+            - !php/const BitBag\SyliusBlacklistPlugin\Entity\Customer\FraudStatusInterface::FRAUD_STATUS_WHITELISTED
