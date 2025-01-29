@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Converter;
 
+use BitBag\SyliusBlacklistPlugin\Dto\FraudSuspicionCommonDTO;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicion;
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use BitBag\SyliusBlacklistPlugin\Exception\WrongAddressTypeException;
@@ -28,23 +29,25 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
 
     public function convertFraudSuspicionObject(FraudSuspicionInterface $fraudSuspicion): FraudSuspicionCommonModelInterface
     {
+        $dto = new FraudSuspicionCommonDTO(
+            order: $fraudSuspicion->getOrder(),
+            customer: $fraudSuspicion->getCustomer(),
+            company: $fraudSuspicion->getCompany(),
+            firstName: $fraudSuspicion->getFirstName(),
+            lastName: $fraudSuspicion->getLastName(),
+            email: $fraudSuspicion->getEmail(),
+            phoneNumber: $fraudSuspicion->getPhoneNumber(),
+            street: $fraudSuspicion->getStreet(),
+            city: $fraudSuspicion->getCity(),
+            province: $fraudSuspicion->getProvince(),
+            country: $fraudSuspicion->getCountry(),
+            postcode: $fraudSuspicion->getPostcode(),
+            customerIp: $fraudSuspicion->getCustomerIp(),
+        );
+
         return $this->populateFraudSuspicionCommonModel(
             $this->fraudSuspicionCommonModelFactory->createNew(),
-            [
-                'order' => $fraudSuspicion->getOrder(),
-                'customer' => $fraudSuspicion->getCustomer(),
-                'company' => $fraudSuspicion->getCompany(),
-                'firstName' => $fraudSuspicion->getFirstName(),
-                'lastName' => $fraudSuspicion->getLastName(),
-                'email' => $fraudSuspicion->getEmail(),
-                'phoneNumber' => $fraudSuspicion->getPhoneNumber(),
-                'street' => $fraudSuspicion->getStreet(),
-                'city' => $fraudSuspicion->getCity(),
-                'province' => $fraudSuspicion->getProvince(),
-                'country' => $fraudSuspicion->getCountry(),
-                'postcode' => $fraudSuspicion->getPostcode(),
-                'customerIp' => $fraudSuspicion->getCustomerIp(),
-            ],
+            $dto,
         );
     }
 
@@ -52,23 +55,25 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
     {
         $address = $this->getAddressFromOrder($order, $addressType);
 
+        $dto = new FraudSuspicionCommonDTO(
+            order: $order,
+            customer: $order->getCustomer(),
+            company: $address->getCompany(),
+            firstName: $address->getFirstName(),
+            lastName: $address->getLastName(),
+            email: $order->getCustomer()?->getEmail(),
+            phoneNumber: $address->getPhoneNumber(),
+            street: $address->getStreet(),
+            city: $address->getCity(),
+            province: $address->getProvinceName(),
+            country: $address->getCountryCode(),
+            postcode: $address->getPostcode(),
+            customerIp: $order->getCustomerIp(),
+        );
+
         return $this->populateFraudSuspicionCommonModel(
             $this->fraudSuspicionCommonModelFactory->createNew(),
-            [
-                'order' => $order,
-                'customer' => $order->getCustomer(),
-                'company' => $address->getCompany(),
-                'firstName' => $address->getFirstName(),
-                'lastName' => $address->getLastName(),
-                'email' => $order->getCustomer()?->getEmail(),
-                'phoneNumber' => $address->getPhoneNumber(),
-                'street' => $address->getStreet(),
-                'city' => $address->getCity(),
-                'province' => $address->getProvinceName(),
-                'country' => $address->getCountryCode(),
-                'postcode' => $address->getPostcode(),
-                'customerIp' => $order->getCustomerIp(),
-            ],
+            $dto,
         );
     }
 
@@ -83,21 +88,21 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
 
     private function populateFraudSuspicionCommonModel(
         FraudSuspicionCommonModelInterface $model,
-        array $data,
+        FraudSuspicionCommonDTO $dto,
     ): FraudSuspicionCommonModelInterface {
-        $model->setOrder($data['order']);
-        $model->setCustomer($data['customer']);
-        $model->setCompany($data['company']);
-        $model->setFirstName($data['firstName']);
-        $model->setLastName($data['lastName']);
-        $model->setEmail($data['email']);
-        $model->setPhoneNumber($data['phoneNumber']);
-        $model->setStreet($data['street']);
-        $model->setCity($data['city']);
-        $model->setProvince($data['province']);
-        $model->setCountry($data['country']);
-        $model->setPostcode($data['postcode']);
-        $model->setCustomerIp($data['customerIp']);
+        $model->setOrder($dto->order);
+        $model->setCustomer($dto->customer);
+        $model->setCompany($dto->company);
+        $model->setFirstName($dto->firstName);
+        $model->setLastName($dto->lastName);
+        $model->setEmail($dto->email);
+        $model->setPhoneNumber($dto->phoneNumber);
+        $model->setStreet($dto->street);
+        $model->setCity($dto->city);
+        $model->setProvince($dto->province);
+        $model->setCountry($dto->country);
+        $model->setPostcode($dto->postcode);
+        $model->setCustomerIp($dto->customerIp);
 
         return $model;
     }
