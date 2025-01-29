@@ -17,6 +17,8 @@ use Symfony\Component\Workflow\WorkflowInterface;
 
 class CustomerStateResolver implements CustomerStateResolverInterface
 {
+    public const BLACKLISTING = 'blacklisting';
+
     public function __construct(
         private readonly WorkflowInterface $workflow,
         private readonly ObjectManager $customerManager,
@@ -25,11 +27,11 @@ class CustomerStateResolver implements CustomerStateResolverInterface
 
     public function changeStateOnBlacklisted(CustomerInterface $customer): void
     {
-        if (!$this->workflow->can($customer, 'blacklisting')) {
+        if (!$this->workflow->can($customer, self::BLACKLISTING)) {
             return;
         }
 
-        $this->workflow->apply($customer, 'blacklisting');
+        $this->workflow->apply($customer, self::BLACKLISTING);
 
         $this->customerManager->persist($customer);
         $this->customerManager->flush();
