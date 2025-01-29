@@ -17,13 +17,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class AutomaticBlacklistingRuleChoiceType extends AbstractType
 {
-    /** @var array */
-    private $rules;
-
-    public function __construct(array $rules)
-    {
-        $this->rules = $rules;
-    }
+    public function __construct(
+        private array $rules
+    ) {}
 
     public function configureOptions(OptionsResolver $resolver): void
     {

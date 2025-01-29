@@ -26,12 +26,12 @@ class AutomaticBlacklistingRulesProcessor implements AutomaticBlacklistingRulesP
 {
     public function __construct(
         private readonly ServiceRegistryInterface $serviceRegistry,
-        private OrderRepositoryInterface $orderRepository,
-        private AutomaticBlacklistingConfigurationRepositoryInterface $automaticBlacklistingConfigurationRepository,
-        private CustomerStateResolverInterface $customerStateResolver,
-        private FraudSuspicionFactoryInterface $fraudSuspicionFactory,
-        private FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
-        private FraudSuspicionActionEligibilityCheckerInterface $fraudSuspicionActionEligibilityChecker,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly AutomaticBlacklistingConfigurationRepositoryInterface $automaticBlacklistingConfigurationRepository,
+        private readonly CustomerStateResolverInterface $customerStateResolver,
+        private readonly FraudSuspicionFactoryInterface $fraudSuspicionFactory,
+        private readonly FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
+        private readonly FraudSuspicionActionEligibilityCheckerInterface $fraudSuspicionActionEligibilityChecker,
     ) {
     }
 

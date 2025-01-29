@@ -20,13 +20,10 @@ final class AdminOrderShowMenuListener
     /** @var string */
     public const MARK_SUSPICIOUS_TYPE_MENU_KEY = 'mark_suspicious';
 
-    /** @var FraudSuspicionRepositoryInterface */
-    private $fraudSuspicionRepository;
-
-    public function __construct(FraudSuspicionRepositoryInterface $fraudSuspicionRepository)
-    {
-        $this->fraudSuspicionRepository = $fraudSuspicionRepository;
-    }
+    public function __construct(
+        private readonly FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
+        private readonly array $rules
+    ) {}
 
     public function addAdminOrderShowMenuItems(MenuBuilderEvent $event): void
     {

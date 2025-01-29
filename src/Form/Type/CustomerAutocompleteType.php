@@ -23,7 +23,7 @@ use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 final class CustomerAutocompleteType extends AbstractType
 {
     public function __construct(
-        private string $customerClass,
+        private readonly string $customerClass,
     ) {
     }
 
