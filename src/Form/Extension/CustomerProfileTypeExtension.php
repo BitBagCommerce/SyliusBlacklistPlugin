@@ -21,8 +21,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 final class CustomerProfileTypeExtension extends AbstractTypeExtension
 {
     public function __construct(
-        private readonly UserRoleCheckerInterface $userRoleChecker
-    ) {}
+        private readonly UserRoleCheckerInterface $userRoleChecker,
+    ) {
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

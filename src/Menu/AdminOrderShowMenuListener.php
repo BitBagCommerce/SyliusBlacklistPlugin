@@ -22,8 +22,9 @@ final class AdminOrderShowMenuListener
 
     public function __construct(
         private readonly FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
-        private readonly array $rules
-    ) {}
+        private readonly array $rules,
+    ) {
+    }
 
     public function addAdminOrderShowMenuItems(MenuBuilderEvent $event): void
     {

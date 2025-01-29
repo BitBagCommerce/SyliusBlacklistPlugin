@@ -28,7 +28,8 @@ class CheckoutAddressTypeValidator extends ConstraintValidator
         private readonly SuspiciousOrderResolverInterface $suspiciousOrderResolver,
         private readonly AutomaticBlacklistingRulesProcessorInterface $automaticBlacklistingRulesProcessor,
         private readonly FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter,
-    ) {}
+    ) {
+    }
 
     public function validate(mixed $order, Constraint $constraint): void
     {
