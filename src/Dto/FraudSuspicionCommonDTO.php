@@ -11,24 +11,25 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\Dto;
 
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 
 class FraudSuspicionCommonDTO
 {
     public function __construct(
-        public ?OrderInterface $order,
-        public ?object $customer,
-        public ?string $company,
-        public ?string $firstName,
-        public ?string $lastName,
-        public ?string $email,
-        public ?string $phoneNumber,
-        public ?string $street,
-        public ?string $city,
-        public ?string $province,
-        public ?string $country,
-        public ?string $postcode,
-        public ?string $customerIp,
+        public ?OrderInterface $order = null,
+        public ?CustomerInterface $customer = null,
+        public ?string $company = null,
+        public ?string $firstName = null,
+        public ?string $lastName = null,
+        public ?string $email = null,
+        public ?string $phoneNumber = null,
+        public ?string $street = null,
+        public ?string $city = null,
+        public ?string $province = null,
+        public ?string $country = null,
+        public ?string $postcode = null,
+        public ?string $customerIp = null,
     ) {
     }
 }
