@@ -44,19 +44,12 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
 
         $customer = $fraudSuspicionCommonModel->getCustomer();
 
-        /** @var BlacklistingRuleInterface $blacklistingRule */
         foreach ($blacklistingRules as $blacklistingRule) {
             if (!$this->blacklistingRuleEligibilityChecker->isEligible($blacklistingRule, $customer)) {
                 continue;
             }
 
-            $builder = $this->fraudSuspicionRepository->createQueryToLaunchBlacklistingRuleCheckers();
-
-            foreach ($blacklistingRule->getAttributes() as $attribute) {
-                $this->checkIfCustomerIsBlacklisted($builder, $fraudSuspicionCommonModel, $attribute);
-            }
-
-            if ((int) ($builder->getQuery()->getSingleScalarResult()) >= $blacklistingRule->getPermittedStrikes()) {
+            if ($this->isCustomerBlacklisted($fraudSuspicionCommonModel, $blacklistingRule)) {
                 return true;
             }
         }
@@ -64,7 +57,20 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
         return false;
     }
 
-    private function checkIfCustomerIsBlacklisted(
+    private function isCustomerBlacklisted(
+        FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel,
+        BlacklistingRuleInterface $blacklistingRule,
+    ): bool {
+        $builder = $this->fraudSuspicionRepository->createQueryToLaunchBlacklistingRuleCheckers();
+
+        foreach ($blacklistingRule->getAttributes() as $attribute) {
+            $this->applyBlacklistingCheck($builder, $fraudSuspicionCommonModel, $attribute);
+        }
+
+        return (int) $builder->getQuery()->getSingleScalarResult() >= $blacklistingRule->getPermittedStrikes();
+    }
+
+    private function applyBlacklistingCheck(
         QueryBuilder $builder,
         FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel,
         string $attribute,
