@@ -54,7 +54,7 @@ Import required config in your `config/packages/_sylius.yaml` file:
 
 imports:
     ...
-    - { resource: "@BitBagSyliusBlacklistPlugin/Resources/config/config.yaml" }
+    - { resource: "@BitBagSyliusBlacklistPlugin/config/config.yaml" }
 ```
 
 Add routing to your `config/routes.yaml` file:
