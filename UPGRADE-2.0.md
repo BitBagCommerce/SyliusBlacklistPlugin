@@ -215,6 +215,19 @@ sylius_twig_hooks:
    ```bash
    composer require bitbag/blacklist-plugin:^2.0 --no-update
    ```
+3. To ensure proper routing configuration, update the path in your Symfony project:
+
+   Replace the following:
+      ```
+      bitbag_sylius_blacklist_plugin:
+       resource: "@BitBagSyliusBlacklistPlugin/Resources/config/routing.yaml"
+      ```   
+
+   With:
+      ```
+      bitbag_sylius_blacklist_plugin:
+       resource: "@BitBagSyliusBlacklistPlugin/config/routing.yaml"
+      ```
 3. Update your dependencies:
    ```bash
    composer update
