@@ -58,18 +58,19 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
         $dto = new FraudSuspicionCommonDTO(
             order: $order,
             customer: $order->getCustomer(),
-            company: $address->getCompany(),
-            firstName: $address->getFirstName(),
-            lastName: $address->getLastName(),
-            email: $order->getCustomer()?->getEmail(),
-            phoneNumber: $address->getPhoneNumber(),
-            street: $address->getStreet(),
-            city: $address->getCity(),
-            province: $address->getProvinceName(),
-            country: $address->getCountryCode(),
-            postcode: $address->getPostcode(),
-            customerIp: $order->getCustomerIp(),
+            company: $address?->getCompany() ?? '',
+            firstName: $address?->getFirstName() ?? '',
+            lastName: $address?->getLastName() ?? '',
+            email: $order->getCustomer()?->getEmail() ?? '',
+            phoneNumber: $address?->getPhoneNumber() ?? '',
+            street: $address?->getStreet() ?? '',
+            city: $address?->getCity() ?? '',
+            province: $address?->getProvinceName() ?? '',
+            country: $address?->getCountryCode() ?? '',
+            postcode: $address?->getPostcode() ?? '',
+            customerIp: $order->getCustomerIp() ?? ''
         );
+
 
         return $this->populateFraudSuspicionCommonModel(
             $this->fraudSuspicionCommonModelFactory->createNew(),
