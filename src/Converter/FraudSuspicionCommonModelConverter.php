@@ -77,7 +77,7 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
         );
     }
 
-    private function getAddressFromOrder(OrderInterface $order, string $addressType): AddressInterface
+    private function getAddressFromOrder(OrderInterface $order, string $addressType): ?AddressInterface
     {
         return match ($addressType) {
             FraudSuspicion::BILLING_ADDRESS_TYPE => $order->getBillingAddress(),
