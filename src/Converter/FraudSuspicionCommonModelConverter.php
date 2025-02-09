@@ -68,9 +68,8 @@ class FraudSuspicionCommonModelConverter implements FraudSuspicionCommonModelCon
             province: $address?->getProvinceName() ?? '',
             country: $address?->getCountryCode() ?? '',
             postcode: $address?->getPostcode() ?? '',
-            customerIp: $order->getCustomerIp() ?? ''
+            customerIp: $order->getCustomerIp() ?? '',
         );
-
 
         return $this->populateFraudSuspicionCommonModel(
             $this->fraudSuspicionCommonModelFactory->createNew(),
