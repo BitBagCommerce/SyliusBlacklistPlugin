@@ -16,16 +16,14 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 final class UserRoleChecker implements UserRoleCheckerInterface
 {
-    private TokenStorageInterface $tokenStorage;
-
-    public function __construct(TokenStorageInterface $tokenStorage)
-    {
-        $this->tokenStorage = $tokenStorage;
+    public function __construct(
+        private readonly TokenStorageInterface $tokenStorage,
+    ) {
     }
 
     public function isAdmin(): bool
     {
-        $user = $this->tokenStorage->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()?->getUser();
 
         return $user instanceof AdminUserInterface;
     }

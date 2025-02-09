@@ -1,0 +1,53 @@
+sylius_grid:
+    grids:
+        bitbag_sylius_blacklist_plugin_automatic_blacklisting_configuration:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%bitbag_sylius_blacklist_plugin.model.automatic_blacklisting_configuration.class%"
+                    repository:
+                        method: createListQueryBuilder
+            sorting:
+                name: desc
+            fields:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: ~
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/grid/field/enabled.html.twig"
+                addFraudSuspicion:
+                    type: twig
+                    label: bitbag_sylius_blacklist_plugin.ui.add_fraud_suspicion_row_after_exceed_limit
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/grid/field/yes_no.html.twig"
+            filters:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                channels:
+                    type: entity
+                    label: bitbag_sylius_blacklist_plugin.form.blacklisting_rule.channels
+                    form_options:
+                        class: '%sylius.model.channel.class%'
+                        choice_label: name
+                        choice_value: code
+                    options:
+                        fields: [ channels.code ]
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
+            actions:
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
+                main:
+                    create:
+                        type: create

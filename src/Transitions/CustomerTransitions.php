@@ -16,4 +16,8 @@ class CustomerTransitions
     public const GRAPH = 'bitbag_sylius_blacklist_plugin_customer';
 
     public const TRANSITION_BLACKLISTING_PROCESS = 'blacklisting';
+
+    public const TRANSITION_NEUTRALIZING_PROCESS = 'neutral';
+
+    public const TRANSITION_WHITELISTING_PROCESS = 'whitelisting';
 }

@@ -1,0 +1,6 @@
+imports:
+    - { resource: "twig_hooks/**/*.yaml" }
+    - { resource: "resources.yaml" }
+    - { resource: "services.xml" }
+    - { resource: "grids.yaml" }
+    - { resource: "workflow.yaml" }

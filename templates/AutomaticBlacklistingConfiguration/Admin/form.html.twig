@@ -1,0 +1,53 @@
+{% form_theme form '@BitBagSyliusBlacklistPlugin/Form/theme.html.twig' %}
+
+<div class="container-xl" {{ attributes }}>
+    {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    {% if hookable_metadata.configuration.method is defined %}
+        <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}"/>
+    {% endif %}
+    {{ form_errors(form) }}
+    {{ form_widget(form._token) }}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3 class="card-title">{{ 'sylius.ui.configuration'|trans }}</h3>
+        </div>
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-6">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.channels) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.enabled) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.addFraudSuspicion) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.permittedFraudSuspicionsNumber) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.permittedFraudSuspicionsTime) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3 class="card-title">{{ 'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.rules'|trans }}</h3>
+        </div>
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    {{ form_row(form.rules, {label: false}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form, {render_rest: hookable.configuration.render_rest|default(false)}) }}
+</div>

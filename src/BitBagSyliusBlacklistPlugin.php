@@ -28,4 +28,9 @@ final class BitBagSyliusBlacklistPlugin extends Bundle
         $container->addCompilerPass(new RegisterBlacklistingRuleCheckersPass());
         $container->addCompilerPass(new RegisterAutomaticBlacklistingRuleCheckersPass());
     }
+
+    public function getPath(): string
+    {
+        return \dirname(__DIR__);
+    }
 }

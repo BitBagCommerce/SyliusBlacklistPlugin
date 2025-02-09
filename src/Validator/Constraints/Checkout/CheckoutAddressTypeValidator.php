@@ -24,31 +24,23 @@ use Webmozart\Assert\Assert;
 
 class CheckoutAddressTypeValidator extends ConstraintValidator
 {
-    /** @var SuspiciousOrderResolverInterface */
-    private $suspiciousOrderResolver;
-
-    /** @var AutomaticBlacklistingRulesProcessorInterface */
-    private $automaticBlacklistingRulesProcessor;
-
-    /** @var FraudSuspicionCommonModelConverterInterface */
-    private $fraudSuspicionCommonModelConverter;
-
     public function __construct(
-        SuspiciousOrderResolverInterface $suspiciousOrderResolver,
-        AutomaticBlacklistingRulesProcessorInterface $automaticBlacklistingRulesProcessor,
-        FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter,
+        private readonly SuspiciousOrderResolverInterface $suspiciousOrderResolver,
+        private readonly AutomaticBlacklistingRulesProcessorInterface $automaticBlacklistingRulesProcessor,
+        private readonly FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter,
     ) {
-        $this->suspiciousOrderResolver = $suspiciousOrderResolver;
-        $this->automaticBlacklistingRulesProcessor = $automaticBlacklistingRulesProcessor;
-        $this->fraudSuspicionCommonModelConverter = $fraudSuspicionCommonModelConverter;
     }
 
     public function validate(mixed $order, Constraint $constraint): void
     {
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        /** @var CustomerInterface $customer */
+        /** @var CustomerInterface|null $customer */
         $customer = $order->getCustomer();
+
+        if (null === $customer) {
+            return;
+        }
 
         if (FraudStatusInterface::FRAUD_STATUS_WHITELISTED === $customer->getFraudStatus()) {
             return;

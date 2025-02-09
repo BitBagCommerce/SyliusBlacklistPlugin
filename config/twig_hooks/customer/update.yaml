@@ -1,0 +1,6 @@
+sylius_twig_hooks:
+  hooks:
+    'sylius_admin.customer.update.content.form.sections#right':
+      extra_information:
+        template: '@BitBagSyliusBlacklistPlugin/Customer/Form/Sections/extra_information.html.twig'
+        priority: 0

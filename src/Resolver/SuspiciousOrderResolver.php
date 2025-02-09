@@ -24,63 +24,32 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 
 class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
 {
-    /** @var ServiceRegistryInterface */
-    private $serviceRegistry;
-
-    /** @var FraudSuspicionRepositoryInterface */
-    private $fraudSuspicionRepository;
-
-    /** @var BlacklistingRuleRepositoryInterface */
-    private $blacklistingRuleRepository;
-
-    /** @var ChannelContextInterface */
-    private $channelContext;
-
-    /** @var ObjectManager */
-    private $customerManager;
-
-    /** @var BlacklistingRuleEligibilityCheckerInterface */
-    private $blacklistingRuleEligibilityChecker;
-
     public function __construct(
-        ServiceRegistryInterface $serviceRegistry,
-        FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
-        BlacklistingRuleRepositoryInterface $blacklistingRuleRepository,
-        ChannelContextInterface $channelContext,
-        ObjectManager $customerManager,
-        BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker,
+        private readonly ServiceRegistryInterface $serviceRegistry,
+        private readonly FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
+        private readonly BlacklistingRuleRepositoryInterface $blacklistingRuleRepository,
+        private readonly ChannelContextInterface $channelContext,
+        private readonly ObjectManager $customerManager,
+        private readonly BlacklistingRuleEligibilityCheckerInterface $blacklistingRuleEligibilityChecker,
     ) {
-        $this->serviceRegistry = $serviceRegistry;
-        $this->fraudSuspicionRepository = $fraudSuspicionRepository;
-        $this->blacklistingRuleRepository = $blacklistingRuleRepository;
-        $this->channelContext = $channelContext;
-        $this->customerManager = $customerManager;
-        $this->blacklistingRuleEligibilityChecker = $blacklistingRuleEligibilityChecker;
     }
 
     public function resolve(FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel): bool
     {
         $blacklistingRules = $this->blacklistingRuleRepository->findActiveByChannel($this->getChannel());
 
-        if (0 === \count($blacklistingRules)) {
+        if ([] === $blacklistingRules) {
             return false;
         }
 
         $customer = $fraudSuspicionCommonModel->getCustomer();
 
-        /** @var BlacklistingRuleInterface $blacklistingRule */
         foreach ($blacklistingRules as $blacklistingRule) {
             if (!$this->blacklistingRuleEligibilityChecker->isEligible($blacklistingRule, $customer)) {
                 continue;
             }
 
-            $builder = $this->fraudSuspicionRepository->createQueryToLaunchBlacklistingRuleCheckers();
-
-            foreach ($blacklistingRule->getAttributes() as $attribute) {
-                $this->checkIfCustomerIsBlacklisted($builder, $fraudSuspicionCommonModel, $attribute);
-            }
-
-            if ((int) ($builder->getQuery()->getSingleScalarResult()) >= $blacklistingRule->getPermittedStrikes()) {
+            if ($this->isCustomerBlacklisted($fraudSuspicionCommonModel, $blacklistingRule)) {
                 return true;
             }
         }
@@ -88,13 +57,25 @@ class SuspiciousOrderResolver implements SuspiciousOrderResolverInterface
         return false;
     }
 
-    private function checkIfCustomerIsBlacklisted(
+    private function isCustomerBlacklisted(
+        FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel,
+        BlacklistingRuleInterface $blacklistingRule,
+    ): bool {
+        $builder = $this->fraudSuspicionRepository->createQueryToLaunchBlacklistingRuleCheckers();
+
+        foreach ($blacklistingRule->getAttributes() as $attribute) {
+            $this->applyBlacklistingCheck($builder, $fraudSuspicionCommonModel, $attribute);
+        }
+
+        return (int) $builder->getQuery()->getSingleScalarResult() >= $blacklistingRule->getPermittedStrikes();
+    }
+
+    private function applyBlacklistingCheck(
         QueryBuilder $builder,
         FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel,
         string $attribute,
     ): void {
         $checker = $this->serviceRegistry->get($attribute);
-
         $checker->checkIfCustomerIsBlacklisted($builder, $fraudSuspicionCommonModel);
     }
 

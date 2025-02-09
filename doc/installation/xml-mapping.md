@@ -14,7 +14,7 @@ doctrine:
                     App:
                         ...
                         type: xml
-                        dir: '%kernel.project_dir%/src/Resources/config/doctrine'
+                        dir: '%kernel.project_dir%/config/doctrine'
 ```
 
 Extend entities with parameters and methods using attributes and traits:
@@ -38,11 +38,11 @@ class Customer extends BaseCustomer implements CustomerInterface
 }
 ```
 
-Define new Entity mapping inside `src/Resources/config/doctrine` directory.
+Define new Entity mapping inside `config/doctrine` directory.
 
 - `Customer` entity:
 
-`src/Resources/config/doctrine/Customer.orm.xml`
+`config/doctrine/Customer.orm.xml`
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

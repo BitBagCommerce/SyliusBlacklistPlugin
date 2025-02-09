@@ -1,0 +1,14 @@
+<div class="card mb-3">
+    <div class="card-header">
+        <h3 class="card-title">{{ 'sylius.ui.customer'|trans }}</h3>
+    </div>
+    <div class="card-body">
+        {% if fraudSuspicion.customer != null %}
+            <a href="{{ path('sylius_admin_customer_show', {'id': fraudSuspicion.customer.id}) }}">
+                {{ fraudSuspicion.customer }}
+            </a>
+        {% else %}
+            <span>{{ 'bitbag_sylius_blacklist_plugin.ui.no_related_customer'|trans }}</span>
+        {% endif %}
+    </div>
+</div>

@@ -22,6 +22,22 @@ class AddressTypeResolver implements AddressTypeResolverInterface
     {
         $address = $this->resolve($fraudSuspicion);
 
+        $this->updateFraudSuspicionWithAddress($fraudSuspicion, $address);
+    }
+
+    public function resolve(FraudSuspicionInterface $fraudSuspicion): AddressInterface
+    {
+        $order = $fraudSuspicion->getOrder();
+
+        return match ($fraudSuspicion->getAddressType()) {
+            FraudSuspicion::BILLING_ADDRESS_TYPE => $order->getBillingAddress(),
+            FraudSuspicion::SHIPPING_ADDRESS_TYPE => $order->getShippingAddress(),
+            default => throw new WrongAddressTypeException('Wrong address type!'),
+        };
+    }
+
+    private function updateFraudSuspicionWithAddress(FraudSuspicionInterface $fraudSuspicion, AddressInterface $address): void
+    {
         $fraudSuspicion->setFirstName($address->getFirstName());
         $fraudSuspicion->setLastName($address->getLastName());
         $fraudSuspicion->setCompany($address->getCompany());
@@ -30,17 +46,5 @@ class AddressTypeResolver implements AddressTypeResolverInterface
         $fraudSuspicion->setProvince($address->getProvinceName());
         $fraudSuspicion->setCountry($address->getCountryCode());
         $fraudSuspicion->setPhoneNumber($address->getPhoneNumber());
-    }
-
-    public function resolve(FraudSuspicionInterface $fraudSuspicion): AddressInterface
-    {
-        switch ($fraudSuspicion->getAddressType()) {
-            case FraudSuspicion::BILLING_ADDRESS_TYPE:
-                return $fraudSuspicion->getOrder()->getBillingAddress();
-            case FraudSuspicion::SHIPPING_ADDRESS_TYPE:
-                return $fraudSuspicion->getOrder()->getShippingAddress();
-            default:
-                throw new WrongAddressTypeException('Wrong address type!');
-        }
     }
 }

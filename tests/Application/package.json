@@ -1,46 +1,21 @@
 {
+  "license": "MIT",
+  "scripts": {
+    "build": "encore dev",
+    "build:prod": "encore production",
+    "watch": "encore dev --watch",
+    "postinstall": "cd ./node_modules/@symfony/ux-autocomplete && npm install && cd - && cd ./node_modules/@symfony/ux-live-component && npm install && cd -"
+  },
   "dependencies": {
-    "@babel/core": "^7.24.9",
-    "@babel/preset-env": "^7.14.7",
-    "babel-polyfill": "^6.26.0",
-    "chart.js": "^3.9.1",
-    "jquery": "^3.6.0",
-    "jquery.dirtyforms": "^2.0.0",
-    "lightbox2": "^2.11.0",
-    "semantic-ui-css": "^2.4.0",
-    "slick-carousel": "^1.8.1"
+    "@sylius-ui/admin": "git+https://github.com/Sylius/SyliusAdminBundle.git#2.0",
+    "@sylius-ui/shop": "git+https://github.com/Sylius/SyliusShopBundle.git#2.0",
+    "@symfony/ux-autocomplete": "file:../../vendor/symfony/ux-autocomplete/assets",
+    "@symfony/ux-live-component": "file:../../vendor/symfony/ux-live-component/assets"
   },
   "devDependencies": {
-    "@symfony/webpack-encore": "^4.0.0",
-    "babel-core": "^6.26.3",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-module-resolver": "^3.2.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
-    "dedent": "^0.7.0",
-    "eslint": "^8.22.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-import-resolver-babel-module": "^5.3.0",
-    "eslint-plugin-import": "^2.26.0",
-    "fast-async": "^7.0.6",
-    "merge-stream": "^2.0.0",
-    "sass": "^1.77.8",
-    "sass-loader": "^13.0.0",
-    "upath": "^2.0.0",
-    "webpack": "^5.93.0",
-    "webpack-cli": "^5.1.4",
-    "yargs": "^17.7.1"
-  },
-  "scripts": {
-    "dev": "yarn encore dev",
-    "watch": "yarn encore dev --watch",
-    "prod": "yarn encore prod"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Sylius/Sylius.git"
-  },
-  "author": "Paweł Jędrzejewski",
-  "license": "MIT"
+    "@hotwired/stimulus": "^3.0.0",
+    "@symfony/stimulus-bridge": "^3.2.0",
+    "@symfony/webpack-encore": "^5.0.1",
+    "tom-select": "^2.2.2"
+  }
 }

@@ -11,35 +11,27 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusBlacklistPlugin\StateResolver;
 
-use BitBag\SyliusBlacklistPlugin\Transitions\CustomerTransitions;
 use Doctrine\Persistence\ObjectManager;
-use SM\Factory\FactoryInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Symfony\Component\Workflow\WorkflowInterface;
 
 class CustomerStateResolver implements CustomerStateResolverInterface
 {
-    /** @var FactoryInterface */
-    private $stateMachineFactory;
+    public const BLACKLISTING = 'blacklisting';
 
-    /** @var ObjectManager */
-    private $customerManager;
-
-    public function __construct(FactoryInterface $stateMachineFactory, ObjectManager $customerManager)
-    {
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->customerManager = $customerManager;
+    public function __construct(
+        private readonly WorkflowInterface $workflow,
+        private readonly ObjectManager $customerManager,
+    ) {
     }
 
     public function changeStateOnBlacklisted(CustomerInterface $customer): void
     {
-        $stateMachine = $this->stateMachineFactory->get($customer, CustomerTransitions::GRAPH);
-        $transition = CustomerTransitions::TRANSITION_BLACKLISTING_PROCESS;
-
-        if (!$stateMachine->can($transition)) {
+        if (!$this->workflow->can($customer, self::BLACKLISTING)) {
             return;
         }
 
-        $stateMachine->apply($transition);
+        $this->workflow->apply($customer, self::BLACKLISTING);
 
         $this->customerManager->persist($customer);
         $this->customerManager->flush();
