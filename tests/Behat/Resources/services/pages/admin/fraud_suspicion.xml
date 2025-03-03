@@ -10,6 +10,7 @@
         <service id="bitbag_sylius_blacklist_plugin.behat.page.admin.fraud_suspicion.create" class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\FraudSuspicion\CreatePage"
                  parent="sylius.behat.page.admin.crud.create">
             <argument>bitbag_sylius_blacklist_plugin_admin_fraud_suspicion_create</argument>
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
 
         <service id="bitbag_sylius_blacklist_plugin.behat.page.admin.fraud_suspicion.update" class="Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\FraudSuspicion\UpdatePage"

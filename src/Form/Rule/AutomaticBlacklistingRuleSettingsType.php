@@ -29,7 +29,7 @@ final class AutomaticBlacklistingRuleSettingsType extends AbstractType
                 'label' => 'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.count',
                 'constraints' => [
                     new NotBlank(['groups' => ['bitbag']]),
-                    new Type(['type' => 'numeric', 'groups' => ['bitbag']]),
+                    new Type(['type' => 'numeric']),
                     new Range(['min' => 1, 'groups' => ['bitbag']]),
                 ],
             ])
@@ -42,8 +42,7 @@ final class AutomaticBlacklistingRuleSettingsType extends AbstractType
                     'bitbag_sylius_blacklist_plugin.form.automatic_blacklisting_rule.per_month' => AutomaticBlacklistingRuleInterface::PER_MONTH,
                 ],
                 'attr' => ['style' => 'margin-bottom: 10px;'],
-            ])
-        ;
+            ]);
     }
 
     public function getBlockPrefix(): string

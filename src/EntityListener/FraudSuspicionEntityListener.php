@@ -19,23 +19,11 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class FraudSuspicionEntityListener
 {
-    /** @var SuspiciousOrderResolverInterface */
-    private $suspiciousOrderResolver;
-
-    /** @var CustomerStateResolverInterface */
-    private $customerStateResolver;
-
-    /** @var FraudSuspicionCommonModelConverterInterface */
-    private $fraudSuspicionCommonModelConverter;
-
     public function __construct(
-        SuspiciousOrderResolverInterface $suspiciousOrderResolver,
-        CustomerStateResolverInterface $customerStateResolver,
-        FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter,
+        private readonly SuspiciousOrderResolverInterface $suspiciousOrderResolver,
+        private readonly CustomerStateResolverInterface $customerStateResolver,
+        private readonly FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter,
     ) {
-        $this->suspiciousOrderResolver = $suspiciousOrderResolver;
-        $this->customerStateResolver = $customerStateResolver;
-        $this->fraudSuspicionCommonModelConverter = $fraudSuspicionCommonModelConverter;
     }
 
     public function prePersist(FraudSuspicionInterface $newFraudSuspicion, LifecycleEventArgs $event): void

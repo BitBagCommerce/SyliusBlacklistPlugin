@@ -23,12 +23,12 @@ ADDITIONAL
 ## Requirements:
 We work on stable, supported and up-to-date versions of packages. We recommend you to do the same.
 
-| Package       | Version         |
-|---------------|-----------------|
-| PHP           | \>8.0           |
-| sylius/sylius | 1.12.x - 1.13.x |
-| MySQL         | \>= 5.7         |
-| NodeJS        | \>= 18.x        |
+| Package       | Version  |
+|---------------|----------|
+| PHP           | \>=8.2   |
+| sylius/sylius | 2.0.x    |
+| MySQL         | \>= 5.7  |
+| NodeJS        | \>= 18.x |
 
 ## Composer:
 ```bash
@@ -54,7 +54,7 @@ Import required config in your `config/packages/_sylius.yaml` file:
 
 imports:
     ...
-    - { resource: "@BitBagSyliusBlacklistPlugin/Resources/config/config.yaml" }
+    - { resource: "@BitBagSyliusBlacklistPlugin/config/config.yaml" }
 ```
 
 Add routing to your `config/routes.yaml` file:
@@ -62,7 +62,7 @@ Add routing to your `config/routes.yaml` file:
 # config/routes.yaml
 
 bitbag_sylius_blacklist_plugin:
-    resource: "@BitBagSyliusBlacklistPlugin/Resources/config/routing.yaml"
+    resource: "@BitBagSyliusBlacklistPlugin/config/routing.yaml"
 ```
 
 Override Customer grid in `config/packages/_sylius_grid.yml` file:
@@ -101,7 +101,6 @@ twig:
     strict_variables: '%kernel.debug%'
     form_themes:
         - '@BitBagSyliusBlacklistPlugin/Form/theme.html.twig'
-        - '@SyliusUi/Form/theme.html.twig'
 services:
     _defaults:
         public: false
@@ -157,15 +156,19 @@ sylius_customer:
 ```
 
 ### Update your database
-First, please run legacy-versioned migrations by using command:
-```bash
-bin/console doctrine:migrations:migrate
-```
 
-After migration, please create a new diff migration and update database:
+As the plugin doesn't have their own migration script, please generate your own migration file depending on database changes:
+
 ```bash
 bin/console doctrine:migrations:diff
 bin/console doctrine:migrations:migrate
+```
+
+Alternative, you can use the schema tool to update your database without migrations:
+
+```bash
+bin/console doctrine:schema:update --dump-sql # Please review database queries before running them!
+bin/console doctrine:schema:update --force    # This command RUNS THE QUERIES.
 ```
 
 ### Clear application cache by using command:
@@ -173,26 +176,6 @@ bin/console doctrine:migrations:migrate
 bin/console cache:clear
 ```
 **Note:** If you are running it on production, add the `-e prod` flag to this command.
-
-## Templates
-
-**AdminBundle** (`templates/bundles/SyliusAdminBundle`):
-
-Override Customer form template (`@SyliusAdminBundle\Customer\_form.html.twig`
-or `@SyliusAdminBundle/Customer/Form/_firstColumn.html.twig`) by adding lines below:
-
-```php
-<div class="ui segment">
-    <h4 class="ui dividing header">{{ 'bitbag_sylius_blacklist_plugin.ui.fraud_status'|trans }}</h4>
-    {{ form_row(form.fraudStatus) }}
-</div>
-```
-
-or copy from the path:
-
-```
-vendor/bitbag/blacklist-plugin/tests/Application/templates/bundles/SyliusAdminBundle/Customer/_form.html.twig
-```
 
 ## Tests
 To run the tests, execute the commands:

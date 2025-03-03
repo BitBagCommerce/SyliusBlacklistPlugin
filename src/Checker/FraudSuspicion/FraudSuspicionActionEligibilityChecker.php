@@ -19,18 +19,10 @@ use Sylius\Component\Order\Model\OrderInterface;
 
 final class FraudSuspicionActionEligibilityChecker implements FraudSuspicionActionEligibilityCheckerInterface
 {
-    /** @var FraudSuspicionRepositoryInterface */
-    private $fraudSuspicionRepository;
-
-    /** @var CustomerStateResolverInterface */
-    private $customerStateResolver;
-
     public function __construct(
-        FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
-        CustomerStateResolverInterface $customerStateResolver,
+        private readonly FraudSuspicionRepositoryInterface $fraudSuspicionRepository,
+        private readonly CustomerStateResolverInterface $customerStateResolver,
     ) {
-        $this->fraudSuspicionRepository = $fraudSuspicionRepository;
-        $this->customerStateResolver = $customerStateResolver;
     }
 
     public function canAddFraudSuspicion(
@@ -41,8 +33,7 @@ final class FraudSuspicionActionEligibilityChecker implements FraudSuspicionActi
             return false;
         }
 
-        $date = (new \DateTime())->modify('- ' . $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsTime());
-
+        $date = (new \DateTime())->modify('-' . $automaticBlacklistingConfiguration->getPermittedFraudSuspicionsTime());
         $customer = $order->getCustomer();
 
         $lastFraudSuspicionsOfCustomer = $this->fraudSuspicionRepository->countByCustomerAndCommentAndDate(

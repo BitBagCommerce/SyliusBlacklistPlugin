@@ -1,2 +1,2 @@
 imports:
-    - { resource: "@BitBagSyliusBlacklistPlugin/Resources/config/config.yaml" }
+    - { resource: "@BitBagSyliusBlacklistPlugin/config/config.yaml" }

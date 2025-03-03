@@ -1,0 +1,9 @@
+sylius_twig_hooks:
+  hooks:
+    'sylius_admin.order.show.content.header.title_block':
+      title:
+        template: '@SyliusAdmin/order/show/content/header/title_block/title.html.twig'
+        priority: 100
+      actions:
+        template: '@BitBagSyliusBlacklistPlugin/Order/Show/Content/Header/Title_block/actions.html.twig'
+        priority: 0

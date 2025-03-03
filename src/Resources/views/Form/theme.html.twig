@@ -1,8 +1,0 @@
-{% extends '@SyliusUi/Form/theme.html.twig' %}
-
-{% block bitbag_sylius_customer_autocomplete_choice_row %}
-    {{ form_row(form, {
-        'remote_url': path('bitbag_sylius_blacklist_plugin_admin_ajax_customer_by_email'),
-        'load_edit_url': path('bitbag_sylius_blacklist_plugin_admin_ajax_customer_by_id')
-    }) }}
-{% endblock %}

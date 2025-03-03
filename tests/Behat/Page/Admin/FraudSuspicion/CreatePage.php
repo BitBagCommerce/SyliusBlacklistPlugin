@@ -10,12 +10,25 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusBlacklistPlugin\Behat\Page\Admin\FraudSuspicion;
 
 use Behat\Mink\Element\DocumentElement;
+use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Tests\BitBag\SyliusBlacklistPlugin\Behat\Behaviour\ContainsErrorTrait;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use ContainsErrorTrait;
+
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        string $routeName,
+        private AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters, $router, $routeName);
+    }
 
     public function fillField(string $field, ?string $value): CreatePageInterface
     {
@@ -37,20 +50,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function selectCustomer(string $customerEmail): CreatePageInterface
     {
-        $dropdown = $this->getElement('customer_dropdown');
-        $dropdown->click();
+        $productOptionsAutocomplete = $this->getElement('customer_dropdown');
 
-        $dropdown->waitFor(5, function () use ($customerEmail) {
-            return $this->hasElement('customer_dropdown_item', [
-                '%item%' => $customerEmail,
-            ]);
-        });
-
-        $item = $this->getElement('customer_dropdown_item', [
-            '%item%' => $customerEmail,
-        ]);
-
-        $item->click();
+        $this->autocompleteHelper->selectByName($this->getDriver(), $productOptionsAutocomplete->getXpath(), $customerEmail);
 
         return $this;
     }
@@ -58,8 +60,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'customer_dropdown' => '.field > label:contains("Customer") ~ .sylius-autocomplete',
-            'customer_dropdown_item' => '.field > label:contains("Customer") ~ .sylius-autocomplete > div.menu > div.item:contains("%item%")',
+            'customer_dropdown' => '[data-test-fraud-suspicion-customer-autocomplete]',
         ]);
     }
 }

@@ -1,0 +1,65 @@
+sylius_grid:
+    grids:
+        bitbag_sylius_blacklist_plugin_blacklisting_rule:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%bitbag_sylius_blacklist_plugin.model.blacklisting_rule.class%"
+                    repository:
+                        method: createListQueryBuilder
+            sorting:
+                name: desc
+            fields:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: ~
+                attributes:
+                    type: twig
+                    label: bitbag_sylius_blacklist_plugin.ui.rule_attributes
+                    options:
+                        template: '@BitBagSyliusBlacklistPlugin/BlacklistingRule/Admin/Grid/Field/attributes.html.twig'
+                permittedStrikes:
+                    type: string
+                    label: bitbag_sylius_blacklist_plugin.ui.permitted_strikes
+                    sortable: ~
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/grid/field/enabled.html.twig"
+                onlyForGuests:
+                    type: twig
+                    label: bitbag_sylius_blacklist_plugin.form.blacklisting_rule.only_for_guests
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/grid/field/yes_no.html.twig"
+            filters:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                channels:
+                    type: entity
+                    label: bitbag_sylius_blacklist_plugin.form.blacklisting_rule.channels
+                    form_options:
+                        class: '%sylius.model.channel.class%'
+                        choice_label: name
+                        choice_value: code
+                    options:
+                        fields: [ channels.code ]
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
+                onlyForGuests:
+                    type: boolean
+                    label: bitbag_sylius_blacklist_plugin.form.blacklisting_rule.only_for_guests
+            actions:
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
+                main:
+                    create:
+                        type: create
