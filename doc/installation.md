@@ -156,15 +156,19 @@ sylius_customer:
 ```
 
 ### Update your database
-First, please run legacy-versioned migrations by using command:
-```bash
-bin/console doctrine:migrations:migrate
-```
 
-After migration, please create a new diff migration and update database:
+As the plugin doesn't have their own migration script, please generate your own migration file depending on database changes:
+
 ```bash
 bin/console doctrine:migrations:diff
 bin/console doctrine:migrations:migrate
+```
+
+Alternative, you can use the schema tool to update your database without migrations:
+
+```bash
+bin/console doctrine:schema:update --dump-sql # Please review database queries before running them!
+bin/console doctrine:schema:update --force    # This command RUNS THE QUERIES.
 ```
 
 ### Clear application cache by using command:
