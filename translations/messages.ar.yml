@@ -1,0 +1,77 @@
+bitbag_sylius_blacklist_plugin:
+    ui:
+        blacklisting_rules: قواعد القائمة السوداء
+        blacklisting_rule: قاعدة القائمة السوداء
+        fraud_suspicions: الشكوك الاحتيالية
+        fraud_suspicion: الشك الاحتيالي
+        manage_blacklisting_rules: إدارة قواعد القائمة السوداء
+        manage_fraud_suspicions: إدارة الشكوك الاحتيالية
+        edit_fraud_suspicion: تعديل الشك الاحتيالي
+        new_blacklisting_rule: قاعدة قائمة سوداء جديدة
+        new_fraud_suspicion: شك احتيالي جديد
+        permitted_strikes: الدخولات المسموحة
+        address_type: نوع العنوان
+        rule_attributes: سمات القاعدة
+        rule_attribute: سمة القاعدة
+        blacklisted: في القائمة السوداء
+        neutral: محايد
+        whitelisted: في القائمة البيضاء
+        fraud_status: حالة الاحتيال
+        mark_suspicious: تحديد كمشبوه
+        mark_blacklisted: تحديد في القائمة السوداء
+        mark_neutral: تحديد كمحايد
+        automatic_blacklisting_configuration: قواعد الحظر التلقائي
+        automatic_blacklisting_configurations: قواعد الحظر التلقائي
+        configure_automatic_blacklisting_configurations: تكوين الحظر التلقائي
+        new_automatic_blacklisting_configuration: إضافة تكوين حظر تلقائي جديد
+        edit_automatic_blacklisting_configuration: تعديل تكوين الحظر التلقائي
+        settings: الإعدادات
+        add_fraud_suspicion_row_after_exceed_limit: إضافة صف شك احتيالي بعد تجاوز الحد
+        no_related_order: لا توجد طلبية مرتبطة
+        see_details_fraud_suspicion: رؤية المزيد من التفاصيل حول الشك الاحتيالي
+        see_more_info_about_order: رؤية المزيد من المعلومات حول الطلبية
+        no_related_customer: لا يوجد عميل مرتبط
+        edit_blacklisting_rule: تعديل قاعدة القائمة السوداء اليدوية
+        rules_are_connected_by_or: سيتم تطبيق تكوين الحظر التلقائي بعد أن يلبي المستخدم إحدى القواعد التي ستضيفها أدناه
+        permitted_fraud_suspicions_number: عدد الشكوك الاحتيالية المسموحة
+        permitted_fraud_suspicions_time: وقت الشكوك الاحتيالية المسموحة
+        choose_time_range: اختر نطاق الوقت
+        status: الحالة
+        auto_generated: مولدة تلقائياً
+        manually_added: مضافة يدوياً
+        fraud_prevention: منع الاحتيال
+    form:
+        blacklisting_rule:
+            name: اسم القاعدة
+            attribute: سمات القاعدة
+            permitted_strikes: الضربات المسموحة
+            channels: القنوات
+            customer_group: مجموعات العملاء
+            only_for_guests: للضيوف فقط
+            company: الشركة
+            city: المدينة
+            country: البلد
+            customer_id: معرف العميل
+            customer_ip: عنوان IP العميل
+            email: البريد الإلكتروني
+            first_name: الاسم الأول
+            last_name: اسم العائلة
+            phone_number: رقم الهاتف
+            postcode: الرمز البريدي
+            province: المحافظة
+            street: الشارع
+            for_unassigned_customers: غير محدد
+            customer_group_help: إذا لم يتم تحديد أي مجموعة عملاء، ستعمل قاعدة القائمة السوداء لجميع مجموعات العملاء.
+        fraud_suspicion:
+            comment: تعليق
+        automatic_blacklisting_rule:
+            rules: القواعد
+            type: النوع
+            count: العدد
+            name: اسم التكوين
+            payment_failures: الحد الأقصى لعدد فشل المدفوعات
+            orders: الحد الأقصى لعدد الطلبات
+            date_modifier: معدل التاريخ
+            per_day: يومياً
+            per_week: أسبوعياً
+            per_month: شهرياً

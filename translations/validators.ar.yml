@@ -1,0 +1,28 @@
+bitbag_sylius_blacklist_plugin:
+    blacklisting_rule:
+        name:
+            not_blank: لا يمكن أن يكون اسم القاعدة فارغاً
+            max_length: اسم القاعدة طويل جداً
+        attributes:
+            min: يجب أن تحتوي قاعدة القائمة السوداء على سمة واحدة على الأقل
+        permitted_strikes:
+            not_blank: لا يمكن أن تكون الدخولات المسموحة فارغة
+        channels:
+            min: يجب عليك تحديد قناة واحدة على الأقل
+        guests_cannot_have_group: لا يمكنك تحديد أي مجموعة عملاء إذا كنت تريد تطبيق هذه القاعدة للضيوف فقط
+    automatic_blacklisting_rule:
+        name:
+            not_blank: لا يمكن أن يكون اسم التكوين فارغاً
+            max_length: اسم التكوين طويل جداً
+    automatic_blacklisting_configuration:
+        fraud_suspicions_number:
+            not_blank: لا يمكن أن يكون عدد الشكوك الاحتيالية المسموحة فارغاً
+        fraud_suspicions_time:
+            not_blank: لا يمكن أن يكون وقت الشكوك الاحتيالية المسموحة فارغاً
+    form:
+        error:
+            cannot_place_order: حدث خطأ ما. لا يمكنك تقديم الطلبية.
+            cannot_deactivate_manual_blacklisting_rule: |
+                لا يمكنك إلغاء تفعيل قاعدة القائمة السوداء اليدوية عندما يكون لدى المتجر بعض تكوينات الحظر التلقائي مع "إضافة صف شك احتيالي بعد تجاوز الحد" مضبوط على صحيح
+            cannot_add_automatic_blacklisting_configuration: |
+                لا يمكنك إضافة تكوين حظر تلقائي مع "إضافة صف شك احتيالي بعد تجاوز الحد" مضبوط على صحيح إذا لم يكن لدى المتجر قواعد قائمة سوداء يدوية نشطة
