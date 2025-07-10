@@ -1,0 +1,74 @@
+bitbag_sylius_blacklist_plugin:
+    ui:
+        blacklisting_rules: Blacklisting-Regeln
+        fraud_suspicions: Betrugsverdacht
+        manage_blacklisting_rules: Blacklisting-Regeln verwalten
+        manage_fraud_suspicions: Betrugsverdachte verwalten
+        edit_fraud_suspicion: Betrugsverdacht bearbeiten
+        new_blacklisting_rule: Neue Blacklisting-Regel
+        new_fraud_suspicion: Neuer Betrugsverdacht
+        permitted_strikes: Erlaubte Schläge
+        address_type: Adresstyp
+        rule_attributes: Regelattribute
+        rule_attribute: Regelattribut
+        blacklisted: Auf die Blacklist gesetzt
+        neutral: Neutral
+        whitelisted: Auf die Whitelist gesetzt
+        fraud_status: Betrugsstatus
+        mark_suspicious: Verdächtig markieren
+        mark_blacklisted: Auf die Blacklist setzen
+        mark_neutral: Neutral markieren
+        automatic_blacklisting_configurations: Automatische Blacklisting-Konfigurationen
+        configure_automatic_blacklisting_configurations: Automatisches Blacklisting konfigurieren
+        new_automatic_blacklisting_configuration: Neue automatische Blacklisting-Konfiguration hinzufügen
+        edit_automatic_blacklisting_configuration: Automatische Blacklisting-Konfiguration bearbeiten
+        settings: Einstellungen
+        add_fraud_suspicion_row_after_exceed_limit: Betrugsverdacht hinzufügen, nachdem das Limit überschritten wurde
+        no_related_order: Keine zugehörige Bestellung
+        see_details_fraud_suspicion: Weitere Details zum Betrugsverdacht anzeigen
+        see_more_info_about_order: Weitere Informationen zur Bestellung anzeigen
+        no_related_customer: Kein zugehöriger Kunde
+        edit_blacklisting_rule: Manuelle Blacklisting-Regel bearbeiten
+        rules_are_connected_by_or: Die automatische Blacklisting-Konfiguration wird angewendet, nachdem der Benutzer eine der unten hinzugefügten Regeln erfüllt
+        permitted_fraud_suspicions_number: Erlaubte Anzahl an Betrugsverdachtsfällen
+        permitted_fraud_suspicions_time: Erlaubte Zeit für Betrugsverdachtsfälle
+        choose_time_range: Zeitrahmen auswählen
+        status: Status
+        auto_generated: Automatisch generiert
+        manually_added: Manuell hinzugefügt
+        fraud_prevention: Betrugsprävention
+    form:
+        blacklisting_rule:
+            name: Regelname
+            attribute: Regelattribute
+            permitted_strikes: Erlaubte Schläge
+            channels: Kanäle
+            customer_group: Kundengruppen
+            only_for_guests: Nur für Gäste
+            company: Unternehmen
+            city: Stadt
+            country: Land
+            customer_id: Kunden-ID
+            customer_ip: Kunden-IP
+            email: E-Mail
+            first_name: Vorname
+            last_name: Nachname
+            phone_number: Telefonnummer
+            postcode: Postleitzahl
+            province: Bundesland
+            street: Straße
+            for_unassigned_customers: Unassigned
+            customer_group_help: Wenn keine Kundengruppe ausgewählt ist, gilt die Blacklisting-Regel für alle Kundengruppen.
+        fraud_suspicion:
+            comment: Kommentar
+        automatic_blacklisting_rule:
+            rules: Regeln
+            type: Typ
+            count: Anzahl
+            name: Konfigurationsname
+            payment_failures: Maximalanzahl an Zahlungsfehlern
+            orders: Maximalanzahl an Bestellungen
+            date_modifier: Datumsmodifizierer
+            per_day: Pro Tag
+            per_week: Pro Woche
+            per_month: Pro Monat
