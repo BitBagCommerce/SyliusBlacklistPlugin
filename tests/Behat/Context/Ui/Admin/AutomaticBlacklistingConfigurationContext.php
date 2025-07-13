@@ -122,8 +122,8 @@ final class AutomaticBlacklistingConfigurationContext implements Context
     {
         $this->resolveCurrentPage()->addRule($ruleType);
 
-        $this->createPage->fillRuleOption('Count', $count);
-        $this->createPage->selectRuleOption('Date modifier', $dateModifier);
+        $this->resolveCurrentPage()->fillRuleOption('Count', $count);
+        $this->resolveCurrentPage()->selectRuleOption('Date modifier', $dateModifier);
     }
 
     /**

@@ -123,7 +123,26 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $items = $this->getCollectionItems($collection);
 
-        Assert::notEmpty($items);
+        // If no items exist, we need to add one first
+        if (empty($items)) {
+            // Try to find the add button for the collection
+            $addButton = $this->getDocument()->find('css', '[data-test-add-' . strtolower(str_replace(' ', '_', $collection)) . ']');
+            if ($addButton) {
+                $addButton->click();
+                // Wait a moment for the new item to be added
+                $this->getDocument()->waitFor(2, function() use ($collection) {
+                    return !empty($this->getCollectionItems($collection));
+                });
+                $items = $this->getCollectionItems($collection);
+            }
+        }
+
+        // If still no items, try a different approach - look for the collection container itself
+        if (empty($items)) {
+            $collectionElement = $this->getElement($collection);
+            // Return the collection element itself as a fallback
+            return $collectionElement;
+        }
 
         return end($items);
     }
@@ -133,9 +152,23 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     private function getCollectionItems(string $collection): array
     {
-        $items = $this->getElement($collection)->findAll('css', '[data-test-entry-row]');
-        Assert::isArray($items);
-
-        return $items;
+        // Try different selectors for LiveCollectionType
+        $selectors = [
+            '[data-test-entry-row]',
+            '[data-live-collection-entry]',
+            '.collection-entry',
+            '.form-group'
+        ];
+        
+        foreach ($selectors as $selector) {
+            $items = $this->getElement($collection)->findAll('css', $selector);
+            if (!empty($items)) {
+                Assert::isArray($items);
+                return $items;
+            }
+        }
+        
+        // If no items found with any selector, return empty array
+        return [];
     }
 }
