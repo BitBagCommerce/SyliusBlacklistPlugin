@@ -15,7 +15,7 @@ use BitBag\SyliusBlacklistPlugin\Converter\FraudSuspicionCommonModelConverterInt
 use BitBag\SyliusBlacklistPlugin\Entity\FraudPrevention\FraudSuspicionInterface;
 use BitBag\SyliusBlacklistPlugin\Resolver\SuspiciousOrderResolverInterface;
 use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolverInterface;
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PrePersistEventArgs;
 
 class FraudSuspicionEntityListener
 {
@@ -26,7 +26,7 @@ class FraudSuspicionEntityListener
     ) {
     }
 
-    public function prePersist(FraudSuspicionInterface $newFraudSuspicion, LifecycleEventArgs $event): void
+    public function prePersist(FraudSuspicionInterface $newFraudSuspicion, PrePersistEventArgs $event): void
     {
         $fraudSuspicionCommonModel = $this->fraudSuspicionCommonModelConverter->convertFraudSuspicionObject($newFraudSuspicion);
 

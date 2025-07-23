@@ -14,7 +14,7 @@ use BitBag\SyliusBlacklistPlugin\EntityListener\FraudSuspicionEntityListener;
 use BitBag\SyliusBlacklistPlugin\Model\FraudSuspicionCommonModelInterface;
 use BitBag\SyliusBlacklistPlugin\Resolver\SuspiciousOrderResolverInterface;
 use BitBag\SyliusBlacklistPlugin\StateResolver\CustomerStateResolverInterface;
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PrePersistEventArgs;
 use PhpSpec\ObjectBehavior;
 use Tests\BitBag\SyliusBlacklistPlugin\Entity\CustomerInterface;
 
@@ -38,7 +38,7 @@ final class FraudSuspicionEntityListenerSpec extends ObjectBehavior
         CustomerStateResolverInterface $customerStateResolver,
         FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter,
         FraudSuspicionInterface $newFraudSuspicion,
-        LifecycleEventArgs $event,
+        PrePersistEventArgs $event,
         FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel,
         CustomerInterface $customer
     ): void {
@@ -58,7 +58,7 @@ final class FraudSuspicionEntityListenerSpec extends ObjectBehavior
         SuspiciousOrderResolverInterface $suspiciousOrderResolver,
         FraudSuspicionCommonModelConverterInterface $fraudSuspicionCommonModelConverter,
         FraudSuspicionInterface $newFraudSuspicion,
-        LifecycleEventArgs $event,
+        PrePersistEventArgs $event,
         FraudSuspicionCommonModelInterface $fraudSuspicionCommonModel
     ): void {
         $fraudSuspicionCommonModelConverter->convertFraudSuspicionObject($newFraudSuspicion)->willReturn($fraudSuspicionCommonModel);

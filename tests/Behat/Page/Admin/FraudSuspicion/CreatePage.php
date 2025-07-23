@@ -50,9 +50,17 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function selectCustomer(string $customerEmail): CreatePageInterface
     {
-        $productOptionsAutocomplete = $this->getElement('customer_dropdown');
-
-        $this->autocompleteHelper->selectByName($this->getDriver(), $productOptionsAutocomplete->getXpath(), $customerEmail);
+        // For UX Autocomplete, we'll try to find the hidden input and set its value
+        $customerField = $this->getElement('customer_dropdown');
+        
+        // Try to find the actual input field (might be hidden)
+        $inputField = $this->getDocument()->find('css', 'input[name*="customer"]');
+        if ($inputField) {
+            $inputField->setValue($customerEmail);
+        } else {
+            // Fallback: try to fill the visible field
+            $customerField->setValue($customerEmail);
+        }
 
         return $this;
     }

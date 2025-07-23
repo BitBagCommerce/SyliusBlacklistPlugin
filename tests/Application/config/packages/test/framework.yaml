@@ -2,3 +2,4 @@ framework:
     test: ~
     session:
         handler_id: ~
+    annotations: false
